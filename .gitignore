@@ -1,0 +1,50 @@
+# .gitignore for LLM Hypothesis Testing Benchmark
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data and results (optional - uncomment if you want to exclude)
+# data/*
+# results/*
+# logs/*
+
+# Keep directory structure
+!data/.gitkeep
+!results/.gitkeep
+!logs/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test outputs
+*.log
+test_*.json
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/

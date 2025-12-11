@@ -1,0 +1,645 @@
+{
+  "total_evaluations": 900,
+  "by_model": {
+    "gpt-4o": {
+      "n_samples": 180,
+      "overall_accuracy": {
+        "mean": 0.7152777777777778,
+        "std": 0.2011492827494478,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9666666666666667,
+        "exact_match_rate": 0.9333333333333333
+      },
+      "decision_accuracy": {
+        "mean": 0.9055555555555556,
+        "correct_rate": 0.9055555555555556
+      },
+      "p_value_accuracy": {
+        "mean": 0.7388888888888889,
+        "within_tolerance_rate": 0.7388888888888889
+      },
+      "reasoning_quality": {
+        "mean": 74.77777777777777,
+        "std": 7.754727749517438
+      },
+      "hallucination_rate": 0.4444444444444444
+    },
+    "gpt-4": {
+      "n_samples": 180,
+      "overall_accuracy": {
+        "mean": 0.5152777777777777,
+        "std": 0.23446731720968314,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 1.0,
+        "exact_match_rate": 1.0
+      },
+      "decision_accuracy": {
+        "mean": 0.65,
+        "correct_rate": 0.65
+      },
+      "p_value_accuracy": {
+        "mean": 0.2833333333333333,
+        "within_tolerance_rate": 0.2833333333333333
+      },
+      "reasoning_quality": {
+        "mean": 60.074074074074076,
+        "std": 16.465285425484165
+      },
+      "hallucination_rate": 0.12777777777777777
+    },
+    "claude-opus-4-1-20250805": {
+      "n_samples": 180,
+      "overall_accuracy": {
+        "mean": 0.7527777777777778,
+        "std": 0.2425828737097571,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9944444444444445,
+        "exact_match_rate": 0.9888888888888889
+      },
+      "decision_accuracy": {
+        "mean": 0.8944444444444445,
+        "correct_rate": 0.8944444444444445
+      },
+      "p_value_accuracy": {
+        "mean": 0.7444444444444445,
+        "within_tolerance_rate": 0.7444444444444445
+      },
+      "reasoning_quality": {
+        "mean": 73.18518518518519,
+        "std": 10.103307258432707
+      },
+      "hallucination_rate": 0.2833333333333333
+    },
+    "deepseek-chat": {
+      "n_samples": 180,
+      "overall_accuracy": {
+        "mean": 0.69375,
+        "std": 0.2302154033605146,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.8583333333333333,
+        "exact_match_rate": 0.7611111111111111
+      },
+      "decision_accuracy": {
+        "mean": 0.9611111111111111,
+        "correct_rate": 0.9611111111111111
+      },
+      "p_value_accuracy": {
+        "mean": 0.6277777777777778,
+        "within_tolerance_rate": 0.6277777777777778
+      },
+      "reasoning_quality": {
+        "mean": 72.0925925925926,
+        "std": 9.142429611672686
+      },
+      "hallucination_rate": 0.17222222222222222
+    },
+    "grok-3-mini": {
+      "n_samples": 180,
+      "overall_accuracy": {
+        "mean": 0.7868055555555555,
+        "std": 0.19794834054543464,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9916666666666667,
+        "exact_match_rate": 0.9833333333333333
+      },
+      "decision_accuracy": {
+        "mean": 0.9722222222222222,
+        "correct_rate": 0.9722222222222222
+      },
+      "p_value_accuracy": {
+        "mean": 0.7555555555555555,
+        "within_tolerance_rate": 0.7555555555555555
+      },
+      "reasoning_quality": {
+        "mean": 74.38888888888889,
+        "std": 8.450838222724812
+      },
+      "hallucination_rate": 0.2833333333333333
+    }
+  },
+  "by_prompt_type": {
+    "few_shot": {
+      "n_samples": 300,
+      "overall_accuracy": {
+        "mean": 0.8266666666666667,
+        "std": 0.18752036926395194,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.94,
+        "exact_match_rate": 0.88
+      },
+      "decision_accuracy": {
+        "mean": 0.9566666666666667,
+        "correct_rate": 0.9566666666666667
+      },
+      "p_value_accuracy": {
+        "mean": 0.9366666666666666,
+        "within_tolerance_rate": 0.9366666666666666
+      },
+      "reasoning_quality": {
+        "mean": 77.35555555555555,
+        "std": 7.471394006145154
+      },
+      "hallucination_rate": 0.38
+    },
+    "zero_shot": {
+      "n_samples": 300,
+      "overall_accuracy": {
+        "mean": 0.68625,
+        "std": 0.27414355272375096,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.965,
+        "exact_match_rate": 0.9566666666666667
+      },
+      "decision_accuracy": {
+        "mean": 0.8233333333333334,
+        "correct_rate": 0.8233333333333334
+      },
+      "p_value_accuracy": {
+        "mean": 0.5666666666666667,
+        "within_tolerance_rate": 0.5666666666666667
+      },
+      "reasoning_quality": {
+        "mean": 69.23333333333333,
+        "std": 14.395382490126375
+      },
+      "hallucination_rate": 0.04666666666666667
+    },
+    "chain_of_thought": {
+      "n_samples": 300,
+      "overall_accuracy": {
+        "mean": 0.5654166666666667,
+        "std": 0.17333082930883612,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9816666666666667,
+        "exact_match_rate": 0.9633333333333334
+      },
+      "decision_accuracy": {
+        "mean": 0.85,
+        "correct_rate": 0.85
+      },
+      "p_value_accuracy": {
+        "mean": 0.38666666666666666,
+        "within_tolerance_rate": 0.38666666666666666
+      },
+      "reasoning_quality": {
+        "mean": 66.12222222222222,
+        "std": 10.644067495065322
+      },
+      "hallucination_rate": 0.36
+    }
+  },
+  "by_test_type": {
+    "unknown": {
+      "n_samples": 900,
+      "overall_accuracy": {
+        "mean": 0.6927777777777778,
+        "std": 0.2412134959269152,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9622222222222222,
+        "exact_match_rate": 0.9333333333333333
+      },
+      "decision_accuracy": {
+        "mean": 0.8766666666666667,
+        "correct_rate": 0.8766666666666667
+      },
+      "p_value_accuracy": {
+        "mean": 0.63,
+        "within_tolerance_rate": 0.63
+      },
+      "reasoning_quality": {
+        "mean": 70.9037037037037,
+        "std": 12.160373252519989
+      },
+      "hallucination_rate": 0.26222222222222225
+    }
+  },
+  "comparison_matrix": {
+    "deepseek-chat": {
+      "zero_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.78125,
+          "std": 0.20744602711709537,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.825,
+          "exact_match_rate": 0.7833333333333333
+        },
+        "decision_accuracy": {
+          "mean": 0.9833333333333333,
+          "correct_rate": 0.9833333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.85,
+          "within_tolerance_rate": 0.85
+        },
+        "reasoning_quality": {
+          "mean": 75.16666666666667,
+          "std": 8.197221751571957
+        },
+        "hallucination_rate": 0.016666666666666666
+      },
+      "chain_of_thought": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.4708333333333333,
+          "std": 0.1054915741764347,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.9166666666666666,
+          "exact_match_rate": 0.8333333333333334
+        },
+        "decision_accuracy": {
+          "mean": 0.9,
+          "correct_rate": 0.9
+        },
+        "p_value_accuracy": {
+          "mean": 0.03333333333333333,
+          "within_tolerance_rate": 0.03333333333333333
+        },
+        "reasoning_quality": {
+          "mean": 64.44444444444443,
+          "std": 8.512880581945756
+        },
+        "hallucination_rate": 0.0
+      },
+      "few_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.8291666666666667,
+          "std": 0.17073167707123235,
+          "min": 0.625,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.8333333333333334,
+          "exact_match_rate": 0.6666666666666666
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 76.66666666666667,
+          "std": 4.714045207910317
+        },
+        "hallucination_rate": 0.5
+      }
+    },
+    "claude-opus-4-1-20250805": {
+      "zero_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.8083333333333333,
+          "std": 0.20086617988656583,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 0.7666666666666667,
+          "within_tolerance_rate": 0.7666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 76.44444444444443,
+          "std": 4.786813161897337
+        },
+        "hallucination_rate": 0.21666666666666667
+      },
+      "chain_of_thought": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.5375,
+          "std": 0.2132340263653998,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.6833333333333333,
+          "correct_rate": 0.6833333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.4666666666666667,
+          "within_tolerance_rate": 0.4666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 63.444444444444436,
+          "std": 11.514349608795984
+        },
+        "hallucination_rate": 0.2833333333333333
+      },
+      "few_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.9125,
+          "std": 0.12562344526401112,
+          "min": 0.625,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9833333333333333,
+          "exact_match_rate": 0.9666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 79.66666666666667,
+          "std": 1.7950549357115018
+        },
+        "hallucination_rate": 0.35
+      }
+    },
+    "gpt-4o": {
+      "zero_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.7166666666666667,
+          "std": 0.21634591642911946,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 0.4666666666666667,
+          "within_tolerance_rate": 0.4666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 76.66666666666664,
+          "std": 3.3333333333333353
+        },
+        "hallucination_rate": 0.0
+      },
+      "chain_of_thought": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.6333333333333333,
+          "std": 0.1852175897574406,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.7166666666666667,
+          "correct_rate": 0.7166666666666667
+        },
+        "p_value_accuracy": {
+          "mean": 0.8166666666666667,
+          "within_tolerance_rate": 0.8166666666666667
+        },
+        "reasoning_quality": {
+          "mean": 69.66666666666667,
+          "std": 10.640593133008242
+        },
+        "hallucination_rate": 0.9166666666666666
+      },
+      "few_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.7958333333333333,
+          "std": 0.16451739185333028,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9,
+          "exact_match_rate": 0.8
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 0.9333333333333333,
+          "within_tolerance_rate": 0.9333333333333333
+        },
+        "reasoning_quality": {
+          "mean": 78.0,
+          "std": 4.0
+        },
+        "hallucination_rate": 0.4166666666666667
+      }
+    },
+    "grok-3-mini": {
+      "zero_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.7833333333333333,
+          "std": 0.2348167133934229,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.9166666666666666,
+          "correct_rate": 0.9166666666666666
+        },
+        "p_value_accuracy": {
+          "mean": 0.6833333333333333,
+          "within_tolerance_rate": 0.6833333333333333
+        },
+        "reasoning_quality": {
+          "mean": 69.66666666666667,
+          "std": 11.764667755929507
+        },
+        "hallucination_rate": 0.0
+      },
+      "chain_of_thought": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.6770833333333334,
+          "std": 0.14486284221827056,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9916666666666667,
+          "exact_match_rate": 0.9833333333333333
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 0.5833333333333334,
+          "within_tolerance_rate": 0.5833333333333334
+        },
+        "reasoning_quality": {
+          "mean": 73.83333333333331,
+          "std": 4.707165538560058
+        },
+        "hallucination_rate": 0.55
+      },
+      "few_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.9,
+          "std": 0.1286953767623375,
+          "min": 0.625,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9833333333333333,
+          "exact_match_rate": 0.9666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 79.66666666666667,
+          "std": 1.7950549357115015
+        },
+        "hallucination_rate": 0.3
+      }
+    },
+    "gpt-4": {
+      "zero_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.3416666666666667,
+          "std": 0.19346977943739835,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.21666666666666667,
+          "correct_rate": 0.21666666666666667
+        },
+        "p_value_accuracy": {
+          "mean": 0.06666666666666667,
+          "within_tolerance_rate": 0.06666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 48.22222222222222,
+          "std": 14.573779939617417
+        },
+        "hallucination_rate": 0.0
+      },
+      "chain_of_thought": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.5083333333333333,
+          "std": 0.09090593428863095,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.95,
+          "correct_rate": 0.95
+        },
+        "p_value_accuracy": {
+          "mean": 0.03333333333333333,
+          "within_tolerance_rate": 0.03333333333333333
+        },
+        "reasoning_quality": {
+          "mean": 59.222222222222214,
+          "std": 9.819984662179069
+        },
+        "hallucination_rate": 0.05
+      },
+      "few_shot": {
+        "n_samples": 60,
+        "overall_accuracy": {
+          "mean": 0.6958333333333333,
+          "std": 0.23757308816914052,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.7833333333333333,
+          "correct_rate": 0.7833333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.75,
+          "within_tolerance_rate": 0.75
+        },
+        "reasoning_quality": {
+          "mean": 72.77777777777779,
+          "std": 14.209629842009033
+        },
+        "hallucination_rate": 0.3333333333333333
+      }
+    }
+  }
+}

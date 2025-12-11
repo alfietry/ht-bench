@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2025-12-02T11:45:05.051608",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bf65b43bb0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:45:05.281467",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bf65b132f0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  }
+]

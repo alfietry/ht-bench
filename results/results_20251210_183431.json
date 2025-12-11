@@ -1,0 +1,114 @@
+[
+  {
+    "timestamp": "2025-12-10T18:34:24.353752",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee529040 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:24.438005",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee52a4e0 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:24.561482",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee578bb0 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:24.608875",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "program_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee542f70 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:24.642148",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee4b5d90 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:30.927198",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee5529f0 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:30.960804",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "program_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee5ad7d0 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-10T18:34:31.085875",
+    "model": "gemini-3.0-pro",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1bcee598b50 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  }
+]

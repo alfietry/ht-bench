@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T11:04:05.042473",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x205fff04b00 state=finished raised RateLimitError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T11:04:05.845700",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x205ffec60f0 state=finished raised RateLimitError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]

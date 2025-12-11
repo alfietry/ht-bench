@@ -1,0 +1,338 @@
+[
+  {
+    "timestamp": "2025-12-02T11:42:10.435677",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dbab7a0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:10.463444",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dbab4d0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:10.480110",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dbfcc90 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:10.512031",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dbfc9f0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:10.634353",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282db56b10 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:16.864427",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dce0ad0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:16.960849",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dd871d0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:17.093969",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dda20d0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:17.158543",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dd86150 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:17.269950",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dd87bd0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:23.334223",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dcb6a50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:23.446279",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dda0950 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:23.777001",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dd86750 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:23.809258",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dda3d50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:24.425970",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dda36d0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:29.867524",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282da2ee50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:29.980032",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dce1b50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:30.340147",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dce16d0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:30.413737",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dcb6e50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:31.066807",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dcb6a50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:36.411813",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dd84e50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:36.490375",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282dda3b50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:36.974926",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282db5b5d0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T11:42:37.010291",
+    "model": "claude-opus-4-1-20251101-thinking-32k",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2282db5ab50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  }
+]
