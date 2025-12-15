@@ -1,4 +1,3 @@
-% filepath: c:\Users\Elitebook x360\OneDrive - Ohio University\Desktop\Ohio University\Fall_25\GenAI\final-proj-bench\report.tex
 \documentclass[conference]{IEEEtran}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
@@ -26,7 +25,7 @@ email@ohio.edu}
 \maketitle
 
 \begin{abstract}
-We study whether modern Large Language Models (LLMs) can reliably carry out statistical hypothesis testing. We present a reproducible benchmark that performs hypothesis testing as a holistic capability: selecting an appropriate test, computing statistics and p-values, and making decisions under a significance level. The framework evaluates models under multiple prompting strategies (Zero-Shot, Few-Shot, Chain-of-Thought, and Program-of-Thought), uses synthetic data with known ground truth, and reports standardized metrics (overall accuracy, decision accuracy, p-value tolerance, reasoning quality, latency). Empirical results on recent models (e.g., GPT-5, Claude 4.5 Opus, Gemini 2.5, grok) show clear performance differences: computation-grounded prompts (PoT) improve numerical fidelity, while CoT improves structure but remains vulnerable to arithmetic errors and completeness. We discuss strengths, limitations, and paths toward trustworthy AI systems that can participate in evidence-based scientific workflows leading to justifiable new discoveries.
+We study whether modern Large Language Models (LLMs) can reliably carry out statistical hypothesis testing. We present a reproducible benchmark that performs hypothesis testing as a holistic capability: selecting an appropriate test, computing statistics and p-values, and making decisions under a significance level. The framework evaluates models under multiple prompting strategies (Zero-Shot, Few-Shot, and Chain-of-Thought), uses synthetic data with known ground truth, and reports standardized metrics (overall accuracy, decision accuracy, p-value tolerance, reasoning quality, latency). CoT improves structure but remains vulnerable to arithmetic errors and completeness. We discuss strengths, limitations, and paths toward trustworthy AI systems that can participate in evidence-based scientific workflows leading to justifiable new discoveries.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -36,7 +35,7 @@ Large Language Models, Hypothesis Testing, Benchmarking, Scientific Reasoning, A
 \section{Introduction}
 This work is a study in artificial intelligence, guided by a long-term aim of understanding how AI systems could help uncover new domains of knowledge. \cite{wang2023scientific}. At its core, the project investigates one essential capability that underlies all scientific progress: hypothesis testing. Specifically, we study how well large language models (LLMs) can evaluate the validity of claims under controlled conditions.
 
-In scientific research, progress depends not only on generating ideas, but also on the ability to test, validate, refine, and reject them. While LLMs have shown impressive performance in tasks such as text generation, reasoning, and problem-solving \cite{achiam2023gpt4, wei2022chain}, there is still limited systematic understanding of how well they perform at evaluating the correctness of claims in a way that resembles true hypothesis testing. If LLMs are ever to meaningfully support scientific discovery, they must be able not just to propose ideas, but to rigorously assess whether those ideas hold up under evidence and structured testing.
+In scientific research, progress depends not only on generating ideas, but also on the ability to test, validate, refine, and reject them. While LLMs have shown impressive performance in tasks such as text generation, reasoning, and problem-solving \cite{openai2023gpt, wei2022chain}, there is still limited systematic understanding of how well they perform at evaluating the correctness of claims in a way that resembles true hypothesis testing. If LLMs are ever to meaningfully support scientific discovery, they must be able not just to propose ideas, but to rigorously assess whether those ideas hold up under evidence and structured testing.
 
 This project serves as groundwork toward measuring that capability. Our central objective is to design and implement a benchmark that evaluates how effectively modern LLMs can perform hypothesis testing. By formalizing hypothesis testing as a measurable task for language models, we aim to provide a standardized way to quantify how accurately these systems can judge the validity of claims, weigh evidence, and reach reliable conclusions. Concretely, we determine success around consistent test selection, calibrated p-value estimation, and correct reject/fail-to-reject decisions at a fixed $\alpha$.
 
@@ -50,11 +49,11 @@ Accordingly, this work will contribute:
 \end{itemize}
 
 \section{Related Work}
-A growing body of work has focused on evaluating the logical reasoning capabilities of large language models. Benchmarks such as LogicBench \cite{parmar2024logicbench} and LogicAsker \cite{wan2024logicasker} systematically test LLMs on propositional and first-order logic, revealing that while modern models can solve surface-level inference tasks, they still struggle with deeper multi-step and rule-consistent reasoning. Multi-LogiEval \cite{zhang2024multilogieval} tests LLMs on harder kinds of logical thinking involving doing many steps, handling facts that change old conclusions, and switching between different types of logic. As the tasks get deeper or require more steps, model performance drops sharply. Recent survey work on logical reasoning in LLMs \cite{survey2025logical} consolidates these findings and highlights persistent gaps in deductive reliability. While these efforts provide critical insights into formal reasoning, they do not directly evaluate statistical hypothesis testing as a reasoning task.
+A growing body of work has focused on evaluating the logical reasoning capabilities of large language models. Benchmarks such as LogicBench \cite{parmar2024logicbench} and LogicAsker \cite{wan2024logicasker} systematically test LLMs on propositional and first-order logic, revealing that while modern models can solve surface-level inference tasks, they still struggle with deeper multi-step and rule-consistent reasoning. Multi-LogiEval \cite{patel2024multi} tests LLMs on harder kinds of logical thinking involving doing many steps, handling facts that change old conclusions, and switching between different types of logic. As the tasks get deeper or require more steps, model performance drops sharply. Recent survey work on logical reasoning in LLMs \cite{liu2025logical} consolidates these findings and highlights persistent gaps in deductive reliability. While these efforts provide critical insights into formal reasoning, they do not directly evaluate statistical hypothesis testing as a reasoning task.
 
-Beyond pure logical inference, recent studies have examined whether LLMs can evaluate the correctness of claims and their own reasoning. Work on self-verification in logical reasoning \cite{hong2024closer} shows that LLMs often fail to reliably detect their own logical inconsistencies. FactReasoner \cite{zhu2025factreasoner} introduces a probabilistic framework for long-form factuality assessment, focusing on evidence-grounded verification of claims. Similarly, Trustworthy Reasoning \cite{jiao2025trustworthy} demonstrates that even when final answers are correct, intermediate reasoning steps frequently contain factual or logical errors. These works highlight the importance of explicitly assessing whether a claim is valid, but they focus mainly on factual accuracy and reasoning self-analysis, not on systematic statistical hypothesis testing.
+Beyond pure logical inference, recent studies have examined whether LLMs can evaluate the correctness of claims and their own reasoning. Work on self-verification in logical reasoning \cite{hong2024closer} shows that LLMs often fail to reliably detect their own logical inconsistencies. FactReasoner \cite{marinescu2025factreasoner} introduces a probabilistic framework for long-form factuality assessment, focusing on evidence-grounded verification of claims. Similarly, Trustworthy Reasoning \cite{jiao2025trustworthy} demonstrates that even when final answers are correct, intermediate reasoning steps frequently contain factual or logical errors. These works highlight the importance of explicitly assessing whether a claim is valid, but they focus mainly on factual accuracy and reasoning self-analysis, not on systematic statistical hypothesis testing.
 
-More closely related to our work, several recent papers investigate whether LLMs can perform statistical reasoning from data. Liu et al. \cite{liu2024are} propose a benchmark for quantitative and causal reasoning based on tabular and numerical data, showing that while LLMs can handle simple statistical patterns, they struggle with multi-variable dependencies and causal structure. Zhu et al. \cite{zhu2024are} systematically evaluate whether LLMs can function as reliable statisticians, testing tasks such as distribution estimation, hypothesis testing components, and statistical decision-making, and find that performance is highly unstable across test types and noise conditions.
+More closely related to our work, several recent papers investigate whether LLMs can perform statistical reasoning from data. Liu et al. \cite{liu2024llms} propose a benchmark for quantitative and causal reasoning based on tabular and numerical data, showing that while LLMs can handle simple statistical patterns, they struggle with multi-variable dependencies and causal structure. Zhu et al. \cite{zhu2024are} systematically evaluate whether LLMs can function as reliable statisticians, testing tasks such as distribution estimation, hypothesis testing components, and statistical decision-making, and find that performance is highly unstable across test types and noise conditions.
 
 Most directly aligned conceptually with our work, Tiwari \cite{tiwari2025framework} introduces a general framework for automated hypothesis testing using AI systems. Although this work proposes a procedural framework for automating the process, it does not offer a standardized, model-independent benchmark for empirically assessing LLM performance on hypothesis testing as a cohesive task.
 
@@ -81,7 +80,6 @@ LLMs are transformer-based models trained on vast corpora of text. Their perform
     \item \textbf{Zero-Shot}: Asking the model to perform the task without examples.
     \item \textbf{Few-Shot}: Providing examples of the task within the prompt.
     \item \textbf{Chain-of-Thought (CoT)}: Encouraging the model to generate intermediate reasoning steps \cite{wei2022chain}.
-    \item \textbf{Program-of-Thought (PoT)}: Asking the model to generate and execute code to solve the problem, decoupling reasoning from computation.
 \end{itemize}
 
 \section{Benchmark Design and Architecture}
@@ -105,15 +103,13 @@ Each evaluation generates a structured JSON entry containing the scenario, promp
 Synthetic hypothesis-testing scenarios are created by the \texttt{DataGenerator} in \texttt{data\_generator.py}. It supports one-sample and two-sample $t$-tests, paired $t$-tests,  via type-specific generators. Scenarios are parameterized by sample size, distributional assumptions, and sample sizes. The \texttt{StatisticalEngine} computes the ground-truth test statistic, $p$-value, and decision for each scenario so that all models are compared against the same reference implementation.
 
 \textbf{Prompt engine}\\
-Prompt construction is handled by \texttt{prompts.py}, which defines a family of templates derived from a common \texttt{PromptTemplate} base class. The benchmark currently supports zero-shot, few-shot, Chain-of-Thought (CoT), Program-of-Thought (PoT), and structured-output prompting. Each template takes the numeric scenario (samples, groups) and a test-specific natural language context from \texttt{create\_test\_context}, and renders a compact, model-facing input string. The PoT template emits executable Python using \texttt{numpy} and \texttt{scipy.stats}, and requires the model to output a single summary line of the form
-\texttt{RESULT: test\_type=\dots; statistic=\dots; p\_value=\dots; decision=\dots},
-which is later parsed deterministically. For structured-output runs, \texttt{RESPONSE\_SCHEMA} defines the desired JSON shape, including hypotheses, test method, statistics, decision, and conclusion.
+Prompt construction is handled by \texttt{prompts.py}, which defines a family of templates derived from a common \texttt{PromptTemplate} base class. The benchmark currently supports zero-shot, few-shot, and Chain-of-Thought (CoT). Each template takes the numeric scenario (samples, groups) and a test-specific natural language context from \texttt{create\_test\_context}, and renders a compact, model-facing input string. 
 
 \textbf{LLM client abstraction}\\
 All provider-specific details are encapsulated in subclasses of the abstract \texttt{LLMClient} interface (\texttt{llm\_clients.py}). Concrete implementations include \texttt{OpenAIClient}, \texttt{AnthropicClient}, \texttt{GoogleClient} (Gemini), and \texttt{GrokClient}, each normalizing differences in authentication, endpoints, and parameter conventions. The orchestrator in \texttt{ht.py} instantiates these clients from a simple configuration mapping of providers to model names, so that adding a new model typically requires only updating the configuration, not the pipeline logic.
 
 \textbf{Response parsing and evaluation}\\
-Raw LLM outputs are converted into a structured representation by \texttt{ResponseParser}. The parser first looks for the PoT \texttt{RESULT} line and, if present, populates a \texttt{ParsedResponse} Pydantic model with the test method, statistic, $p$-value, and normalized decision. If no such line exists, it falls back to a combination of JSON extraction (for structured modes) and regex-based extraction of hypotheses, test type, test statistic, $p$-value, degrees of freedom, decision, confidence interval, assumptions, and conclusion from free-form text. Validators on the Pydantic model enforce basic sanity checks (e.g., $p \in [0,1]$) and normalize decision strings to \texttt{reject\_H0} versus \texttt{fail\_to\_reject\_H0}. The \texttt{EvaluationMetrics} module then compares the parsed response against the ground truth and computes accuracy at several levels (test-type, $p$-value, decision, reasoning quality, hallucination flags, latency).
+Raw LLM outputs are converted into a structured representation by \texttt{ResponseParser}. The parser first looks for the CoT \texttt{RESULT} line and, if present, populates a \texttt{ParsedResponse} Pydantic model with the test method, statistic, $p$-value, and normalized decision. If no such line exists, it falls back to a combination of JSON extraction (for structured modes) and regex-based extraction of hypotheses, test type, test statistic, $p$-value, degrees of freedom, decision, confidence interval, assumptions, and conclusion from free-form text. Validators on the Pydantic model enforce basic sanity checks (e.g., $p \in [0,1]$) and normalize decision strings to \texttt{reject\_H0} versus \texttt{fail\_to\_reject\_H0}. The \texttt{EvaluationMetrics} module then compares the parsed response against the ground truth and computes accuracy at several levels (test-type, $p$-value, decision, reasoning quality, hallucination flags, latency).
 
 \textbf{Aggregation, storage, and visualization}\\
 Each evaluation call returns a JSON-serializable record that includes a timestamp, model name, prompt type, test type, prompt text, raw response, parsed result, ground truth, evaluation metrics, and latency. The orchestrator in \texttt{ht.py} accumulates these records in-memory and periodically writes them to timestamped JSON files under \texttt{config.RESULTS\_DIR}. The \texttt{BenchmarkAggregator} in \texttt{evaluator.py} computes summary statistics by model, prompt type, and test type, as well as comparison matrices used in the report. The interactive dashboard in \texttt{dashboard/app.py} loads all JSON results, flattens them into a Pandas DataFrame, and exposes a leaderboard-style UI (built with Streamlit and Plotly) that presents per-model accuracy, confidence intervals, error breakdowns, and qualitative examples through dedicated analysis tabs.
@@ -123,7 +119,7 @@ A benchmark run is configured and launched from \texttt{ht.py}, either in quick,
 
 \begin{enumerate}
     \item Samples a grid of \emph{test types} and \emph{sample sizes} and calls \texttt{DataGenerator} to create synthetic scenarios with associated metadata.
-    \item For each provider/model and each selected \emph{prompt type}, generates a natural-language prompt (or PoT program / structured-output instruction) using \texttt{get\_prompt} from \texttt{prompts.py}.
+    \item For each provider/model and each selected \emph{prompt type}, generates a natural-language prompt  using \texttt{get\_prompt} from \texttt{prompts.py}.
     \item Dispatches all (model, prompt, scenario) triples asynchronously via the appropriate \texttt{LLMClient}, respecting a global concurrency limit through an \texttt{asyncio.Semaphore}.
     \item Parses each returned response with \texttt{ResponseParser}, computes ground truth with \texttt{StatisticalEngine}, and evaluates correctness and auxiliary metrics with \texttt{EvaluationMetrics}.
     \item Appends the resulting evaluation record to the in-memory result list and, at the end of the run, writes the full set of records to disk and prints a textual summary using \texttt{BenchmarkAggregator}.
@@ -153,7 +149,7 @@ For each tuple the benchmark logs a structured evaluation record. Core scalar me
 These per-sample metrics are aggregated by model, prompt strategy, and test family (mean, standard error, confidence intervals) and drive the leaderboard, radar plots, heatmaps, and error analyses reported in Section~\ref{sec:evaluation-results}.
 
 \section{Evaluation \& Results}
-Results aggregate across the three $t$-test families currently enabled (one-sample, two-sample, and paired $t$-tests), two sample-size regimes ($n=20$ and $n=50$), and the four prompt strategies (zero-shot, few-shot, CoT, PoT).
+Results aggregate across the three $t$-test families currently enabled (one-sample, two-sample, and paired $t$-tests), two sample-size regimes ($n=20$ and $n=50$), and the four prompt strategies.
 
 \subsection{Leaderboard: Overall Accuracy and Reliability}
 
@@ -162,34 +158,35 @@ The primary leaderboard view ranks models by mean overall accuracy with 95\% con
 \begin{table}[htbp]
 \caption{Model Performance Comparison (Dashboard Summary)}
 \begin{center}
-\begin{tabular}{|l|c|c|c|}
+\small
+\begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-	Model & \textbf{Overall Acc.} & \textbf{Decision Acc.} & \textbf{Hal. Rate} \\
+\textbf{Model} & \textbf{N} & \textbf{Overall} & \textbf{Decision} & \textbf{Reasoning} & \textbf{Hal.} & \textbf{Latency} \\
+      &  & \textbf{Acc.}    & \textbf{Acc.}     & \textbf{Score}     & \textbf{Rate}   & \textbf{(s)} \\
 \hline
-grok-4-fast & 81.2\% & 75.0\% & 25.0\% \\
-grok-3 & 80.8\% & 87.7\% & 30.9\% \\
-claude-opus-4-5 & 79.3\% & 89.5\% & 18.0\% \\
-grok-3-mini & 78.1\% & 95.7\% & 24.6\% \\
-claude-sonnet-4-5 & 76.3\% & 84.0\% & 35.1\% \\
-claude-opus-4-1 & 75.4\% & 89.7\% & 27.7\% \\
-claude-haiku-4-5 & 74.2\% & 88.0\% & 25.0\% \\
-gpt-4o & 73.6\% & 89.7\% & 40.8\% \\
-grok-4-1-fast-r. & 72.1\% & 81.9\% & 22.3\% \\
-gpt-5.1 & 68.5\% & 83.6\% & 49.1\% \\
-deepseek-c. & 65.2\% & 86.2\% & 15.8\% \\
-gpt-4o-mini & 53.1\% & 87.5\% & 0.0\% \\
-gpt-4 & 51.4\% & 64.1\% & 12.5\% \\
-claude-3-haiku & 50.0\% & 0.0\% & 100.0\% \\
-gpt-5-mini & 42.3\% & 49.0\% & 13.5\% \\
-gemini-2.5-p. & 36.8\% & 31.8\% & 9.7\% \\
-gemini-2.5-f. & 24.1\% & 20.3\% & 13.3\% \\
+gemini-2.5-pro     & 111 & 85.5\% $\pm$ 3.7\% & 84.7\% & 0.73 & 10.8\% & 22.74 \\
+gemini-2.5-flash   & 120 & 82.8\% $\pm$ 3.8\% & 87.5\% & 0.74 & 10.0\% & 17.49 \\
+grok-3             & 356 & 82.4\% $\pm$ 2.4\% & 91.6\% & 0.74 & 24.4\% & 4.60 \\
+grok-4-fast        & 248 & 80.8\% $\pm$ 2.6\% & 91.5\% & 0.70 & 13.7\% & 24.52 \\
+claude-sonnet-4-5  & 240 & 79.3\% $\pm$ 2.4\% & 87.9\% & 0.73 & 30.8\% & 10.01 \\
+claude-opus-4-5    & 200 & 79.3\% $\pm$ 3.5\% & 89.5\% & 0.73 & 18.0\% & 5.77 \\
+grok-3-mini        & 278 & 78.6\% $\pm$ 2.4\% & 96.4\% & 0.75 & 24.8\% & 16.57 \\
+claude-opus-4-1    & 184 & 75.4\% $\pm$ 3.5\% & 89.7\% & 0.73 & 27.7\% & --- \\
+grok-4-1-f-r       & 90  & 75.3\% $\pm$ 4.3\% & 85.6\% & 0.73 & 23.3\% & 74.18 \\
+gpt-5-mini         & 61  & 75.0\% $\pm$ 6.7\% & 88.5\% & 0.74 & 23.0\% & 22.19 \\
+claude-haiku-4-5   & 92  & 74.2\% $\pm$ 4.7\% & 88.0\% & 0.73 & 25.0\% & 3.56 \\
+gpt-4o             & 368 & 74.2\% $\pm$ 2.2\% & 90.2\% & 0.75 & 40.8\% & 4.16 \\
+deepseek-chat      & 372 & 71.9\% $\pm$ 2.4\% & 95.4\% & 0.72 & 17.5\% & 8.96 \\
+gpt-5.1            & 236 & 68.2\% $\pm$ 3.2\% & 83.5\% & 0.69 & 46.2\% & 4.31 \\
+gpt-4              & 130 & 62.3\% $\pm$ 3.4\% & 90.8\% & 0.68 & 17.7\% & 4.30 \\
+gpt-4o-mini        & 152 & 58.6\% $\pm$ 3.4\% & 81.6\% & 0.69 & 5.9\% & 7.71 \\
 \hline
 \end{tabular}
 \label{tab1}
 \end{center}
 \end{table}
 
-The leaderboard and its confidence intervals make three patterns visible. First, the best Grok and Claude variants form the top tier, with mean overall accuracy around 80\% and high decision accuracy, indicating that they almost always choose the correct reject/fail-to-reject action at $\alpha=0.05$. GPT-4o sits slightly below this tier in overall accuracy but with competitive decision accuracy, suggesting that most of its errors come from secondary aspects which include test naming or p-value calibration rather than incorrect final decisions. Second, mid-tier models such as GPT-5.1 and DeepSeek Chat achieve respectable decision accuracy but noticeably lower overall accuracy and, in the case of GPT-5.1, a comparatively high hallucination rate according to the hallucination indicator. Third, Gemini 2.5 models and smaller variants (GPT-5-mini, older Haiku) trail the group with substantially lower overall accuracy and decision accuracy, reflecting difficulty in either selecting the right test or maintaining consistent numerical reasoning across scenarios.
+The leaderboard and its confidence intervals make three patterns visible. First, the Gemini 2.5 models lead in overall accuracy (85.5\% and 82.8\%), followed closely by Grok variants (grok-3 at 82.4\%, grok-4-fast at 80.8\%) which form the top tier with mean overall accuracy above 80\%. These models also exhibit high decision accuracy above 84\%, indicating that they almost always choose the correct reject/fail-to-reject action at $\alpha=0.05$. Second, Claude models (claude-sonnet-4-5, claude-opus-4-5, claude-opus-4-1) cluster in the 75--79\% overall accuracy range with consistently high decision accuracy (87--90\%), though claude-sonnet-4-5 shows an elevated hallucination rate of 30.8\%. Third, GPT models show more variability: gpt-4o achieves 74.2\% overall accuracy with 90.2\% decision accuracy but the highest hallucination rate (40.8\%), while gpt-5.1 trails at 68.2\% with a 46.2\% hallucination rate. The smaller gpt-4o-mini sits at the bottom with 58.6\% overall accuracy but notably the lowest hallucination rate (5.9\%), suggesting a trade-off between verbosity and factual grounding. DeepSeek Chat achieves a strong 95.4\% decision accuracy despite moderate overall accuracy (71.9\%), indicating reliable final decisions even when intermediate reasoning is imprecise.
 
 \subsection{Family-Level Capability Profiles}
 
@@ -199,12 +196,6 @@ Within the GPT family radar, GPT-4o provides the strongest and most balanced pro
 
 The Grok radar shows a consistently high and rounded footprint: both grok-4-fast and grok-3 score strongly on test-method selection, p-value accuracy, and decision correctness, giving them the broadest capability coverage of all families. The Claude radar is similarly strong but slightly more skewed toward reasoning quality and explanation completeness, reflecting that Claude often produces well-structured, interpretable arguments for its conclusions, even when slightly conservative on border-line decisions. In contrast, the Gemini/DeepSeek/other radar appears more irregular: DeepSeek Chat exhibits a reasonably solid decision and reasoning profile, while Gemini 2.5 variants display thinner radii, especially on test-method and p-value axes, indicating less stable statistical reasoning across the tested tasks.
 
-\subsection{Performance by Test Type and Prompt Strategy}
-
-The heatmap view breaks overall accuracy down by test type and model. Across families, performance on one-sample and two-sample $t$-tests is generally stronger than on paired $t$-tests, where several models mis-handle the dependency structure or confuse the scenario with an independent two-sample design. Top Grok and Claude models maintain relatively uniform accuracy across all three test types, whereas lower-tier models show large drops on paired tests, reflecting weaker understanding of experimental design.
-
-The "Prompt Strategy Impact" bar chart quantifies the effect of Zero-Shot, Few-Shot, CoT, and PoT prompting on overall accuracy. For all high-performing models, PoT consistently appears as the top-performing strategy on the dashboard, often adding a sizable margin over Zero-Shot and Few-Shot prompts. By delegating computation to Python and forcing a single structured summary line, PoT largely eliminates arithmetic errors and format drift. CoT improves over Zero-Shot by encouraging explicit identification of the test and intermediate reasoning steps, but still occasionally suffers from manual numerical mistakes and verbose formatting that stress the parser. Few-Shot prompts offer modest gains relative to Zero-Shot for models that already follow instructions reliably, but the improvement is small compared to the jump from natural-language reasoning to PoT.
-
 \subsection{Error Patterns, Calibration, and Latency}
 
 The statistical deep-dive tab combines a scatter plot of true versus predicted $p$-values with a mean absolute error (MAE) bar chart. For the top-tier Grok, Claude, and GPT-4o models, the scatter cloud concentrates near the diagonal $y=x$ line, indicating good $p$-value calibration and relatively small MAE bars. In contrast, Gemini variants and some smaller models show a more diffuse scatter with noticeable off-diagonal clusters, especially for mid-range $p$-values, which correspond to the most ambiguous cases for hypothesis testing. Decision errors in the scatter plots are concentrated around scenarios where the true $p$-value lies close to the significance threshold; here, models sometimes over-reject or over-conserve, depending on how they interpret borderline evidence.
@@ -213,10 +204,10 @@ The reasoning-quality box plots reveal that Grok, Claude, and GPT-4o maintain hi
 
 \subsection{Qualitative Behaviour}
 
-The qualitative inspector tab allows side-by-side inspection of full prompts, raw responses, and ground-truth statistics. These examples corroborate the quantitative error analysis: top-performing models typically select the correct test, compute a numerically reasonable statistic and $p$-value, and articulate a concise conclusion. Most hallucinations flagged by the dashboard are not wild fabrications but rather over-confident test-name claims, extra invented context, or inconsistent restatements of the same result. Lower-performing models occasionally mis-identify the test (e.g., treating a paired design as independent) or conflate descriptive and inferential claims, leading to incorrect decisions even when the numerical computation is approximately right. Overall, the dashboard confirms that modern frontier models are capable of robust, end-to-end hypothesis testing when supported by appropriate prompting (especially Program-of-Thought), but also highlights systematic weaknesses in test selection, calibration, and explanation that must be addressed before such systems can be trusted in high-stakes statistical settings.
+The qualitative inspector tab allows side-by-side inspection of full prompts, raw responses, and ground-truth statistics. These examples corroborate the quantitative error analysis: top-performing models typically select the correct test, compute a numerically reasonable statistic and $p$-value, and articulate a concise conclusion. Most hallucinations flagged by the dashboard are not wild fabrications but rather over-confident test-name claims, extra invented context, or inconsistent restatements of the same result. Lower-performing models occasionally mis-identify the test or conflate descriptive and inferential claims, leading to incorrect decisions even when the numerical computation is approximately right. Overall, the dashboard confirms that modern frontier models are capable of robust, end-to-end hypothesis testing when supported by appropriate prompting, but also highlights systematic weaknesses in test selection, calibration, and explanation that must be addressed before such systems can be trusted in high-stakes statistical settings.
 
 \section{Conclusion \& Future Work}
-This work establishes a rigorous benchmark for evaluating hypothesis testing in LLMs. We find that while top-tier models such as Grok-4, Claude Opus, and GPT-4o are approaching reliable performance on the tested $t$-test families, they still benefit significantly from structured prompting in particular Program-of-Thought to guarantee numerical precision.
+This work establishes a rigorous benchmark for evaluating hypothesis testing in LLMs. We find that while top-tier models such as Grok-4, Claude Opus, and GPT-4o are approaching reliable performance on the tested $t$-test families, they still benefit significantly from structured prompting in particular few shot to guarantee response structure precision.
 
 Future work will focus on:
 \begin{itemize}

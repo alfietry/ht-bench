@@ -74,7 +74,9 @@ Provide response in the format below but on the same line:
 8. Critical value(s): (number(s) or N/A)
 9. Assumptions checked: (normality, independence, equal variance - yes/no)
 
-IMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.
+IMPORTANT: 
+- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.
+- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
 
 Notation requirements:
 - mu for population mean
@@ -128,6 +130,8 @@ Data:
 
 Provide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.
 
+IMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+
 Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         
         return prompt
@@ -158,6 +162,8 @@ Steps:
 
 Be brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.
 
+IMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+
 Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         
         return prompt
@@ -169,55 +175,46 @@ class ProgramOfThoughtPrompt(PromptTemplate):
     @staticmethod
     def create(data: Dict[str, Any], test_context: str = "") -> str:
         """Create PoT prompt"""
-        # Convert data to Python code
-        code_lines = ["import numpy as np", "from scipy import stats", ""]
+        data_str = PromptTemplate.format_data(data)
         
-        if "sample1" in data:
-            sample1_list = list(data["sample1"])
-            code_lines.append(f"sample1 = np.array({sample1_list})")
-        
-        if "sample2" in data:
-            sample2_list = list(data["sample2"])
-            code_lines.append(f"sample2 = np.array({sample2_list})")
-        
-        if "groups" in data:
-            for i, group in enumerate(data["groups"]):
-                code_lines.append(f"group{i+1} = np.array({list(group)})")
-        
-        if "observed" in data:
-            code_lines.append(f"observed = np.array({data['observed']})")
-        
-        if "expected" in data:
-            code_lines.append(f"expected = np.array({data['expected']})")
-        
-        if "population_mean" in data:
-            code_lines.append(f"population_mean = {data['population_mean']}")
-        
-        if "population_std" in data:
-            code_lines.append(f"population_std = {data['population_std']}")
-        
-        data_code = "\n".join(code_lines)
-        
-        prompt = f"""Write concise Python (numpy/scipy) code that performs the correct hypothesis test using scipy.stats ONLY. Keep imports to `import numpy as np` and `from scipy import stats`.
+        prompt = f"""Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.
 
-    {test_context}
+{test_context}
 
-    Data (already valid Python):
-    {data_code}
+Data:
+{data_str}
 
-    Your response must:
-    1. Detect and name the appropriate test (e.g., "two_sample_t_test").
-    2. Run the computation inside real Python code (no pseudocode) using numpy/scipy.
-    3. Print the test name, test statistic, p-value, and the decision at alp = 0.05.
-    4. After the code, emit a single plain-text summary line exactly in this format:
-       RESULT: test_type=<name>; statistic=<value>; p_value=<value>; decision=<reject/fail_to_reject>
+Instructions:
+1. Write Python code using numpy/scipy to perform the appropriate hypothesis test
+2. Execute the code mentally and compute the actual numerical results
+3. After your code, output the RESULTS section with the computed values
 
-    Example summary line:
-    RESULT: test_type=two_sample_t_test; statistic=2.41; p_value=0.021; decision=reject
+Your response format:
+```python
+import numpy as np
+from scipy import stats
 
-    Keep everything ASCII. Do not use markdown fences. Ensure the summary line appears once after the code so downstream parsers can read it.
+# Your computation code here
+# ...
+```
 
-    Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
+RESULTS:
+H0: <null hypothesis in format: mu = value or mu1 = mu2>
+H1: <alternative hypothesis in format: mu != value or mu1 != mu2>
+Test: <test name, e.g., one-sample t-test>
+Test statistic: <computed numerical value>
+P-value: <computed numerical value>
+Degrees of freedom: <number>
+Decision: <reject H0 / fail to reject H0> (at alp = 0.05)
+Conclusion: <one sentence interpretation>
+
+IMPORTANT:
+- State hypotheses using notation: mu for population mean, mu1/mu2 for group means
+- Provide actual computed numerical values, not variable names or formulas
+- The RESULTS section must contain the final numerical answers
+- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+
+Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         
         return prompt
 

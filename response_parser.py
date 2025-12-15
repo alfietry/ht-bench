@@ -65,10 +65,78 @@ class ParsedResponse(BaseModel):
 class ResponseParser:
     """Parse LLM responses into structured format"""
 
+    # Old single-line RESULT pattern (kept for backward compatibility)
     RESULT_PATTERN = re.compile(
         r"RESULT:\s*test_type=([^;]+);\s*statistic=([^;]+);\s*p_value=([^;]+);\s*decision=([^\n]+)",
         re.IGNORECASE
     )
+    
+    # New RESULTS block pattern for PoT prompts
+    RESULTS_BLOCK_PATTERN = re.compile(
+        r"RESULTS?:\s*\n(.*?)(?:\n\n|\Z)",
+        re.IGNORECASE | re.DOTALL
+    )
+
+    @staticmethod
+    def parse_results_block(text: str) -> Optional[ParsedResponse]:
+        """Parse the RESULTS: block from Program-of-Thought responses"""
+        match = ResponseParser.RESULTS_BLOCK_PATTERN.search(text)
+        if not match:
+            return None
+        
+        block = match.group(1)
+        
+        # Extract H0 and H1
+        h0_match = re.search(r'H[_\s]?0\s*[:=]\s*([^\n]+)', block, re.IGNORECASE)
+        h1_match = re.search(r'H[_\s]?1\s*[:=]\s*([^\n]+)', block, re.IGNORECASE)
+        hypotheses = None
+        if h0_match and h1_match:
+            hypotheses = HypothesesModel(
+                H0=h0_match.group(1).strip(),
+                H1=h1_match.group(1).strip()
+            )
+        
+        # Extract test name
+        test_match = re.search(r'Test\s*[:=]\s*([^\n]+)', block, re.IGNORECASE)
+        test_method = None
+        if test_match:
+            test_method = test_match.group(1).strip().lower().replace(" ", "_").replace("-", "_")
+        
+        # Extract test statistic
+        stat_match = re.search(r'Test\s+statistic\s*[:=]\s*([+-]?\d+\.?\d*)', block, re.IGNORECASE)
+        test_statistic = float(stat_match.group(1)) if stat_match else None
+        
+        # Extract p-value
+        p_match = re.search(r'P[_-]?value\s*[:=]\s*([0-9.eE+-]+)', block, re.IGNORECASE)
+        p_value = float(p_match.group(1)) if p_match else None
+        
+        # Extract degrees of freedom
+        df_match = re.search(r'Degrees?\s+of\s+freedom\s*[:=]\s*(\d+\.?\d*)', block, re.IGNORECASE)
+        degrees_of_freedom = float(df_match.group(1)) if df_match else None
+        
+        # Extract decision
+        decision_match = re.search(r'Decision\s*[:=]\s*([^\n(]+)', block, re.IGNORECASE)
+        decision = None
+        if decision_match:
+            decision_text = decision_match.group(1).strip().lower()
+            if "reject" in decision_text and "fail" not in decision_text and "not" not in decision_text:
+                decision = "reject_H0"
+            elif any(term in decision_text for term in ["fail", "not"]):
+                decision = "fail_to_reject_H0"
+        
+        # Extract conclusion
+        conclusion_match = re.search(r'Conclusion\s*[:=]\s*([^\n]+)', block, re.IGNORECASE)
+        conclusion = conclusion_match.group(1).strip() if conclusion_match else None
+        
+        return ParsedResponse(
+            hypotheses=hypotheses,
+            test_method=test_method,
+            test_statistic=test_statistic,
+            p_value=p_value,
+            degrees_of_freedom=degrees_of_freedom,
+            decision=decision,
+            conclusion=conclusion,
+        )
 
     @staticmethod
     def parse_result_line(text: str) -> Optional[ParsedResponse]:
@@ -367,7 +435,12 @@ class ResponseParser:
             if result and result.test_statistic is not None:
                 return result
 
-            # Check for PoT summary line before regex heuristics
+            # Try parsing RESULTS: block (new PoT format)
+            results_block = ResponseParser.parse_results_block(text)
+            if results_block and results_block.test_statistic is not None and results_block.p_value is not None:
+                return results_block
+
+            # Check for old PoT summary line before regex heuristics
             pot_result = ResponseParser.parse_result_line(text)
             if pot_result and pot_result.test_statistic is not None and pot_result.p_value is not None:
                 return pot_result

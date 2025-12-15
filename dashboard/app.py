@@ -11,6 +11,7 @@ import numpy as np
 from pathlib import Path
 import sys
 import scipy.stats as stats
+from sklearn.metrics import confusion_matrix
 
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -172,24 +173,94 @@ def load_results(results_dir: Path = config.RESULTS_DIR):
             st.warning(f"Error loading {file}: {e}")
     return results
 
+# Models to exclude from dashboard (outdated versions)
+EXCLUDED_MODELS = [
+    'claude-3-haiku-20240307',
+    'claude-3-sonnet-20240229', 
+    'claude-3-opus-20240229',
+]
+
+# Cutoff date for Gemini models (API was unreliable before this date)
+GEMINI_CUTOFF_DATE = '2025-12-14'
+
+
+def shorten_model_name(name: str) -> str:
+    """Shorten model names for better display in plots and tables.
+    
+    Examples:
+        claude-opus-4-5-20251101 → claude-opus-4-5
+        grok-4-1-fast-reasoning → grok-4-1-f-r
+        deepseek-v3.2-exp-thinking → deepseek-v3.2-exp-t
+    """
+    import re
+    
+    # Remove date suffixes (YYYYMMDD pattern at end)
+    name = re.sub(r'-\d{8}$', '', name)
+    
+    # Abbreviation mappings for long words
+    abbreviations = {
+        'fast-reasoning': 'f-r',
+        'thinking': 't',
+        'reasoning': 'r',
+        'preview': 'prev',
+        'experimental': 'exp',
+        'latest': 'lat',
+    }
+    
+    for full, abbrev in abbreviations.items():
+        name = name.replace(full, abbrev)
+    
+    return name
+
 @st.cache_data
 def prepare_dataframe(results: list) -> pd.DataFrame:
     """Convert results to DataFrame with enhanced metrics"""
     rows = []
     
     for result in results:
+        model_name = result.get('model', 'unknown')
+        
+        # Skip excluded/outdated models
+        if model_name in EXCLUDED_MODELS or '2024' in model_name:
+            continue
+        
+        # Skip Gemini results before cutoff date (API was unreliable)
+        timestamp = result.get('timestamp', '')
+        if 'gemini' in model_name.lower() and timestamp:
+            try:
+                result_date = timestamp[:10]  # Extract YYYY-MM-DD
+                if result_date < GEMINI_CUTOFF_DATE:
+                    continue
+            except Exception:
+                pass
+        
+        # Skip results with empty or incomplete responses
+        raw_response = result.get('raw_response') or result.get('response', '')
+        if not raw_response or raw_response.strip() == '':
+            continue
+        
+        # Skip results where critical parsed fields are missing (incomplete response)
+        parsed = result.get('parsed_results', {})
+        if parsed.get('p_value') is None and parsed.get('test_statistic') is None and parsed.get('decision') is None:
+            continue
+            
         eval_data = result.get('evaluation', {})
         ground_truth = result.get('ground_truth', {})
         parsed = result.get('parsed_results', {})
         
-        # Calculate errors
+        # Calculate p-value errors
         p_val_pred = parsed.get('p_value')
         p_val_true = ground_truth.get('p_value')
         p_val_error = abs(p_val_pred - p_val_true) if (p_val_pred is not None and p_val_true is not None) else None
         
+        # Calculate test statistic errors
+        stat_pred = parsed.get('test_statistic')
+        stat_true = ground_truth.get('test_statistic')
+        stat_error = abs(stat_pred - stat_true) if (stat_pred is not None and stat_true is not None) else None
+        
         row = {
             'timestamp': result.get('timestamp', ''),
-            'model': result.get('model', 'unknown'),
+            'model': shorten_model_name(model_name),
             'prompt_type': result.get('prompt_type', 'unknown'),
             'test_type': result.get('input_data', {}).get('test_type', 'unknown'),
             'overall_accuracy': eval_data.get('overall_accuracy', 0),
@@ -204,6 +275,9 @@ def prepare_dataframe(results: list) -> pd.DataFrame:
             'predicted_p_value': p_val_pred,
             'true_p_value': p_val_true,
             'p_value_error': p_val_error,
+            'predicted_test_statistic': stat_pred,
+            'true_test_statistic': stat_true,
+            'test_statistic_error': stat_error,
             'latency_seconds': result.get('latency_seconds'),
             'prompt_text': result.get('prompt') or result.get('input_prompt', ''),
             'response_text': result.get('raw_response') or result.get('response', '')
@@ -315,7 +389,7 @@ def group_models_for_radars(models: list) -> dict:
     return categories
 
 def create_p_value_scatter(df: pd.DataFrame):
-    """Create scatter plot of True vs Predicted P-values"""
+    """Create scatter plot of True vs Predicted P-values with larger points"""
     fig = px.scatter(
         df, 
         x='true_p_value', 
@@ -326,13 +400,173 @@ def create_p_value_scatter(df: pd.DataFrame):
         labels={'true_p_value': 'Ground Truth P-Value', 'predicted_p_value': 'Predicted P-Value'}
     )
     
+    # Increase marker size for better visibility
+    fig.update_traces(marker=dict(size=12, opacity=0.7),
+                      hovertemplate='<b>%{fullData.name}</b><br>Ground Truth: %{x:.4f}<br>Predicted: %{y:.4f}<extra></extra>')
+    
     # Add y=x line
     fig.add_shape(
-        type="line", line=dict(dash='dash', color='gray'),
+        type="line", line=dict(dash='dash', color='gray', width=2),
         x0=0, y0=0, x1=1, y1=1
     )
     
-    fig.update_layout(height=600)
+    fig.update_layout(height=600, xaxis_tickformat='.4f', yaxis_tickformat='.4f')
+    return fig
+
+
+def create_test_statistic_scatter(df: pd.DataFrame):
+    """Create scatter plot of True vs Predicted Test Statistics"""
+    fig = px.scatter(
+        df, 
+        x='true_test_statistic', 
+        y='predicted_test_statistic', 
+        color='model',
+        hover_data=['test_type', 'prompt_type'],
+        title="Test Statistic Correlation: Ground Truth vs Predicted",
+        labels={'true_test_statistic': 'Ground Truth Test Statistic', 'predicted_test_statistic': 'Predicted Test Statistic'}
+    )
+    
+    # Increase marker size
+    fig.update_traces(marker=dict(size=12, opacity=0.7),
+                      hovertemplate='<b>%{fullData.name}</b><br>Ground Truth: %{x:.4f}<br>Predicted: %{y:.4f}<extra></extra>')
+    
+    # Add y=x reference line based on data range
+    if not df.empty:
+        min_val = min(df['true_test_statistic'].min(), df['predicted_test_statistic'].min())
+        max_val = max(df['true_test_statistic'].max(), df['predicted_test_statistic'].max())
+        fig.add_shape(
+            type="line", line=dict(dash='dash', color='gray', width=2),
+            x0=min_val, y0=min_val, x1=max_val, y1=max_val
+        )
+    
+    fig.update_layout(height=600, xaxis_tickformat='.4f', yaxis_tickformat='.4f')
+    return fig
+
+
+def create_correlation_heatmap(df: pd.DataFrame):
+    """Create correlation heatmap for numerical predictions vs ground truth"""
+    # Prepare correlation data by model
+    models = df['model'].unique()
+    
+    p_value_corrs = []
+    stat_corrs = []
+    
+    for model in models:
+        model_df = df[df['model'] == model]
+        
+        # P-value correlation
+        p_df = model_df.dropna(subset=['true_p_value', 'predicted_p_value'])
+        if len(p_df) > 2:
+            p_corr = p_df['true_p_value'].corr(p_df['predicted_p_value'])
+        else:
+            p_corr = np.nan
+        p_value_corrs.append(p_corr)
+        
+        # Test statistic correlation
+        s_df = model_df.dropna(subset=['true_test_statistic', 'predicted_test_statistic'])
+        if len(s_df) > 2:
+            s_corr = s_df['true_test_statistic'].corr(s_df['predicted_test_statistic'])
+        else:
+            s_corr = np.nan
+        stat_corrs.append(s_corr)
+    
+    corr_df = pd.DataFrame({
+        'Model': models,
+        'P-Value Correlation': p_value_corrs,
+        'Test Statistic Correlation': stat_corrs
+    }).set_index('Model')
+    
+    fig = px.imshow(
+        corr_df.T,
+        labels=dict(x="Model", y="Metric", color="Correlation (r)"),
+        color_continuous_scale='RdYlGn',
+        zmin=-1, zmax=1,
+        text_auto='.4f',
+        aspect='auto',
+        title="Correlation Heatmap: Predicted vs Ground Truth"
+    )
+    
+    fig.update_layout(height=300)
+    fig.update_traces(hovertemplate='Model: %{x}<br>Metric: %{y}<br>Correlation: %{z:.4f}<extra></extra>')
+    return fig
+
+
+def create_accuracy_by_prompt_and_test(df: pd.DataFrame):
+    """Create grouped bar chart showing accuracy breakdown"""
+    pivot = df.pivot_table(
+        values='overall_accuracy',
+        index='prompt_type',
+        columns='test_type',
+        aggfunc='mean'
+    )
+    
+    fig = px.imshow(
+        pivot,
+        labels=dict(x="Test Type", y="Prompt Strategy", color="Accuracy"),
+        color_continuous_scale='Blues',
+        text_auto='.4f',
+        aspect='auto',
+        title="Accuracy by Prompt Strategy × Test Type"
+    )
+    
+    fig.update_layout(height=350)
+    fig.update_traces(hovertemplate='Test Type: %{x}<br>Prompt: %{y}<br>Accuracy: %{z:.4f}<extra></extra>')
+    return fig
+
+
+def create_decision_confusion_matrix(df: pd.DataFrame):
+    """Create confusion matrix for decision predictions"""
+    # Filter valid decisions
+    decision_df = df.dropna(subset=['predicted_decision', 'true_decision'])
+    
+    if decision_df.empty:
+        return None
+    
+    # Create confusion matrix
+    labels = ['reject_H0', 'fail_to_reject_H0']
+    
+    # Ensure we have both classes
+    y_true = decision_df['true_decision']
+    y_pred = decision_df['predicted_decision']
+    
+    try:
+        cm = confusion_matrix(y_true, y_pred, labels=labels)
+        cm_df = pd.DataFrame(cm, index=labels, columns=labels)
+        
+        fig = px.imshow(
+            cm_df,
+            labels=dict(x="Predicted Decision", y="True Decision", color="Count"),
+            color_continuous_scale='Blues',
+            text_auto=True,
+            aspect='auto',
+            title="Decision Confusion Matrix (All Models)"
+        )
+        
+        fig.update_layout(height=400)
+        return fig
+    except Exception:
+        return None
+
+
+def create_error_distribution_violin(df: pd.DataFrame):
+    """Create violin plot showing error distributions by model"""
+    error_df = df.dropna(subset=['p_value_error'])
+    
+    if error_df.empty:
+        return None
+    
+    fig = px.violin(
+        error_df,
+        x='model',
+        y='p_value_error',
+        color='model',
+        box=True,
+        points='outliers',
+        title="P-Value Error Distribution by Model"
+    )
+    
+    fig.update_layout(height=450, showlegend=False, yaxis_tickformat='.4f')
+    fig.update_traces(hovertemplate='Model: %{x}<br>P-Value Error: %{y:.4f}<extra></extra>')
     return fig
 
 def create_heatmap(df: pd.DataFrame):
@@ -352,12 +586,13 @@ def create_heatmap(df: pd.DataFrame):
             [0.5, "#513b8a"],
             [1.0, "#f5d76e"]
         ],
-        text_auto=True,
+        text_auto='.4f',
         aspect="auto",
         title="Model Performance Heatmap by Test Type"
     )
     
     fig.update_layout(height=400)
+    fig.update_traces(hovertemplate='Test Type: %{x}<br>Model: %{y}<br>Accuracy: %{z:.4f}<extra></extra>')
     return fig
 
 def main():
@@ -474,13 +709,21 @@ def main():
         with col2:
             st.markdown("### Prompt Strategy Impact")
             prompt_perf = filtered_df.groupby(['model', 'prompt_type'])['overall_accuracy'].mean().reset_index()
+            # Use a larger color palette to ensure unique colors for each model
+            n_models = prompt_perf['model'].nunique()
+            colors = px.colors.qualitative.Dark24 + px.colors.qualitative.Light24
+            color_map = {model: colors[i % len(colors)] for i, model in enumerate(prompt_perf['model'].unique())}
             fig_prompt = px.bar(prompt_perf, x='prompt_type', y='overall_accuracy', color='model', barmode='group',
-                              title="Accuracy by Prompt Strategy")
+                              title="Accuracy by Prompt Strategy", color_discrete_map=color_map)
+            fig_prompt.update_layout(yaxis_tickformat='.4f')
+            fig_prompt.update_traces(hovertemplate='<b>%{fullData.name}</b><br>Prompt: %{x}<br>Accuracy: %{y:.4f}<extra></extra>')
             st.plotly_chart(fig_prompt, width='stretch')
             
         st.markdown("### Reasoning Quality Distribution")
         fig_box = px.box(filtered_df, x='model', y='reasoning_quality', color='model', 
                         title="Distribution of Reasoning Quality Scores")
+        fig_box.update_layout(yaxis_tickformat='.4f')
+        fig_box.update_traces(hovertemplate='Model: %{x}<br>Reasoning Quality: %{y:.4f}<extra></extra>')
         st.plotly_chart(fig_box, width='stretch')
 
         st.markdown("### Latency by Model")
@@ -495,7 +738,8 @@ def main():
                 title="Average Response Latency",
                 labels={'model': 'Model', 'latency_seconds': 'Latency (s)'}
             )
-            fig_latency.update_layout(showlegend=False)
+            fig_latency.update_layout(showlegend=False, yaxis_tickformat='.4f')
+            fig_latency.update_traces(hovertemplate='Model: %{x}<br>Latency: %{y:.4f}s<extra></extra>')
             st.plotly_chart(fig_latency, width='stretch')
         else:
             st.info("Latency data is not available for the selected filters.")
@@ -504,21 +748,81 @@ def main():
         st.dataframe(display_df, width='stretch', height=400)
 
     with tab_stats:
-        st.markdown("### P-Value Estimation Accuracy")
-        st.info("This plot compares the ground truth p-value (x-axis) with the model's predicted p-value (y-axis). Points closer to the diagonal dashed line indicate better performance.")
+        st.markdown("### Correlation Heatmap: Model Prediction Quality")
+        st.info("Pearson correlation (r) between predicted and ground truth values. Higher values (green) indicate better calibration.")
+        corr_heatmap = create_correlation_heatmap(filtered_df)
+        st.plotly_chart(corr_heatmap, use_container_width=True)
         
-        # Filter out None values for p-values
-        p_val_df = filtered_df.dropna(subset=['predicted_p_value', 'true_p_value'])
-        if not p_val_df.empty:
-            scatter = create_p_value_scatter(p_val_df)
-            st.plotly_chart(scatter, width='stretch')
-        else:
-            st.warning("No p-value data available for the selected filters.")
-            
-        st.markdown("### Error Distribution (MAE)")
-        error_df = filtered_df.groupby('model')[['p_value_error']].mean().reset_index()
-        fig_err = px.bar(error_df, x='model', y='p_value_error', title="Mean Absolute Error in P-Value Estimation")
-        st.plotly_chart(fig_err, width='stretch')
+        st.markdown("---")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("### P-Value Estimation")
+            p_val_df = filtered_df.dropna(subset=['predicted_p_value', 'true_p_value'])
+            if not p_val_df.empty:
+                scatter = create_p_value_scatter(p_val_df)
+                st.plotly_chart(scatter, use_container_width=True)
+            else:
+                st.warning("No p-value data available.")
+        
+        with col2:
+            st.markdown("### Test Statistic Estimation")
+            stat_df = filtered_df.dropna(subset=['predicted_test_statistic', 'true_test_statistic'])
+            if not stat_df.empty:
+                stat_scatter = create_test_statistic_scatter(stat_df)
+                st.plotly_chart(stat_scatter, use_container_width=True)
+            else:
+                st.warning("No test statistic data available.")
+        
+        st.markdown("---")
+        
+        col3, col4 = st.columns(2)
+        
+        with col3:
+            st.markdown("### P-Value Error Distribution")
+            violin_fig = create_error_distribution_violin(filtered_df)
+            if violin_fig:
+                st.plotly_chart(violin_fig, use_container_width=True)
+            else:
+                st.warning("Insufficient error data.")
+        
+        with col4:
+            st.markdown("### Decision Confusion Matrix")
+            cm_fig = create_decision_confusion_matrix(filtered_df)
+            if cm_fig:
+                st.plotly_chart(cm_fig, use_container_width=True)
+            else:
+                st.warning("Insufficient decision data.")
+        
+        st.markdown("---")
+        
+        st.markdown("### Mean Absolute Errors by Model")
+        col5, col6 = st.columns(2)
+        
+        with col5:
+            error_df = filtered_df.groupby('model')[['p_value_error']].mean().reset_index()
+            fig_p_err = px.bar(error_df, x='model', y='p_value_error', 
+                              title="MAE: P-Value Estimation",
+                              color='model')
+            fig_p_err.update_layout(showlegend=False, yaxis_tickformat='.4f')
+            fig_p_err.update_traces(hovertemplate='Model: %{x}<br>MAE: %{y:.4f}<extra></extra>')
+            st.plotly_chart(fig_p_err, use_container_width=True)
+        
+        with col6:
+            stat_error_df = filtered_df.groupby('model')[['test_statistic_error']].mean().reset_index()
+            fig_s_err = px.bar(stat_error_df, x='model', y='test_statistic_error', 
+                              title="MAE: Test Statistic Estimation",
+                              color='model')
+            fig_s_err.update_layout(showlegend=False, yaxis_tickformat='.4f')
+            fig_s_err.update_traces(hovertemplate='Model: %{x}<br>MAE: %{y:.4f}<extra></extra>')
+            st.plotly_chart(fig_s_err, use_container_width=True)
+        
+        st.markdown("---")
+        
+        st.markdown("### Accuracy Breakdown: Prompt Strategy × Test Type")
+        prompt_test_heatmap = create_accuracy_by_prompt_and_test(filtered_df)
+        st.plotly_chart(prompt_test_heatmap, use_container_width=True)
 
     with tab_qual:
         st.markdown("### Individual Response Inspector")

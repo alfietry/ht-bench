@@ -163,7 +163,7 @@ class GoogleClient(LLMClient):
     @retry(stop=stop_after_attempt(config.RETRY_ATTEMPTS),
            wait=wait_exponential(multiplier=config.RETRY_DELAY))
     async def generate(self, prompt: str, temperature: float = 0.0,
-                      max_tokens: int = 2000) -> str:
+                      max_tokens: int = 8000) -> str:
         """Generate text response"""
         try:
             endpoint = f"{self.base_url}/models/{self.model_name}:generateContent"
@@ -178,7 +178,13 @@ class GoogleClient(LLMClient):
                 "generationConfig": {
                     "temperature": temperature,
                     "maxOutputTokens": max_tokens
-                }
+                },
+                "safetySettings": [
+                    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+                    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+                ]
             }
 
             async with aiohttp.ClientSession() as session:
@@ -189,7 +195,17 @@ class GoogleClient(LLMClient):
                     data = await response.json()
                     candidates = data.get("candidates", [])
                     if not candidates:
+                        # Log the block reason for debugging
+                        prompt_feedback = data.get("promptFeedback", {})
+                        block_reason = prompt_feedback.get("blockReason", "unknown")
+                        logger.warning(f"Google API returned no candidates. Block reason: {block_reason}, promptFeedback: {prompt_feedback}")
                         return ""
+                    
+                    # Log finish reason for debugging truncation issues
+                    finish_reason = candidates[0].get("finishReason", "unknown")
+                    if finish_reason == "MAX_TOKENS":
+                        logger.warning(f"Google API response truncated due to MAX_TOKENS limit")
+                    
                     parts = candidates[0].get("content", {}).get("parts", [])
                     text = "".join(part.get("text", "") for part in parts if isinstance(part, dict))
                     return text.strip()
