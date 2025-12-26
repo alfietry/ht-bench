@@ -41,7 +41,7 @@ MODELS = {
 # Canonical model set for the full benchmark mode (mirrors dashboard filtering)
 FULL_MODE_MODEL_MAP = {
     "openai": ["gpt-5.1","gpt-5-mini", "gpt-4","gpt-4o", "gpt-4o-mini"],
-    "anthropic": ["claude-opus-4-5-20251101", "claude-sonnet-4-5-20250929", "claude-haiku-4-5-20251001"], 
+    "anthropic": ["claude-opus-4-5-20251101", "claude-opus-4-1-20250805","claude-sonnet-4-5-20250929", "claude-haiku-4-5-20251001"], 
     "google": ["gemini-2.5-pro", "gemini-2.5-flash"], # , "gemini-3.0-pro"
     "grok": ["grok-3", "grok-4.1-thinking", "grok-3-mini", "grok-4-1-fast-reasoning"],
     "deepseek": ["deepseek-chat"],

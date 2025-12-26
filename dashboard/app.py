@@ -428,7 +428,7 @@ def create_test_statistic_scatter(df: pd.DataFrame):
     
     # Increase marker size
     fig.update_traces(marker=dict(size=12, opacity=0.7),
-                      hovertemplate='<b>%{fullData.name}</b><br>Ground Truth: %{x:.4f}<br>Predicted: %{y:.4f}<extra></extra>')
+                      hovertemplate='<b>%{fullData.name}</b><br>Test Type: %{customdata[0]}<br>Ground Truth: %{x:.4f}<br>Predicted: %{y:.4f}<extra></extra>')
     
     # Add y=x reference line based on data range
     if not df.empty:
@@ -694,7 +694,7 @@ def main():
                     st.markdown(f"#### {title}")
                     if models_subset:
                         radar_fig = create_radar_chart(filtered_df, models_subset)
-                        st.plotly_chart(radar_fig, use_container_width=True)
+                        st.plotly_chart(radar_fig, width='stretch')
                     else:
                         st.info("No models selected in this family.")
 
@@ -751,7 +751,7 @@ def main():
         st.markdown("### Correlation Heatmap: Model Prediction Quality")
         st.info("Pearson correlation (r) between predicted and ground truth values. Higher values (green) indicate better calibration.")
         corr_heatmap = create_correlation_heatmap(filtered_df)
-        st.plotly_chart(corr_heatmap, use_container_width=True)
+        st.plotly_chart(corr_heatmap, width='stretch')
         
         st.markdown("---")
         
@@ -762,7 +762,7 @@ def main():
             p_val_df = filtered_df.dropna(subset=['predicted_p_value', 'true_p_value'])
             if not p_val_df.empty:
                 scatter = create_p_value_scatter(p_val_df)
-                st.plotly_chart(scatter, use_container_width=True)
+                st.plotly_chart(scatter, width='stretch')
             else:
                 st.warning("No p-value data available.")
         
@@ -771,7 +771,7 @@ def main():
             stat_df = filtered_df.dropna(subset=['predicted_test_statistic', 'true_test_statistic'])
             if not stat_df.empty:
                 stat_scatter = create_test_statistic_scatter(stat_df)
-                st.plotly_chart(stat_scatter, use_container_width=True)
+                st.plotly_chart(stat_scatter, width='stretch')
             else:
                 st.warning("No test statistic data available.")
         
@@ -783,7 +783,7 @@ def main():
             st.markdown("### P-Value Error Distribution")
             violin_fig = create_error_distribution_violin(filtered_df)
             if violin_fig:
-                st.plotly_chart(violin_fig, use_container_width=True)
+                st.plotly_chart(violin_fig, width='stretch')
             else:
                 st.warning("Insufficient error data.")
         
@@ -791,7 +791,7 @@ def main():
             st.markdown("### Decision Confusion Matrix")
             cm_fig = create_decision_confusion_matrix(filtered_df)
             if cm_fig:
-                st.plotly_chart(cm_fig, use_container_width=True)
+                st.plotly_chart(cm_fig, width='stretch')
             else:
                 st.warning("Insufficient decision data.")
         
@@ -807,7 +807,7 @@ def main():
                               color='model')
             fig_p_err.update_layout(showlegend=False, yaxis_tickformat='.4f')
             fig_p_err.update_traces(hovertemplate='Model: %{x}<br>MAE: %{y:.4f}<extra></extra>')
-            st.plotly_chart(fig_p_err, use_container_width=True)
+            st.plotly_chart(fig_p_err, width='stretch')
         
         with col6:
             stat_error_df = filtered_df.groupby('model')[['test_statistic_error']].mean().reset_index()
@@ -816,13 +816,13 @@ def main():
                               color='model')
             fig_s_err.update_layout(showlegend=False, yaxis_tickformat='.4f')
             fig_s_err.update_traces(hovertemplate='Model: %{x}<br>MAE: %{y:.4f}<extra></extra>')
-            st.plotly_chart(fig_s_err, use_container_width=True)
+            st.plotly_chart(fig_s_err, width='stretch')
         
         st.markdown("---")
         
         st.markdown("### Accuracy Breakdown: Prompt Strategy × Test Type")
         prompt_test_heatmap = create_accuracy_by_prompt_and_test(filtered_df)
-        st.plotly_chart(prompt_test_heatmap, use_container_width=True)
+        st.plotly_chart(prompt_test_heatmap, width='stretch')
 
     with tab_qual:
         st.markdown("### Individual Response Inspector")
