@@ -14,12 +14,16 @@ A research benchmark evaluating LLMs on statistical hypothesis testing tasks acr
 ```bash
 # Install
 pip install -r requirements.txt
-cp .env.example .env  # Add API keys
+.env  # Add API keys
 
 # Run benchmark
 python ht.py --mode quick          # Fast test (1 model, 2 scenarios)
 python ht.py --mode full           # All models, all tests
 python ht.py --mode custom --models openai/gpt-4o --tests one_sample_t_test --scenarios 5
+
+## 🌐 Live Demo
+
+Try the interactive dashboard: **[ht-bench.streamlit.app](https://ht-bench-alfietry.streamlit.app)**
 
 # View results
 streamlit run dashboard/app.py
