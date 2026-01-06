@@ -13,7 +13,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "Data:\nSample 1: n=20, xb=9.9341, s=1.7404\nHypothesized population mean: mu0=10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: (9.9341 - 10) / (1.7404 / sqrt(20)) \u2248 -0.17\np-value: \u2248 0.87\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: There is no significant evidence that the population mean differs from 10.",
+    "raw_response": "Data:\nSample 1: n=20, xb=9.9341, s=1.7404\nHypothesized population mean: mu0=10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: (9.9341 - 10) / (1.7404 / sqrt(20)) ≈ -0.17\np-value: ≈ 0.87\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: There is no significant evidence that the population mean differs from 10.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
@@ -44,8 +44,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -95,9 +95,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.543691199971363
+    "latency_seconds": 4.543691199971363,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.05,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant evidence that the population mean differs from 10."
   },
   {
     "timestamp": "2025-12-11T10:51:58.249888",
@@ -113,7 +121,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "Data:\nSample 1 mean (xb): 10.1867\nSample 1 std (s): 1.4952\nSample size (n): 50\nHypothesized population mean (mu0): 10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: (10.1867 - 10) / (1.4952 / sqrt(50)) \u2248 0.89\np-value: \u2248 0.38\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: The sample mean does not differ significantly from the hypothesized population mean of 10.",
+    "raw_response": "Data:\nSample 1 mean (xb): 10.1867\nSample 1 std (s): 1.4952\nSample size (n): 50\nHypothesized population mean (mu0): 10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: (10.1867 - 10) / (1.4952 / sqrt(50)) ≈ 0.89\np-value: ≈ 0.38\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: The sample mean does not differ significantly from the hypothesized population mean of 10.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
@@ -144,8 +152,8 @@
       "sample_mean": 10.186686353077933,
       "sample_std": 1.4952001527857144,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -195,9 +203,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.558807600056753
+    "latency_seconds": 4.558807600056753,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.05,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean does not differ significantly from the hypothesized population mean of 10."
   },
   {
     "timestamp": "2025-12-11T10:51:59.078139",
@@ -213,7 +229,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. H0 and H1: H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: t = -0.17\n4. P-value: 0.86\n5. Decision: fail to reject H0 (for typical alp = 0.05)\n6. Brief conclusion: There is no statistically significant difference between xb and the hypothesized mu = 10.\n7. Degrees of freedom: 19\n8. Critical value(s): t(0.975,19) \u2248 \u00b12.093 (for alp = 0.05, two-tailed)\n9. Assumptions checked: normality - yes (assumed); independence - yes (assumed); equal variance - N/A (single sample)",
+    "raw_response": "1. H0 and H1: H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: t = -0.17\n4. P-value: 0.86\n5. Decision: fail to reject H0 (for typical alp = 0.05)\n6. Brief conclusion: There is no statistically significant difference between xb and the hypothesized mu = 10.\n7. Degrees of freedom: 19\n8. Critical value(s): t(0.975,19) ≈ ±2.093 (for alp = 0.05, two-tailed)\n9. Assumptions checked: normality - yes (assumed); independence - yes (assumed); equal variance - N/A (single sample)",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10, H1: mu != 10",
@@ -247,8 +263,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -264,7 +280,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00075092986551617,
         "relative_error": 0.004436833035002719,
@@ -302,7 +318,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 5.396275499952026
+    "latency_seconds": 5.396275499952026,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "H0: mu = 10, H1: mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.17,
+    "p_value": 0.86,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no statistically significant difference between xb and the hypothesized mu = 10."
   },
   {
     "timestamp": "2025-12-11T10:51:59.500798",
@@ -318,11 +343,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type\nOne-sample t-test (sig unknown, use s, n=20)\n\n2. Hypotheses\nH0: mu = 10  \nH1: mu \u2260 10\n\n3. Test statistic\nGiven: xb = 9.9341, s = 1.7404, n = 20  \nStandard error SE = s / sqrt(n) = 1.7404 / sqrt(20) \u2248 1.7404 / 4.4721 \u2248 0.3891  \nt = (xb - mu0) / SE = (9.9341 - 10) / 0.3891 \u2248 -0.0659 / 0.3891 \u2248 -0.169\n\ndf = n - 1 = 19\n\n4. p-value\nTwo-tailed p-value for t = -0.169 with df = 19 \u2248 0.87\n\n5. Decision (alp = 0.05)\np = 0.87 > 0.05 \u2192 Fail to reject H0\n\n6. Conclusion\nAt alp = 0.05, there is no statistically significant evidence that xb differs from the hypothesized mu = 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\nt-statistic: -0.1690\nDecision: Fail To Reject H0\nConclusion: Conclusion",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -349,8 +374,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -366,7 +391,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00024907013448383086,
         "relative_error": 0.0014716189240267135,
@@ -374,8 +399,8 @@
         "ground_truth": -0.16924907013448384
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -406,12 +431,20 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": true,
-        "has_p_value": true,
+        "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 5.813596000079997
+    "latency_seconds": 5.813596000079997,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.169,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion"
   },
   {
     "timestamp": "2025-12-11T10:52:01.062001",
@@ -455,8 +488,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -510,7 +543,11 @@
       },
       "overall_accuracy": 0.75
     },
-    "latency_seconds": 7.379028300056234
+    "latency_seconds": 7.379028300056234,
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.07021572964802264,
+    "p_value": 0.9448790848071577,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-11T10:52:04.068723",
@@ -526,11 +563,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type\nOne-sample t-test (population std dev unknown, n=50, test if xb differs from mu0=10; two-sided).\n\n2. Hypotheses\nH0: mu = 10  \nH1: mu \u2260 10\n\n3. Test statistic\nGiven: xb = 10.1867, s = 1.4952, n = 50, mu0 = 10\n\nStandard error = s / sqrt(n) = 1.4952 / sqrt(50) \u2248 1.4952 / 7.0711 \u2248 0.2114\n\nt = (xb - mu0) / (s / sqrt(n))\n  = (10.1867 - 10) / 0.2114\n  \u2248 0.1867 / 0.2114\n  \u2248 0.88\n\ndf = n - 1 = 49\n\n4. p-value\nTwo-sided p-value for t \u2248 0.88 with df = 49:\np \u2248 0.38 (well above 0.05)\n\n5. Decision (alp = 0.05)\np > 0.05 \u21d2 Fail to reject H0.\n\n6. Conclusion\nAt alp = 0.05, there is not enough evidence to conclude that the population mean mu differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\np-value: 0.3800\nDecision: Fail To Reject H0\nConclusion: Conclusion",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -557,8 +594,8 @@
       "sample_mean": 10.186686353077933,
       "sample_std": 1.4952001527857144,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -580,8 +617,8 @@
         "relative_error": null
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -615,9 +652,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.814270899980329
+    "latency_seconds": 5.814270899980329,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.38,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion"
   },
   {
     "timestamp": "2025-12-11T10:52:06.127354",
@@ -664,8 +709,8 @@
       "sample_mean": 10.186686353077933,
       "sample_std": 1.4952001527857144,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -719,7 +764,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 7.047973099979572
+    "latency_seconds": 7.047973099979572,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "H0: mu = 10, H1: mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.88,
+    "p_value": 0.384,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no statistically significant evidence that xb differs from the hypothesized mu = 10."
   },
   {
     "timestamp": "2025-12-11T10:52:08.814336",
@@ -763,8 +817,8 @@
       "sample_mean": 10.186686353077933,
       "sample_std": 1.4952001527857144,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -812,8 +866,10 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.5
     },
-    "latency_seconds": 11.722327800001949
+    "latency_seconds": 11.722327800001949,
+    "test_method": "\",_test_name)",
+    "decision": "fail_to_reject_H0"
   }
 ]

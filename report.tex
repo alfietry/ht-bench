@@ -2,6 +2,10 @@
 
 \typeout{IJCAI--ECAI 26 Instructions for Authors}
 
+% https://2026.ijcai.org/ijcai-ecai-2026-call-for-papers-main-track/
+% submission: 1/12/2026
+% Papers must be no longer than 9 pages in total: 7 pages for the body of the paper and 2 pages for references. 
+
 % These are the instructions for authors for IJCAI--ECAI 26.
 
 \documentclass{article}
@@ -107,18 +111,18 @@ fourth@example.com
 \maketitle
 
 \begin{abstract}
-As LLMs integrate into scientific workflows, their statistical reasoning capabilities remain unverified. We present a benchmark evaluating state-of-the-art LLMs (GPT, Gemini, Claude, Grok) on hypothesis testing tasks—One-Sample, Two-Sample, and Paired T-Tests—across four prompting strategies, revealing a critical ``Outcome-Process Dissociation.''
+As LLMs integrate into scientific workflows, their statistical reasoning capabilities remain unverified. We present a benchmark evaluating state-of-the-art LLMs (GPT, Gemini, Claude, Grok) on hypothesis testing tasks—One-Sample, Two-Sample, and Paired T-Tests across four prompting strategies, revealing a critical "Outcome-Process Dissociation".
 
 Results show top models achieve near-perfect P-value calibration and 98.7\% sensitivity in detecting effects, yet frequently fail to derive correct test statistics. This brittleness peaks in paired data scenarios due to dependency reasoning failures, compounded by a ``liberal bias'' yielding tenfold more False Positives than False Negatives. Notably, Chain-of-Thought prompting degrades performance compared to Program-of-Thought (code generation), which alone enables near-100\% accuracy. We conclude that while LLMs excel as high-sensitivity screening tools, reliable scientific discovery requires neuro-symbolic code execution.
 \end{abstract}
 
 
 \section{Introduction}
-The rapid integration of artificial intelligence across high-stakes domains including medecine, academia, and defence has intensified the demand for trustworthy and reliable automated systems. However, current Large Language Model (LLM) agent systems carry inherent risks, such as unpredictable reasoning, potential for deception, and embedded biases, which can compromise the integrity of these sensitive fields\shortcite{bengio2025superintelligent}. As proposed by the foundational work of Yoshua Bengio on "Scientist AI". a critical pathway to establishing safe, non-agentic AI is to prioritize a system's ability to explain the world from observations rather than merely acting within it to achieve goal-directed outcomes~\shortcite{bengio2025superintelligent}, ~\shortcite{yamada2025ai}.
+The rapid integration of artificial intelligence across high-stakes domains including medicine, academia, and defense has intensified the demand for trustworthy and reliable automated systems. However, current Large Language Model (LLM) agent systems carry inherent risks, such as illogical reasoning, potential for deception, and embedded biases, which can compromise the integrity of these sensitive fields\cite{bengio2025superintelligent}. As proposed by the foundational work of Yoshua Bengio on "Scientist AI", a critical pathway to establishing safe, non-agentic AI is to prioritize a system's ability to explain the world from observations as scientists do rather than merely acting within it to achieve goal-directed outcomes~\cite{bengio2025superintelligent}, ~\cite{yamada2025ai}.
 
-Scientific research requires two fundamental capabilities: robust reasoning and validation ~\shortcite{koslowski1996theory}, ~\shortcite{national2012assessing}. While significant progress has been made in eliciting reasoning through techniques such as the Google DeepMind "Chain of Thought" (CoT) prompting strategy \shortcite{wei2022chain}. True scientific progress depends on the ability to rigorously test, validate, and interpret data to make informed decisions. 
+Scientific research requires two fundamental capabilities: robust reasoning and validation ~\cite{koslowski1996theory}, ~\cite{national2012assessing}. While significant progress has been made in eliciting reasoning through techniques such as the Google DeepMind "Chain of Thought" (CoT) strategy \cite{wei2022chain}, true scientific progress also depends on the ability to rigorously test, validate, and interpret data to make informed decisions. 
 
-As motivated by the ImageNet Benchmark, a revolutionary computer vision benchmark which provided a common metric for measuring objective improvement. The field of AI-enabled science requires a rigorous infrastructure to quantify reasoning and validation skills\shortcite{russakovsky2015imagenet}. This project serves as groundwork toward measuring LLM hypothesis testing capability as a unified end-to-end task. Our central objective is to design and implement a benchmark that evaluates how effectively modern LLMs can perform hypothesis testing. By formalizing hypothesis testing as a measurable task for language models, we aim to provide a standardized way to quantify how accurately these systems can judge the validity of claims, weigh evidence, and reach reliable conclusions. Concretely, we determine success around consistent test selection, calibrated p-value estimation, and correct reject/fail-to-reject decisions at a fixed $\alpha$.
+Similar to the ImageNet Benchmark, a revolutionary computer vision benchmark which provided an objective metric for measuring improvements and witnessed tremendous progress in the field, LLM benchmarks are facilitating rapid improvement of LLMs. The field of AI-enabled science requires a rigorous infrastructure to quantify reasoning and validation skills\cite{russakovsky2015imagenet}. This project serves as groundwork toward measuring LLM hypothesis testing capability as a unified end-to-end task. Our central objective is to design and implement a benchmark that evaluates how effectively modern LLMs can perform hypothesis testing. By formalizing hypothesis testing as a measurable task for language models, we aim to provide a standardized way to quantify how accurately these systems can judge the validity of claims, weigh evidence, and reach reliable conclusions. Concretely, we determine success around consistent test selection, calibrated p-value estimation, and correct reject/fail-to-reject decisions at a fixed $\alpha$.
 
 In the long term, this line of work connects to a much larger question: if future AI systems are to assist in the formation of new areas of study, then they must first demonstrate reliable performance in evaluating the foundational claims upon which new fields are built. This research does not attempt to establish new fields directly; rather, it focuses on building an evaluation infrastructure needed to assess whether LLMs are developing the kinds of reasoning and validation skills that scientific discovery would require.
 
@@ -130,20 +134,26 @@ Accordingly, this work will contribute:
 \end{itemize}
 
 \section{Related Work}
-Recent advancements have moved toward end-to-end systems capable of navigating the entire scientific pipeline. Hypothesis testing played a foundational role in the development of scientific pipelines like the Scientist AI framework, both as a core architectural principle and as a functional workflow for automated discovery. The sources describe two distinct but related versions: the conceptual non-agentic Scientist AI proposed by Bengio et al. and the agentic "The AI Scientist" implementation by Sakana AI. The AI Scientist-v2 by Yoshua Bengio \shortcite{yamada2025ai} demonstrates this by iteratively formulating scientific hypotheses from data, designs experiments to test them, and analyzes the results utilizing agentic tree search and Vision-Language Model (VLM) feedback to autonomously generate and author peer-review-worthy manuscripts. Their work has surged the demand for hypothesis testing in the development of safe models for high stake industries, thereby motivating our work of testing current LLMs performance on Hypothesis testing as an unified task. LLMs that excel at hypothesis testing are valuable for creating high-stakes models. This concept resonates with Yoshua Bengio's research on 'Scientist AI,' which established hypothesis testing as a core guiding principle for such models.~\shortcite{bengio2025superintelligent}, ~\shortcite{yamada2025ai}.
+Recent advancements have moved toward end-to-end systems capable of navigating the entire scientific pipeline. Hypothesis testing played a foundational role in the development of scientific pipelines like the Scientist AI framework, both as a core architectural principle and as a functional workflow for automated discovery. The sources describe two distinct but related versions: the conceptual non-agentic Scientist AI proposed by Bengio et al. and the agentic "The AI Scientist" implementation by Sakana AI. The AI Scientist-v2 by Yoshua Bengio \cite{yamada2025ai} demonstrates this by iteratively formulating scientific hypotheses from data, designs experiments to test them, and analyzes the results utilizing agentic tree search and Vision-Language Model (VLM) feedback to autonomously generate and author peer-review-worthy manuscripts. Their work has surged the demand for hypothesis testing in the development of safe models for high-stake industries, thereby motivating our work of testing current LLM performance on hypothesis testing as a unified task. LLMs that excel at hypothesis testing are valuable for creating high-stakes models. This concept resonates with Yoshua Bengio's research on 'Scientist AI,' which established hypothesis testing as a core guiding principle for such models.~\cite{bengio2025superintelligent}, ~\cite{yamada2025ai}.
 
-Also, a growing body of work has focused on evaluating the logical reasoning capabilities of large language models. Benchmarks such as LogicBench \shortcite{parmar2024logicbench} and LogicAsker \shortcite{wan2024logicasker} systematically test LLMs on propositional and first-order logic, revealing that while modern models can solve surface-level inference tasks, they still struggle with deeper multi-step and rule-consistent reasoning. Multi-LogiEval \shortcite{patel2024multi} tests LLMs on harder kinds of logical thinking involving doing many steps, handling facts that change old conclusions, and switching between different types of logic. As the tasks get deeper or require more steps, model performance drops sharply. Recent survey work on logical reasoning in LLMs \shortcite{liu2025logical} consolidates these findings and highlights persistent gaps in deductive reliability. While these efforts provide critical insights into formal reasoning, they do not directly evaluate statistical hypothesis testing as a reasoning task.
+Also, a growing body of work has focused on evaluating the logical reasoning capabilities of large language models. Benchmarks such as LogicBench \cite{parmar2024logicbench} and LogicAsker \cite{wan2024logicasker} systematically test LLMs on propositional and first-order logic, revealing that while modern models can solve surface-level inference tasks, they still struggle with deeper multi-step and rule-consistent reasoning. Multi-LogiEval \cite{patel2024multi} tests LLMs on harder kinds of logical thinking involving doing many steps, handling facts that change old conclusions, and switching between different types of logic. As the tasks get deeper or require more steps, model performance drops sharply. Recent survey work on logical reasoning in LLMs \cite{liu2025logical} consolidates these findings and highlights persistent gaps in deductive reliability. While these efforts provide critical insights into formal reasoning, they do not directly evaluate statistical hypothesis testing as a reasoning task.
 
-Beyond pure logical inference, recent studies have examined whether LLMs can evaluate the correctness of claims and their own reasoning. Work on self-verification in logical reasoning \shortcite{hong2024closer} shows that LLMs often fail to reliably detect their own logical inconsistencies. FactReasoner \shortcite{marinescu2025factreasoner} introduces a probabilistic framework for long-form factuality assessment, focusing on evidence-grounded verification of claims. Similarly, Trustworthy Reasoning \shortcite{jiao2025trustworthy} demonstrates that even when final answers are correct, intermediate reasoning steps frequently contain factual or logical errors. These works highlight the importance of explicitly assessing whether a claim is valid, but they focus mainly on factual accuracy and reasoning self-analysis, not on systematic statistical hypothesis testing.
+Beyond logical inference, recent work examines claim verification and statistical reasoning. Self-verification studies~\cite{hong2024closer} show LLMs struggle to detect logical inconsistencies, while FactReasoner~\cite{marinescu2025factreasoner} and Trustworthy Reasoning~\cite{jiao2025trustworthy} highlight errors in intermediate steps despite correct final answers.
+% Beyond pure logical inference, recent studies have examined whether LLMs can evaluate the correctness of claims and their own reasoning. Work on self-verification in logical reasoning \cite{hong2024closer} shows that LLMs often fail to reliably detect their own logical inconsistencies. FactReasoner \cite{marinescu2025factreasoner} introduces a probabilistic framework for long-form factuality assessment, focusing on evidence-grounded verification of claims. Similarly, Trustworthy Reasoning \cite{jiao2025trustworthy} demonstrates that even when final answers are correct, intermediate reasoning steps frequently contain factual or logical errors. These works highlight the importance of explicitly assessing whether a claim is valid, but they focus mainly on factual accuracy and reasoning self-analysis, not on systematic statistical hypothesis testing.
 
-More closely related to our work, several recent papers investigate whether LLMs can perform statistical reasoning from data. Liu et al. \shortcite{liu2024llms} propose a benchmark for quantitative and causal reasoning based on tabular and numerical data, showing that while LLMs can handle simple statistical patterns, they struggle with multi-variable dependencies and causal structure. Zhu et al. \shortcite{zhu2024are} systematically evaluate whether LLMs can function as reliable statisticians, testing tasks such as distribution estimation, hypothesis testing components, and statistical decision-making, and find that performance is highly unstable across test types and noise conditions.
+Statistical reasoning benchmarks~\cite{liu2024llms,zhu2024are} reveal instability in tasks like distribution estimation and hypothesis testing components. Tiwari~\cite{tiwari2025framework} proposes an automated framework but lacks empirical validation.
+% More closely related to our work, several recent papers investigate whether LLMs can perform statistical reasoning from data. Liu et al. \cite{liu2024llms} propose a benchmark for quantitative and causal reasoning based on tabular and numerical data, showing that while LLMs can handle simple statistical patterns, they struggle with multi-variable dependencies and causal structure. Zhu et al. \cite{zhu2024are} systematically evaluate whether LLMs can function as reliable statisticians, testing tasks such as distribution estimation, hypothesis testing components, and statistical decision-making, and find that performance is highly unstable across test types and noise conditions.
 
-Most directly aligned conceptually with our work, Tiwari \shortcite{tiwari2025framework} introduces a general framework for automated hypothesis testing using AI systems. Although this work proposes a procedural framework for automating the process, it does not offer a standardized, model-independent benchmark for empirically assessing LLM performance on hypothesis testing as a cohesive task.
+Recent mathematics benchmarks for LLMs have primarily focused on pure mathematics domains. MATH~\cite{hendrycks2021measuring} evaluates competition-level problem-solving across algebra, geometry, and calculus but includes minimal statistical inference tasks. GSM8K~\cite{cobbe2021training} targets grade-school arithmetic word problems without hypothesis testing scenarios. MiniF2F~\cite{zheng2021minif2f} and ProofNet~\cite{azerbayev2023proofnet} benchmark formal theorem proving in Lean and Isabelle, emphasizing proof verification over data-driven statistical reasoning. More recent work like MATH-500~\cite{lightman2023let} and MathVista~\cite{lu2023mathvista} extend to visual mathematical reasoning and multi-modal problems, yet statistical hypothesis testing remains absent.
+
+The few benchmarks that do address statistical reasoning focus on fragmented subtasks rather than end-to-end workflows. StatQA~\cite{zhu2024large} tests statistical literacy through multiple-choice questions about correlation and causation interpretation, but does not require performing actual hypothesis tests. The closest work, Liu et al.~\cite{liu2024llms} and Zhu et al.~\cite{zhu2024are}, evaluate components such as distribution fitting or numeric estimation but do not assess the complete pipeline from data to decision making. This fragmentation leaves a critical gap: while LLMs are extensively benchmarked on pure mathematics and quantitative reasoning (arithmetic, algebra), their ability to conduct rigorous applied statistical inference which is a cornerstone of empirical science remains underexplored.
+
+Most directly aligned conceptually with our work, Tiwari \cite{tiwari2025framework} introduces a general framework for automated hypothesis testing using AI systems. Although this work proposes a procedural framework for automating the process, it does not offer a standardized, model-independent benchmark for empirically assessing LLM performance on hypothesis testing as a cohesive task.
 
 \subsection{Gap \& Contribution}
 Despite rapid progress in evaluating LLMs for logical reasoning, factual verification, and isolated statistical tasks, there is currently no standardized benchmark dedicated to evaluating hypothesis testing as a unified end-to-end capability of large language models on statistical t-tests problems. Existing reasoning benchmarks emphasize formal logic, while statistical studies primarily assess fragmented subtasks such as distribution estimation or numeric reasoning. Furthermore, automated hypothesis testing frameworks remain largely conceptual and lack large-scale empirical validation on modern LLMs.
 
-This work fills that gap by proposing a dedicated benchmark to assess LLMs’ hypothesis-testing abilities as an integrated reasoning and computational task. We formally define hypothesis testing as a reasoning and computational capability, construct a benchmark that covers structured claim formulation, statistical decision-making, and validity assessment, and perform an extensive evaluation of current LLMs. Our findings offers a systematic characterization of LLM strengths and weaknesses in statistical hypothesis testing, laying the groundwork for future research in AI-enabled scientific verification and discovery.
+This work fills that gap by proposing a dedicated benchmark to assess LLMs' hypothesis-testing abilities as an integrated reasoning and computational task. We formally define hypothesis testing as a reasoning and computational capability, construct a benchmark that covers structured claim formulation, statistical decision-making, and validity assessment, and perform an extensive evaluation of current LLMs. Our findings offer a systematic characterization of LLM strengths and weaknesses in statistical hypothesis testing, laying the groundwork for future research in AI-enabled scientific verification and discovery.
 
 \section{Foundational Background}
 
@@ -162,8 +172,8 @@ LLMs are transformer-based models trained on vast corpora of text. Their perform
 \begin{itemize}
     \item Zero-Shot: Asking the model to perform the task without examples.
     \item Few-Shot: Providing examples of the task within the prompt.
-    \item Chain-of-Thought (CoT): Encouraging the model to generate intermediate reasoning steps \shortcite{wei2022chain}.
-    \item Program-of-Thought (PoT): Encouraging the model to generate a program as an intermediate step to solve the problem \shortcite{chen2022program}.
+    \item Chain-of-Thought (CoT): Encouraging the model to generate intermediate reasoning steps \cite{wei2022chain}.
+    \item Program-of-Thought (PoT): Encouraging the model to generate a program as an intermediate step to solve the problem \cite{chen2022program}.
 \end{itemize}
 
 \section{Benchmark Design and Architecture}
@@ -179,21 +189,21 @@ The benchmark is implemented as a modular, asynchronous Python pipeline that eva
     \item response parsing and statistical evaluation, and
     \item aggregation and visualization.
 \end{itemize}
-Each evaluation generates a structured JSON entry containing the scenario, prompt, model output, parsed components, ground-truth statistics, and computed metrics. These JSON records are subsequently tranfered to the Streamlit dashboard.
+Each evaluation generates a structured JSON entry containing the scenario, prompt, model output, parsed components, ground-truth statistics, and computed metrics. These JSON records are subsequently transferred to the Streamlit dashboard.
 
 \subsection{Core Components}
 
 \textbf{Data generation and ground truth} \\
-Synthetic hypothesis-testing scenarios are created by the \texttt{DataGenerator} in \texttt{data\_generator.py}. It supports one-sample and two-sample $t$-tests, paired $t$-tests,  via type-specific generators. Scenarios are parameterized by sample size, distributional assumptions, and sample sizes. The \texttt{StatisticalEngine} computes the ground-truth test statistic, $p$-value, and decision for each scenario so that all models are compared against the same reference implementation.
+The \texttt{DataGenerator} creates synthetic scenarios for one-sample, two-sample, and paired $t$-tests. The \texttt{StatisticalEngine} computes ground-truth statistics using SciPy for comparison.
 
 \textbf{Prompt engine}\\
-Prompt construction is handled by \texttt{prompts.py}, which defines a family of templates derived from a common \texttt{PromptTemplate} base class. The benchmark currently supports zero-shot, few-shot, and Chain-of-Thought (CoT). Each template takes the numeric scenario (samples, groups) and a test-specific natural language context from \texttt{create\_test\_context}, and renders a compact, model-facing input string. 
+\texttt{prompts.py} implements zero-shot, few-shot, and Chain-of-Thought templates via a \texttt{PromptTemplate} base class.
 
 \textbf{LLM client abstraction}\\
-All provider-specific details are encapsulated in subclasses of the abstract \texttt{LLMClient} interface (\texttt{llm\_clients.py}). Concrete implementations include \texttt{OpenAIClient}, \texttt{AnthropicClient}, \texttt{GoogleClient} (Gemini), and \texttt{GrokClient}, each normalizing differences in authentication, endpoints, and parameter conventions. The orchestrator in \texttt{ht.py} instantiates these clients from a simple configuration mapping of providers to model names, so that adding a new model typically requires only updating the configuration, not the pipeline logic.
+Provider-specific implementations (\texttt{OpenAIClient}, \texttt{AnthropicClient}, etc.) normalize API differences through a unified \texttt{LLMClient} interface.
 
 \textbf{Response parsing and evaluation}\\
-Raw LLM outputs are converted into a structured representation by \texttt{ResponseParser}. The parser first looks for the CoT \texttt{RESULT} line and, if present, populates a \texttt{ParsedResponse} Pydantic model with the test method, statistic, $p$-value, and normalized decision. If no such line exists, it falls back to a combination of JSON extraction (for structured modes) and regex-based extraction of hypotheses, test type, test statistic, $p$-value, degrees of freedom, decision, confidence interval, assumptions, and conclusion from free-form text. Validators on the Pydantic model enforce basic sanity checks (e.g., $p \in [0,1]$) and normalize decision strings to \texttt{reject\_H0} versus \texttt{fail\_to\_reject\_H0}. The \texttt{EvaluationMetrics} module then compares the parsed response against the ground truth and computes accuracy at several levels (test-type, $p$-value, decision, reasoning quality, hallucination flags, latency).
+\texttt{ResponseParser} extracts structured data from outputs using regex and JSON parsing with Pydantic validation. \texttt{EvaluationMetrics} computes accuracy metrics against ground truth.
 
 \textbf{Aggregation, storage, and visualization}\\
 Each evaluation call returns a JSON-serializable record that includes a timestamp, model name, prompt type, test type, prompt text, raw response, parsed result, ground truth, evaluation metrics, and latency. The orchestrator in \texttt{ht.py} accumulates these records in-memory and periodically writes them to timestamped JSON files under \texttt{config.RESULTS\_DIR}. The \texttt{BenchmarkAggregator} in \texttt{evaluator.py} computes summary statistics by model, prompt type, and test type, as well as comparison matrices used in the report. The interactive dashboard in \texttt{dashboard/app.py} loads all JSON results, flattens them into a Pandas DataFrame, and exposes a leaderboard-style UI (built with Streamlit and Plotly) that presents per-model accuracy, confidence intervals, error breakdowns, and qualitative examples through dedicated analysis tabs.
@@ -204,21 +214,13 @@ Each evaluation call returns a JSON-serializable record that includes a timestam
           \label{fig:arch} % For referencing later with \ref{fig:my_image}
         \end{figure}
 \subsection{Execution Flow}
-A benchmark run is configured and launched from \texttt{ht.py}, either in quick, full, or custom mode. For a given configuration, the orchestrator:
+The orchestrator samples test scenarios, generates prompts for each model/strategy pair, dispatches requests asynchronously with concurrency control, parses responses, computes ground truth, evaluates correctness, and writes timestamped JSON results for dashboard visualization.
 
-\begin{enumerate}
-    \item Samples a grid of \emph{test types} and \emph{sample sizes} and calls \texttt{DataGenerator} to create synthetic scenarios with associated metadata.
-    \item For each provider/model and each selected \emph{prompt type}, generates a natural-language prompt  using \texttt{get\_prompt} from \texttt{prompts.py}.
-    \item Dispatches all (model, prompt, scenario) triples asynchronously via the appropriate \texttt{LLMClient}, respecting a global concurrency limit through an \texttt{asyncio.Semaphore}.
-    \item Parses each returned response with \texttt{ResponseParser}, computes ground truth with \texttt{StatisticalEngine}, and evaluates correctness and auxiliary metrics with \texttt{EvaluationMetrics}.
-    \item Appends the resulting evaluation record to the in-memory result list and, at the end of the run, writes the full set of records to disk and prints a textual summary using \texttt{BenchmarkAggregator}.
-\end{enumerate}
+This design cleanly separates concerns: data generation and ground truth are independent of model and provider; prompting strategies are independent of the LLM backends; and parsing/evaluation are shared across all models and modes.
 
-This design cleanly separates concerns: data generation and ground truth are independent of model and provider; prompting strategies are independent to the LLM backends; and parsing/evaluation are shared across all models and modes.
+% \subsection{Extensibility and Reproducibility}
 
-\subsection{Extensibility and Reproducibility}
-
-The modular architecture is explicitly designed for extensibility. New statistical tests can be added by implementing a generator method in \texttt{DataGenerator}, extending \texttt{create\_test\_context}, and adding the test to the orchestrator's list of supported types. New prompting strategies are added by defining a new \texttt{PromptTemplate} subclass and registering it in \texttt{get\_prompt}. Additional models or providers are integrated by subclassing \texttt{LLMClient} and extending the configuration mapping in \texttt{config.py}. Because all runs are parameterized through configuration files, fixed seeds in \texttt{DataGenerator}, and timestamped JSON outputs, the benchmark is reproducible and auditable: any reported result can be traced back to the exact synthetic scenario, prompt, raw response, and evaluation logic used.
+% The modular architecture is explicitly designed for extensibility. New statistical tests can be added by implementing a generator method in \texttt{DataGenerator}, extending \texttt{create\_test\_context}, and adding the test to the orchestrator's list of supported types. New prompting strategies are added by defining a new \texttt{PromptTemplate} subclass and registering it in \texttt{get\_prompt}. Additional models or providers are integrated by subclassing \texttt{LLMClient} and extending the configuration mapping in \texttt{config.py}. Because all runs are parameterized through configuration files, fixed seeds in \texttt{DataGenerator}, and timestamped JSON outputs, the benchmark is reproducible and auditable: any reported result can be traced back to the exact synthetic scenario, prompt, raw response, and evaluation logic used.
 
 \subsection{Evaluation Metrics}
 \label{sec:evaluation-metrics}
@@ -240,12 +242,6 @@ These per-sample metrics are aggregated by model, prompt strategy, and test fami
 \section{Evaluation \& Results}
 \label{evaluation-result}
 Results aggregate across the three $t$-test families currently enabled (one-sample, two-sample, and paired $t$-tests), two sample-size regimes ($n=20$ and $n=50$), and the four prompt strategies.
-
-\subsection{Leaderboard: Overall Accuracy and Reliability}
-
-The primary leaderboard view ranks models by mean overall accuracy with 95\% confidence intervals and exposes decision accuracy, hallucination rates, reasoning scores, and latency. Table~\ref{tab1} summarizes the aggregated results from the most recent full run used to populate the dashboard.
-
-% // ...existing code...
 
 \subsection{Leaderboard: Overall Accuracy and Reliability}
 
@@ -289,170 +285,93 @@ The leaderboard reveals several key patterns across model families. First, the G
 
 The radar panels group models into four families: GPT models, Grok models, Claude models, and a combined other family. Each radar traces five dimensions namely: test-method accuracy, decision accuracy, p-value accuracy, reasoning quality, and completeness normalized to $[0,1]$.
 
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{rad-op.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Open AI family radar chart comparing their performance.}
-%           \label{fig:op} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
+\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
+          \centering % Centers the image
+          \includegraphics[width=0.5\textwidth]{rad-gpt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+          \caption{OpenAI family radar chart comparing their performance.}
+          \label{fig:op} % For referencing later with \ref{fig:my_image}
+        \end{figure}
+Within the GPT family radar, GPT-4o provides the strongest and most balanced profile, with high decision accuracy and reasoning quality but a noticeable dip in hallucination control compared to some Claude and Grok variants (consistent with Table~\ref{tab1}). GPT-5.1 and GPT-4o-mini achieve strong decision accuracy but exhibit more uneven coverage across dimensions, especially in p-value accuracy and completeness when prompts are less structured (\ref{fig:op}).
+
 % \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
 %           \centering % Centers the image
 %           \includegraphics[width=0.5\textwidth]{rad-gr.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
 %           \caption{Grok AI family radar chart comparing their performance.}
 %           \label{fig:gr} % For referencing later with \ref{fig:my_image}
 %         \end{figure}
+The Grok radar shows a consistently high and rounded footprint: both grok-4-fast and grok-3 score strongly on test-method selection, p-value accuracy, and decision correctness, giving them the broadest capability coverage of all families. 
+
 % \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
 %           \centering % Centers the image
 %           \includegraphics[width=0.5\textwidth]{rad-cl.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
 %           \caption{Anthropic AI family radar chart comparing their performance.}
 %           \label{fig:cl} % For referencing later with \ref{fig:my_image}
 %         \end{figure}
+The Claude radar is similarly strong but slightly more skewed toward reasoning quality and explanation completeness, reflecting that Claude often produces well-structured, interpretable arguments for its conclusions, even when slightly conservative on border-line decisions. 
+
 % \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
 %           \centering % Centers the image
 %           \includegraphics[width=0.5\textwidth]{rad-geds.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
 %           \caption{Google and DeepSeek family radar charts comparing their performance.}
 %           \label{fig:geds} % For referencing later with \ref{fig:my_image}
 %         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{his-pmt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Accuracy of LLMs by prompt strategy.}
-%           \label{fig:h-pmt} % For referencing later with \ref{fig:h-pmt}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{hm-tt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Accuracy of LLMs by test type.}
-%           \label{fig:hm-tt} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{hm-p-g.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Correlation between predicted and ground truth values.}
-%           \label{fig:hm-pg} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{cor-ts.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Correlation between ground truth and predicted test statistic value.}
-%           \label{fig:cor-ts} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
+The Gemini and DeepSeek radar appears as the other charts: DeepSeek Chat exhibits a reasonably solid decision and reasoning profile, while Gemini 2.5 variants display larger radii especially on test-method, completeness and p-value axes, indicating a more stable statistical reasoning across the tested tasks.
+
+\subsection{Impact of Prompt Strategies on LLM Hypothesis Testing}
+\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
+          \centering % Centers the image
+          \includegraphics[width=0.5\textwidth]{his-fewshot.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+          \caption{Accuracy of LLMs by prompt strategy.}
+          \label{fig:h-pmt} % For referencing later with \ref{fig:h-pmt}
+        \end{figure}
+The analysis of prompt strategies reveals a distinct hierarchy in effectiveness for hypothesis testing tasks. Program of Thought (PoT) and Few-Shot prompting are the superior methods, frequently driving model accuracy near 100\%, while Chain of Thought (CoT)—often considered a gold standard for reasoning tasks—surprisingly underperforms in this specific domain, yielding lower accuracy than even standard Zero-Shot prompting for many models.
+
+Program of Thought demonstrates high variance with peak potential, performing best for models with strong coding capabilities (e.g., Gemini-2.5-Pro, GPT-5-mini, Grok-4-1-f-r). This strategy unlocks the highest ceiling, with several models achieving near 100\% accuracy by delegating statistical calculation to code, thereby eliminating calculation errors common in LLMs. However, it poses volatility risks—while top models thrive, others (like GPT-5.1 and GPT-4o-mini) fail significantly, dropping below 0.4 accuracy due to unreliable code generation. Few-Shot prompting provides general-purpose improvements across almost all architectures, with top performers like GPT-5-mini and Gemini-2.5-Pro approaching the 0.95–1.0 range and reduced variance compared to PoT, making it a safer default choice. In contrast, CoT yields the lowest overall accuracy, with most models struggling below the 0.70 barrier. In rigid statistical tasks, the verbose nature of CoT may introduce hallucination opportunities where models lose track of strict statistical procedures.
+
+To maximize accuracy in LLM-based hypothesis testing, researchers should utilize Program of Thought prompting with high-capability models (like Gemini 2.5 Pro or Grok-4). For a more universally robust approach that works across various model families, Few-Shot prompting is the optimal strategy. Chain of Thought should currently be avoided for these specific statistical tasks(\ref{fig:h-pmt}).
+% The analysis of prompt strategies reveals a distinct hierarchy in effectiveness for hypothesis testing tasks. Program of Thought (PoT) and Few-Shot prompting are the superior methods, frequently driving model accuracy near 100\%. Conversely, Chain of Thought (CoT)—often considered a gold standard for reasoning tasks—surprisingly underperforms in this specific domain, yielding lower accuracy than even standard Zero-Shot prompting for many models.\\
+% \textbf{Findings:}
+% \begin{itemize}
+%     \item Program of Thought (PoT): High Variance, Peak Potential. Best for models with strong coding/algorithmic capabilities (e.g., Gemini-2.5-Pro, GPT-5-mini, Grok-4-1-f-r).This strategy unlocks the highest ceiling, with several models achieving near 1.0 (100\%) accuracy. This suggests that delegating the statistical calculation to code (Python) or structured algorithmic steps eliminates calculation errors common in LLMs. However, it poses the risk of volatility across all models. While top models thrive, others (like GPT-5.1 and GPT-4o-mini) fail significantly, dropping below 0.4 accuracy, likely due to an inability to generate executable logic reliably.
+%     \item Few-Shot: General-purpose performance improvements across almost all architectures. Providing examples consistently boosts accuracy compared to Zero-Shot. Top performers here include GPT-5-mini and Gemini-2.5-Pro, which approach the 0.95–1.0 range. A reduction in the variance was seen as compared to PoT, making it a "safer" default choice for a wider range of models.
+%     \item Chain of Thought (CoT): CoT yields the lowest overall accuracy among the four strategies. Most models struggle to break the 0.70 barrier, with many hovering around 0.50–0.60. In rigid statistical tasks like hypothesis testing, the verbose nature of CoT may introduce "hallucination opportunities" where the model talks itself into a calculation error or loses track of the strict statistical procedure.
+%     \item Zero-Shot: Standard Zero-Shot prompting performs remarkably, with strong models like Grok-3 and Claude-Opus-4.5 scoring in the 0.80–0.90 range. in comparison, it generally outperforms CoT, reinforcing the idea that for this specific task, "less is more" unless you are providing specific examples (Few-Shot) or code-logic (PoT).
+% \end{itemize}
+% To maximize accuracy in LLM-based hypothesis testing, researchers should utilize Program of Thought prompting, but only with high-capability models (like Gemini 2.5 Pro or Grok-4). For a more universally robust approach that works across various model families, Few-Shot prompting is the optimal strategy. Chain of Thought should currently be avoided for these specific statistical tasks(\ref{fig:h-pmt}).
+
+\subsection{LLM Performance on T-Test Variations}
+\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
+          \centering % Centers the image
+          \includegraphics[width=0.5\textwidth]{hm-t.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+          \caption{Accuracy of LLMs by test type.}
+          \label{fig:hm-tt} % For referencing later with \ref{fig:my_image}
+        \end{figure}
+
+Current Large Language Models (LLMs) demonstrate significant variance in proficiency across different hypothesis testing tasks. While performance is generally high for One-Sample and Two-Sample t-tests, the Paired T-Test presents a systemic challenge across nearly all architectures, suggesting a specific deficiency in handling paired data structures or dependency reasoning. The most striking visual trend in the heatmap is the vertical band of low performance for the paired t-test. While many models achieve at least 90\% accuracy on one-sample and two-sample tests, even top-tier models drop significantly on paired tests. For instance, Gemini-2.5-Flash scores an impressive 0.9286 on one sample and 0.9333 on two sample tests, but plummets to 0.5952 on paired tests.
+
+The Gemini 2.5 family (Flash and Pro) and Grok-4 family are the clear leaders for One-Sample and Two-Sample t-tests, consistently scoring in the high 80s or 90s. Grok-3 appears to be the most robust model for the difficult paired-t-test, achieving a score of 0.7471, significantly outperforming most competitors which hover in the 0.60–0.65 range. For hypothesis testing tasks, researchers should currently prioritize Gemini 2.5 or Grok-4 for standard independent t-tests due to their superior accuracy. However, for tasks involving dependent samples (paired t-tests), Grok-3 currently offers the best relative performance, though no model has yet "solved" this specific problem space effectively.        
+% Current Large Language Models (LLMs) demonstrate significant variance in proficiency across different hypothesis testing tasks. While performance is generally high for One-Sample and Two-Sample t-tests, the Paired T-Test presents a systemic challenge across nearly all architectures, suggesting a specific deficiency in handling paired data structures or dependency reasoning.\\
+% \textbf{Findings:}
+% \begin{itemize}
+%     \item The "Paired T-Test" Gap:
+% The most striking visual trend in the heatmap is the vertical band of low performance (dark blue/purple) for the paired t test. While many models achieve at least 90\% accuracy on one-sample and two-sample tests, even top-tier models drop significantly on paired tests. For instance, Gemini-2.5-Flash scores an impressive 0.9286 on one sample and 0.9333 on two sample tests, but plummets to 0.5952 on paired tests.
+% \item Top Performers by Category:
+% The Gemini 2.5 family (Flash and Pro) and Grok-4 family are the clear leaders for One-Sample and Two-Sample t-tests, consistently scoring in the high 80s or 90s. Grok-3 appears to be the most robust model for the difficult paired-t-test, achieving a score of 0.7471, significantly outperforming most competitors which hover in the 0.60–0.65 range.
+% \end{itemize}
 % \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
 %           \centering % Centers the image
 %           \includegraphics[width=0.5\textwidth]{hm-pm-tt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
 %           \caption{Accuracy of LLMs by prompt strategy and test type.}
 %           \label{fig:hm-pm-tt} % For referencing later with \ref{fig:my_image}
 %         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{bw-r.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Reasoning across LLMs.}
-%           \label{fig:bw-r} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{his-l.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Latency across LLMs.}
-%           \label{fig:his-ltcy} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{cm.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Confusion Matrix.}
-%           \label{fig:cm} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{mae-pv.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Mean Absolute Error of p-values across models.}
-%           \label{fig:mae-pv} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-%           \centering % Centers the image
-%           \includegraphics[width=0.5\textwidth]{mae-ts.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-%           \caption{Mean Absolute Error of test statistic across models.}
-%           \label{fig:mae-ts} % For referencing later with \ref{fig:my_image}
-%         \end{figure}
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{rad-op.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Open AI family radar chart comparing their performance.}
-          \label{fig:op} % For referencing later with \ref{fig:my_image}
-        \end{figure}
-Within the GPT family radar, GPT-4o provides the strongest and most balanced profile, with high decision accuracy and reasoning quality but a noticeable dip in hallucination control compared to some Claude and Grok variants (consistent with Table~\ref{tab1}). GPT-5.1 and GPT-4o-mini achieve strong decision accuracy but exhibit more uneven coverage across dimensions, especially in p-value accuracy and completeness when prompts are less structured(\ref{fig:op}).
-
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{rad-gr.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Grok AI family radar chart comparing their performance.}
-          \label{fig:gr} % For referencing later with \ref{fig:my_image}
-        \end{figure}
-The Grok radar shows a consistently high and rounded footprint: both grok-4-fast and grok-3 score strongly on test-method selection, p-value accuracy, and decision correctness, giving them the broadest capability coverage of all families(\ref{fig:gr}). 
-
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{rad-cl.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Anthropic AI family radar chart comparing their performance.}
-          \label{fig:cl} % For referencing later with \ref{fig:my_image}
-        \end{figure}
-The Claude radar is similarly strong but slightly more skewed toward reasoning quality and explanation completeness, reflecting that Claude often produces well-structured, interpretable arguments for its conclusions, even when slightly conservative on border-line decisions(\ref{fig:cl}). 
-
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{rad-geds.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Google and DeepSeek family radar charts comparing their performance.}
-          \label{fig:geds} % For referencing later with \ref{fig:my_image}
-        \end{figure}
-The Gemini and DeepSeek radar appears as the other charts: DeepSeek Chat exhibits a reasonably solid decision and reasoning profile, while Gemini 2.5 variants display larger radii especially on test-method, completeness and p-value axes, indicating a more stable statistical reasoning across the tested tasks(\ref{fig:geds}).
-
-\subsection{Impact of Prompt Strategies on LLM Hypothesis Testing}
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{his-pmt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Accuracy of LLMs by prompt strategy.}
-          \label{fig:h-pmt} % For referencing later with \ref{fig:h-pmt}
-        \end{figure}
-The analysis of prompt strategies reveals a distinct hierarchy in effectiveness for hypothesis testing tasks. Program of Thought (PoT) and Few-Shot prompting are the superior methods, frequently driving model accuracy near 100\%. Conversely, Chain of Thought (CoT)—often considered a gold standard for reasoning tasks—surprisingly underperforms in this specific domain, yielding lower accuracy than even standard Zero-Shot prompting for many models.\\
-\textbf{Findings}
-\begin{itemize}
-    \item Program of Thought (PoT): High Variance, Peak Potential. Best for models with strong coding/algorithmic capabilities (e.g., Gemini-2.5-Pro, GPT-5-mini, Grok-4-1-f-r).This strategy unlocks the highest ceiling, with several models achieving near 1.0 (100\%) accuracy. This suggests that delegating the statistical calculation to code (Python) or structured algorithmic steps eliminates calculation errors common in LLMs. However, it poses the risk of volatility across all models. While top models thrive, others (like GPT-5.1 and GPT-4o-mini) fail significantly, dropping below 0.4 accuracy, likely due to an inability to generate executable logic reliably.
-    \item Few-Shot: General-purpose performance improvements across almost all architectures. Providing examples consistently boosts accuracy compared to Zero-Shot. Top performers here include GPT-5-mini and Gemini-2.5-Pro, which approach the 0.95–1.0 range. A reduction in the variance was seen as compared to PoT, making it a "safer" default choice for a wider range of models.
-    \item Chain of Thought (CoT): CoT yields the lowest overall accuracy among the four strategies. Most models struggle to break the 0.70 barrier, with many hovering around 0.50–0.60. In rigid statistical tasks like hypothesis testing, the verbose nature of CoT may introduce "hallucination opportunities" where the model talks itself into a calculation error or loses track of the strict statistical procedure.
-    \item Zero-Shot: Standard Zero-Shot prompting performs remarkably, with strong models like Grok-3 and Claude-Opus-4.5 scoring in the 0.80–0.90 range. in comparison, it generally outperforms CoT, reinforcing the idea that for this specific task, "less is more" unless you are providing specific examples (Few-Shot) or code-logic (PoT).
-\end{itemize}
-To maximize accuracy in LLM-based hypothesis testing, researchers should utilize Program of Thought prompting, but only with high-capability models (like Gemini 2.5 Pro or Grok-4). For a more universally robust approach that works across various model families, Few-Shot prompting is the optimal strategy. Chain of Thought should currently be avoided for these specific statistical tasks(\ref{fig:h-pmt}).
-
-\subsection{LLM Performance on T-Test Variations}
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{hm-tt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Accuracy of LLMs by test type.}
-          \label{fig:hm-tt} % For referencing later with \ref{fig:my_image}
-        \end{figure}
-
-Current Large Language Models (LLMs) demonstrate significant variance in proficiency across different hypothesis testing tasks. While performance is generally high for One-Sample and Two-Sample t-tests, the Paired T-Test presents a systemic challenge across nearly all architectures, suggesting a specific deficiency in handling paired data structures or dependency reasoning.\\
-\textbf{Findings}\\
-\begin{itemize}
-    \item The "Paired T-Test" Gap:
-The most striking visual trend in the heatmap is the vertical band of low performance (dark blue/purple) for the paired t test. While many models achieve at least 90\% accuracy on one-sample and two-sample tests, even top-tier models drop significantly on paired tests. For instance, Gemini-2.5-Flash scores an impressive 0.9286 on one sample and 0.9333 on two sample tests, but plummets to 0.5952 on paired tests.
-\item Top Performers by Category:
-The Gemini 2.5 family (Flash and Pro) and Grok-4 family are the clear leaders for One-Sample and Two-Sample t-tests, consistently scoring in the high 80s or 90s. Grok-3 appears to be the most robust model for the difficult paired-t-test, achieving a score of 0.7471, significantly outperforming most competitors which hover in the 0.60–0.65 range.
-\end{itemize}
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{hm-pm-tt.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Accuracy of LLMs by prompt strategy and test type.}
-          \label{fig:hm-pm-tt} % For referencing later with \ref{fig:my_image}
-        \end{figure}
         
-For hypothesis testing tasks, researchers should currently prioritize Gemini 2.5 or Grok-4 for standard independent t-tests due to their superior accuracy. However, for tasks involving dependent samples (paired t-tests), Grok-3 currently offers the best relative performance, though no model has yet "solved" this specific problem space effectively.
-Based on the "Accuracy by Prompt Strategy" chart provided in the screenshot, here is a brief analysis report for your research (\ref{fig:hm-tt}).
+For hypothesis testing tasks, researchers should currently prioritize Gemini 2.5 or Grok-4 for standard independent t-tests due to their superior accuracy. However, for tasks involving dependent samples (paired t-tests), Grok-3 currently offers the best relative performance, though no model has yet solved this specific problem space effectively.
 
 \subsection{LLM Reasoning Quality}
 \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
           \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{bw-r.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Reasoning across LLMs.}
+          \includegraphics[width=0.5\textwidth]{bw-r2.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+          \caption{Reasoning across selected LLMs.}
           \label{fig:bw-r} % For referencing later with \ref{fig:my_image}
         \end{figure}
 The analysis of reasoning quality reveals a "high ceiling, unstable floor" dynamic across the current LLM landscape. While the median reasoning scores for most advanced models cluster tightly between 0.70 and 0.80, the significant presence of low-end outliers indicates that reliability remains a major hurdle. Even the most capable models are prone to catastrophic reasoning failures where quality scores drop below 0.30.
@@ -462,8 +381,8 @@ For hypothesis testing workflows requiring high reliability, Gemini 2.5 Pro or \
 \subsection{Latency Analysis of LLMs}
 \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
           \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{his-l.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Latency across LLMs.}
+          \includegraphics[width=0.5\textwidth]{his-gk.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+          \caption{Latency across grok models.}
           \label{fig:his-ltcy} % For referencing later with \ref{fig:my_image}
         \end{figure}
 
@@ -474,20 +393,20 @@ For hypothesis testing workflows where throughput is critical, \texttt{gpt-4o} a
 \subsection{LLMs Numeric Prediction}
 \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
           \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{hm-p-g.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Correlation between predicted and ground truth values.}
+          \includegraphics[width=0.5\textwidth]{hm-pg.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+          \caption{Correlation between predicted and ground truth values for sample models.}
           \label{fig:hm-pg} % For referencing later with \ref{fig:my_image}
         \end{figure}
 
 The correlation analysis reveals a fundamental dichotomy in how Large Language Models (LLMs) handle statistical outputs. While the vast majority of models show near-perfect calibration for P-Values (indicating they generally understand "significance"), their ability to accurately predict the specific Test Statistic (t-value) is highly erratic. This suggests that while models can often arrive at the correct probability conclusion, the intermediate mathematical derivations remain a weak point for many architectures.
 
-For research tasks where the process is as important as the result (e.g., educational tools or transparent reasoning), Grok-3 and Claude-Haiku-4-5 are the superior choices because they align well on both test statistics and p-values. However, if the goal is purely to obtain the correct statistical significance (p-value), Grok-4-1-f-r and Claude-Opus are the most precise, despite their potential inability to calculate the underlying t-statistic accurately (\ref{fig:hm-pg}).
-\begin{figure}[h!] % [h!] tries to place it here, '!' forces it
-          \centering % Centers the image
-          \includegraphics[width=0.5\textwidth]{cor-ts.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
-          \caption{Correlation between ground truth and predicted test statistic value.}
-          \label{fig:cor-ts} % For referencing later with \ref{fig:my_image}
-        \end{figure}
+For research tasks where the process is as important as the result (e.g. educational tools or transparent reasoning), Grok-3 and Claude-Haiku-4-5 are the superior choices because they align well on both test statistics and p-values. However, if the goal is purely to obtain the correct statistical significance (p-value), Grok-4-1-f-r and Claude-Opus are the most precise, despite their potential inability to calculate the underlying t-statistic accurately (\ref{fig:hm-pg}).
+% \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
+%           \centering % Centers the image
+%           \includegraphics[width=0.5\textwidth]{cor-ts.jpg} % Adjust width as needed (e.g., 0.8\textwidth, \linewidth)
+%           \caption{Correlation between ground truth and predicted test statistic value.}
+%           \label{fig:cor-ts} % For referencing later with \ref{fig:my_image}
+%         \end{figure}
 
 \subsection{Decision Bias and Hypothesis Testing Error Types}
 \begin{figure}[h!] % [h!] tries to place it here, '!' forces it
@@ -497,8 +416,10 @@ For research tasks where the process is as important as the result (e.g., educat
           \label{fig:cm} % For referencing later with \ref{fig:my_image}
         \end{figure}
 
-The aggregate confusion matrix reveals a significant behavioral bias in how current LLMs approach hypothesis testing: they are biased toward rejecting the Null Hypothesis. While the models exhibit exceptional sensitivity (rarely missing a true effect), they suffer from a high rate of Type I errors (False Positives), frequently claiming statistical significance where none exists.
-When using LLMs for hypothesis testing, researchers must be extremely wary of positive results. A "Reject Null Hypothesis" conclusion from an LLM should be treated with skepticism and verified manually, as there is a substantial risk (21\% of all negative cases were misclassified) of a False Positive. However, a "Fail to Reject" conclusion is highly trustworthy, as the models rarely miss a true rejection(\ref{fig:cm}).
+The aggregate confusion matrix reveals a significant behavioral bias in how current LLMs approach hypothesis testing: they are biased toward rejecting the Null Hypothesis, exhibiting exceptional sensitivity (98.7\% recall) but suffering from high Type I error rates with 21
+% of negative cases misclassified as significant. This suggests LLM-generated "Reject H₀" conclusions require manual verification, while "Fail to Reject" decisions are highly trustworthy(\ref{fig:cm}).
+% The aggregate confusion matrix reveals a significant behavioral bias in how current LLMs approach hypothesis testing: they are biased toward rejecting the Null Hypothesis. While the models exhibit exceptional sensitivity (rarely missing a true effect), they suffer from a high rate of Type I errors (False Positives), frequently claiming statistical significance where none exists.
+% When using LLMs for hypothesis testing, researchers must be extremely wary of positive results. A "Reject Null Hypothesis" conclusion from an LLM should be treated with skepticism and verified manually, as there is a substantial risk (21\% of all negative cases were misclassified) of a False Positive. However, a "Fail to Reject" conclusion is highly trustworthy, as the models rarely miss a true rejection(\ref{fig:cm}).
 
 
 \subsection{Qualitative Behaviour}
@@ -514,7 +435,7 @@ Three critical failure modes emerged that define the current limitations of LLMs
     \item Bias toward statistical significance: A 10:1 ratio of False Positives to False Negatives reveals that models are "trigger-happy" toward claiming statistical significance. In a scientific context, this tendency to hallucinate discoveries (Type I Errors) poses a severe risk to research integrity.
     \item The Prompting Paradox: Contrary to general reasoning tasks, Chain of Thought (CoT) prompting degraded performance in strict statistical contexts. Instead, Program of Thought (PoT) proved superior, confirming that the most reliable path to statistical accuracy for LLMs is not thinking, but coding.
 \end{enumerate}
-On the other hand these are some success of LLMs on this Benchmark.
+On the other hand, these are some successes of LLMs on this benchmark.
 \begin{enumerate}
     \item Exceptional Sensitivity (Recall): We observed a near-perfect sensitivity to true effects. The Confusion Matrix shows that models correctly identified 2,022 significant results while missing only 26. This implies a Recall rate of 98.7\%, making LLMs highly effective as a "first-pass" screening tool to ensure no potential discoveries are overlooked.
     \item High Fidelity in Significance Determination: Despite struggles with exact calculations, the P-Value correlations for top-tier models (specifically Grok-4-1-fast-reasoning at 0.9991 and Claude-Opus-4-5 at 0.9973) are virtually perfect. This indicates that modern LLMs possess a strong semantic understanding of "statistical significance" and can reliably classify results as significant or non-significant, even if the underlying arithmetic is slightly off.
@@ -531,7 +452,7 @@ Future work will focus on:
 \end{itemize}
 Ultimately, this research paves the way for AI assistants that can participate more reliably in the scientific method, moving beyond text generation to evidence-based statistical reasoning and decision support.
 
-\bibliographystyle{named}
-\bibliography{ijcai26}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
 
 \end{document}

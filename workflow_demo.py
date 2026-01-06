@@ -15,7 +15,7 @@ Author: LLM Hypothesis Testing Benchmark Team
 Date: December 2025
 
 WORKFLOW STAGES:
-    1. Synthetic Data Generation
+    1. Data Generation (Synthetic or Real-World)
     2. Prompt Construction/Styling
     3. Orchestration and LLM Client Interaction (REAL API CALL)
     4. Response Parsing
@@ -23,6 +23,11 @@ WORKFLOW STAGES:
     6. Comparison and Evaluation (Scoring)
     7. Metric Computation
     8. Dashboard Data Transfer (Simulated)
+
+REAL-WORLD DATA SUPPORT:
+    - Stock Market: US Stock Market data (2020-2024) with daily returns
+    - Healthcare: Pima Indians Diabetes dataset (768 patients)
+    - Mixed Mode: Randomly alternates between synthetic and real data
 ================================================================================
 """
 
@@ -221,11 +226,84 @@ def display_test_type_menu() -> str:
             print("  ❌ Please enter a valid number")
 
 
+def display_data_source_menu() -> str:
+    """Display data source selection menu and get user choice."""
+    print("\n" + "=" * 60)
+    print(" SELECT DATA SOURCE")
+    print("=" * 60)
+    
+    data_sources = [
+        ("synthetic", "Synthetic Data", "Generated from statistical distributions (default)"),
+        ("real", "Real-World Data", "Uses actual datasets (stocks, healthcare)"),
+        ("mixed", "Mixed Mode", "Randomly alternates between synthetic and real"),
+    ]
+    
+    for idx, (key, name, desc) in enumerate(data_sources, 1):
+        print(f"\n  [{idx}] {name}")
+        print(f"      └── {desc}")
+    
+    print("\n" + "-" * 60)
+    
+    while True:
+        try:
+            choice = input("  Enter data source number (or press Enter for default [1]): ").strip()
+            if choice == "":
+                choice = 1
+            else:
+                choice = int(choice)
+            
+            if 1 <= choice <= len(data_sources):
+                key, name, _ = data_sources[choice - 1]
+                print(f"\n  ✅ Selected: {name}")
+                return key
+            else:
+                print(f"  ❌ Invalid choice. Please enter 1-{len(data_sources)}")
+        except ValueError:
+            print("  ❌ Please enter a valid number")
+
+
+def display_domain_menu() -> str:
+    """Display real-world domain selection menu and get user choice."""
+    print("\n" + "=" * 60)
+    print(" SELECT REAL-WORLD DOMAIN")
+    print("=" * 60)
+    
+    domains = [
+        ("random", "Random", "Randomly select from available domains"),
+        ("stocks", "Stock Market", "US Stock Market data (2020-2024)"),
+        ("healthcare", "Healthcare", "Pima Indians Diabetes dataset"),
+    ]
+    
+    for idx, (key, name, desc) in enumerate(domains, 1):
+        print(f"\n  [{idx}] {name}")
+        print(f"      └── {desc}")
+    
+    print("\n" + "-" * 60)
+    
+    while True:
+        try:
+            choice = input("  Enter domain number (or press Enter for default [1]): ").strip()
+            if choice == "":
+                choice = 1
+            else:
+                choice = int(choice)
+            
+            if 1 <= choice <= len(domains):
+                key, name, _ = domains[choice - 1]
+                print(f"\n  ✅ Selected: {name}")
+                return key
+            else:
+                print(f"  ❌ Invalid choice. Please enter 1-{len(domains)}")
+        except ValueError:
+            print("  ❌ Please enter a valid number")
+
+
 # ============================================================================
 # MAIN DEMONSTRATION WORKFLOW
 # ============================================================================
 
-async def run_demo(provider: str, model_name: str, prompt_type: str, test_type: str = "one_sample_t_test"):
+async def run_demo(provider: str, model_name: str, prompt_type: str, test_type: str = "one_sample_t_test",
+                   data_source: str = "synthetic", real_domain: str = "random"):
     """
     Execute the full workflow demonstration with visualizations at each stage.
     
@@ -234,6 +312,8 @@ async def run_demo(provider: str, model_name: str, prompt_type: str, test_type: 
         model_name: Specific model name
         prompt_type: Prompting style (zero_shot, few_shot, chain_of_thought, program_of_thought)
         test_type: Statistical test type (one_sample_t_test, two_sample_t_test, paired_t_test)
+        data_source: Data source type (synthetic, real, mixed)
+        real_domain: Real-world domain (stocks, healthcare, random)
     """
     
     print("\n" + "█" * 80)
@@ -245,13 +325,22 @@ async def run_demo(provider: str, model_name: str, prompt_type: str, test_type: 
     print("█" * 80)
     
     print(f"\n🎯 CONFIGURATION: {provider}/{model_name} | Prompt: {prompt_type} | Test: {test_type}")
+    print(f"   DATA SOURCE: {data_source}" + (f" | DOMAIN: {real_domain}" if data_source != "synthetic" else ""))
     
     # ========================================================================
-    # STAGE 1: SYNTHETIC DATA GENERATION
+    # STAGE 1: DATA GENERATION (SYNTHETIC OR REAL-WORLD)
     # ========================================================================
-    print_header("STAGE 1: SYNTHETIC DATA GENERATION", "=")
+    data_stage_title = "STAGE 1: DATA GENERATION"
+    if data_source == "synthetic":
+        data_stage_title += " (SYNTHETIC)"
+    elif data_source == "real":
+        data_stage_title += " (REAL-WORLD)"
+    else:
+        data_stage_title += " (MIXED MODE)"
+    print_header(data_stage_title, "=")
     
-    print("""
+    if data_source == "synthetic":
+        print("""
     PURPOSE: Generate reproducible synthetic data with known statistical 
              properties to evaluate LLM hypothesis testing capabilities.
     
@@ -262,11 +351,33 @@ async def run_demo(provider: str, model_name: str, prompt_type: str, test_type: 
     • Configurable sample sizes and distributional parameters
     • Extensibility: New statistical tests, new prompting styles, and LLM providers can be added easily.
     """)
+    else:
+        print(f"""
+    PURPOSE: Load real-world datasets with authentic statistical properties
+             to evaluate LLM hypothesis testing in realistic scenarios.
     
-    print_subheader("Initializing Data Generator (seed=42)")
+    DATA SOURCE: {data_source.upper()}
+    DOMAIN: {real_domain.upper()}
     
-    # Use the actual DataGenerator from the codebase
-    data_generator = DataGenerator(seed=42)
+    AVAILABLE REAL-WORLD DATASETS:
+    • Stock Market: US Stock Market data (2020-2024) with daily returns
+      - Assets: AAPL, GOOGL, MSFT, AMZN, META, TSLA, etc.
+      - Metrics: Daily returns, volatility comparisons, event impact analysis
+    
+    • Healthcare: Pima Indians Diabetes dataset (768 patients)
+      - Features: Glucose, BMI, Blood Pressure, Insulin, Age
+      - Groups: Diabetic vs Non-Diabetic patients
+    
+    KEY FEATURES:
+    • Real-world statistical properties (non-ideal distributions)
+    • Authentic domain context for prompts
+    • Tests LLM reasoning on practical scenarios
+    """)
+    
+    print_subheader(f"Initializing Data Generator (seed=42, source={data_source}, domain={real_domain})")
+    
+    # Use the actual DataGenerator from the codebase with data source configuration
+    data_generator = DataGenerator(seed=42, data_source=data_source, real_domain=real_domain)
     
     # Generate scenario based on selected test type
     test_type_display = test_type.replace('_', ' ').title()
@@ -279,7 +390,25 @@ async def run_demo(provider: str, model_name: str, prompt_type: str, test_type: 
             std=2.5,             # Standard deviation
             null_mean=10.0       # Hypothesized mean under H0
         )
-        scenario_info = f"""
+        # Format scenario info based on data source
+        if scenario.get('data_source') == 'real':
+            ctx = scenario.get('context', {})
+            scenario_info = f"""
+Data Source: REAL-WORLD DATA
+Domain: {ctx.get('domain', 'unknown').title()}
+Dataset: {ctx.get('dataset', 'unknown')}
+
+Test Type: {scenario['test_type']}
+Sample Size: {scenario['metadata']['sample_size']}
+Population Mean (H0): {scenario['population_mean']}
+
+Scenario Context:
+{ctx.get('description', 'N/A')}
+Research Question: {ctx.get('test_description', 'N/A')}
+"""
+        else:
+            scenario_info = f"""
+Data Source: SYNTHETIC
 Test Type: {scenario['test_type']}
 Sample Size: {scenario['metadata']['sample_size']}
 True Population Mean (μ): {scenario['metadata']['true_mean']}
@@ -297,7 +426,28 @@ True Effect Size: {scenario['true_effect']} (true_mean - null_mean)
             std2=2.5,            # Std dev of group 2
             paired=False
         )
-        scenario_info = f"""
+        # Format scenario info based on data source
+        if scenario.get('data_source') == 'real':
+            ctx = scenario.get('context', {})
+            scenario_info = f"""
+Data Source: REAL-WORLD DATA
+Domain: {ctx.get('domain', 'unknown').title()}
+Dataset: {ctx.get('dataset', 'unknown')}
+
+Test Type: {scenario['test_type']}
+Sample Size (Group 1): {scenario['metadata']['sample_size1']}
+Sample Size (Group 2): {scenario['metadata']['sample_size2']}
+
+Group 1: {ctx.get('group1_name', 'Group 1')}
+Group 2: {ctx.get('group2_name', 'Group 2')}
+
+Scenario Context:
+{ctx.get('description', 'N/A')}
+Research Question: {ctx.get('test_description', 'N/A')}
+"""
+        else:
+            scenario_info = f"""
+Data Source: SYNTHETIC
 Test Type: {scenario['test_type']}
 Sample Size (Group 1): {scenario['metadata']['sample_size1']}
 Sample Size (Group 2): {scenario['metadata']['sample_size2']}
@@ -317,7 +467,26 @@ True Effect Size: {scenario['true_effect']} (mean2 - mean1)
             std2=2.5,
             paired=True
         )
-        scenario_info = f"""
+        # Format scenario info based on data source
+        if scenario.get('data_source') == 'real':
+            ctx = scenario.get('context', {})
+            scenario_info = f"""
+Data Source: REAL-WORLD DATA
+Domain: {ctx.get('domain', 'unknown').title()}
+Dataset: {ctx.get('dataset', 'unknown')}
+
+Test Type: {scenario['test_type']}
+Sample Size (Paired): {scenario['metadata']['sample_size1']}
+
+Event/Intervention: {ctx.get('event', ctx.get('intervention', 'N/A'))}
+
+Scenario Context:
+{ctx.get('description', 'N/A')}
+Research Question: {ctx.get('test_description', 'N/A')}
+"""
+        else:
+            scenario_info = f"""
+Data Source: SYNTHETIC
 Test Type: {scenario['test_type']}
 Sample Size (Paired): {scenario['metadata']['sample_size1']}
 True Mean (Before): {scenario['metadata']['mean1']}
@@ -330,7 +499,8 @@ True Effect Size: {scenario['true_effect']} (after - before)
         return None
     
     print("\n📊 GENERATED SCENARIO DATA:")
-    print_box(scenario_info, title="SYNTHETIC DATA ARTIFACT")
+    artifact_title = "REAL-WORLD DATA ARTIFACT" if scenario.get('data_source') == 'real' else "SYNTHETIC DATA ARTIFACT"
+    print_box(scenario_info, title=artifact_title)
     
     print("\n📈 SAMPLE DATA (first 15 values):")
     sample_preview = scenario['sample1'][:15]
@@ -685,8 +855,15 @@ RESPONSE COMPLETENESS:
     
     print_subheader("Constructing Dashboard Payload")
     
-    # Build metadata based on test type (different structures for different tests)
-    if test_type == "one_sample_t_test":
+    # Build metadata based on test type and data source
+    actual_data_source = generated_data.get('data_source', 'synthetic')
+    
+    if actual_data_source == 'real':
+        # Real-world data metadata structure
+        input_metadata = generated_data['metadata'].copy()
+        input_metadata['domain'] = generated_data.get('context', {}).get('domain', 'unknown')
+        input_metadata['dataset'] = generated_data.get('context', {}).get('dataset', 'unknown')
+    elif test_type == "one_sample_t_test":
         input_metadata = {
             "sample_size": generated_data['metadata']['sample_size'],
             "true_mean": generated_data['metadata']['true_mean'],
@@ -710,9 +887,12 @@ RESPONSE COMPLETENESS:
         "model": model_name,
         "provider": provider,
         "prompt_type": prompt_type,
+        "data_source": actual_data_source,
+        "domain": generated_data.get('context', {}).get('domain') if actual_data_source == 'real' else None,
         "input_data": {
             "test_type": generated_data['test_type'],
-            "metadata": input_metadata
+            "metadata": input_metadata,
+            "context": generated_data.get('context', {}) if actual_data_source == 'real' else None
         },
         "prompt": full_prompt[:200] + "... [truncated]",  # Truncated for display
         "raw_response": raw_response[:200] + "... [truncated]",
@@ -764,6 +944,7 @@ RESPONSE COMPLETENESS:
     ║  CONFIGURATION:                                                        ║
     ║    Model: {(provider + '/' + model_name).ljust(40)}              ║
     ║    Prompt Style: {prompt_type.ljust(35)}              ║
+    ║    Data Source: {actual_data_source.ljust(36)}              ║
     ║                                                                        ║
     ║  ┌─────────────────┐                                                   ║
     ║  │ 1. Data Gen     │ → Synthetic scenario with known parameters        ║
@@ -805,6 +986,9 @@ RESPONSE COMPLETENESS:
     print(f"    • Model Evaluated: {model_name}")
     print(f"    • Prompt Style: {prompt_type}")
     print(f"    • Test Type: {generated_data['test_type']}")
+    print(f"    • Data Source: {actual_data_source}")
+    if actual_data_source == 'real':
+        print(f"    • Domain: {generated_data.get('context', {}).get('domain', 'unknown').title()}")
     print(f"    • Overall Accuracy: {overall_accuracy * 100:.1f}%")
     print(f"    • Decision Correct: {'Yes ✅' if evaluation_result['decision']['correct'] else 'No ❌'}")
     print(f"    • Reasoning Quality: {reasoning_score:.1f}%")
@@ -848,6 +1032,13 @@ def main():
     provider, model_name = display_model_menu(available_models)
     prompt_type = display_prompt_menu()
     test_type = display_test_type_menu()
+    data_source = display_data_source_menu()
+    
+    # Only ask for domain if using real or mixed data
+    if data_source in ("real", "mixed"):
+        real_domain = display_domain_menu()
+    else:
+        real_domain = "random"
     
     print("\n" + "=" * 60)
     print(" STARTING DEMONSTRATION")
@@ -857,11 +1048,14 @@ def main():
     print(f"     • Model: {model_name}")
     print(f"     • Prompt Style: {prompt_type}")
     print(f"     • Test Type: {test_type}")
+    print(f"     • Data Source: {data_source}")
+    if data_source in ("real", "mixed"):
+        print(f"     • Domain: {real_domain}")
     
     input("\n  Press Enter to begin the demonstration...")
     
     # Run the async demonstration
-    result = asyncio.run(run_demo(provider, model_name, prompt_type, test_type))
+    result = asyncio.run(run_demo(provider, model_name, prompt_type, test_type, data_source, real_domain))
     
     return result
 
@@ -879,12 +1073,20 @@ if __name__ == "__main__":
         
         # Or with command-line arguments to skip interactive selection:
         python workflow_demo.py --provider openai --model gpt-4o --prompt zero_shot
+        
+        # With real-world data:
+        python workflow_demo.py --provider openai --model gpt-4o --prompt zero_shot --data-source real --real-domain stocks
+        
+        # Mixed mode (synthetic + real alternating):
+        python workflow_demo.py --provider anthropic --model claude-sonnet-4-5-20250929 --prompt chain_of_thought --data-source mixed
     
     This script is designed for live presentations and will:
     1. Let you select an LLM model from available providers
     2. Let you choose a prompting style
-    3. Make a REAL API call to the selected LLM
-    4. Display formatted output for each stage of the hypothesis testing workflow
+    3. Let you select a statistical test type
+    4. Let you choose between synthetic, real-world, or mixed data sources
+    5. Make a REAL API call to the selected LLM
+    6. Display formatted output for each stage of the hypothesis testing workflow
     """
     import argparse
     
@@ -895,6 +1097,10 @@ if __name__ == "__main__":
                        help="Prompting style")
     parser.add_argument("--test", type=str, choices=["one_sample_t_test", "two_sample_t_test", "paired_t_test"],
                        default="one_sample_t_test", help="Statistical test type (default: one_sample_t_test)")
+    parser.add_argument("--data-source", type=str, choices=["synthetic", "real", "mixed"],
+                       default="synthetic", help="Data source type (default: synthetic)")
+    parser.add_argument("--real-domain", type=str, choices=["stocks", "healthcare", "random"],
+                       default="random", help="Real-world domain for real/mixed data (default: random)")
     
     args = parser.parse_args()
     
@@ -912,8 +1118,12 @@ if __name__ == "__main__":
         print(f"     • Model: {args.model}")
         print(f"     • Prompt Style: {args.prompt}")
         print(f"     • Test Type: {args.test}")
+        print(f"     • Data Source: {args.data_source}")
+        if args.data_source in ("real", "mixed"):
+            print(f"     • Domain: {args.real_domain}")
         
-        result = asyncio.run(run_demo(args.provider, args.model, args.prompt, args.test))
+        result = asyncio.run(run_demo(args.provider, args.model, args.prompt, args.test, 
+                                       args.data_source, args.real_domain))
     else:
         # Interactive mode
         result = main()

@@ -47,4 +47,41 @@ test_*.json
 # Distribution / packaging
 dist/
 build/
+*.egg-info/# Environment and secrets
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Results (optional - remove if you want to include sample results)
+# results/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build
+dist/
+build/
 *.egg-info/

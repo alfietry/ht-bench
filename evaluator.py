@@ -8,8 +8,78 @@ import config
 
 
 class EvaluationMetrics:
-    """Calculate evaluation metrics for hypothesis testing"""
+    """Compute evaluation metrics with hierarchical dependencies"""
     
+    @staticmethod
+    def evaluate_response(parsed: Dict[str, Any], 
+                         ground_truth: Dict[str, Any],
+                         strict_mode: bool = True) -> Dict[str, Any]:
+        """
+        Evaluate with hierarchical dependencies:
+        - Test selection must be correct for downstream metrics to count
+        - P-value accuracy only valid if test statistic is correct
+        
+        Args:
+            strict_mode: If True, downstream metrics require upstream correctness
+        """
+        metrics = {
+            "test_correct": False,
+            "test_statistic_correct": False,
+            "p_value_correct": False,
+            "decision_correct": False,
+            "complete_pipeline_correct": False
+        }
+        
+        # Level 1: Test Selection
+        if parsed.get("test_type") == ground_truth.get("test_type"):
+            metrics["test_correct"] = True
+        else:
+            if strict_mode:
+                # Wrong test invalidates all downstream metrics
+                return metrics
+        
+        # Level 2: Test Statistic (only if test correct in strict mode)
+        if strict_mode and not metrics["test_correct"]:
+            return metrics
+            
+        t_stat_parsed = parsed.get("test_statistic")
+        t_stat_truth = ground_truth.get("test_statistic")
+        
+        if t_stat_parsed is not None and t_stat_truth is not None:
+            if abs(t_stat_parsed - t_stat_truth) < config.EVALUATION["test_stat_tolerance"]:
+                metrics["test_statistic_correct"] = True
+        
+        # Level 3: P-Value (only if test statistic correct in strict mode)
+        if strict_mode and not metrics["test_statistic_correct"]:
+            return metrics
+            
+        p_val_parsed = parsed.get("p_value")
+        p_val_truth = ground_truth.get("p_value")
+        
+        if p_val_parsed is not None and p_val_truth is not None:
+            if abs(p_val_parsed - p_val_truth) < config.EVALUATION["p_value_tolerance"]:
+                metrics["p_value_correct"] = True
+        
+        # Level 4: Decision (requires correct p-value in strict mode)
+        if strict_mode and not metrics["p_value_correct"]:
+            return metrics
+            
+        decision_parsed = parsed.get("decision")
+        decision_truth = ground_truth.get("decision")
+        
+        if decision_parsed == decision_truth:
+            metrics["decision_correct"] = True
+        
+        # Complete pipeline correctness
+        metrics["complete_pipeline_correct"] = all([
+            metrics["test_correct"],
+            metrics["test_statistic_correct"],
+            metrics["p_value_correct"],
+            metrics["decision_correct"]
+        ])
+        
+        return metrics
+
     @staticmethod
     def test_method_accuracy(predicted: Optional[str], 
                             ground_truth: str) -> float:

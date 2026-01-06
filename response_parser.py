@@ -359,9 +359,9 @@ class ResponseParser:
                 text, r'\b[tz]\s*[=:]\s*([+-]?\d+\.?\d*)', None
             )
         
-        # Extract p-value
+        # Extract p-value (handling < and > symbols)
         p_value = None
-        approx_chars = '=:\u2248\u2245~'
+        approx_chars = '=:\u2248\u2245~<>'
         p_value_patterns = [
             rf'\d+\.\s*p[- ]?value\s*[{approx_chars}]\s*([0-9.eE-]+)',
             rf'p[- ]?value\s*[{approx_chars}]\s*([0-9.eE-]+)',
@@ -369,12 +369,18 @@ class ResponseParser:
         ]
         
         for pattern in p_value_patterns:
-            matches = re.findall(pattern, text, re.IGNORECASE)
-            for match in matches:
+            matches = list(re.finditer(pattern, text, re.IGNORECASE))
+            for match_obj in matches:
                 try:
-                    val = float(match)
+                    val = float(match_obj.group(1))
                     if 0 <= val <= 1:
                         p_value = val
+                        # If the matched pattern contains < or >, adjust the value
+                        matched_text = match_obj.group(0)
+                        if '<' in matched_text and val == 0.05:
+                            p_value = 0.04  # Conservative estimate for p < 0.05
+                        elif '>' in matched_text and val == 0.05:
+                            p_value = 0.06  # Conservative estimate for p > 0.05
                         break
                 except:
                     continue

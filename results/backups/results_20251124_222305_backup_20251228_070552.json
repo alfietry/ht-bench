@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2025-11-24T22:23:05.270349",
+    "model": "gpt-5-mini",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1ec7f1f5e00 state=finished raised BadRequestError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-11-24T22:23:05.286202",
+    "model": "gpt-5-mini",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1ec7f30cb90 state=finished raised BadRequestError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  }
+]

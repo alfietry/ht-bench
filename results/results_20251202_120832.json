@@ -15,7 +15,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -7.46\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 198\n8. Critical value(s): \u00b11.972\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
+    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -7.46\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 198\n8. Critical value(s): ±1.972\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
     "parsed_results": {
       "hypotheses": {
         "H0": "mean1 = mean2, H1: mean1 != mean2",
@@ -49,14 +49,14 @@
       "sample1_std": 2.150581700373692,
       "sample2_std": 2.1549743998797384,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 2.6605354699470106e-12,
         "relative_error": 1.0,
@@ -66,7 +66,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00015104423903622433,
         "relative_error": 2.024680708748725e-05,
@@ -104,7 +104,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.9348191000026418
+    "latency_seconds": 1.9348191000026418,
+    "hypotheses": {
+      "H0": "mean1 = mean2, H1: mean1 != mean2",
+      "H1": "mean1 != mean2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -7.46,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-02T12:08:19.116369",
@@ -122,7 +131,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -8.23\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 198\n8. Critical value(s): \u00b11.972\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
+    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -8.23\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 198\n8. Critical value(s): ±1.972\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
     "parsed_results": {
       "hypotheses": {
         "H0": "mean1 = mean2, H1: mean1 != mean2",
@@ -156,14 +165,14 @@
       "sample1_std": 1.7309088294767752,
       "sample2_std": 1.938136922262718,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 1.3362873708069013e-14,
         "relative_error": 1.0,
@@ -211,7 +220,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.972296499996446
+    "latency_seconds": 1.972296499996446,
+    "hypotheses": {
+      "H0": "mean1 = mean2, H1: mean1 != mean2",
+      "H1": "mean1 != mean2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -8.23,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-02T12:08:19.153017",
@@ -229,7 +247,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -5.24\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 198\n8. Critical value(s): \u00b11.972\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
+    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -5.24\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 198\n8. Critical value(s): ±1.972\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
     "parsed_results": {
       "hypotheses": {
         "H0": "mean1 = mean2, H1: mean1 != mean2",
@@ -263,14 +281,14 @@
       "sample1_std": 2.0636578999796176,
       "sample2_std": 2.020951535261872,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 4.2388534242606574e-07,
         "relative_error": 1.0,
@@ -318,7 +336,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 2.607624799988116
+    "latency_seconds": 2.607624799988116,
+    "hypotheses": {
+      "H0": "mean1 = mean2, H1: mean1 != mean2",
+      "H1": "mean1 != mean2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.24,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-02T12:08:20.723256",
@@ -334,7 +361,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -1.77\n4. P-value: 0.083\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 49\n8. Critical value(s): \u00b12.01\n9. Assumptions checked: normality - no, independence - no, equal variance - N/A",
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -1.77\n4. P-value: 0.083\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 49\n8. Critical value(s): ±2.01\n9. Assumptions checked: normality - no, independence - no, equal variance - N/A",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10, H1: mu != 10",
@@ -365,14 +392,14 @@
       "sample_mean": 9.616499493078544,
       "sample_std": 1.5331866340538596,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00016718583622973848,
         "relative_error": 0.00201023798687809,
@@ -420,7 +447,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.5495123000000603
+    "latency_seconds": 1.5495123000000603,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.77,
+    "p_value": 0.083,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-02T12:08:20.939183",
@@ -467,14 +503,14 @@
       "sample_mean": 10.182422060986022,
       "sample_std": 1.53655445671519,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0002728727848380075,
         "relative_error": 0.0006733063157249051,
@@ -484,7 +520,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0005121719083219789,
         "relative_error": 0.0006101004579021081,
@@ -522,7 +558,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.7580723999999464
+    "latency_seconds": 1.7580723999999464,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.84,
+    "p_value": 0.405,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-02T12:08:21.766107",
@@ -540,11 +585,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test (independent groups, comparing means, unknown population variances, assuming equal variances).\n\n2. Hypotheses:\n   H0: mu1 = mu2 (no difference in population means)\n   H1: mu1 \u2260 mu2 (difference in population means)\n\n3. Test Statistic:\n   Given: xb1 = 10.0740, xb2 = 11.9061, s1 = 2.0610, s2 = 2.1565, n1 = 50, n2 = 50\n   Pooled std dev, sp = sqrt(((n1-1)*s1^2 + (n2-1)*s2^2)/(n1+n2-2)) = sqrt((49*2.0610^2 + 49*2.1565^2)/(98)) = 2.1095\n   t = (xb1 - xb2) / (sp * sqrt(1/n1 + 1/n2)) = (10.0740 - 11.9061) / (2.1095 * sqrt(1/50 + 1/50)) = -1.8321 / 0.4221 = -4.340\n   Degrees of freedom, df = n1 + n2 - 2 = 98\n\n4. P-value:\n   For t = -4.340, df = 98, two-tailed test, p-value < 0.0001 (using t-distribution table or calculator)\n\n5. Decision:\n   alp = 0.05\n   Since p-value < 0.05, reject H0.\n\n6. Conclusion:\n   There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 \u2260 mu2).",
+    "raw_response": "H0: mu1 = mu2 (no difference in population means)\nH1: mu1 ≠ mu2 (difference in population means)\nTest_type: Two-sample t-test\nt-statistic: -4.3400\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in population means)",
-        "H1": "mu1 \u2260 mu2 (difference in population means)"
+        "H1": "mu1 ≠ mu2 (difference in population means)"
       },
       "test_method": "two_sample_t_test_(independent_groups,_comparing_means,_unknown_population_variances,_assuming_equal_variances).",
       "assumptions": null,
@@ -554,7 +599,7 @@
       "critical_value": null,
       "decision": "reject_H0",
       "significance_level": 0.05,
-      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 \u2260 mu2).",
+      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 ≠ mu2).",
       "confidence_interval": null
     },
     "ground_truth": {
@@ -574,27 +619,29 @@
       "sample1_std": 2.0609589673445834,
       "sample2_std": 2.156456976151832,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.04996571372676092,
-        "relative_error": 1457.3095587946327,
-        "predicted": 0.05,
+        "error": 6.571372676091657e-05,
+        "relative_error": 1.916619117589266,
+        "predicted": 0.0001,
         "ground_truth": 3.428627323908344e-05,
         "valid_range": true,
-        "correct_significance": false
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "within_tolerance": true,
+        "error": 0.0030375122885644146,
+        "relative_error": 0.0006993981240018802,
+        "predicted": -4.34,
+        "ground_truth": -4.343037512288564
       },
       "decision": {
         "correct": true,
@@ -628,13 +675,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 1.0
     },
-    "latency_seconds": 4.614517499998328
+    "latency_seconds": 4.614517499998328,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in population means)",
+      "H1": "mu1 ≠ mu2 (difference in population means)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.34,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:22.567797",
@@ -652,11 +708,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test (independent groups, comparing means, unknown population variances assumed unequal).\n\n2. Hypotheses:\n   H0: mu1 = mu2 (population means of the two groups are equal)\n   H1: mu1 \u2260 mu2 (population means of the two groups are not equal)\n\n3. Test Statistic:\n   Given: xb1 = 9.7284, xb2 = 11.8315, s1 = 2.0312, s2 = 2.0481, n1 = 50, n2 = 50\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   t = (9.7284 - 11.8315) / sqrt((2.0312^2/50) + (2.0481^2/50))\n   t = -2.1031 / sqrt(0.0825 + 0.0839)\n   t = -2.1031 / 0.4080\n   t = -5.155\n\n   Degrees of Freedom (approximated using Welch's formula):\n   df = ((s1^2/n1 + s2^2/n2)^2) / ((s1^2/n1)^2/(n1-1) + (s2^2/n2)^2/(n2-1))\n   df \u2248 98 (rounded for simplicity)\n\n4. P-value:\n   For t = -5.155, df \u2248 98, two-tailed test, p-value < 0.0001 (using t-distribution table or calculator).\n\n5. Decision:\n   alp = 0.05\n   Since p-value < 0.05, reject H0.\n\n6. Conclusion:\n   There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are significantly different.",
+    "raw_response": "H0: mu1 = mu2 (population means of the two groups are equal)\nH1: mu1 ≠ mu2 (population means of the two groups are not equal)\nTest_type: Two-sample t-test\nt-statistic: -2.1031\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (population means of the two groups are equal)",
-        "H1": "mu1 \u2260 mu2 (population means of the two groups are not equal)"
+        "H1": "mu1 ≠ mu2 (population means of the two groups are not equal)"
       },
       "test_method": "two_sample_t_test_(independent_groups,_comparing_means,_unknown_population_variances_assumed_unequal).",
       "assumptions": null,
@@ -686,27 +742,29 @@
       "sample1_std": 2.031193680081686,
       "sample2_std": 2.048148324298389,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.04999868294332136,
-        "relative_error": 37962.43833247195,
-        "predicted": 0.05,
+        "error": 9.868294332135789e-05,
+        "relative_error": 74.9268766649439,
+        "predicted": 0.0001,
         "ground_truth": 1.3170566786421082e-06,
         "valid_range": true,
-        "correct_significance": false
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 3.0521484576920552,
+        "relative_error": 0.5920468203890344,
+        "predicted": -2.1031,
+        "ground_truth": -5.155248457692055
       },
       "decision": {
         "correct": true,
@@ -740,13 +798,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.419961699997657
+    "latency_seconds": 5.419961699997657,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (population means of the two groups are equal)",
+      "H1": "mu1 ≠ mu2 (population means of the two groups are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.1031,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:23.489470",
@@ -793,8 +860,8 @@
       "sample_mean": 10.131693123222096,
       "sample_std": 1.958932250019036,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -848,7 +915,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.7095419999968726
+    "latency_seconds": 1.7095419999968726,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.67,
+    "p_value": 0.504,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-02T12:08:23.590567",
@@ -866,11 +942,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test (independent groups, comparing means, unknown population variances assumed unequal).\n\n2. Hypotheses:\n   H0: mu1 = mu2 (population means of the two groups are equal)\n   H1: mu1 \u2260 mu2 (population means of the two groups are different)\n\n3. Test Statistic:\n   Given: xb1 = 9.7215, xb2 = 11.7153, s1 = 2.1509, s2 = 1.9982, n1 = 50, n2 = 50\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   t = (9.7215 - 11.7153) / sqrt((2.1509^2/50) + (1.9982^2/50))\n   t = -1.9938 / sqrt(0.0925 + 0.0799)\n   t = -1.9938 / sqrt(0.1724)\n   t = -1.9938 / 0.4152\n   t = -4.802\n\n4. P-value:\n   Degrees of freedom (approximated using Welch's formula): df \u2248 97\n   For t = -4.802, two-tailed test, p-value < 0.0001 (using t-distribution table or software)\n\n5. Decision:\n   alp = 0.05\n   Since p-value < 0.05, reject H0.\n\n6. Conclusion:\n   There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 \u2260 mu2).",
+    "raw_response": "H0: mu1 = mu2 (population means of the two groups are equal)\nH1: mu1 ≠ mu2 (population means of the two groups are different)\nTest_type: Two-sample t-test\nt-statistic: -1.9938\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (population means of the two groups are equal)",
-        "H1": "mu1 \u2260 mu2 (population means of the two groups are different)"
+        "H1": "mu1 ≠ mu2 (population means of the two groups are different)"
       },
       "test_method": "two_sample_t_test_(independent_groups,_comparing_means,_unknown_population_variances_assumed_unequal).",
       "assumptions": null,
@@ -880,7 +956,7 @@
       "critical_value": null,
       "decision": "reject_H0",
       "significance_level": 0.05,
-      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 \u2260 mu2).",
+      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 ≠ mu2).",
       "confidence_interval": null
     },
     "ground_truth": {
@@ -900,27 +976,29 @@
       "sample1_std": 2.1509061244944765,
       "sample2_std": 1.9982412453078222,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.0499943588801953,
-        "relative_error": 8862.48840850916,
-        "predicted": 0.05,
+        "error": 9.43588801952966e-05,
+        "relative_error": 16.72697681701832,
+        "predicted": 0.0001,
         "ground_truth": 5.641119804703396e-06,
         "valid_range": true,
-        "correct_significance": false
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 2.8083540558702254,
+        "relative_error": 0.584811320752455,
+        "predicted": -1.9938,
+        "ground_truth": -4.802154055870226
       },
       "decision": {
         "correct": true,
@@ -954,13 +1032,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.425899900001241
+    "latency_seconds": 4.425899900001241,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (population means of the two groups are equal)",
+      "H1": "mu1 ≠ mu2 (population means of the two groups are different)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.9938,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:24.100600",
@@ -976,7 +1063,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test (since population standard deviation is unknown, and we are testing if sample mean differs from a known population mean).\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu != 10 (two-tailed test)\n\n3. Test Statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   xb = 10.1824, mu = 10, s = 1.5366, n = 50\n   t = (10.1824 - 10) / (1.5366 / sqrt(50))\n   t = 0.1824 / 0.2174\n   t = 0.839\n\n4. P-value:\n   Degrees of freedom (df) = n - 1 = 49\n   Using t-distribution table or calculator for two-tailed test, t = 0.839, df = 49\n   P-value \u2248 0.405 (greater than 0.05)\n\n5. Decision:\n   alp = 0.05\n   Since p-value (0.405) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence at the 0.05 significance level to conclude that the population mean differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu != 10 (two-tailed test)\nTest_type: One-sample t-test\nt-statistic: 0.1824\np-value: 0.4050\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
@@ -1007,18 +1094,18 @@
       "sample_mean": 10.182422060986022,
       "sample_std": 1.53655445671519,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
-        "within_tolerance": false,
-        "error": 0.35527287278483805,
-        "relative_error": 0.8766263341130525,
-        "predicted": 0.05,
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0002728727848380075,
+        "relative_error": 0.0006733063157249051,
+        "predicted": 0.405,
         "ground_truth": 0.40527287278483803,
         "valid_range": true,
         "correct_significance": true
@@ -1026,12 +1113,14 @@
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 0.657087828091678,
+        "relative_error": 0.7827246639005698,
+        "predicted": 0.1824,
+        "ground_truth": 0.839487828091678
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -1061,13 +1150,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 3.3742466999974567
+    "latency_seconds": 3.3742466999974567,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10 (two-tailed test)"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.1824,
+    "p_value": 0.405,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:25.304802",
@@ -1083,7 +1181,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -0.295\n4. P-value: 0.768\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 99\n8. Critical value(s): \u00b11.984\n9. Assumptions checked: normality - no, independence - no, equal variance - N/A",
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -0.295\n4. P-value: 0.768\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 99\n8. Critical value(s): ±1.984\n9. Assumptions checked: normality - no, independence - no, equal variance - N/A",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10, H1: mu != 10",
@@ -1114,14 +1212,14 @@
       "sample_mean": 9.94329557990962,
       "sample_std": 1.9207423052862138,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00044302008468055654,
         "relative_error": 0.0005765165055851985,
@@ -1131,7 +1229,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00022138359903767224,
         "relative_error": 0.000749890120894325,
@@ -1169,7 +1267,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.7115060999931302
+    "latency_seconds": 1.7115060999931302,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.295,
+    "p_value": 0.768,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-02T12:08:25.642510",
@@ -1185,11 +1292,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test (since population standard deviation is unknown, and we are testing if sample mean differs from a known population mean).\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu \u2260 10 (two-tailed test)\n\n3. Test Statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   xb = 9.6165, mu = 10, s = 1.5332, n = 50\n   t = (9.6165 - 10) / (1.5332 / sqrt(50))\n   t = -0.3835 / 0.2169\n   t = -1.768\n\n4. P-value:\n   Degrees of freedom (df) = n - 1 = 49\n   Using t-distribution table or calculator for two-tailed test, p-value \u2248 0.083\n\n5. Decision (alp = 0.05):\n   Since p-value (0.083) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence at the 0.05 significance level to conclude that the population mean differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10 (two-tailed test)\nTest_type: One-sample t-test\nt-statistic: -0.3835\np-value: 0.0830\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10 (two-tailed test)"
+        "H1": "mu ≠ 10 (two-tailed test)"
       },
       "test_method": "one_sample_t_test_(since_population_standard_deviation_is_unknown,_and_we_are_testing_if_sample_mean_differs_from_a_known_population_mean).",
       "assumptions": null,
@@ -1216,18 +1323,18 @@
       "sample_mean": 9.616499493078544,
       "sample_std": 1.5331866340538596,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.03316718583622974,
-        "relative_error": 0.39880134818486634,
-        "predicted": 0.05,
+        "error": 0.00016718583622973848,
+        "relative_error": 0.00201023798687809,
+        "predicted": 0.083,
         "ground_truth": 0.08316718583622974,
         "valid_range": true,
         "correct_significance": true
@@ -1235,12 +1342,14 @@
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 1.3852071032939466,
+        "relative_error": 0.7831749534528414,
+        "predicted": -0.3835,
+        "ground_truth": -1.7687071032939465
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -1270,13 +1379,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 3.0705225999990944
+    "latency_seconds": 3.0705225999990944,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10 (two-tailed test)"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.3835,
+    "p_value": 0.083,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:26.024073",
@@ -1294,11 +1412,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test (independent groups, comparing means, unknown population variances assumed unequal).\n\n2. Hypotheses:\n   H0: mu1 = mu2 (population means of the two groups are equal)\n   H1: mu1 \u2260 mu2 (population means of the two groups are different)\n\n3. Test Statistic:\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   xb1 = 10.2475, xb2 = 11.7589\n   s1 = 2.0637, s2 = 2.0210\n   n1 = 100, n2 = 100\n   t = (10.2475 - 11.7589) / sqrt((2.0637^2/100) + (2.0210^2/100))\n   t = -1.5114 / sqrt(0.0426 + 0.0408)\n   t = -1.5114 / 0.2893\n   t = -5.224\n\n4. P-value:\n   Degrees of freedom (approx, Welch's): df = 198 (since n1 and n2 are large and variances similar)\n   For t = -5.224, two-tailed test, p-value < 0.0001 (using t-distribution table or calculator)\n\n5. Decision:\n   alp = 0.05\n   Since p-value < 0.05, reject H0.\n\n6. Conclusion:\n   There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 \u2260 mu2).",
+    "raw_response": "H0: mu1 = mu2 (population means of the two groups are equal)\nH1: mu1 ≠ mu2 (population means of the two groups are different)\nTest_type: Two-sample t-test\nt-statistic: -1.5114\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (population means of the two groups are equal)",
-        "H1": "mu1 \u2260 mu2 (population means of the two groups are different)"
+        "H1": "mu1 ≠ mu2 (population means of the two groups are different)"
       },
       "test_method": "two_sample_t_test_(independent_groups,_comparing_means,_unknown_population_variances_assumed_unequal).",
       "assumptions": null,
@@ -1308,7 +1426,7 @@
       "critical_value": null,
       "decision": "reject_H0",
       "significance_level": 0.05,
-      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 \u2260 mu2).",
+      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are different (mu1 ≠ mu2).",
       "confidence_interval": null
     },
     "ground_truth": {
@@ -1328,27 +1446,29 @@
       "sample1_std": 2.0636578999796176,
       "sample2_std": 2.020951535261872,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.04999957611465758,
-        "relative_error": 117955.42593780186,
-        "predicted": 0.05,
+        "error": 9.957611465757395e-05,
+        "relative_error": 234.91285187560374,
+        "predicted": 0.0001,
         "ground_truth": 4.2388534242606574e-07,
         "valid_range": true,
-        "correct_significance": false
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 3.721328318775231,
+        "relative_error": 0.7111640605194353,
+        "predicted": -1.5114,
+        "ground_truth": -5.232728318775231
       },
       "decision": {
         "correct": true,
@@ -1382,13 +1502,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.079839499987429
+    "latency_seconds": 5.079839499987429,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (population means of the two groups are equal)",
+      "H1": "mu1 ≠ mu2 (population means of the two groups are different)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.5114,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:26.761257",
@@ -1404,7 +1533,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -0.36\n4. P-value: 0.719\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 49\n8. Critical value(s): \u00b12.01\n9. Assumptions checked: normality - no, independence - no, equal variance - N/A",
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -0.36\n4. P-value: 0.719\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 49\n8. Critical value(s): ±2.01\n9. Assumptions checked: normality - no, independence - no, equal variance - N/A",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10, H1: mu != 10",
@@ -1435,14 +1564,14 @@
       "sample_mean": 9.897542062388416,
       "sample_std": 2.008080448033624,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0008103299366716277,
         "relative_error": 0.001125754803689633,
@@ -1452,7 +1581,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.000785856674633989,
         "relative_error": 0.0021781803806757726,
@@ -1490,7 +1619,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.4525599000044167
+    "latency_seconds": 1.4525599000044167,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.36,
+    "p_value": 0.719,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-02T12:08:27.284231",
@@ -1506,11 +1644,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test (since population standard deviation is unknown, and we are testing if sample mean differs from a known population mean).\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu \u2260 10 (two-tailed test)\n\n3. Test Statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   t = (9.8975 - 10) / (2.0081 / sqrt(50))\n   t = (-0.1025) / (2.0081 / 7.0711)\n   t = (-0.1025) / 0.2840\n   t = -0.3609\n\n4. P-value:\n   Degrees of freedom (df) = n - 1 = 50 - 1 = 49\n   For t = -0.3609, df = 49, p-value \u2248 0.7198 (two-tailed, using t-distribution table or calculator)\n\n5. Decision:\n   alp = 0.05\n   Since p-value (0.7198) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence at alp = 0.05 to conclude that the population mean differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10 (two-tailed test)\nTest_type: One-sample t-test\nt-statistic: -0.3609\np-value: 0.7198\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10 (two-tailed test)"
+        "H1": "mu ≠ 10 (two-tailed test)"
       },
       "test_method": "one_sample_t_test_(since_population_standard_deviation_is_unknown,_and_we_are_testing_if_sample_mean_differs_from_a_known_population_mean).",
       "assumptions": null,
@@ -1537,31 +1675,33 @@
       "sample_mean": 9.897542062388416,
       "sample_std": 2.008080448033624,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
-        "within_tolerance": false,
-        "error": 0.6698103299366716,
-        "relative_error": 0.9305372569404512,
-        "predicted": 0.05,
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 1.0329936671604756e-05,
+        "relative_error": 1.4350914736821818e-05,
+        "predicted": 0.7198,
         "ground_truth": 0.7198103299366716,
         "valid_range": true,
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
-        "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0001141433253660229,
+        "relative_error": 0.00031637416837257095,
+        "predicted": -0.3609,
+        "ground_truth": -0.360785856674634
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -1591,13 +1731,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 1.0
     },
-    "latency_seconds": 3.1774615999893285
+    "latency_seconds": 3.1774615999893285,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10 (two-tailed test)"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.3609,
+    "p_value": 0.7198,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:27.787781",
@@ -1615,7 +1764,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -4.33\n4. P-value: 0.00003\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 98\n8. Critical value(s): \u00b11.984\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
+    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -4.33\n4. P-value: 0.00003\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 98\n8. Critical value(s): ±1.984\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
     "parsed_results": {
       "hypotheses": {
         "H0": "mean1 = mean2, H1: mean1 != mean2",
@@ -1649,14 +1798,14 @@
       "sample1_std": 2.0609589673445834,
       "sample2_std": 2.156456976151832,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 4.286273239083441e-06,
         "relative_error": 0.1250142647232203,
@@ -1704,7 +1853,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.76114809999126
+    "latency_seconds": 1.76114809999126,
+    "hypotheses": {
+      "H0": "mean1 = mean2, H1: mean1 != mean2",
+      "H1": "mean1 != mean2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.33,
+    "p_value": 3e-05,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-02T12:08:27.791753",
@@ -1722,11 +1880,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test for independent groups (assuming unequal variances since sample std devs differ).\n\n2. Hypotheses:\n   H0: mu1 = mu2 (population means of the two groups are equal)\n   H1: mu1 \u2260 mu2 (population means of the two groups are not equal)\n\n3. Test Statistic:\n   Given: xb1 = 10.0316, xb2 = 12.1959, s1 = 1.7309, s2 = 1.9381, n1 = 100, n2 = 100\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   t = (10.0316 - 12.1959) / sqrt((1.7309^2/100) + (1.9381^2/100))\n   t = -2.1643 / sqrt(0.02995 + 0.03756)\n   t = -2.1643 / sqrt(0.06751)\n   t = -2.1643 / 0.2598\n   t = -8.33\n\n4. P-value:\n   Degrees of freedom (approx. using Welch's formula): df \u2248 195\n   For t = -8.33, two-tailed test, p-value < 0.0001 (extremely small, based on t-distribution tables or software).\n\n5. Decision:\n   alp = 0.05\n   Since p-value < 0.05, reject H0.\n\n6. Conclusion:\n   There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are significantly different (mu1 \u2260 mu2).",
+    "raw_response": "H0: mu1 = mu2 (population means of the two groups are equal)\nH1: mu1 ≠ mu2 (population means of the two groups are not equal)\nTest_type: Two-sample t-test\nt-statistic: -2.1643\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (population means of the two groups are equal)",
-        "H1": "mu1 \u2260 mu2 (population means of the two groups are not equal)"
+        "H1": "mu1 ≠ mu2 (population means of the two groups are not equal)"
       },
       "test_method": "two_sample_t_test_for_independent_groups_(assuming_unequal_variances_since_sample_std_devs_differ).",
       "assumptions": null,
@@ -1736,7 +1894,7 @@
       "critical_value": null,
       "decision": "reject_H0",
       "significance_level": 0.05,
-      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are significantly different (mu1 \u2260 mu2).",
+      "conclusion": "There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are significantly different (mu1 ≠ mu2).",
       "confidence_interval": null
     },
     "ground_truth": {
@@ -1756,27 +1914,29 @@
       "sample1_std": 1.7309088294767752,
       "sample2_std": 1.938136922262718,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.04999999999998664,
-        "relative_error": 3741710136031.1987,
-        "predicted": 0.05,
+        "error": 9.999999998663713e-05,
+        "relative_error": 7483420271.064398,
+        "predicted": 0.0001,
         "ground_truth": 1.3362873708069013e-14,
         "valid_range": true,
-        "correct_significance": false
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 6.164504893644291,
+        "relative_error": 0.7401427902757601,
+        "predicted": -2.1643,
+        "ground_truth": -8.32880489364429
       },
       "decision": {
         "correct": true,
@@ -1810,13 +1970,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.298501299999771
+    "latency_seconds": 4.298501299999771,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (population means of the two groups are equal)",
+      "H1": "mu1 ≠ mu2 (population means of the two groups are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.1643,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:28.924523",
@@ -1832,7 +2001,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -0.431\n4. P-value: 0.667\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 99\n8. Critical value(s): \u00b11.984\n9. Assumptions checked: normality - yes, independence - yes, equal variance - N/A",
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: one-sample t-test\n3. Test statistic value: -0.431\n4. P-value: 0.667\n5. Decision: fail to reject H0\n6. Brief conclusion: There is insufficient evidence to conclude that the sample mean differs from the population mean of 10.\n7. Degrees of freedom: 99\n8. Critical value(s): ±1.984\n9. Assumptions checked: normality - yes, independence - yes, equal variance - N/A",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10, H1: mu != 10",
@@ -1863,14 +2032,14 @@
       "sample_mean": 9.90851633795673,
       "sample_std": 2.1205305771509075,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00010194673829455603,
         "relative_error": 0.00015282032797687208,
@@ -1880,7 +2049,7 @@
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0004187356175046064,
         "relative_error": 0.0009706013738723136,
@@ -1918,7 +2087,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.634947700003977
+    "latency_seconds": 1.634947700003977,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.431,
+    "p_value": 0.667,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-02T12:08:29.337184",
@@ -1936,7 +2114,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -5.14\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 98\n8. Critical value(s): \u00b11.984\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
+    "raw_response": "1. H0: mean1 = mean2, H1: mean1 != mean2\n2. Test name: two-sample t-test\n3. Test statistic value: -5.14\n4. P-value: 0.000\n5. Decision: reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.\n7. Degrees of freedom: 98\n8. Critical value(s): ±1.984\n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes",
     "parsed_results": {
       "hypotheses": {
         "H0": "mean1 = mean2, H1: mean1 != mean2",
@@ -1970,14 +2148,14 @@
       "sample1_std": 2.031193680081686,
       "sample2_std": 2.048148324298389,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 1.3170566786421082e-06,
         "relative_error": 1.0,
@@ -2025,7 +2203,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 1.5396078000048874
+    "latency_seconds": 1.5396078000048874,
+    "hypotheses": {
+      "H0": "mean1 = mean2, H1: mean1 != mean2",
+      "H1": "mean1 != mean2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.14,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-02T12:08:30.041954",
@@ -2041,11 +2228,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample z-test (since sample size is large, n=100, and we're testing sample mean against a known population mean)\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu \u2260 10 (two-tailed test)\n\n3. Test Statistic:\n   z = (xb - mu) / (s / sqrt(n))\n   z = (9.9085 - 10) / (2.1205 / sqrt(100))\n   z = (-0.0915) / (2.1205 / 10)\n   z = -0.0915 / 0.21205\n   z = -0.4314\n\n4. P-value:\n   For z = -0.4314, using standard normal distribution (two-tailed),\n   P-value = 2 * P(Z < -0.4314) \u2248 2 * 0.3336 = 0.6672\n\n5. Decision:\n   alp = 0.05\n   Since P-value (0.6672) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence at alp = 0.05 to conclude that the population mean differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10 (two-tailed test)\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10 (two-tailed test)"
+        "H1": "mu ≠ 10 (two-tailed test)"
       },
       "test_method": "one_sample_z_test_(since_sample_size_is_large,_n=100,_and_we're_testing_sample_mean_against_a_known_population_mean)",
       "assumptions": null,
@@ -2072,8 +2259,8 @@
       "sample_mean": 9.90851633795673,
       "sample_std": 2.1205305771509075,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2095,8 +2282,8 @@
         "relative_error": null
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -2127,12 +2314,18 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": false,
-        "has_p_value": true,
+        "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.125
+      "overall_accuracy": 0.5625
     },
-    "latency_seconds": 3.278150899990578
+    "latency_seconds": 3.278150899990578,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10 (two-tailed test)"
+    },
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:30.047880",
@@ -2150,11 +2343,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test (independent groups, comparing means, sample std devs provided, assuming unequal variances).\n\n2. Hypotheses:\n   H0: mu1 = mu2 (population means of the two groups are equal)\n   H1: mu1 \u2260 mu2 (population means of the two groups are different)\n\n3. Test Statistic:\n   Given: xb1 = 9.7357, xb2 = 12.0069, s1 = 2.1506, s2 = 2.1550, n1 = 100, n2 = 100\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   t = (9.7357 - 12.0069) / sqrt((2.1506^2/100) + (2.1550^2/100))\n   t = -2.2712 / sqrt(0.0462 + 0.0464)\n   t = -2.2712 / 0.3043\n   t = -7.465\n\n4. P-value:\n   Degrees of freedom (approx, Welch's): df = ~198 (since n1 and n2 are large and variances similar)\n   For t = -7.465, two-tailed test, p-value < 0.0001 (extremely small, using t-distribution table or software)\n\n5. Decision:\n   alp = 0.05\n   Since p-value < 0.05, reject H0.\n\n6. Conclusion:\n   There is sufficient evidence at alp = 0.05 to conclude that the population means of the two groups are significantly different.",
+    "raw_response": "H0: mu1 = mu2 (population means of the two groups are equal)\nH1: mu1 ≠ mu2 (population means of the two groups are different)\nTest_type: Two-sample t-test\nt-statistic: -2.2712\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (population means of the two groups are equal)",
-        "H1": "mu1 \u2260 mu2 (population means of the two groups are different)"
+        "H1": "mu1 ≠ mu2 (population means of the two groups are different)"
       },
       "test_method": "two_sample_t_test_(independent_groups,_comparing_means,_sample_std_devs_provided,_assuming_unequal_variances).",
       "assumptions": null,
@@ -2184,27 +2377,29 @@
       "sample1_std": 2.150581700373692,
       "sample2_std": 2.1549743998797384,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
-        "error": 0.049999999997339464,
-        "relative_error": 18793209322.759117,
-        "predicted": 0.05,
+        "error": 9.999999733946453e-05,
+        "relative_error": 37586417.64751823,
+        "predicted": 0.0001,
         "ground_truth": 2.6605354699470106e-12,
         "valid_range": true,
-        "correct_significance": false
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 5.188951044239037,
+        "relative_error": 0.6955557620037879,
+        "predicted": -2.2712,
+        "ground_truth": -7.460151044239036
       },
       "decision": {
         "correct": true,
@@ -2238,13 +2433,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.400907699993695
+    "latency_seconds": 4.400907699993695,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (population means of the two groups are equal)",
+      "H1": "mu1 ≠ mu2 (population means of the two groups are different)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.2712,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:30.757852",
@@ -2260,7 +2464,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test (since population standard deviation is unknown, and we are testing if sample mean differs from a known population mean).\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu != 10 (two-tailed test)\n\n3. Test Statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   t = (10.1317 - 10) / (1.9589 / sqrt(100))\n   t = 0.1317 / 0.19589\n   t = 0.672\n\n4. P-value:\n   Degrees of freedom (df) = n - 1 = 99\n   Using t-distribution table or calculator for t=0.672, df=99, two-tailed test:\n   p-value \u2248 0.503\n\n5. Decision:\n   alp = 0.05\n   Since p-value (0.503) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence at the 0.05 significance level to conclude that the population mean differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu != 10 (two-tailed test)\nTest_type: One-sample t-test\nt-statistic: 0.1317\np-value: 0.5030\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
@@ -2291,18 +2495,18 @@
       "sample_mean": 10.131693123222096,
       "sample_std": 1.958932250019036,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
-        "within_tolerance": false,
-        "error": 0.452977859313863,
-        "relative_error": 0.900592045804546,
-        "predicted": 0.05,
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 2.21406861370399e-05,
+        "relative_error": 4.401920626733572e-05,
+        "predicted": 0.503,
         "ground_truth": 0.502977859313863,
         "valid_range": true,
         "correct_significance": true
@@ -2310,12 +2514,14 @@
       "test_statistic": {
         "exact_match": false,
         "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "error": 0.540569922662288,
+        "relative_error": 0.8040965458064097,
+        "predicted": 0.1317,
+        "ground_truth": 0.672269922662288
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -2345,13 +2551,22 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.9594472000026144
+    "latency_seconds": 2.9594472000026144,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10 (two-tailed test)"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.1317,
+    "p_value": 0.503,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-02T12:08:31.480567",
@@ -2403,14 +2618,14 @@
       "sample1_std": 2.1509061244944765,
       "sample2_std": 1.9982412453078222,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 5.641119804703396e-06,
         "relative_error": 1.0,
@@ -2458,7 +2673,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 2.5496987999940757
+    "latency_seconds": 2.5496987999940757,
+    "hypotheses": {
+      "H0": "mean1 = mean2, H1: mean1 != mean2",
+      "H1": "mean1 != mean2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.73,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-02T12:08:32.812803",
@@ -2474,11 +2698,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test (since population standard deviation is unknown, and we are testing if sample mean differs from a known population mean).\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu \u2260 10 (two-tailed test)\n\n3. Test Statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   xb = 9.9433, mu = 10, s = 1.9207, n = 100\n   t = (9.9433 - 10) / (1.9207 / sqrt(100))\n   t = (-0.0567) / (1.9207 / 10)\n   t = (-0.0567) / 0.19207\n   t = -0.295\n\n4. P-value:\n   Degrees of freedom (df) = n - 1 = 99\n   For t = -0.295, df = 99, p-value \u2248 0.769 (two-tailed, using t-distribution table or calculator)\n\n5. Decision:\n   alp = 0.05\n   Since p-value (0.769) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence at alp = 0.05 to conclude that the population mean differs from 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10 (two-tailed test)\nTest_type: One-sample t-test\nt-statistic: -0.2950\np-value: 0.7690\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10 (two-tailed test)"
+        "H1": "mu ≠ 10 (two-tailed test)"
       },
       "test_method": "one_sample_t_test_(since_population_standard_deviation_is_unknown,_and_we_are_testing_if_sample_mean_differs_from_a_known_population_mean).",
       "assumptions": null,
@@ -2505,31 +2729,33 @@
       "sample_mean": 9.94329557990962,
       "sample_std": 1.9207423052862138,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
-        "within_tolerance": false,
-        "error": 0.7184430200846805,
-        "relative_error": 0.934933366959999,
-        "predicted": 0.05,
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0005569799153194444,
+        "relative_error": 0.0007248161552148219,
+        "predicted": 0.769,
         "ground_truth": 0.7684430200846806,
         "valid_range": true,
         "correct_significance": true
       },
       "test_statistic": {
-        "exact_match": false,
-        "within_tolerance": false,
-        "error": null,
-        "relative_error": null
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.00022138359903767224,
+        "relative_error": 0.000749890120894325,
+        "predicted": -0.295,
+        "ground_truth": -0.29522138359903766
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -2559,12 +2785,21 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": false,
+        "has_test_statistic": true,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 1.0
     },
-    "latency_seconds": 3.4685125999967568
+    "latency_seconds": 3.4685125999967568,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10 (two-tailed test)"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.295,
+    "p_value": 0.769,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   }
 ]

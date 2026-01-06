@@ -55,8 +55,8 @@ TEST_TYPES = [
     # "one_sample_z_test",
     # "two_sample_z_test",
     # "anova",
-    # "chi_square_goodness_of_fit",  # Disabled
-    # "chi_square_independence",      # Disabled
+    # "chi_square_goodness_of_fit",  
+    # "chi_square_independence",      
 ]
 
 # Distribution parameters
@@ -79,6 +79,7 @@ EVALUATION = {
         "assumption_checking": 1,
         "correct_interpretation": 1,
         "statistical_rigor": 1,
+        "strict_hierarchical": True, # enforce dependency chain
     }
 }
 

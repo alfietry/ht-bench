@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T12:38:02.328372",
+    "model": "grok-4-1-fast-reasoning",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2b055c362c0 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T12:38:02.565308",
+    "model": "grok-4-1-fast-reasoning",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2b055c81490 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]

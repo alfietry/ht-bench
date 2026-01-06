@@ -1,8 +1,77 @@
 """
-Prompt templates for hypothesis testing evaluation
+Prompt templates for hypothesis testing evaluation.
+
+Supports both synthetic and real-world data scenarios with appropriate context formatting.
 """
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import numpy as np
+
+
+def create_scenario_description(data: Dict[str, Any]) -> str:
+    """
+    Create a rich contextual description for real-world data scenarios.
+    
+    Args:
+        data: Scenario dictionary with optional 'context' key for real data
+        
+    Returns:
+        Formatted description string with domain-specific context
+    """
+    if "context" not in data or data.get("data_source") != "real":
+        return ""
+    
+    ctx = data["context"]
+    parts = []
+    
+    # Domain and dataset info
+    domain = ctx.get("domain", "").title()
+    dataset = ctx.get("dataset", "")
+    if domain or dataset:
+        parts.append(f"Domain: {domain}")
+        parts.append(f"Dataset: {dataset}")
+    
+    # Main description
+    description = ctx.get("description", "")
+    if description:
+        parts.append(f"\nScenario: {description}")
+    
+    # Test-specific description
+    test_desc = ctx.get("test_description", "")
+    if test_desc:
+        parts.append(f"Research Question: {test_desc}")
+    
+    # Group names for two-sample tests
+    group1_name = ctx.get("group1_name")
+    group2_name = ctx.get("group2_name")
+    if group1_name and group2_name:
+        parts.append(f"\nGroup 1: {group1_name}")
+        parts.append(f"Group 2: {group2_name}")
+    
+    # Event info for paired tests (time-series comparisons)
+    event = ctx.get("event")
+    event_date = ctx.get("event_date")
+    if event:
+        event_str = f"Event: {event}"
+        if event_date:
+            event_str += f" ({event_date})"
+        parts.append(f"\n{event_str}")
+    
+    # Intervention info for healthcare paired tests
+    intervention = ctx.get("intervention")
+    if intervention:
+        parts.append(f"\nIntervention: {intervention}")
+    
+    # Units
+    units = ctx.get("units")
+    if units:
+        parts.append(f"Units: {units}")
+    
+    # Note if present
+    note = ctx.get("note")
+    if note:
+        parts.append(f"\nNote: {note}")
+    
+    return "\n".join(parts) if parts else ""
 
 
 class PromptTemplate:
@@ -10,8 +79,15 @@ class PromptTemplate:
     
     @staticmethod
     def format_data(data: Dict[str, Any]) -> str:
-        """Format data for prompt"""
+        """Format data for prompt, including real-world context if available."""
         formatted = []
+        
+        # Add real-world scenario context if present
+        scenario_desc = create_scenario_description(data)
+        if scenario_desc:
+            formatted.append("=== Real-World Context ===")
+            formatted.append(scenario_desc)
+            formatted.append("\n=== Statistical Data ===")
         
         if "sample1" in data:
             sample1 = data["sample1"]
@@ -63,28 +139,20 @@ class ZeroShotPrompt(PromptTemplate):
 Data:
 {data_str}
 
-Provide response in the format below but on the same line:
-1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols, you can also use =, !=, <, >, <=, >=, etc.)
-2. Test name: (one-sample t-test)
-3. Test statistic value: (5.14)
-4. P-value: (0.003)
-5. Decision: (reject/fail to reject H0)
-6. Brief conclusion: (one sentence)
-7. Degrees of freedom: (number or N/A)
-8. Critical value(s): (number(s) or N/A)
-9. Assumptions checked: (normality, independence, equal variance - yes/no)
+Provide your answer in this exact format:
+H0: <null hypothesis, e.g., mu1 = mu2>
+H1: <alternative hypothesis, e.g., mu1 != mu2>
+Test_type: <test name, e.g., Two-sample t-test>
+t-statistic: <exact numerical value, e.g., 5.14>
+p-value: <exact numerical value, e.g., 0.0008>
+Decision: <Reject H0 or Fail to reject H0>
+Conclusion: <one sentence interpretation>
 
 IMPORTANT: 
 - Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.
-- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
 
-Notation requirements:
-- mu for population mean
-- xb for sample mean
-- sig for population standard deviation
-- s for sample standard deviation
-- alp for significance level
-- Follow this pattern for all Greek letters (use ASCII abbreviations)"""
+Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         
         return prompt
 
@@ -98,10 +166,10 @@ class FewShotPrompt(PromptTemplate):
             "analysis": """
 H0: mu1 = mu2
 H1: mu1 != mu2
-Test: Two-sample t-test
+Test_type: Two-sample t-test
 t-statistic: 5.14
 p-value: 0.0008
-Decision: Reject H0 (alp = 0.05)
+Decision: Reject H0
 Conclusion: The two population means are significantly different.
 """
         }
@@ -130,7 +198,7 @@ Data:
 
 Provide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.
 
-IMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+IMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
 
 Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         
@@ -160,9 +228,18 @@ Steps:
 5. Make decision (alp = 0.05)
 6. State conclusion
 
+Provide your answer in this exact format:
+H0: <null hypothesis, e.g., mu1 = mu2>
+H1: <alternative hypothesis, e.g., mu1 != mu2>
+Test_type: <test name, e.g., Two-sample t-test>
+t-statistic: <exact numerical value, e.g., 5.14>
+p-value: <exact numerical value, e.g., 0.0008>
+Decision: <Reject H0 or Fail to reject H0>
+Conclusion: <one sentence interpretation>
+
 Be brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.
 
-IMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+IMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
 
 Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         
@@ -198,21 +275,20 @@ from scipy import stats
 # ...
 ```
 
-RESULTS:
-H0: <null hypothesis in format: mu = value or mu1 = mu2>
-H1: <alternative hypothesis in format: mu != value or mu1 != mu2>
-Test: <test name, e.g., one-sample t-test>
-Test statistic: <computed numerical value>
-P-value: <computed numerical value>
-Degrees of freedom: <number>
-Decision: <reject H0 / fail to reject H0> (at alp = 0.05)
+Provide your answer in this exact format:
+H0: <null hypothesis, e.g., mu1 = mu2>
+H1: <alternative hypothesis, e.g., mu1 != mu2>
+Test_type: <test name, e.g., Two-sample t-test>
+t-statistic: <exact numerical value, e.g., 5.14>
+p-value: <exact numerical value, e.g., 0.0008>
+Decision: <Reject H0 or Fail to reject H0>
 Conclusion: <one sentence interpretation>
 
 IMPORTANT:
 - State hypotheses using notation: mu for population mean, mu1/mu2 for group means
 - Provide actual computed numerical values, not variable names or formulas
 - The RESULTS section must contain the final numerical answers
-- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
+- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like "> 0.05" or "< 0.0001"
 
 Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level."""
         

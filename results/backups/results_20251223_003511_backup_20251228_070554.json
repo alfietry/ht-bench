@@ -1,0 +1,1254 @@
+[
+  {
+    "timestamp": "2025-12-23T00:34:45.399007",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284)]...\nSample 1 size: 20\nSample 1 mean: 9.9341\nSample 1 std: 1.7404\n\nHypothesized population mean: 10\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample_mean = 9.9341\nsample_std = 1.7404\nn = 20\nhypothesized_mean = 10\n\n# Calculate standard error\nse = sample_std / np.sqrt(n)\n# se = 1.7404 / sqrt(20) = 1.7404 / 4.4721 = 0.3892\n\n# Calculate t-statistic\nt_statistic = (sample_mean - hypothesized_mean) / se\n# t_statistic = (9.9341 - 10) / 0.3892 = -0.0659 / 0.3892 = -0.1693\n\n# Degrees of freedom\ndf = n - 1\n# df = 20 - 1 = 19\n\n# Calculate two-tailed p-value\np_value = 2 * stats.t.cdf(abs(t_statistic), df)\n# For t = 0.1693 with df = 19:\n# CDF value \u2248 0.5663\n# Two-tailed p-value = 2 * (1 - 0.5663) = 2 * 0.4337 = 0.8674\n```\n\nRESULTS:\nH0: mu = 10\nH1: mu != 10\nTest: one-sample t-test\nTest statistic: -0.1693\nP-value: 0.8674\nDegrees of freedom: 19\nDecision: fail to reject H0 (at alp = 0.05)\nConclusion: There is insufficient evidence to conclude that the population mean differs from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.1693,
+      "p_value": 0.8674,
+      "degrees_of_freedom": 19.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is insufficient evidence to conclude that the population mean differs from 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.16924907013448384,
+      "p_value": 0.8673896546591415,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        9.119624303685217,
+        10.74864733305591
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.934135818370564,
+      "sample_std": 1.7403556461348662,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 1.034534085841976e-05,
+        "relative_error": 1.1926982069535027e-05,
+        "predicted": 0.8674,
+        "ground_truth": 0.8673896546591415,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 5.092986551616385e-05,
+        "relative_error": 0.0003009166636820836,
+        "predicted": -0.1693,
+        "ground_truth": -0.16924907013448384
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 8.29051210009493
+  },
+  {
+    "timestamp": "2025-12-23T00:34:49.688498",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(9.552282366239002), np.float64(10.484993582542444), np.float64(10.353146716907421), np.float64(7.831223855533267), np.float64(10.180979563255748), np.float64(10.45645666027781), np.float64(15.034948075067842), np.float64(13.75368922256334), np.float64(8.29351329888236), np.float64(9.425233276901647)]...\nSample 1 size: 50\nSample 1 mean: 9.8800\nSample 1 std: 2.1857\n\nSample 2: [np.float64(10.556883932914305), np.float64(12.632988523346617), np.float64(11.80542680317302), np.float64(16.18633661786119), np.float64(15.146709804950484), np.float64(12.771693105113002), np.float64(10.473885580610466), np.float64(9.775177056033165), np.float64(14.38228590617773), np.float64(12.525498450294277)]...\nSample 2 size: 50\nSample 2 mean: 12.2092\nSample 2 std: 2.0122\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 50\nmean1 = 9.8800\nstd1 = 2.1857\n\nn2 = 50\nmean2 = 12.2092\nstd2 = 2.0122\n\n# Two-sample t-test for independent samples\n# Calculate pooled standard deviation\nsp_squared = ((n1 - 1) * std1**2 + (n2 - 1) * std2**2) / (n1 + n2 - 2)\nsp = np.sqrt(sp_squared)\n\n# sp_squared = (49 * 2.1857**2 + 49 * 2.0122**2) / 98\n# sp_squared = (49 * 4.7773 + 49 * 4.0489) / 98\n# sp_squared = (234.0877 + 198.3961) / 98\n# sp_squared = 432.4838 / 98 = 4.4131\n# sp = 2.1007\n\nsp = 2.1007\n\n# Calculate standard error\nse = sp * np.sqrt(1/n1 + 1/n2)\n# se = 2.1007 * np.sqrt(1/50 + 1/50)\n# se = 2.1007 * np.sqrt(0.04)\n# se = 2.1007 * 0.2\nse = 0.4201\n\n# Calculate t-statistic\nt_stat = (mean1 - mean2) / se\n# t_stat = (9.8800 - 12.2092) / 0.4201\n# t_stat = -2.3292 / 0.4201\nt_stat = -5.5438\n\n# Degrees of freedom\ndf = n1 + n2 - 2\ndf = 98\n\n# Calculate p-value (two-tailed test)\np_value = 2 * stats.t.cdf(t_stat, df)\n# For t = -5.5438 with df = 98\n# stats.t.cdf(-5.5438, 98) \u2248 0.0000001\np_value = 0.0000002\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nTest statistic: -5.5438\nP-value: 0.0000002\nDegrees of freedom: 98\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the population means of the two groups are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.5438,
+      "p_value": 2e-07,
+      "degrees_of_freedom": 98.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the population means of the two groups are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.543960369678761,
+      "p_value": 2.501521387457179e-07,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -3.1630547678076057,
+        -1.4955142427633301
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.329284505285468,
+      "sample1_mean": 9.879964771073467,
+      "sample2_mean": 12.209249276358936,
+      "sample1_std": 2.1857308524130463,
+      "sample2_std": 2.0121636652335138,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 5.015213874571789e-08,
+        "relative_error": 0.20048654789515125,
+        "predicted": 2e-07,
+        "ground_truth": 2.501521387457179e-07,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00016036967876065233,
+        "relative_error": 2.892691651220169e-05,
+        "predicted": -5.5438,
+        "ground_truth": -5.543960369678761
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 12.592661999864504
+  },
+  {
+    "timestamp": "2025-12-23T00:34:49.859375",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(10.828818866551993), np.float64(8.020923759936272), np.float64(5.735907438537382), np.float64(10.535422924687671), np.float64(8.374117809379348), np.float64(9.16928547964063), np.float64(8.775806401880384), np.float64(9.718418227167229), np.float64(12.131960461575288), np.float64(10.31409713489069)]...\nSample 1 size: 20\nSample 1 mean: 9.4590\nSample 1 std: 1.8693\n\nSample 2: [np.float64(10.069766475535257), np.float64(10.549547870928494), np.float64(16.256939464870328), np.float64(10.357226641551227), np.float64(13.67697840747269), np.float64(10.194145643825948), np.float64(13.863146025748488), np.float64(12.769901932211726), np.float64(11.68672420468382), np.float64(11.918474947729132)]...\nSample 2 size: 20\nSample 2 mean: 11.9583\nSample 2 std: 1.8255\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 20\nmean1 = 9.4590\nstd1 = 1.8693\n\nn2 = 20\nmean2 = 11.9583\nstd2 = 1.8255\n\n# Perform two-sample t-test (assuming equal variances)\n# Calculate pooled standard deviation\npooled_var = ((n1 - 1) * std1**2 + (n2 - 1) * std2**2) / (n1 + n2 - 2)\npooled_std = np.sqrt(pooled_var)\n\n# Calculate standard error\nse = pooled_std * np.sqrt(1/n1 + 1/n2)\n\n# Calculate t-statistic\nt_stat = (mean1 - mean2) / se\n\n# Degrees of freedom\ndf = n1 + n2 - 2\n\n# Calculate p-value (two-tailed)\np_value = 2 * stats.t.cdf(t_stat, df)  # Since t_stat is negative\n\n# Mental calculation:\n# pooled_var = (19 * 1.8693^2 + 19 * 1.8255^2) / 38\n# pooled_var = (19 * 3.4943 + 19 * 3.3324) / 38\n# pooled_var = (66.3917 + 63.3156) / 38\n# pooled_var = 129.7073 / 38 = 3.4133\n# pooled_std = sqrt(3.4133) = 1.8476\n\n# se = 1.8476 * sqrt(1/20 + 1/20)\n# se = 1.8476 * sqrt(0.1)\n# se = 1.8476 * 0.3162\n# se = 0.5842\n\n# t_stat = (9.4590 - 11.9583) / 0.5842\n# t_stat = -2.4993 / 0.5842\n# t_stat = -4.278\n\n# df = 38\n\n# For t = -4.278 with df = 38:\n# p_value = 2 * P(T < -4.278)\n# p_value \u2248 2 * 0.00006\n# p_value \u2248 0.00012\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nTest statistic: -4.278\nP-value: 0.00012\nDegrees of freedom: 38\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the means of the two groups are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -4.278,
+      "p_value": 0.00012,
+      "degrees_of_freedom": 38.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the means of the two groups are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -4.277927614191337,
+      "p_value": 0.00012276433589064706,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -3.682017791646482,
+        -1.3165862598174536
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.499302025731968,
+      "sample1_mean": 9.459002183878258,
+      "sample2_mean": 11.958304209610226,
+      "sample1_std": 1.8692572699700258,
+      "sample2_std": 1.8254908575398352,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 2.764335890647059e-06,
+        "relative_error": 0.022517418194722322,
+        "predicted": 0.00012,
+        "ground_truth": 0.00012276433589064706,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 7.238580866264499e-05,
+        "relative_error": 1.6920765190723824e-05,
+        "predicted": -4.278,
+        "ground_truth": -4.277927614191337
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 12.756012700032443
+  },
+  {
+    "timestamp": "2025-12-23T00:34:53.163397",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(11.330770217945572), np.float64(9.803029030981152), np.float64(9.153403375911692), np.float64(9.840563578187203), np.float64(6.62533113208394), np.float64(7.105775055153826), np.float64(7.354600775291195), np.float64(8.005506344797036), np.float64(10.799548453446873), np.float64(8.189041889279878)]...\nSample 1 size: 50\nSample 1 mean: 9.7896\nSample 1 std: 2.0227\n\nHypothesized population mean: 10\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample_mean = 9.7896\nsample_std = 2.0227\nsample_size = 50\nhypothesized_mean = 10\n\n# Calculate standard error\nstandard_error = sample_std / np.sqrt(sample_size)\n# SE = 2.0227 / sqrt(50) = 2.0227 / 7.0711 = 0.2861\n\n# Calculate t-statistic\nt_statistic = (sample_mean - hypothesized_mean) / standard_error\n# t = (9.7896 - 10) / 0.2861 = -0.2104 / 0.2861 = -0.7354\n\n# Degrees of freedom\ndf = sample_size - 1  # df = 49\n\n# Calculate two-tailed p-value\np_value = 2 * stats.t.cdf(t_statistic, df)\n# Since t is negative, we use cdf directly\n# t.cdf(-0.7354, 49) \u2248 0.2327\n# Two-tailed p-value = 2 * 0.2327 = 0.4654\n```\n\nRESULTS:\nH0: mu = 10\nH1: mu != 10\nTest: one-sample t-test\nTest statistic: -0.7354\nP-value: 0.4654\nDegrees of freedom: 49\nDecision: fail to reject H0 (at alp = 0.05)\nConclusion: There is insufficient evidence to conclude that the population mean differs from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.7354,
+      "p_value": 0.4654,
+      "degrees_of_freedom": 49.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is insufficient evidence to conclude that the population mean differs from 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.7355203330545562,
+      "p_value": 0.46552888555689786,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.214742573567616,
+        10.364454005162472
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.789598289365044,
+      "sample_std": 2.022737777287144,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00012888555689788417,
+        "relative_error": 0.0002768583451995731,
+        "predicted": 0.4654,
+        "ground_truth": 0.46552888555689786,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00012033305455616539,
+        "relative_error": 0.0001636026213666072,
+        "predicted": -0.7354,
+        "ground_truth": -0.7355203330545562
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 7.754369499860331
+  },
+  {
+    "timestamp": "2025-12-23T00:34:55.414375",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.184253316868219), np.float64(8.325203552345076), np.float64(8.81119929560253), np.float64(7.038926974869968), np.float64(8.223732292532695), np.float64(9.283966623851141), np.float64(11.607170038757204), np.float64(13.441539662331968), np.float64(7.23563696924592), np.float64(10.785654936519839)]...\nSample 1 size: 20\nSample 1 mean: 9.3434\nSample 1 std: 1.8142\n\nSample 2: [np.float64(11.995008975931814), np.float64(10.653865554627558), np.float64(11.173121149531372), np.float64(10.359588630398136), np.float64(9.880946141668316), np.float64(9.80710880700541), np.float64(14.674392455329187), np.float64(15.110051490234714), np.float64(10.350229413823296), np.float64(13.16903204970231)]...\nSample 2 size: 20\nSample 2 mean: 11.7059\nSample 2 std: 1.7914\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 20\nmean1 = 9.3434\nstd1 = 1.8142\n\nn2 = 20\nmean2 = 11.7059\nstd2 = 1.7914\n\n# Since these are measurements from the same subjects under two conditions,\n# we should use a paired t-test. However, we don't have the paired differences,\n# so we'll need to estimate using the given summary statistics.\n\n# For paired t-test, we need the mean difference and std of differences\n# Since we don't have individual pairs, we'll use the approximation:\nmean_diff = mean2 - mean1  # 11.7059 - 9.3434 = 2.3625\n\n# For paired data, if we don't have the actual pairs, we can't compute \n# the exact std of differences. But given the context states \"same subjects\",\n# we should treat this as paired. We'll estimate std_diff.\n# A conservative estimate when correlation is unknown:\n# Assuming moderate positive correlation (r \u2248 0.5) for paired data\nr = 0.5  # reasonable assumption for paired measurements\nvar_diff = std1**2 + std2**2 - 2*r*std1*std2\n# var_diff = 1.8142**2 + 1.7914**2 - 2*0.5*1.8142*1.7914\n# var_diff = 3.2913 + 3.2091 - 3.2497\n# var_diff = 3.2507\nstd_diff = np.sqrt(3.2507)  # = 1.8030\n\n# Paired t-test calculation\nse_diff = std_diff / np.sqrt(n1)  # 1.8030 / sqrt(20) = 1.8030 / 4.4721 = 0.4032\nt_stat = mean_diff / se_diff  # 2.3625 / 0.4032 = 5.859\ndf = n1 - 1  # 20 - 1 = 19\n\n# Two-tailed p-value\np_value = 2 * (1 - stats.t.cdf(abs(t_stat), df))\n# stats.t.cdf(5.859, 19) \u2248 0.99999\n# p_value = 2 * (1 - 0.99999) = 2 * 0.00001 = 0.00002\n\n# Actually, let me recalculate more precisely:\n# For t = 5.859 with df = 19:\n# Using t-distribution table or calculation:\n# P(T > 5.859) \u2248 0.000010\n# Two-tailed: p_value = 2 * 0.000010 = 0.000020\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: paired t-test\nTest statistic: 5.859\nP-value: 0.000020\nDegrees of freedom: 19\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the measurements differ between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": 5.859,
+      "p_value": 2e-05,
+      "degrees_of_freedom": 19.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the measurements differ between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -12.051324040049932,
+      "p_value": 2.4106259176061046e-10,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -2.77275351628784,
+        -1.9521515673285448
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.3624525418081923,
+      "std_difference": 0.8766844969971274,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 1.9999758937408242e-05,
+        "relative_error": 82965.00419803499,
+        "predicted": 2e-05,
+        "ground_truth": 2.4106259176061046e-10,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 17.910324040049932,
+        "relative_error": 1.4861706465222326,
+        "predicted": 5.859,
+        "ground_truth": -12.051324040049932
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    },
+    "latency_seconds": 18.325894400011748
+  },
+  {
+    "timestamp": "2025-12-23T00:34:56.510321",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(12.727724459627819), np.float64(11.790369963943371), np.float64(8.561039533430419), np.float64(6.994993087918206), np.float64(4.070942324316698), np.float64(8.91300898413473), np.float64(14.840830024494805), np.float64(10.869768542927295), np.float64(8.880855427901022), np.float64(10.930160419000613)]...\nSample 1 size: 50\nSample 1 mean: 9.9061\nSample 1 std: 2.1565\n\nSample 2: [np.float64(15.11276239728392), np.float64(14.346903406694635), np.float64(10.857457534239078), np.float64(11.030066390649274), np.float64(5.983848153264187), np.float64(10.605925765800155), np.float64(16.08730244413743), np.float64(11.837505872349459), np.float64(9.636383640299947), np.float64(12.041363105769694)]...\nSample 2 size: 50\nSample 2 mean: 11.7703\nSample 2 std: 2.4551\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 50\nmean1 = 9.9061\nstd1 = 2.1565\n\nn2 = 50\nmean2 = 11.7703\nstd2 = 2.4551\n\n# Since we're comparing measurements from the same subjects under two conditions,\n# this is a paired t-test scenario. However, we don't have the paired differences,\n# so we'll need to use the paired t-test formula with summary statistics.\n\n# For paired t-test, we need the mean difference and std of differences\n# Since we don't have individual paired data, we'll use the formula for \n# difference of means assuming paired data\nmean_diff = mean2 - mean1  # 11.7703 - 9.9061 = 1.8642\n\n# For paired data, we need the standard deviation of the differences\n# Without the actual paired data, we'll approximate using the formula\n# for dependent samples. However, since we're told these are the same subjects,\n# we should use a paired t-test approach.\n\n# Actually, given that we have same subjects but only summary stats,\n# we'll perform a paired t-test using the difference statistics\n# The standard error for paired differences can be estimated\n\n# Since we don't have correlation, we'll use a conservative approach\n# and perform a two-sample t-test for dependent samples\n\n# Calculate pooled standard deviation\nsp = np.sqrt(((n1-1)*std1**2 + (n2-1)*std2**2)/(n1+n2-2))\n# sp = sqrt((49*2.1565^2 + 49*2.4551^2)/(98))\n# sp = sqrt((49*4.6505 + 49*6.0275)/98)\n# sp = sqrt((227.8745 + 295.3475)/98)\n# sp = sqrt(523.222/98)\n# sp = sqrt(5.3390)\n# sp = 2.3106\n\n# Standard error for independent samples\nse = sp * np.sqrt(1/n1 + 1/n2)\n# se = 2.3106 * sqrt(1/50 + 1/50)\n# se = 2.3106 * sqrt(0.04)\n# se = 2.3106 * 0.2\n# se = 0.4621\n\n# t-statistic\nt_stat = mean_diff / se\n# t_stat = 1.8642 / 0.4621\n# t_stat = 4.0351\n\n# Degrees of freedom\ndf = n1 + n2 - 2  # 50 + 50 - 2 = 98\n\n# P-value (two-tailed)\np_value = 2 * (1 - stats.t.cdf(abs(t_stat), df))\n# For t = 4.0351 with df = 98\n# Looking up t-distribution: P(T > 4.0351) \u2248 0.00005\n# Two-tailed p-value = 2 * 0.00005 = 0.00010\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: two-sample t-test\nTest statistic: 4.0351\nP-value: 0.00010\nDegrees of freedom: 98\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the measurements differ between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 4.0351,
+      "p_value": 0.0001,
+      "degrees_of_freedom": 98.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the measurements differ between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -12.97959155260416,
+      "p_value": 1.782997102086686e-17,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.1528502952487307,
+        -1.575591438466716
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.8642208668577234,
+      "std_difference": 1.0155968400408428,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 9.999999999998217e-05,
+        "relative_error": 5608534073496.231,
+        "predicted": 0.0001,
+        "ground_truth": 1.782997102086686e-17,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 17.014691552604162,
+        "relative_error": 1.3108803527172948,
+        "predicted": 4.0351,
+        "ground_truth": -12.97959155260416
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    },
+    "latency_seconds": 19.426764499861747
+  },
+  {
+    "timestamp": "2025-12-23T00:35:04.151825",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(9.63027527290948), np.float64(8.638140911192117), np.float64(12.445082677348061), np.float64(9.690941035862396), np.float64(9.143344355673786), np.float64(9.295732899023541), np.float64(11.064618371106697), np.float64(10.730888128728157), np.float64(10.825465223191976), np.float64(10.861642006015765)]...\nSample 1 size: 20\nSample 1 mean: 10.2189\nSample 1 std: 1.5901\n\nHypothesized population mean: 10\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample_mean = 10.2189\nsample_std = 1.5901\nsample_size = 20\nhypothesized_mean = 10\n\n# Calculate standard error\nstandard_error = sample_std / np.sqrt(sample_size)\n# SE = 1.5901 / sqrt(20) = 1.5901 / 4.4721 = 0.3556\n\n# Calculate t-statistic\nt_statistic = (sample_mean - hypothesized_mean) / standard_error\n# t = (10.2189 - 10) / 0.3556 = 0.2189 / 0.3556 = 0.6156\n\n# Degrees of freedom\ndf = sample_size - 1\n# df = 20 - 1 = 19\n\n# Calculate two-tailed p-value\np_value = 2 * (1 - stats.t.cdf(abs(t_statistic), df))\n# For t = 0.6156 with df = 19:\n# stats.t.cdf(0.6156, 19) \u2248 0.7273\n# p_value = 2 * (1 - 0.7273) = 2 * 0.2727 = 0.5454\n```\n\nRESULTS:\nH0: mu = 10\nH1: mu != 10\nTest: one-sample t-test\nTest statistic: 0.6156\nP-value: 0.5454\nDegrees of freedom: 19\nDecision: fail to reject H0 (at alp = 0.05)\nConclusion: There is insufficient evidence to conclude that the population mean differs from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.6156,
+      "p_value": 0.5454,
+      "degrees_of_freedom": 19.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is insufficient evidence to conclude that the population mean differs from 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.6157378009026948,
+      "p_value": 0.5453737171958681,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        9.474754190823008,
+        10.963094193277966
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.218924192050487,
+      "sample_std": 1.5900578935593672,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 2.6282804131860793e-05,
+        "relative_error": 4.819228228855308e-05,
+        "predicted": 0.5454,
+        "ground_truth": 0.5453737171958681,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00013780090269477352,
+        "relative_error": 0.00022379802327021699,
+        "predicted": 0.6156,
+        "ground_truth": 0.6157378009026948
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 7.63823870010674
+  },
+  {
+    "timestamp": "2025-12-23T00:35:05.173418",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.627816422915107), np.float64(8.333262388101188), np.float64(6.820865013382062), np.float64(5.8540331280174165), np.float64(7.765231774020784), np.float64(9.082649430121334), np.float64(9.413616826702476), np.float64(13.874462324859033), np.float64(12.211986739814597), np.float64(8.075817767316746)]...\nSample 1 size: 20\nSample 1 mean: 9.8677\nSample 1 std: 2.2969\n\nSample 2: [np.float64(12.850896165540382), np.float64(11.76647689470736), np.float64(8.91238519155527), np.float64(8.434810223347213), np.float64(9.708448579628094), np.float64(10.91224184895713), np.float64(10.634134429977056), np.float64(16.304763683816585), np.float64(13.360449550628829), np.float64(10.741403003630175)]...\nSample 2 size: 20\nSample 2 mean: 11.7757\nSample 2 std: 2.0844\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 20\nmean1 = 9.8677\nstd1 = 2.2969\n\nn2 = 20\nmean2 = 11.7757\nstd2 = 2.0844\n\n# Since we're comparing measurements from the same subjects under two conditions,\n# this is a paired t-test scenario. We need the differences.\n# However, we only have summary statistics, not the paired differences.\n# Given the context states \"same subjects under two conditions\", \n# we'll treat this as a paired t-test using the difference in means.\n\n# For paired t-test, we need the mean difference and std of differences\n# Since we don't have the actual paired data, we'll approximate using\n# the independent samples t-test (which is conservative)\n\n# Perform independent samples t-test (two-sample t-test)\n# Calculate pooled standard deviation\nsp = np.sqrt(((n1-1)*std1**2 + (n2-1)*std2**2) / (n1+n2-2))\n# sp = sqrt((19*2.2969^2 + 19*2.0844^2) / 38)\n# sp = sqrt((19*5.2757 + 19*4.3447) / 38)\n# sp = sqrt((100.238 + 82.549) / 38)\n# sp = sqrt(182.787 / 38)\n# sp = sqrt(4.8102)\n# sp = 2.1932\n\n# Calculate standard error\nse = sp * np.sqrt(1/n1 + 1/n2)\n# se = 2.1932 * sqrt(1/20 + 1/20)\n# se = 2.1932 * sqrt(0.1)\n# se = 2.1932 * 0.3162\n# se = 0.6935\n\n# Calculate t-statistic\nt_stat = (mean1 - mean2) / se\n# t_stat = (9.8677 - 11.7757) / 0.6935\n# t_stat = -1.908 / 0.6935\n# t_stat = -2.7517\n\n# Degrees of freedom\ndf = n1 + n2 - 2\n# df = 20 + 20 - 2 = 38\n\n# Calculate p-value (two-tailed)\np_value = 2 * stats.t.cdf(t_stat, df)\n# For t = -2.7517 with df = 38\n# Using t-distribution table/calculation:\n# P(T < -2.7517) \u2248 0.00449\n# Two-tailed p-value = 2 * 0.00449 = 0.00898\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nTest statistic: -2.7517\nP-value: 0.00898\nDegrees of freedom: 38\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the measurements differ between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -2.7517,
+      "p_value": 0.00898,
+      "degrees_of_freedom": 38.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the measurements differ between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -9.153835801922789,
+      "p_value": 2.143710184946979e-08,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -2.344251244129664,
+        -1.471727836491062
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.907989540310363,
+      "std_difference": 0.9321544333570806,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.008979978562898151,
+        "relative_error": 418898.9083484835,
+        "predicted": 0.00898,
+        "ground_truth": 2.143710184946979e-08,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 6.402135801922789,
+        "relative_error": 0.6993937776967775,
+        "predicted": -2.7517,
+        "ground_truth": -9.153835801922789
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    },
+    "latency_seconds": 15.309891200158745
+  },
+  {
+    "timestamp": "2025-12-23T00:35:06.411970",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(11.030820805801621), np.float64(8.844922225288698), np.float64(12.548894433882477), np.float64(8.74482492712616), np.float64(8.726769433795528), np.float64(11.082263221609063), np.float64(11.525852964673874), np.float64(10.896198727872408), np.float64(6.6288053652303836), np.float64(11.076068879856502)]...\nSample 1 size: 50\nSample 1 mean: 9.8315\nSample 1 std: 2.0481\n\nSample 2: [np.float64(14.878645818757667), np.float64(10.67074949148374), np.float64(16.216782045002), np.float64(9.641084229344154), np.float64(11.31402860059832), np.float64(13.401663485400292), np.float64(12.65680571680909), np.float64(13.073594842509348), np.float64(9.841324202061983), np.float64(12.752277175569901)]...\nSample 2 size: 50\nSample 2 mean: 11.6922\nSample 2 std: 2.3815\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 50\nmean1 = 9.8315\nstd1 = 2.0481\n\nn2 = 50\nmean2 = 11.6922\nstd2 = 2.3815\n\n# Since these are measurements from the same subjects under two conditions,\n# this is a paired t-test scenario. However, we don't have the paired differences,\n# so we'll treat this as a two-sample t-test (independent samples)\n\n# Calculate the test statistic for two-sample t-test\n# Standard error of the difference\nse_diff = np.sqrt((std1**2 / n1) + (std2**2 / n2))\n# se_diff = sqrt((2.0481^2 / 50) + (2.3815^2 / 50))\n# se_diff = sqrt((4.1947 / 50) + (5.6715 / 50))\n# se_diff = sqrt(0.08389 + 0.11343)\n# se_diff = sqrt(0.19732)\n# se_diff = 0.4442\n\n# Test statistic\nt_stat = (mean1 - mean2) / se_diff\n# t_stat = (9.8315 - 11.6922) / 0.4442\n# t_stat = -1.8607 / 0.4442\n# t_stat = -4.189\n\n# Degrees of freedom using Welch's approximation\n# df = ((s1^2/n1 + s2^2/n2)^2) / ((s1^2/n1)^2/(n1-1) + (s2^2/n2)^2/(n2-1))\nnumerator = (std1**2/n1 + std2**2/n2)**2\n# numerator = (0.08389 + 0.11343)^2 = 0.19732^2 = 0.03894\n\ndenominator = ((std1**2/n1)**2/(n1-1)) + ((std2**2/n2)**2/(n2-1))\n# denominator = (0.08389^2/49) + (0.11343^2/49)\n# denominator = 0.007037/49 + 0.012866/49\n# denominator = 0.0001436 + 0.0002626\n# denominator = 0.0004062\n\ndf = numerator / denominator\n# df = 0.03894 / 0.0004062 = 95.86\n# Round to nearest integer: df = 96\n\n# Calculate p-value (two-tailed test)\np_value = 2 * stats.t.cdf(t_stat, df)\n# Since t_stat is negative (-4.189), we use the CDF directly\n# For t = -4.189 with df = 96:\n# stats.t.cdf(-4.189, 96) \u2248 0.00003\n# p_value = 2 * 0.00003 = 0.00006\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nTest statistic: -4.189\nP-value: 0.00006\nDegrees of freedom: 96\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the measurements differ between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -4.189,
+      "p_value": 6e-05,
+      "degrees_of_freedom": 96.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the measurements differ between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -12.234265464208246,
+      "p_value": 1.6540581440983915e-16,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.1663746562732977,
+        -1.5550938992254604
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.860734277749379,
+      "std_difference": 1.0754530622472382,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 5.999999999983459e-05,
+        "relative_error": 362744201066.40155,
+        "predicted": 6e-05,
+        "ground_truth": 1.6540581440983915e-16,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 8.045265464208246,
+        "relative_error": 0.6576010213073225,
+        "predicted": -4.189,
+        "ground_truth": -12.234265464208246
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    },
+    "latency_seconds": 16.717045200057328
+  },
+  {
+    "timestamp": "2025-12-23T00:35:08.160094",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.61200348341365), np.float64(10.438765002727713), np.float64(9.178145538332526), np.float64(12.212577420119779), np.float64(10.857512876923227), np.float64(13.071511983991984), np.float64(10.366468874443813), np.float64(7.551061936559), np.float64(7.2636816015086705), np.float64(13.3018558644625)]...\nSample 1 size: 20\nSample 1 mean: 10.4128\nSample 1 std: 1.9934\n\nSample 2: [np.float64(12.675149097597867), np.float64(14.814963722627434), np.float64(12.181169813803491), np.float64(13.287877586553716), np.float64(7.899655797937955), np.float64(11.902563196139765), np.float64(10.313539459414258), np.float64(9.562373879152744), np.float64(10.243695266142499), np.float64(11.331753118598376)]...\nSample 2 size: 20\nSample 2 mean: 11.7942\nSample 2 std: 1.8424\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 20\nmean1 = 10.4128\nstd1 = 1.9934\n\nn2 = 20\nmean2 = 11.7942\nstd2 = 1.8424\n\n# Two-sample t-test for independent samples\n# Calculate pooled standard deviation\nsp_squared = ((n1 - 1) * std1**2 + (n2 - 1) * std2**2) / (n1 + n2 - 2)\nsp = np.sqrt(sp_squared)\n\n# sp_squared = (19 * 1.9934**2 + 19 * 1.8424**2) / 38\n# sp_squared = (19 * 3.9736 + 19 * 3.3944) / 38\n# sp_squared = (75.4984 + 64.4936) / 38\n# sp_squared = 139.992 / 38 = 3.6840\n# sp = 1.9194\n\nsp = 1.9194\n\n# Calculate standard error\nse = sp * np.sqrt(1/n1 + 1/n2)\n# se = 1.9194 * np.sqrt(1/20 + 1/20)\n# se = 1.9194 * np.sqrt(0.1)\n# se = 1.9194 * 0.3162\n# se = 0.6069\n\nse = 0.6069\n\n# Calculate t-statistic\nt_stat = (mean1 - mean2) / se\n# t_stat = (10.4128 - 11.7942) / 0.6069\n# t_stat = -1.3814 / 0.6069\n# t_stat = -2.276\n\nt_stat = -2.276\n\n# Degrees of freedom\ndf = n1 + n2 - 2\n# df = 20 + 20 - 2 = 38\n\ndf = 38\n\n# Calculate p-value (two-tailed test)\np_value = 2 * stats.t.cdf(t_stat, df)\n# For t = -2.276 with df = 38\n# Using t-distribution table or calculation:\n# P(T < -2.276) \u2248 0.0143\n# Two-tailed p-value = 2 * 0.0143 = 0.0286\n\np_value = 0.0286\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nTest statistic: -2.276\nP-value: 0.0286\nDegrees of freedom: 38\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the population means of the two groups are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -2.276,
+      "p_value": 0.0286,
+      "degrees_of_freedom": 38.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the population means of the two groups are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -2.276032263961242,
+      "p_value": 0.028566346913989005,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -2.6102448177273363,
+        -0.15273765465189215
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.3814912361896141,
+      "sample1_mean": 10.412757997543391,
+      "sample2_mean": 11.794249233733005,
+      "sample1_std": 1.993445645841543,
+      "sample2_std": 1.8424197939621236,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 3.365308601099501e-05,
+        "relative_error": 0.0011780675391334346,
+        "predicted": 0.0286,
+        "ground_truth": 0.028566346913989005,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 3.22639612422293e-05,
+        "relative_error": 1.4175528947061848e-05,
+        "predicted": -2.276,
+        "ground_truth": -2.276032263961242
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 12.744208400137722
+  },
+  {
+    "timestamp": "2025-12-23T00:35:08.495345",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(11.564700684835323), np.float64(9.61869788498968), np.float64(12.342494186934639), np.float64(11.50173797746252), np.float64(13.641292315293603), np.float64(11.46154938227729), np.float64(6.855919488693519), np.float64(9.866093654203599), np.float64(7.655985614810368), np.float64(8.963440315267452)]...\nSample 1 size: 50\nSample 1 mean: 10.1441\nSample 1 std: 1.9465\n\nSample 2: [np.float64(12.022852111121319), np.float64(14.657921180873979), np.float64(13.713587965133053), np.float64(13.683640133780123), np.float64(13.108233002648186), np.float64(16.65530620069217), np.float64(11.58967662226791), np.float64(7.992955415866972), np.float64(15.208508723034281), np.float64(11.084601138086349)]...\nSample 2 size: 50\nSample 2 mean: 11.9293\nSample 2 std: 2.1413\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nn1 = 50\nmean1 = 10.1441\nstd1 = 1.9465\n\nn2 = 50\nmean2 = 11.9293\nstd2 = 2.1413\n\n# Perform two-sample t-test (independent samples, unequal variances assumed)\n# Calculate test statistic manually\nse_diff = np.sqrt((std1**2 / n1) + (std2**2 / n2))\nt_stat = (mean1 - mean2) / se_diff\n\n# Calculate degrees of freedom using Welch's formula\nnumerator = ((std1**2 / n1) + (std2**2 / n2))**2\ndenominator = ((std1**2 / n1)**2 / (n1 - 1)) + ((std2**2 / n2)**2 / (n2 - 1))\ndf = numerator / denominator\n\n# Calculate p-value (two-tailed test)\np_value = 2 * stats.t.cdf(t_stat, df)  # Since t_stat is negative, this gives correct p-value\n\n# Mental calculation:\n# se_diff = sqrt((1.9465^2 / 50) + (2.1413^2 / 50))\n# se_diff = sqrt((3.7888 / 50) + (4.5852 / 50))\n# se_diff = sqrt(0.0758 + 0.0917)\n# se_diff = sqrt(0.1675)\n# se_diff = 0.4093\n\n# t_stat = (10.1441 - 11.9293) / 0.4093\n# t_stat = -1.7852 / 0.4093\n# t_stat = -4.361\n\n# df calculation:\n# numerator = (0.1675)^2 = 0.0281\n# denominator = (0.0758/50)^2 * 50 + (0.0917/50)^2 * 50\n# denominator = (0.001516)^2 * 50 + (0.001834)^2 * 50\n# denominator = 0.0001149 + 0.0001681\n# denominator = 0.000283\n# df = 0.0281 / 0.000283 = 99.3 \u2248 97.3\n\n# p_value = 2 * t.cdf(-4.361, 97.3)\n# p_value \u2248 0.00003\n```\n\nRESULTS:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test (Welch's t-test)\nTest statistic: -4.361\nP-value: 0.00003\nDegrees of freedom: 97\nDecision: reject H0 (at alp = 0.05)\nConclusion: There is significant evidence that the population means of the two groups are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test_(welch's_t_test)",
+      "assumptions": null,
+      "test_statistic": -4.361,
+      "p_value": 3e-05,
+      "degrees_of_freedom": 97.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is significant evidence that the population means of the two groups are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -4.362262349843296,
+      "p_value": 3.185811324592621e-05,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -2.5973423763573757,
+        -0.9730912823792675
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.7852168293683217,
+      "sample1_mean": 10.144072176724293,
+      "sample2_mean": 11.929289006092615,
+      "sample1_std": 1.9465073356937863,
+      "sample2_std": 2.1412662348987546,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 1.8581132459262116e-06,
+        "relative_error": 0.05832464815422846,
+        "predicted": 3e-05,
+        "ground_truth": 3.185811324592621e-05,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0012623498432962066,
+        "relative_error": 0.0002893796250795309,
+        "predicted": -4.361,
+        "ground_truth": -4.362262349843296
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 15.3261401001364
+  },
+  {
+    "timestamp": "2025-12-23T00:35:11.691673",
+    "model": "claude-opus-4-1-20250805",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(11.486508342406884), np.float64(11.08630853661039), np.float64(8.668980585422611), np.float64(10.46432264613344), np.float64(10.233371618281456), np.float64(10.437377193458026), np.float64(11.74285755589638), np.float64(10.447191097549364), np.float64(11.357827126143789), np.float64(10.135158138977783)]...\nSample 1 size: 50\nSample 1 mean: 9.9735\nSample 1 std: 1.3998\n\nHypothesized population mean: 10\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis in format: mu = value or mu1 = mu2>\nH1: <alternative hypothesis in format: mu != value or mu1 != mu2>\nTest: <test name, e.g., one-sample t-test>\nTest statistic: <computed numerical value>\nP-value: <computed numerical value>\nDegrees of freedom: <number>\nDecision: <reject H0 / fail to reject H0> (at alp = 0.05)\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample_mean = 9.9735\nsample_std = 1.3998\nsample_size = 50\nhypothesized_mean = 10\n\n# Calculate standard error\nstandard_error = sample_std / np.sqrt(sample_size)\n# SE = 1.3998 / sqrt(50) = 1.3998 / 7.0711 = 0.1979\n\n# Calculate t-statistic\nt_statistic = (sample_mean - hypothesized_mean) / standard_error\n# t = (9.9735 - 10) / 0.1979 = -0.0265 / 0.1979 = -0.1339\n\n# Degrees of freedom\ndf = sample_size - 1  # df = 49\n\n# Calculate two-tailed p-value\np_value = 2 * stats.t.cdf(abs(t_statistic), df)\n# Since t is negative, we use abs(t) = 0.1339\n# stats.t.cdf(0.1339, 49) \u2248 0.5530\n# p_value = 2 * (1 - 0.5530) = 2 * 0.4470 = 0.8940\n```\n\nRESULTS:\nH0: mu = 10\nH1: mu != 10\nTest: one-sample t-test\nTest statistic: -0.1339\nP-value: 0.8940\nDegrees of freedom: 49\nDecision: fail to reject H0 (at alp = 0.05)\nConclusion: There is insufficient evidence to conclude that the population mean differs from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.1339,
+      "p_value": 0.894,
+      "degrees_of_freedom": 49.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is insufficient evidence to conclude that the population mean differs from 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.13363195483511048,
+      "p_value": 0.8942409488584682,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.575729655605107,
+        10.371362650064052
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.97354615283458,
+      "sample_std": 1.3997920439181257,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0002409488584681485,
+        "relative_error": 0.00026944511853961583,
+        "predicted": 0.894,
+        "ground_truth": 0.8942409488584682,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00026804516488951324,
+        "relative_error": 0.002005846320367432,
+        "predicted": -0.1339,
+        "ground_truth": -0.13363195483511048
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 7.5367260000202805
+  }
+]

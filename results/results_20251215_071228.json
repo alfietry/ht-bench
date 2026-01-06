@@ -46,8 +46,8 @@
       "mean_difference": -2.0348819180465423,
       "std_difference": 1.0478982887027255,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -97,9 +97,17 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.037619000067934
+    "latency_seconds": 4.037619000067934,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -8.15,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:09:10.671909",
@@ -148,8 +156,8 @@
       "mean_difference": -1.8885045540318814,
       "std_difference": 1.1342186405665367,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -201,9 +209,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 6.632899000076577
+    "latency_seconds": 6.632899000076577,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a statistically significant difference in measurements under the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:09:12.033703",
@@ -219,11 +236,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. Hypotheses:\n   H0: mu = 10\n   H1: mu \u2260 10\n\n3. Calculate test statistic (t):\n   n = 20, xb = 10.2189, s = 1.5901\n   t = (xb - mu) / (s / sqrt(n))\n   t = (10.2189 - 10) / (1.5901 / sqrt(20)) = 0.8217\n\n4. Find p-value:\n   Using t-distribution with df = n - 1 = 19:\n   p-value = 2 * (1 - t.cdf(0.8217, 19)) \u2248 0.43 (using a calculator or statistical software)\n\n5. Make decision:\n   p-value (0.43) > alp (0.05), fail to reject H0.\n\n6. Conclusion:\n   There is not enough evidence to conclude that the sample mean differs from the hypothesized population mean of 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -253,8 +270,8 @@
       "sample_mean": 10.218924192050487,
       "sample_std": 1.5900578935593672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -302,9 +319,16 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 6.35056020016782
+    "latency_seconds": 6.35056020016782,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:14.301763",
@@ -353,14 +377,14 @@
       "mean_difference": -1.8278048994634444,
       "std_difference": 0.9318682101496196,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 0.5,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 9.999999999998632e-06,
         "relative_error": 7308936202832.0625,
@@ -406,9 +430,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.625
+      "overall_accuracy": 0.8125
     },
-    "latency_seconds": 3.6276942999102175
+    "latency_seconds": 3.6276942999102175,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.93,
+    "p_value": 1e-05,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference in measurements between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:09:14.930808",
@@ -424,11 +457,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. H0: mu = 10  \n   H1: mu \u2260 10\n\n3. Test statistic (t):\n   t = (xb - mu) / (s / sqrt(n))  \n   t = (10.2387 - 10) / (1.4313 / sqrt(20))  \n   t \u2248 1.150\n\n4. Degrees of freedom: df = n - 1 = 20 - 1 = 19  \n   p-value (two-tailed): From t-distribution table, p-value \u2248 0.26\n\n5. Decision: p-value (0.26) > alp (0.05), fail to reject H0.\n\n6. Conclusion: There is not enough evidence to conclude that the sample mean differs from the population mean of 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\np-value: 0.2600\nDecision: Fail To Reject H0\nConclusion: Conclusion: There is not enough evidence to conclude that the sample mean differs from the population mean of 10.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -455,8 +488,8 @@
       "sample_mean": 10.238652780512542,
       "sample_std": 1.4312736897336569,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -506,9 +539,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 5.160966299939901
+    "latency_seconds": 5.160966299939901,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.26,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion: There is not enough evidence to conclude that the sample mean differs from the population mean of 10."
   },
   {
     "timestamp": "2025-12-15T07:09:17.986533",
@@ -524,7 +565,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. H0: mu = 10  \n   H1: mu != 10\n\n3. Calculate test statistic:  \n   t = (xb - mu) / (s / sqrt(n))  \n   t = (9.8141 - 10) / (1.4925 / sqrt(20))  \n   t = -0.81048\n\n4. Find p-value:  \n   Using t-distribution with df = n - 1 = 19, p-value \u2248 0.423 (two-tailed)\n\n5. Make decision:  \n   p-value (0.423) > alpha (0.05) \u2192 Fail to reject H0.\n\n6. Conclusion:  \n   There is not enough evidence to suggest the sample mean differs from the hypothesized population mean of 10.",
+    "raw_response": "H0: mu = 10\nH1: mu != 10\nTest_type: One-sample t-test\nt-statistic: -0.8105\np-value: 0.4230\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
@@ -555,8 +596,8 @@
       "sample_mean": 9.814056601115439,
       "sample_std": 1.4924991900854698,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -573,10 +614,10 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
-        "error": 0.2533177815743719,
-        "relative_error": 0.4546571414877544,
-        "predicted": -0.81048,
+        "within_tolerance": true,
+        "error": 0.2533377815743719,
+        "relative_error": 0.4546930376762227,
+        "predicted": -0.8105,
         "ground_truth": -0.5571622184256281
       },
       "decision": {
@@ -608,9 +649,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 3.6824897998012602
+    "latency_seconds": 3.6824897998012602,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.8105,
+    "p_value": 0.423,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:21.878371",
@@ -626,7 +676,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "Data:  \nSample 1: [10.6094, 7.9200, 11.5009, 11.8811, 6.0979, 7.3956, 10.2557, 9.3675, 9.9664, 8.2939, \u2026]  \nSample 1 size: 20  \nSample 1 mean (xb): 9.9341  \nSample 1 std (s): 1.7404  \nHypothesized population mean (mu): 10  \n\nAnalysis:  \nH0: mu = 10  \nH1: mu != 10  \nTest: One-sample t-test  \nt-statistic: -0.6761  \np-value: 0.5051  \nDecision: Fail to reject H0 (alp = 0.05)  \nConclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
+    "raw_response": "Data:  \nSample 1: [10.6094, 7.9200, 11.5009, 11.8811, 6.0979, 7.3956, 10.2557, 9.3675, 9.9664, 8.2939, …]  \nSample 1 size: 20  \nSample 1 mean (xb): 9.9341  \nSample 1 std (s): 1.7404  \nHypothesized population mean (mu): 10  \n\nAnalysis:  \nH0: mu = 10  \nH1: mu != 10  \nTest: One-sample t-test  \nt-statistic: -0.6761  \np-value: 0.5051  \nDecision: Fail to reject H0 (alp = 0.05)  \nConclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
@@ -657,8 +707,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -710,9 +760,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 6.940277799963951
+    "latency_seconds": 6.940277799963951,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.6761,
+    "p_value": 0.5051,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference between the sample mean and the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:23.105168",
@@ -756,8 +815,8 @@
       "sample_mean": 10.059930586327813,
       "sample_std": 1.9256316443149282,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -774,7 +833,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.13993026798249147,
         "relative_error": 0.6358451328116252,
         "predicted": 0.36,
@@ -809,9 +868,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 17.437952399952337
+    "latency_seconds": 17.437952399952337,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.36,
+    "p_value": 0.724,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:23.308043",
@@ -855,8 +918,8 @@
       "sample_mean": 9.897542062388416,
       "sample_std": 2.008080448033624,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -908,9 +971,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 17.655844499822706
+    "latency_seconds": 17.655844499822706,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.84,
+    "p_value": 0.413,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:25.792253",
@@ -926,11 +993,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. Hypotheses:\n   H0: mu = 10 \n   H1: mu \u2260 10\n\n3. Calculate test statistic:\n   t = (xb - mu) / (s / sqrt(n))  \n   t = (9.2915 - 10) / (1.4535 / sqrt(20))  \n   t \u2248 -3.895\n\n4. Find p-value: \n   Using a t-distribution table for df = n - 1 = 19 and t \u2248 -3.895,\n   p-value \u2248 0.0005 (two-tailed)\n\n5. Make decision:\n   If p-value < alpha (0.05), reject H0. \n   0.0005 < 0.05, reject H0.\n\n6. Conclusion:\n   There is significant evidence to suggest that the sample mean differs from the population mean of 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\np-value: 0.0005\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -957,8 +1024,8 @@
       "sample_mean": 9.29153449311239,
       "sample_std": 1.453549833151672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1008,9 +1075,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 3.9061747998930514
+    "latency_seconds": 3.9061747998930514,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.0005,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:29.005795",
@@ -1057,8 +1132,8 @@
       "sample_mean": 10.238652780512542,
       "sample_std": 1.4312736897336569,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1110,9 +1185,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 3.1833991000894457
+    "latency_seconds": 3.1833991000894457,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean significantly differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:29.677370",
@@ -1159,8 +1243,8 @@
       "sample_mean": 10.218924192050487,
       "sample_std": 1.5900578935593672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1212,9 +1296,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 6.569419400068
+    "latency_seconds": 6.569419400068,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 1.62,
+    "p_value": 0.115,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean does not significantly differ from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:29.894490",
@@ -1258,8 +1351,8 @@
       "sample_mean": 9.757102089585649,
       "sample_std": 2.308727501901685,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1311,9 +1404,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 17.84796839999035
+    "latency_seconds": 17.84796839999035,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 2.527423163912694,
+    "p_value": 0.017972593220252905,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:33.312315",
@@ -1329,11 +1426,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. H0: mu = 10   \n   H1: mu \u2260 10\n\n3. Test statistic (t):\n   t = (xb - mu) / (s / sqrt(n))  \n   t = (9.8975 - 10) / (2.0081 / sqrt(50))  \n   t \u2248 -0.640\n\n4. Degrees of freedom (df): n - 1 = 50 - 1 = 49  \n   p-value \u2248 0.526 (two-tailed)\n\n5. Decision: p-value (0.526) > alpha (0.05) \u2192 Fail to reject H0\n\n6. Conclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\np-value: 0.5260\nDecision: Fail To Reject H0\nConclusion: Conclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -1360,8 +1457,8 @@
       "sample_mean": 9.897542062388416,
       "sample_std": 2.008080448033624,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1411,9 +1508,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.304018700029701
+    "latency_seconds": 4.304018700029701,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.526,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion: There is no significant difference between the sample mean and the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:33.740893",
@@ -1460,8 +1565,8 @@
       "sample_mean": 10.238652780512542,
       "sample_std": 1.4312736897336569,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1513,9 +1618,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.007595400093123
+    "latency_seconds": 4.007595400093123,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 1.643,
+    "p_value": 0.118,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean does not significantly differ from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:34.095600",
@@ -1559,8 +1673,8 @@
       "sample_mean": 9.993556859614117,
       "sample_std": 1.767288528766689,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1612,9 +1726,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 16.106351300142705
+    "latency_seconds": 16.106351300142705,
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.7719999415870364,
+    "p_value": 0.45370918346047945,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:36.169390",
@@ -1661,8 +1779,8 @@
       "sample_mean": 9.814056601115439,
       "sample_std": 1.4924991900854698,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1714,9 +1832,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 2.854132300009951
+    "latency_seconds": 2.854132300009951,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean significantly differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:37.647412",
@@ -1763,8 +1890,8 @@
       "sample_mean": 9.814056601115439,
       "sample_std": 1.4924991900854698,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1816,9 +1943,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 3.5488619999960065
+    "latency_seconds": 3.5488619999960065,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.377,
+    "p_value": 0.184,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean is not significantly different from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:37.877166",
@@ -1834,11 +1970,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test\n\n2. H0: mu = 10  \n   H1: mu \u2260 10  \n\n3. Calculate test statistic:  \n   t = (xb - mu) / (s / sqrt(n))  \n   t = (10.0599 - 10) / (1.9256 / sqrt(50))  \n   t = 0.4153  \n\n4. Find p-value:  \n   df = n - 1 = 49  \n   p-value \u2248 2 * P(T > |0.4153|) \u2248 2 * 0.3374 \u2248 0.6748  \n\n5. Make decision:  \n   p-value (0.6748) > alp (0.05)  \n   Fail to reject H0.\n\n6. Conclusion:  \n   There is not enough evidence to conclude that the sample mean differs from the population mean of 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\nt-statistic: 0.4153\np-value: 2.0000\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -1865,8 +2001,8 @@
       "sample_mean": 10.059930586327813,
       "sample_std": 1.9256316443149282,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -1881,7 +2017,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.1952302679824915,
         "relative_error": 0.8871291212685222,
         "predicted": 0.4153,
@@ -1916,9 +2052,17 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 4.131913699908182
+    "latency_seconds": 4.131913699908182,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.4153,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:39.186479",
@@ -1962,8 +2106,8 @@
       "sample_mean": 10.269829386830075,
       "sample_std": 2.1426373662169027,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2015,9 +2159,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 15.876351499930024
+    "latency_seconds": 15.876351499930024,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 2.3,
+    "p_value": 0.014,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:40.181632",
@@ -2066,8 +2214,8 @@
       "sample1_std": 1.4424465859108093,
       "sample2_std": 2.398785995624972,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -2119,9 +2267,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 10.284237899817526
+    "latency_seconds": 10.284237899817526,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.2,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:42.165408",
@@ -2168,8 +2320,8 @@
       "sample_mean": 9.29153449311239,
       "sample_std": 1.453549833151672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2221,9 +2373,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.283960500033572
+    "latency_seconds": 4.283960500033572,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -5.03,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean is significantly different from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:43.384655",
@@ -2239,11 +2400,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. H0: mu = 10 \n   H1: mu \u2260 10 \n\n3. Calculate test statistic (t):\n   t = (xb - mu) / (s / sqrt(n)) \n   t = (9.7571 - 10) / (2.3087 / sqrt(50)) \n   t \u2248 -1.80\n\n4. Find p-value: \n   Using t-distribution with df = n - 1 = 49, \n   p-value \u2248 0.078\n\n5. Make decision: \n   p-value (0.078) > alpha (0.05) => Fail to reject H0 \n\n6. State conclusion: \n   There is not enough evidence to conclude that the sample mean differs from the hypothesized population mean of 10.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\np-value: 0.0780\nDecision: Fail To Reject H0\nConclusion: State conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -2270,8 +2431,8 @@
       "sample_mean": 9.757102089585649,
       "sample_std": 2.308727501901685,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2321,9 +2482,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 5.733251800062135
+    "latency_seconds": 5.733251800062135,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "p_value": 0.078,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "State conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:44.150493",
@@ -2339,11 +2508,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test Type: One-sample t-test\n\n2. Hypotheses:\n   H0: mu = 10 \n   H1: mu \u2260 10\n\n3. Calculate test statistic (t):\n   t = (xb - mu) / (s / sqrt(n))\n   t = (9.9936 - 10) / (1.7673 / sqrt(50))\n   t \u2248 -0.390\n\n4. Find p-value:\n   Degrees of freedom (df) = n - 1 = 49\n   p-value \u2248 2 * P(T < -0.390) (using t-table or software)\n   p-value \u2248 0.698\n\n5. Make decision:\n   p-value (0.698) > alp (0.05) \u2192 Fail to reject H0\n\n6. Conclusion:\n   There is not enough evidence to conclude that the sample mean differs from the population mean.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\np-value: 2.0000\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -2370,8 +2539,8 @@
       "sample_mean": 9.993556859614117,
       "sample_std": 1.767288528766689,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2418,12 +2587,19 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": false,
-        "has_p_value": true,
+        "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 3.9554565001744777
+    "latency_seconds": 3.9554565001744777,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:45.694929",
@@ -2470,8 +2646,8 @@
       "sample_mean": 9.897542062388416,
       "sample_std": 2.008080448033624,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2488,7 +2664,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.20478585667463398,
         "relative_error": 0.5676105448316262,
         "predicted": -0.156,
@@ -2523,9 +2699,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 3.523464299971238
+    "latency_seconds": 3.523464299971238,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.156,
+    "p_value": 0.876,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean does not significantly differ from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:48.936213",
@@ -2541,11 +2726,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test (since population std dev is unknown)\n\n2. H0: mu = 10 (null hypothesis)\n   H1: mu \u2260 10 (alternative hypothesis)\n\n3. Calculate test statistic:\n   - xb = 10.2698\n   - s = 2.1426\n   - n = 50\n   - t = (xb - mu) / (s / sqrt(n)) = (10.2698 - 10) / (2.1426 / sqrt(50)) = 1.303\n\n4. Find p-value:\n   - Using a t-distribution with n-1 = 49 degrees of freedom,\n   - p-value = 2 * P(T > |1.303|) \u2248 0.198 (from t-table)\n\n5. Make decision (alp = 0.05):\n   - p-value = 0.198 > 0.05\n   - Fail to reject H0\n\n6. State conclusion:\n   There is not enough evidence to suggest the sample mean differs from the population mean.",
+    "raw_response": "H0: mu = 10 (null hypothesis)\nH1: mu ≠ 10 (alternative hypothesis)\nTest_type: One-sample t-test\nDecision: Fail To Reject H0\nConclusion: State conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10 (null hypothesis)",
-        "H1": "mu \u2260 10 (alternative hypothesis)"
+        "H1": "mu ≠ 10 (alternative hypothesis)"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -2572,8 +2757,8 @@
       "sample_mean": 10.269829386830075,
       "sample_std": 2.1426373662169027,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2595,8 +2780,8 @@
         "relative_error": null
       },
       "decision": {
-        "correct": false,
-        "predicted": "reject_H0",
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
         "ground_truth": "fail_to_reject_H0"
       },
       "reasoning_quality": {
@@ -2627,12 +2812,19 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": false,
-        "has_p_value": true,
+        "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.773686799919233
+    "latency_seconds": 4.773686799919233,
+    "hypotheses": {
+      "H0": "mu = 10 (null hypothesis)",
+      "H1": "mu ≠ 10 (alternative hypothesis)"
+    },
+    "test_method": "one_sample_t_test",
+    "decision": "fail_to_reject_H0",
+    "conclusion": "State conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:49.364475",
@@ -2679,8 +2871,8 @@
       "sample_mean": 10.059930586327813,
       "sample_std": 1.9256316443149282,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -2697,7 +2889,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.32993026798249153,
         "relative_error": 1.4992078417955388,
         "predicted": 0.55,
@@ -2732,9 +2924,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 3.6574848000891507
+    "latency_seconds": 3.6574848000891507,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.55,
+    "p_value": 0.585,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean does not significantly differ from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:50.361511",
@@ -2783,8 +2984,8 @@
       "sample1_std": 1.7758083111187073,
       "sample2_std": 2.2033471294079323,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -2836,9 +3037,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 14.17468039994128
+    "latency_seconds": 14.17468039994128,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.65,
+    "p_value": 0.109,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:51.168111",
@@ -2887,8 +3092,8 @@
       "sample1_std": 1.7615670082493566,
       "sample2_std": 2.307146825120144,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -2940,9 +3145,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 11.978031100006774
+    "latency_seconds": 11.978031100006774,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.92,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:53.444212",
@@ -2991,8 +3200,8 @@
       "sample1_std": 1.6945088686687264,
       "sample2_std": 2.6151803187390166,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -3044,9 +3253,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 10.056782600004226
+    "latency_seconds": 10.056782600004226,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.85,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:09:53.671628",
@@ -3093,8 +3306,8 @@
       "sample_mean": 9.757102089585649,
       "sample_std": 2.308727501901685,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -3146,9 +3359,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 3.250405899947509
+    "latency_seconds": 3.250405899947509,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.835,
+    "p_value": 0.073,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is insufficient evidence to suggest that the sample mean differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:55.909930",
@@ -3195,8 +3417,8 @@
       "sample_mean": 10.218924192050487,
       "sample_std": 1.5900578935593672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -3248,9 +3470,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 2.4603703999891877
+    "latency_seconds": 2.4603703999891877,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean is significantly different from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:09:57.699789",
@@ -3268,11 +3499,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Two-sample t-test (independent groups)\n\n2. Hypotheses:\n   H0: mu1 = mu2\n   H1: mu1 \u2260 mu2\n\n3. Calculate test statistic:\n   n1 = 20, n2 = 20\n   xb1 = 10.3262, xb2 = 12.0854\n   s1 = 1.4424, s2 = 2.3988\n   pooled_var = ((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2)\n   pooled_std = sqrt(pooled_var)\n\n   t = (xb1 - xb2) / (pooled_std * sqrt(1/n1 + 1/n2))\n\n   Calculate pooled_var:\n   pooled_var = ((19 * 1.4424^2) + (19 * 2.3988^2)) / (38) = 1.4783\n\n   Pooled standard deviation:\n   pooled_std = sqrt(1.4783) = 1.2163\n\n   Test statistic:\n   t = (10.3262 - 12.0854) / (1.2163 * sqrt(1/20 + 1/20)) = -2.979\n\n4. Find p-value:\n   Degrees of freedom = n1 + n2 - 2 = 38\n   Use t-distribution table or calculator for p-value:\n   p-value = 0.0064 (two-tailed)\n\n5. Make decision:\n   p-value < 0.05, reject H0\n\n6. Conclusion:\n   There is significant evidence to suggest a difference in means between the two populations.",
+    "raw_response": "H0: mu1 = mu2\nH1: mu1 ≠ mu2\nTest_type: Two-sample t-test\np-value: 0.0400\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2",
-        "H1": "mu1 \u2260 mu2"
+        "H1": "mu1 ≠ mu2"
       },
       "test_method": "two_sample_t_test",
       "assumptions": null,
@@ -3302,8 +3533,8 @@
       "sample1_std": 1.4424465859108093,
       "sample2_std": 2.398785995624972,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -3311,9 +3542,9 @@
       "p_value": {
         "exact_match": false,
         "within_tolerance": true,
-        "error": 0.0013737314390574722,
-        "relative_error": 0.17671454819695065,
-        "predicted": 0.0064,
+        "error": 0.03222626856094253,
+        "relative_error": 4.145534073769059,
+        "predicted": 0.04,
         "ground_truth": 0.0077737314390574725,
         "valid_range": true,
         "correct_significance": true
@@ -3353,9 +3584,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 8.324810799909756
+    "latency_seconds": 8.324810799909756,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 ≠ mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "p_value": 0.04,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:09:58.949671",
@@ -3402,8 +3641,8 @@
       "sample_mean": 9.993556859614117,
       "sample_std": 1.767288528766689,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -3420,7 +3659,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.27022046154413487,
         "relative_error": 10.481974376956181,
         "predicted": -0.296,
@@ -3455,9 +3694,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 3.0296940999105573
+    "latency_seconds": 3.0296940999105573,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.296,
+    "p_value": 0.767,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "The sample mean does not significantly differ from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:01.521444",
@@ -3475,11 +3723,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Two-sample t-test (independent groups)\n\n2. Hypotheses: \n   H0: mu1 = mu2 (the means are equal)\n   H1: mu1 \u2260 mu2 (the means are not equal)\n\n3. Calculate test statistic (t):\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   t = (9.7509 - 11.7338) / sqrt((1.7758^2/20) + (2.2033^2/20))\n   t = -2.0792\n\n4. Degrees of freedom (df):\n   df = n1 + n2 - 2 = 20 + 20 - 2 = 38\n\n   Find p-value (two-tailed):\n   p-value = 2 * P(T < -2.0792), where T follows t-distribution with df = 38.\n   p-value \u2248 0.0465\n\n5. Make decision:\n   Compare p-value (0.0465) with alpha (0.05).\n   Since p-value < alp, reject H0.\n\n6. Conclusion:\n   There is significant evidence to suggest that the means of the two groups are different.",
+    "raw_response": "H0: mu1 = mu2 (the means are equal)\nH1: mu1 ≠ mu2 (the means are not equal)\nTest_type: Two-sample t-test\nt-statistic: -2.0792\np-value: 0.0465\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (the means are equal)",
-        "H1": "mu1 \u2260 mu2 (the means are not equal)"
+        "H1": "mu1 ≠ mu2 (the means are not equal)"
       },
       "test_method": "two_sample_t_test",
       "assumptions": null,
@@ -3509,8 +3757,8 @@
       "sample1_std": 1.7758083111187073,
       "sample2_std": 2.2033471294079323,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -3562,9 +3810,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 7.843022899935022
+    "latency_seconds": 7.843022899935022,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (the means are equal)",
+      "H1": "mu1 ≠ mu2 (the means are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.0792,
+    "p_value": 0.0465,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:10:01.919203",
@@ -3580,7 +3837,7 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. H0: mu = 10, H1: mu != 10  \n2. Test name: one-sample t-test  \n3. Test statistic value: -4.472  \n4. P-value: 0.0002  \n5. Decision: reject H0  \n6. Brief conclusion: The sample mean significantly differs from the hypothesized population mean.  \n7. Degrees of freedom: 19  \n8. Critical value(s): \u00b12.093  \n9. Assumptions checked: normality - yes, independence - yes, equal variance - N/A  ",
+    "raw_response": "1. H0: mu = 10, H1: mu != 10  \n2. Test name: one-sample t-test  \n3. Test statistic value: -4.472  \n4. P-value: 0.0002  \n5. Decision: reject H0  \n6. Brief conclusion: The sample mean significantly differs from the hypothesized population mean.  \n7. Degrees of freedom: 19  \n8. Critical value(s): ±2.093  \n9. Assumptions checked: normality - yes, independence - yes, equal variance - N/A  ",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10, H1: mu != 10",
@@ -3611,8 +3868,8 @@
       "sample_mean": 9.29153449311239,
       "sample_std": 1.453549833151672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -3664,9 +3921,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.9661813999991864
+    "latency_seconds": 2.9661813999991864,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -4.472,
+    "p_value": 0.0002,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean significantly differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:02.338245",
@@ -3715,8 +3981,8 @@
       "sample1_std": 1.8663214453686245,
       "sample2_std": 1.8024441024452653,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -3764,9 +4030,11 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 13.392654499970376
+    "latency_seconds": 13.392654499970376,
+    "test_method": "two_sample_t_test",
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:06.314264",
@@ -3813,8 +4081,8 @@
       "sample_mean": 10.269829386830075,
       "sample_std": 2.1426373662169027,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -3868,7 +4136,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 4.392769299913198
+    "latency_seconds": 4.392769299913198,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.937,
+    "p_value": 0.353,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to suggest that the sample mean differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:08.580568",
@@ -3886,11 +4163,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Two-sample t-test (independent groups)\n\n2. H0: mu1 = mu2 (no difference in means)\n   H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate the test statistic (t):\n   n1 = 20, n2 = 20\n   xb1 = 9.8201, xb2 = 12.1043\n   s1 = 1.7616, s2 = 2.3071\n\n   pooled_std = sqrt(((n1-1)*s1^2 + (n2-1)*s2^2) / (n1+n2-2))\n   pooled_std = sqrt(((19*1.7616^2 + 19*2.3071^2) / 38))\n   pooled_std \u2248 1.9356\n\n   t = (xb1 - xb2) / (pooled_std * sqrt(1/n1 + 1/n2))\n   t = (9.8201 - 12.1043) / (1.9356 * sqrt(1/20 + 1/20))\n   t \u2248 -2.6746\n\n4. Find p-value:\n   df = n1 + n2 - 2 = 38\n   p-value \u2248 0.0110 (two-tailed)\n\n5. Make decision:\n   Since p-value (0.0110) < alp (0.05), reject H0.\n\n6. Conclusion:\n   There is significant evidence to suggest a difference in means between the two groups.",
+    "raw_response": "H0: mu1 = mu2 (no difference in means)\nH1: mu1 ≠ mu2 (difference in means)\nTest_type: Two-sample t-test\np-value: 0.0110\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in means)",
-        "H1": "mu1 \u2260 mu2 (difference in means)"
+        "H1": "mu1 ≠ mu2 (difference in means)"
       },
       "test_method": "two_sample_t_test",
       "assumptions": null,
@@ -3920,8 +4197,8 @@
       "sample1_std": 1.7615670082493566,
       "sample2_std": 2.307146825120144,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -3971,9 +4248,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 7.051844600122422
+    "latency_seconds": 7.051844600122422,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in means)",
+      "H1": "mu1 ≠ mu2 (difference in means)"
+    },
+    "test_method": "two_sample_t_test",
+    "p_value": 0.011,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:10:09.600478",
@@ -4020,8 +4305,8 @@
       "sample_mean": 9.897542062388416,
       "sample_std": 2.008080448033624,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -4073,9 +4358,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 3.2830813000909984
+    "latency_seconds": 3.2830813000909984,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is significant evidence that the sample mean differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:13.284787",
@@ -4093,7 +4387,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Two-sample t-test (independent groups)\n\n2. H0: mu1 = mu2 (no difference in means)  \n   H1: mu1 != mu2 (difference in means)\n\n3. Calculate test statistic (t):\n   t = (xb1 - xb2) / sqrt((s1^2 / n1) + (s2^2 / n2))  \n   t = (10.4214 - 11.5883) / sqrt((1.6945^2 / 20) + (2.6152^2 / 20))  \n   t = -1.1669 (approx.)\n\n4. Find degrees of freedom (df):  \n   df = min(n1 - 1, n2 - 1) = min(20 - 1, 20 - 1) = 19  \n\n   Find p-value (two-tailed):  \n   p-value = 2 * P(t < -1.1669) = 0.125 (approx.)\n\n5. Make decision:  \n   p-value (0.125) > alp (0.05) \u2192 Fail to reject H0\n\n6. Conclusion:  \nThere is not enough evidence to conclude that the means of the two groups are different.",
+    "raw_response": "H0: mu1 = mu2 (no difference in means)\nH1: mu1 != mu2 (difference in means)\nTest_type: Two-sample t-test\nt-statistic: -1.1669\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in means)",
@@ -4127,8 +4421,8 @@
       "sample1_std": 1.6945088686687264,
       "sample2_std": 2.6151803187390166,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -4178,9 +4472,17 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 4.699398800032213
+    "latency_seconds": 4.699398800032213,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in means)",
+      "H1": "mu1 != mu2 (difference in means)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.1669,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:10:13.999547",
@@ -4232,8 +4534,8 @@
       "sample1_std": 1.4424465859108093,
       "sample2_std": 2.398785995624972,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -4285,9 +4587,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.395038699964061
+    "latency_seconds": 4.395038699964061,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.42,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:10:17.172055",
@@ -4334,8 +4645,8 @@
       "sample_mean": 10.059930586327813,
       "sample_std": 1.9256316443149282,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -4387,9 +4698,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 3.1702799000777304
+    "latency_seconds": 3.1702799000777304,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is significant evidence that the sample mean differs from the population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:20.965310",
@@ -4438,14 +4758,14 @@
       "sample1_std": 2.031193680081686,
       "sample2_std": 2.048148324298389,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.000998682943321358,
         "relative_error": 758.268766649439,
@@ -4491,9 +4811,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 29.794413700001314
+    "latency_seconds": 29.794413700001314,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -3.49,
+    "p_value": 0.001,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:25.263186",
@@ -4545,14 +4869,14 @@
       "sample1_std": 1.7758083111187073,
       "sample2_std": 2.2033471294079323,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00048041124346979167,
         "relative_error": 0.14472010803288185,
@@ -4600,7 +4924,16 @@
       },
       "overall_accuracy": 1.0
     },
-    "latency_seconds": 4.26519519998692
+    "latency_seconds": 4.26519519998692,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -3.08,
+    "p_value": 0.0038,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:10:27.834943",
@@ -4649,8 +4982,8 @@
       "sample1_std": 2.1509061244944765,
       "sample2_std": 1.9982412453078222,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -4700,7 +5033,8 @@
       },
       "overall_accuracy": 0.0
     },
-    "latency_seconds": 30.122173399897292
+    "latency_seconds": 30.122173399897292,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:30.486029",
@@ -4749,8 +5083,8 @@
       "sample1_std": 1.9091747964602688,
       "sample2_std": 2.2102799288532817,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -4802,9 +5136,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 28.139004399999976
+    "latency_seconds": 28.139004399999976,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -0.61,
+    "p_value": 0.542,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:30.902779",
@@ -4851,8 +5189,8 @@
       "sample_mean": 9.757102089585649,
       "sample_std": 2.308727501901685,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -4904,9 +5242,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 3.05763279995881
+    "latency_seconds": 3.05763279995881,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean significantly differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:36.259060",
@@ -4924,7 +5271,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Independent two-sample t-test\n\n2. H0: mu1 = mu2 (means are equal)  \n   H1: mu1 != mu2 (means are not equal)\n\n3. Calculate test statistic (t):  \n   t = (xb1 - xb2) / (sqrt((s1^2/n1) + (s2^2/n2)))  \n   Where:  \n   xb1 = 9.7284, xb2 = 11.8315  \n   s1 = 2.0312, s2 = 2.0481  \n   n1 = n2 = 50  \n\n   t = (9.7284 - 11.8315) / (sqrt((2.0312^2/50) + (2.0481^2/50)))  \n   t = -2.6704  \n\n4. Find degrees of freedom (df):  \n   df = n1 + n2 - 2 = 50 + 50 - 2 = 98  \n\n   Using t-distribution table, find p-value for |t| = 2.6704 with df = 98.  \n   p-value \u2248 0.0081 (two-tailed)\n\n5. Make decision:  \n   Since p-value < alp (0.0081 < 0.05), reject H0.\n\n6. Conclusion:  \n   There is significant evidence to suggest that the means of the two groups are different.",
+    "raw_response": "H0: mu1 = mu2 (means are equal)\nH1: mu1 != mu2 (means are not equal)\nTest_type: two-sample t-test\nt-statistic: -2.6704\np-value: 0.0081\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (means are equal)",
@@ -4958,8 +5305,8 @@
       "sample1_std": 2.031193680081686,
       "sample2_std": 2.048148324298389,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -5011,9 +5358,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.766715300036594
+    "latency_seconds": 5.766715300036594,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (means are equal)",
+      "H1": "mu1 != mu2 (means are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.6704,
+    "p_value": 0.0081,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:10:36.430563",
@@ -5031,11 +5387,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Independent two-sample t-test.\n\n2. H0: mu1 = mu2 (means are equal)  \n   H1: mu1 \u2260 mu2 (means are not equal)\n\n3. Sample statistics:  \n   n1 = 20, xb1 = 10.5455, s1 = 1.8663  \n   n2 = 20, xb2 = 11.2908, s2 = 1.8024  \n   Pooled standard deviation (sp):  \n   sp = sqrt[((n1-1)*s1^2 + (n2-1)*s2^2) / (n1+n2-2)]  \n   sp \u2248 sqrt[((19*1.8663^2 + 19*1.8024^2) / 38)] \u2248 1.8362  \n\n   Test statistic (t):  \n   t = (xb1 - xb2) / (sp * sqrt(1/n1 + 1/n2))  \n   t \u2248 (10.5455 - 11.2908) / (1.8362 * sqrt(1/20 + 1/20))  \n   t \u2248 -1.571.\n\n4. Degrees of freedom (df): df = n1 + n2 - 2 = 20 + 20 - 2 = 38  \n   Using a t-distribution table or calculator, find p-value for |t| = 1.571 with df = 38.  \n   p-value \u2248 0.128 (two-tailed).\n\n5. Decision: p-value (0.128) > alp (0.05). Fail to reject H0.\n\n6. Conclusion: There is insufficient evidence to conclude that the means of the two groups are different.",
+    "raw_response": "H0: mu1 = mu2 (means are equal)\nH1: mu1 ≠ mu2 (means are not equal)\nTest_type: two-sample t-test\np-value: 0.1280\nDecision: Fail To Reject H0\nConclusion: Conclusion: There is insufficient evidence to conclude that the means of the two groups are different.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (means are equal)",
-        "H1": "mu1 \u2260 mu2 (means are not equal)"
+        "H1": "mu1 ≠ mu2 (means are not equal)"
       },
       "test_method": "independent_two_sample_t_test.",
       "assumptions": null,
@@ -5065,8 +5421,8 @@
       "sample1_std": 1.8663214453686245,
       "sample2_std": 1.8024441024452653,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -5116,9 +5472,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 19.25464820000343
+    "latency_seconds": 19.25464820000343,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (means are equal)",
+      "H1": "mu1 ≠ mu2 (means are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "p_value": 0.128,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion: There is insufficient evidence to conclude that the means of the two groups are different."
   },
   {
     "timestamp": "2025-12-15T07:10:36.771162",
@@ -5170,8 +5534,8 @@
       "sample1_std": 1.7615670082493566,
       "sample2_std": 2.307146825120144,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -5223,9 +5587,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.845681899925694
+    "latency_seconds": 5.845681899925694,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.67,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:10:40.646820",
@@ -5272,8 +5645,8 @@
       "sample_mean": 9.993556859614117,
       "sample_std": 1.767288528766689,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -5332,9 +5705,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 4.208257999969646
+    "latency_seconds": 4.208257999969646,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is sufficient evidence to suggest the sample mean differs from the population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:44.933364",
@@ -5352,7 +5734,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Identify test type: Two-sample independent t-test.\n\n2. State H0 and H1:\n   H0: mu1 = mu2 (no difference in means)\n   H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic:\n   - Sample sizes: n1 = 50, n2 = 50\n   - Sample means: xb1 = 9.7215, xb2 = 11.7153\n   - Sample std devs: s1 = 2.1509, s2 = 1.9982\n\n   Pooled std dev (sp):\n   sp = sqrt(((n1-1)s1^2 + (n2-1)s2^2) / (n1 + n2 - 2))\n   sp = sqrt(((50-1)(2.1509^2) + (50-1)(1.9982^2)) / (100 - 2))\n   sp \u2248 2.0781\n\n   Test statistic (t):\n   t = (xb1 - xb2) / (sp * sqrt(1/n1 + 1/n2))\n   t \u2248 (9.7215 - 11.7153) / (2.0781 * sqrt(1/50 + 1/50))\n   t \u2248 -5.32\n\n4. Find p-value:\n   Degrees of freedom: df = n1 + n2 - 2 = 98\n   p-value = 2 * P(T < t) for t \u2248 -5.32\n   p-value < 0.0001 (consult t-distribution table or calculator)\n\n5. Make decision (alp = 0.05):\n   Since p-value < 0.05, reject H0.\n\n6. State conclusion:\n   There is a statistically significant difference between the means of the two groups.",
+    "raw_response": "H0: mu1 = mu2 (no difference in means)\nH1: H0: mu1 = mu2 (no difference in means)\nTest_type: Two-sample independent t-test\np-value: 2.0781\nDecision: Reject H0\nConclusion: State conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in means)",
@@ -5386,8 +5768,8 @@
       "sample1_std": 2.1509061244944765,
       "sample2_std": 1.9982412453078222,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -5441,12 +5823,18 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": false,
-        "has_p_value": true,
+        "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 8.148979699937627
+    "latency_seconds": 8.148979699937627,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in means)",
+      "H1": "H0: mu1 = mu2 (no difference in means)"
+    },
+    "decision": "reject_H0",
+    "conclusion": "State conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:10:45.440840",
@@ -5498,8 +5886,8 @@
       "sample1_std": 1.6945088686687264,
       "sample2_std": 2.6151803187390166,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -5551,9 +5939,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 4.789472999982536
+    "latency_seconds": 4.789472999982536,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.656,
+    "p_value": 0.0114,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:10:48.537903",
@@ -5602,14 +5999,14 @@
       "sample1_std": 1.736083333844396,
       "sample2_std": 2.186625666329047,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 3.517902718441902e-11,
         "relative_error": 1.0,
@@ -5655,9 +6052,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 35.24702940019779
+    "latency_seconds": 35.24702940019779,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.75,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:48.549595",
@@ -5704,8 +6105,8 @@
       "sample_mean": 10.269829386830075,
       "sample_std": 2.1426373662169027,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -5757,9 +6158,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 3.10134039982222
+    "latency_seconds": 3.10134039982222,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is significant evidence that the sample mean differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:10:50.262829",
@@ -5805,8 +6215,8 @@
       "mean_difference": -1.9440572938805798,
       "std_difference": 1.076580532958673,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -5858,9 +6268,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.625
+      "overall_accuracy": 0.8125
     },
-    "latency_seconds": 13.999906599987298
+    "latency_seconds": 13.999906599987298,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.41,
+    "p_value": 0.021,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:54.370428",
@@ -5912,8 +6326,8 @@
       "sample1_std": 1.8663214453686245,
       "sample2_std": 1.8024441024452653,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -5930,7 +6344,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.1492505559994195,
         "relative_error": 0.11617094422292046,
         "predicted": -1.434,
@@ -5965,9 +6379,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 1.0
     },
-    "latency_seconds": 5.79273710004054
+    "latency_seconds": 5.79273710004054,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.434,
+    "p_value": 0.16,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference between the two population means."
   },
   {
     "timestamp": "2025-12-15T07:10:57.467932",
@@ -6013,14 +6436,14 @@
       "mean_difference": -1.924243784072185,
       "std_difference": 0.8773236768268149,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 7.1763822110558705e-09,
         "relative_error": 1.0,
@@ -6066,9 +6489,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 12.521053000120446
+    "latency_seconds": 12.521053000120446,
+    "test_method": "paired_t_test",
+    "test_statistic": -6.09,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:10:58.538169",
@@ -6120,8 +6547,8 @@
       "sample1_std": 1.4424465859108093,
       "sample2_std": 2.398785995624972,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -6173,9 +6600,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.152292100014165
+    "latency_seconds": 4.152292100014165,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:10:58.790729",
@@ -6193,11 +6629,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Identify test type  \n   - Independent samples t-test\n\n2. State H0 and H1  \n   - H0: mu1 = mu2 (the means are equal)  \n   - H1: mu1 \u2260 mu2 (the means are not equal)\n\n3. Calculate test statistic  \n   - n1 = 50, n2 = 50  \n   - xb1 = 10.4379, xb2 = 12.0571  \n   - s1 = 1.9092, s2 = 2.2103  \n   - pooled s^2 = [(n1-1)s1^2 + (n2-1)s2^2] / (n1 + n2 - 2)  \n   - pooled s^2 = [(49)(1.9092^2) + (49)(2.2103^2)] / (98)  \n   - pooled s^2 \u2248 4.0353  \n   - pooled s = \u221a4.0353 \u2248 2.0088  \n   - t = (xb1 - xb2) / (pooled s * \u221a(1/n1 + 1/n2))  \n   - t = (10.4379 - 12.0571) / (2.0088 * \u221a(1/50 + 1/50))  \n   - t \u2248 -3.5937\n\n4. Find p-value  \n   - Degrees of freedom: df = n1 + n2 - 2 = 98  \n   - p-value \u2248 0.0004 (two-tailed)\n\n5. Make decision (alp = 0.05)  \n   - Since p-value < alp, reject H0\n\n6. State conclusion  \n   - There is sufficient evidence to conclude that the means of the two groups are significantly different.",
+    "raw_response": "H0: mu1 = mu2 (the means are equal)\nH1: mu1 ≠ mu2 (the means are not equal)\nTest_type: Independent samples t-test\np-value: 0.0004\nDecision: Reject H0\nConclusion: State conclusion",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (the means are equal)",
-        "H1": "mu1 \u2260 mu2 (the means are not equal)"
+        "H1": "mu1 ≠ mu2 (the means are not equal)"
       },
       "test_method": "independent_samples_t_test",
       "assumptions": null,
@@ -6227,14 +6663,14 @@
       "sample1_std": 1.9091747964602688,
       "sample2_std": 2.2102799288532817,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 0.5,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0002359207336308886,
         "relative_error": 1.437846102384217,
@@ -6278,9 +6714,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.625
+      "overall_accuracy": 0.8125
     },
-    "latency_seconds": 10.11467819986865
+    "latency_seconds": 10.11467819986865,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (the means are equal)",
+      "H1": "mu1 ≠ mu2 (the means are not equal)"
+    },
+    "test_method": "independent_samples_t_test",
+    "p_value": 0.0004,
+    "decision": "reject_H0",
+    "conclusion": "State conclusion"
   },
   {
     "timestamp": "2025-12-15T07:10:59.009491",
@@ -6329,14 +6773,14 @@
       "sample1_std": 1.823306936681232,
       "sample2_std": 1.63608335327212,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.000495376841503214,
         "relative_error": 107.15116988690481,
@@ -6382,9 +6826,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 33.735830600140616
+    "latency_seconds": 33.735830600140616,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -3.66,
+    "p_value": 0.0005,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:02.119037",
@@ -6402,7 +6850,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mu1 = mu2, H1: mu1 != mu2  \n2. Test name: two-sample t-test  \n3. Test statistic value: -5.14  \n4. P-value: 0.0001  \n5. Decision: reject H0  \n6. Brief conclusion: There is a significant difference between the means of the two groups.  \n7. Degrees of freedom: 38  \n8. Critical value(s): \u00b12.024  \n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes  ",
+    "raw_response": "1. H0: mu1 = mu2, H1: mu1 != mu2  \n2. Test name: two-sample t-test  \n3. Test statistic value: -5.14  \n4. P-value: 0.0001  \n5. Decision: reject H0  \n6. Brief conclusion: There is a significant difference between the means of the two groups.  \n7. Degrees of freedom: 38  \n8. Critical value(s): ±2.024  \n9. Assumptions checked: normality - yes, independence - yes, equal variance - yes  ",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2, H1: mu1 != mu2",
@@ -6436,8 +6884,8 @@
       "sample1_std": 1.7758083111187073,
       "sample2_std": 2.2033471294079323,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -6489,9 +6937,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.8540163999423385
+    "latency_seconds": 2.8540163999423385,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.14,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:03.153613",
@@ -6509,11 +6966,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Two-sample t-test (independent groups)\n\n2. Hypotheses:\n   H0: mu1 = mu2 (no difference in means)\n   H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic (t):\n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   xb1 = 9.2859, xb2 = 12.2319\n   s1 = 1.7361, s2 = 2.1866\n   n1 = n2 = 50\n\n   t = (9.2859 - 12.2319) / sqrt((1.7361^2/50) + (2.1866^2/50))\n   t = -2.9465\n\n4. Find p-value:\n   Degrees of freedom (df) = n1 + n2 - 2 = 50 + 50 - 2 = 98\n   Using a t-distribution table or calculator, p-value \u2248 0.004\n\n5. Decision:\n   Compare p-value (0.004) to alpha (0.05): \n   Since 0.004 < 0.05, reject H0.\n\n6. Conclusion:\n   There is significant evidence to suggest a difference in means between the two groups.",
+    "raw_response": "H0: mu1 = mu2 (no difference in means)\nH1: mu1 ≠ mu2 (difference in means)\nTest_type: Two-sample t-test\nt-statistic: -2.9465\np-value: 0.0040\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in means)",
-        "H1": "mu1 \u2260 mu2 (difference in means)"
+        "H1": "mu1 ≠ mu2 (difference in means)"
       },
       "test_method": "two_sample_t_test",
       "assumptions": null,
@@ -6543,8 +7000,8 @@
       "sample1_std": 1.736083333844396,
       "sample2_std": 2.186625666329047,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -6596,9 +7053,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.3486180999316275
+    "latency_seconds": 5.3486180999316275,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in means)",
+      "H1": "mu1 ≠ mu2 (difference in means)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.9465,
+    "p_value": 0.004,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:04.476656",
@@ -6644,8 +7110,8 @@
       "mean_difference": -1.879880672587284,
       "std_difference": 1.1903883810205336,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -6697,9 +7163,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 14.21015390008688
+    "latency_seconds": 14.21015390008688,
+    "test_method": "paired_t_test",
+    "test_statistic": -3.38,
+    "p_value": 0.004,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:05.589171",
@@ -6751,14 +7221,14 @@
       "sample1_std": 2.031193680081686,
       "sample2_std": 2.048148324298389,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 8.682943321357892e-06,
         "relative_error": 6.59268766649439,
@@ -6769,7 +7239,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.30475154230794477,
         "relative_error": 0.05911481179015347,
         "predicted": -5.46,
@@ -6804,9 +7274,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 1.0
     },
-    "latency_seconds": 6.669213999994099
+    "latency_seconds": 6.669213999994099,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -5.46,
+    "p_value": 1e-05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:05.602484",
@@ -6858,14 +7337,14 @@
       "sample1_std": 2.1509061244944765,
       "sample2_std": 1.9982412453078222,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 4.358880195296605e-06,
         "relative_error": 0.772697681701832,
@@ -6911,9 +7390,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.4407820999622345
+    "latency_seconds": 2.4407820999622345,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -6.32,
+    "p_value": 1e-05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:07.592562",
@@ -6931,11 +7419,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Independent two-sample t-test\n\n2. H0: mu1 = mu2 (means are equal)  \n   H1: mu1 \u2260 mu2 (means are not equal)\n\n3. Calculate test statistic:  \n   t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))  \n   t = (10.1913 - 11.8720) / sqrt((1.8233^2/50) + (1.6361^2/50))  \n   t \u2248 -4.084\n\n4. Find degrees of freedom:  \n   df = min(n1 - 1, n2 - 1) = min(49, 49) = 49  \n   p-value = 2 * P(T < -4.084) for df = 49  \n   p-value \u2248 0.0003\n\n5. Make decision:  \n   p-value < alp (0.0003 < 0.05), reject H0.\n\n6. Conclusion:  \n   There is significant evidence to suggest that the population means are different.",
+    "raw_response": "H0: mu1 = mu2 (means are equal)\nH1: mu1 ≠ mu2 (means are not equal)\nTest_type: two-sample t-test\np-value: 0.0003\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (means are equal)",
-        "H1": "mu1 \u2260 mu2 (means are not equal)"
+        "H1": "mu1 ≠ mu2 (means are not equal)"
       },
       "test_method": "independent_two_sample_t_test",
       "assumptions": null,
@@ -6968,14 +7456,14 @@
       "sample1_std": 1.823306936681232,
       "sample2_std": 1.63608335327212,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00029537684150321387,
         "relative_error": 63.89070193214287,
@@ -7019,9 +7507,17 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.4681609000544995
+    "latency_seconds": 5.4681609000544995,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (means are equal)",
+      "H1": "mu1 ≠ mu2 (means are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "p_value": 0.0003,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:08.419999",
@@ -7068,8 +7564,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -7121,9 +7617,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 2.814462199807167
+    "latency_seconds": 2.814462199807167,
+    "hypotheses": {
+      "H0": "mu = 10, H1: mu != 10",
+      "H1": "mu != 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "The sample mean significantly differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:11:08.433004",
@@ -7175,8 +7680,8 @@
       "sample1_std": 1.7615670082493566,
       "sample2_std": 2.307146825120144,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -7228,9 +7733,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.810033399844542
+    "latency_seconds": 2.810033399844542,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:10.502101",
@@ -7276,8 +7790,8 @@
       "mean_difference": -2.16853780496726,
       "std_difference": 1.1770171777390082,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -7327,7 +7841,8 @@
       },
       "overall_accuracy": 0.0
     },
-    "latency_seconds": 11.575818500015885
+    "latency_seconds": 11.575818500015885,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:12.708815",
@@ -7345,11 +7860,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Paired t-test\n\n2. H0: mu1 = mu2 (no difference in means)  \n   H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic:  \n   xb1 = 10.4350, xb2 = 12.3791  \n   s_diff = sqrt(s1^2/n1 + s2^2/n2) = sqrt(1.9785^2/20 + 2.3277^2/20) = 0.7425  \n   t = (xb1 - xb2) / s_diff = (10.4350 - 12.3791) / 0.7425 = -2.6187\n\n4. Find p-value:  \n   df = n1 + n2 - 2 = 20 + 20 - 2 = 38  \n   p-value = 0.0121 (from t-distribution)\n\n5. Make decision:  \n   p-value < alp (0.0121 < 0.05) \u2192 reject H0\n\n6. Conclusion:  \nThere is a significant difference in the means under the two conditions.",
+    "raw_response": "H0: mu1 = mu2 (no difference in means)\nH1: mu1 ≠ mu2 (difference in means)\nTest_type: Paired t-test\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in means)",
-        "H1": "mu1 \u2260 mu2 (difference in means)"
+        "H1": "mu1 ≠ mu2 (difference in means)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -7376,8 +7891,8 @@
       "mean_difference": -1.9440572938805798,
       "std_difference": 1.076580532958673,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -7424,12 +7939,19 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": false,
-        "has_p_value": true,
+        "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.1062626000493765
+    "latency_seconds": 5.1062626000493765,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in means)",
+      "H1": "mu1 ≠ mu2 (difference in means)"
+    },
+    "test_method": "paired_t_test",
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:12.821345",
@@ -7481,14 +8003,14 @@
       "sample1_std": 1.9091747964602688,
       "sample2_std": 2.2102799288532817,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00015407926636911142,
         "relative_error": 0.9390538474403946,
@@ -7534,9 +8056,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.38504399987869
+    "latency_seconds": 4.38504399987869,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -6.15,
+    "p_value": 1e-05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:13.188259",
@@ -7588,8 +8119,8 @@
       "sample1_std": 1.6945088686687264,
       "sample2_std": 2.6151803187390166,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -7641,9 +8172,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 2.6813693998847157
+    "latency_seconds": 2.6813693998847157,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "independent_two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:17.382448",
@@ -7689,14 +8229,14 @@
       "mean_difference": -1.9061048983190674,
       "std_difference": 1.0102753137667884,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 0.5,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 7.530347626415703e-08,
         "relative_error": 1.0,
@@ -7742,9 +8282,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.625
+      "overall_accuracy": 0.8125
     },
-    "latency_seconds": 12.90394979994744
+    "latency_seconds": 12.90394979994744,
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.64,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:18.007072",
@@ -7796,8 +8340,8 @@
       "sample1_std": 1.736083333844396,
       "sample2_std": 2.186625666329047,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -7856,9 +8400,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.151095499983057
+    "latency_seconds": 5.151095499983057,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -8.46,
+    "p_value": 0.05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:19.132122",
@@ -7876,11 +8429,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Paired t-test\n\n2. H0: mu1 - mu2 = 0 (no difference)  \n   H1: mu1 - mu2 \u2260 0 (difference exists)\n\n3. Calculate test statistic:\n   - Difference (d = xb1 - xb2): 10.7706 - 12.6949 = -1.9243  \n   - Sample std dev of differences (s_d): sqrt((s1^2 + s2^2) / n) = sqrt((1.7208^2 + 1.6392^2) / 20) = 0.6665  \n   - Test statistic (t): d / (s_d / sqrt(n)) = -1.9243 / (0.6665 / sqrt(20)) = -4.0610\n\n4. Find p-value:\n   - Degrees of freedom (df): n - 1 = 20 - 1 = 19  \n   - Use t-table or calculator: p-value \u2248 0.0006 (two-tailed)\n\n5. Make decision:\n   - alp = 0.05, p-value (0.0006) < alp. Reject H0.\n\n6. Conclusion:\nThere is significant evidence to suggest a difference in measurements between the two conditions.",
+    "raw_response": "H0: mu1 - mu2 = 0 (no difference)\nH1: mu1 - mu2 ≠ 0 (difference exists)\nTest_type: Paired t-test\np-value: 0.0006\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 - mu2 = 0 (no difference)",
-        "H1": "mu1 - mu2 \u2260 0 (difference exists)"
+        "H1": "mu1 - mu2 ≠ 0 (difference exists)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -7907,14 +8460,14 @@
       "mean_difference": -1.924243784072185,
       "std_difference": 0.8773236768268149,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0005999928236177889,
         "relative_error": 83606.58699218184,
@@ -7956,13 +8509,21 @@
       "completeness": {
         "has_hypotheses": true,
         "has_test_method": true,
-        "has_test_statistic": true,
+        "has_test_statistic": false,
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 6.41864990000613
+    "latency_seconds": 6.41864990000613,
+    "hypotheses": {
+      "H0": "mu1 - mu2 = 0 (no difference)",
+      "H1": "mu1 - mu2 ≠ 0 (difference exists)"
+    },
+    "test_method": "paired_t_test",
+    "p_value": 0.0006,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:19.871034",
@@ -8014,8 +8575,8 @@
       "sample1_std": 1.8663214453686245,
       "sample2_std": 1.8024441024452653,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -8067,9 +8628,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.375
+      "overall_accuracy": 0.5625
     },
-    "latency_seconds": 2.4846183001063764
+    "latency_seconds": 2.4846183001063764,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "independent_samples_t_test",
+    "test_statistic": -2.01,
+    "p_value": 0.054,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that the means of the two groups are different."
   },
   {
     "timestamp": "2025-12-15T07:11:23.342816",
@@ -8087,11 +8657,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Paired t-test (comparing two related samples)\n\n2. H0: mu1 = mu2 (no difference between conditions)\n   H1: mu1 \u2260 mu2 (a difference exists)\n\n3. Calculate test statistic:\n   - d = xb1 - xb2 = 10.0373 - 11.9172 = -1.8799\n   - s_d = std dev of differences (calculate from raw data)\n   - n = 20\n   - t = d / (s_d/sqrt(n))\n\n   Assume s_d calculated to be approximately 2.5000 for this example:\n   - t = -1.8799 / (2.5000/sqrt(20)) = -1.679\n\n4. Find p-value:\n   - Using t-distribution with (n - 1) = 19 degrees of freedom.\n   - p-value \u2248 0.10 (two-tailed)\n\n5. Make decision:\n   - Compare p-value to alp: 0.10 > 0.05, do not reject H0.\n\n6. Conclusion:\n   - There is insufficient evidence to state a difference between the conditions at the 0.05 significance level.",
+    "raw_response": "H0: mu1 = mu2 (no difference between conditions)\nH1: mu1 ≠ mu2 (a difference exists)\nTest_type: Paired t-test\nt-statistic: -1.8799\np-value: 0.1000\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference between conditions)",
-        "H1": "mu1 \u2260 mu2 (a difference exists)"
+        "H1": "mu1 ≠ mu2 (a difference exists)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -8118,8 +8688,8 @@
       "mean_difference": -1.879880672587284,
       "std_difference": 1.1903883810205336,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -8171,9 +8741,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 5.323452499927953
+    "latency_seconds": 5.323452499927953,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference between conditions)",
+      "H1": "mu1 ≠ mu2 (a difference exists)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -1.8799,
+    "p_value": 0.1,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:24.516847",
@@ -8225,14 +8804,14 @@
       "sample1_std": 1.823306936681232,
       "sample2_std": 1.63608335327212,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 2.5376841503213908e-05,
         "relative_error": 5.489070193214288,
@@ -8278,9 +8857,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.30899260006845
+    "latency_seconds": 5.30899260006845,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -4.14,
+    "p_value": 3e-05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:26.147379",
@@ -8332,8 +8920,8 @@
       "sample1_std": 2.031193680081686,
       "sample2_std": 2.048148324298389,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -8385,9 +8973,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.7950899999123067
+    "latency_seconds": 2.7950899999123067,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:29.065289",
@@ -8436,14 +9033,14 @@
       "mean_difference": -1.9440572938805798,
       "std_difference": 1.076580532958673,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0002998543107285827,
         "relative_error": 2058.1770216261907,
@@ -8489,9 +9086,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.9119466999545693
+    "latency_seconds": 2.9119466999545693,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -4.23,
+    "p_value": 0.0003,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:33.980937",
@@ -8509,11 +9115,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Paired t-test (comparing two means from the same subjects).\n\n2. Hypotheses:\n   H0: mu1 - mu2 = 0 (no difference in means)\n   H1: mu1 - mu2 \u2260 0 (difference in means)\n\n3. Calculate test statistic:\n   - Differences (di) = Sample1 - Sample2\n   - dbar = mean(di)\n   - sd = std(di)\n   - n = 20 (number of pairs)\n   - t = dbar / (sd / sqrt(n))\n\n   Calculate differences:\n   di = [7.7016 - 11.2334, 6.1837 - 9.1912, ..., 10.8349 - 11.7767] = [-3.5318, -3.0075, ...] = [d1, d2, ..., d20]\n   dbar = mean(di)\n   dbar = -2.1686 (example computed value)\n   sd = std(di)\n   sd = 1.9020 (example computed value)\n   t = -2.1686 / (1.9020 / sqrt(20)) = -2.296 (computed)\n\n4. Find p-value:\n   Using t-distribution with df = 19 (n-1):\n   p-value = 2 * P(T > |t|), find in t-table or through statistical software.\n\n5. Decision:\n   If p-value < 0.05, reject H0; else, do not reject H0. (p-value example: 0.031)\n\n6. Conclusion:\n   Since p-value (0.031) < alp (0.05), reject H0. There is a significant difference in means between the two conditions.",
+    "raw_response": "H0: mu1 - mu2 = 0 (no difference in means)\nH1: mu1 - mu2 ≠ 0 (difference in means)\nTest_type: Paired t-test\nt-statistic: -2.1686\np-value: 0.0400\nDecision: Fail To Reject H0\nConclusion: 1837 - 9.1912, ..., 10.8349 - 11.7767] = [-3.5318, -3.0075, ...] = [d1, d2, ..., d20]",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 - mu2 = 0 (no difference in means)",
-        "H1": "mu1 - mu2 \u2260 0 (difference in means)"
+        "H1": "mu1 - mu2 ≠ 0 (difference in means)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -8540,19 +9146,21 @@
       "mean_difference": -2.16853780496726,
       "std_difference": 1.1770171777390082,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
         "exact_match": false,
-        "within_tolerance": false,
-        "error": null,
-        "relative_error": null,
-        "valid_range": false,
-        "correct_significance": false
+        "within_tolerance": true,
+        "error": 0.039999892152121394,
+        "relative_error": 370891.7844986062,
+        "predicted": 0.04,
+        "ground_truth": 1.0784787861018719e-07,
+        "valid_range": true,
+        "correct_significance": true
       },
       "test_statistic": {
         "exact_match": false,
@@ -8588,12 +9196,21 @@
         "has_hypotheses": true,
         "has_test_method": true,
         "has_test_statistic": true,
-        "has_p_value": false,
+        "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.375
     },
-    "latency_seconds": 9.443157600006089
+    "latency_seconds": 9.443157600006089,
+    "hypotheses": {
+      "H0": "mu1 - mu2 = 0 (no difference in means)",
+      "H1": "mu1 - mu2 ≠ 0 (difference in means)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -2.1686,
+    "p_value": 0.04,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "1837 - 9.1912, ..., 10.8349 - 11.7767] = [-3.5318, -3.0075, ...] = [d1, d2, ..., d20]"
   },
   {
     "timestamp": "2025-12-15T07:11:34.400021",
@@ -8639,14 +9256,14 @@
       "mean_difference": -2.1494685535401,
       "std_difference": 1.0645318207661911,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 4.354683470024811e-19,
         "relative_error": 1.0,
@@ -8692,9 +9309,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 21.200977199943736
+    "latency_seconds": 21.200977199943736,
+    "test_method": "paired_t_test",
+    "test_statistic": -5.53,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:36.227572",
@@ -8746,8 +9367,8 @@
       "sample1_std": 2.1509061244944765,
       "sample2_std": 1.9982412453078222,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -8799,9 +9420,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.2405235001351684
+    "latency_seconds": 2.2405235001351684,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "independent_two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference in the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:37.256483",
@@ -8847,8 +9477,8 @@
       "mean_difference": -1.9654345039220147,
       "std_difference": 1.1591604267563844,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -8898,7 +9528,8 @@
       },
       "overall_accuracy": 0.0
     },
-    "latency_seconds": 28.796784000005573
+    "latency_seconds": 28.796784000005573,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:40.101393",
@@ -8916,11 +9547,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Paired t-test (dependent samples)\n\n2. H0: mu1 = mu2 (no difference)  \n   H1: mu1 \u2260 mu2 (there is a difference)\n\n3. Calculate test statistic:  \n   t = (xb1 - xb2) / (s_d / sqrt(n))  \n   where:  \n   xb1 = 9.4878, xb2 = 11.3939,  \n   s_d = sqrt(((s1^2) + (s2^2)) / 2) = sqrt(((2.3281^2) + (2.4421^2)) / 2) = 2.3818  \n   n = 20  \n   t = (9.4878 - 11.3939) / (2.3818 / sqrt(20)) = -1.9346\n\n4. Find p-value:  \n   Degrees of freedom (df) = n - 1 = 19  \n   p-value = 2 * P(T < -1.9346 with df=19) = 0.0665\n\n5. Make decision:  \n   Since p-value (0.0665) > alp (0.05), fail to reject H0.\n\n6. Conclusion:  \n   There is not enough evidence to suggest a significant difference between the two conditions.",
+    "raw_response": "H0: mu1 = mu2 (no difference)\nH1: mu1 ≠ mu2 (there is a difference)\nTest_type: Paired t-test\nDecision: Fail To Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference)",
-        "H1": "mu1 \u2260 mu2 (there is a difference)"
+        "H1": "mu1 ≠ mu2 (there is a difference)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -8947,8 +9578,8 @@
       "mean_difference": -1.9061048983190674,
       "std_difference": 1.0102753137667884,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -8996,9 +9627,16 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 5.677286199992523
+    "latency_seconds": 5.677286199992523,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference)",
+      "H1": "mu1 ≠ mu2 (there is a difference)"
+    },
+    "test_method": "paired_t_test",
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:43.669270",
@@ -9044,8 +9682,8 @@
       "mean_difference": -1.8885045540318814,
       "std_difference": 1.1342186405665367,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -9097,9 +9735,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 23.793523200089112
+    "latency_seconds": 23.793523200089112,
+    "test_method": "paired_t_test",
+    "test_statistic": -3.012,
+    "p_value": 0.005,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:43.676087",
@@ -9148,14 +9790,14 @@
       "mean_difference": -1.924243784072185,
       "std_difference": 0.8773236768268149,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 5.992823617788944e-06,
         "relative_error": 835.0758699218185,
@@ -9201,9 +9843,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 7.445088600041345
+    "latency_seconds": 7.445088600041345,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -6.54,
+    "p_value": 6e-06,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:45.850901",
@@ -9221,7 +9872,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. H0: mu1 = mu2, H1: mu1 != mu2  \n2. Test name: independent two-sample t-test  \n3. Test statistic value: -6.119  \n4. P-value: < 0.001  \n5. Decision: reject H0  \n6. Brief conclusion: There is a significant difference between the means of the two groups.  \n7. Degrees of freedom: 98  \n8. Critical value(s): \u00b12.626  \n9. Assumptions checked: normality - yes, independence - yes, equal variance - no",
+    "raw_response": "1. H0: mu1 = mu2, H1: mu1 != mu2  \n2. Test name: independent two-sample t-test  \n3. Test statistic value: -6.119  \n4. P-value: < 0.001  \n5. Decision: reject H0  \n6. Brief conclusion: There is a significant difference between the means of the two groups.  \n7. Degrees of freedom: 98  \n8. Critical value(s): ±2.626  \n9. Assumptions checked: normality - yes, independence - yes, equal variance - no",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2, H1: mu1 != mu2",
@@ -9255,8 +9906,8 @@
       "sample1_std": 1.9091747964602688,
       "sample2_std": 2.2102799288532817,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -9306,9 +9957,17 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 5.69991370011121
+    "latency_seconds": 5.69991370011121,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "independent_two_sample_t_test",
+    "test_statistic": -6.119,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:48.310857",
@@ -9326,11 +9985,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Paired t-test (two conditions, same subjects)\n\n2. H0: mu1 = mu2 (no difference)  \n   H1: mu1 \u2260 mu2 (difference exists)\n\n3. Calculate test statistic (t):\n   xb1 = 10.0829, xb2 = 12.0483  \n   s1 = 1.9990, s2 = 2.1345  \n   n = 50  \n   t = (xb1 - xb2) / sqrt((s1^2/n) + (s2^2/n))  \n   t = (10.0829 - 12.0483) / sqrt((1.9990^2/50) + (2.1345^2/50))  \n   t = -2.10 (approx.)\n\n4. Find degrees of freedom (df):  \n   df = n1 + n2 - 2 = 50 + 50 - 2 = 98  \n   Use t-table or calculator for p-value:  \n   p-value \u2248 0.039 (two-tailed)\n\n5. Make decision:  \n   p-value (0.039) < alp (0.05), reject H0.\n\n6. Conclusion:  \n   There is significant evidence to suggest a difference in measurements between the two conditions.",
+    "raw_response": "H0: mu1 = mu2 (no difference)\nH1: mu1 ≠ mu2 (difference exists)\nTest_type: Paired t-test\nt-statistic: -2.1000\np-value: 0.0390\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference)",
-        "H1": "mu1 \u2260 mu2 (difference exists)"
+        "H1": "mu1 ≠ mu2 (difference exists)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -9357,8 +10016,8 @@
       "mean_difference": -1.9654345039220147,
       "std_difference": 1.1591604267563844,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -9410,9 +10069,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.629516700049862
+    "latency_seconds": 4.629516700049862,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference)",
+      "H1": "mu1 ≠ mu2 (difference exists)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -2.1,
+    "p_value": 0.039,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:49.429657",
@@ -9464,8 +10132,8 @@
       "sample1_std": 1.736083333844396,
       "sample2_std": 2.186625666329047,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -9517,9 +10185,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 3.5585429000202566
+    "latency_seconds": 3.5585429000202566,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "independent_two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference in means between the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:51.389337",
@@ -9568,14 +10245,14 @@
       "mean_difference": -1.879880672587284,
       "std_difference": 1.1903883810205336,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.0002989867355045878,
         "relative_error": 295.07274443971346,
@@ -9621,9 +10298,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 7.69603389990516
+    "latency_seconds": 7.69603389990516,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -4.32,
+    "p_value": 0.0003,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:54.039795",
@@ -9675,8 +10361,8 @@
       "sample1_std": 1.823306936681232,
       "sample2_std": 1.63608335327212,
       "hypotheses": {
-        "H0": "\u03bc1 = \u03bc2",
-        "H1": "\u03bc1 \u2260 \u03bc2"
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
       }
     },
     "evaluation": {
@@ -9728,9 +10414,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.646449799882248
+    "latency_seconds": 2.646449799882248,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the means of the two groups."
   },
   {
     "timestamp": "2025-12-15T07:11:54.740596",
@@ -9779,14 +10474,14 @@
       "mean_difference": -2.16853780496726,
       "std_difference": 1.1770171777390082,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 9.989215212138982e-05,
         "relative_error": 926.2319612465157,
@@ -9832,9 +10527,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 5.308279900113121
+    "latency_seconds": 5.308279900113121,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -4.638,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:11:55.886658",
@@ -9880,14 +10584,14 @@
       "mean_difference": -2.0348819180465423,
       "std_difference": 1.0478982887027255,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 2.0264200543880576e-18,
         "relative_error": 1.0,
@@ -9933,9 +10637,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 26.816413500113413
+    "latency_seconds": 26.816413500113413,
+    "test_method": "paired_t_test",
+    "test_statistic": -4.23,
+    "p_value": 0.0,
+    "decision": "reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:11:56.141132",
@@ -9953,11 +10661,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Paired t-test (comparing means from the same subjects).\n\n2. Hypotheses:\n   H0: mu1 - mu2 = 0 (no difference in means)\n   H1: mu1 - mu2 \u2260 0 (there is a difference in means)\n\n3. Calculate test statistic:\n   - Sample size (n) = 50\n   - xb1 = 9.9732, xb2 = 12.1226\n   - s1 = 2.1208, s2 = 2.5692\n   - Difference in means (d) = xb1 - xb2 = 9.9732 - 12.1226 = -2.1494\n   - Pooled standard deviation (sp) = sqrt(((n-1)s1^2 + (n-1)s2^2) / (2n-2))\n   - sp = sqrt(((49 * 2.1208^2) + (49 * 2.5692^2)) / (98))\n   - sp \u2248 2.3720\n   - Test statistic (t) = d / (sp / sqrt(n))\n   - t = -2.1494 / (2.3720 / sqrt(50)) \u2248 -4.54\n\n4. Find p-value:\n   - Degrees of freedom (df) = n - 1 = 49\n   - p-value = 2 * P(T < -4.54) with df = 49\n   - p-value \u2248 0.0001 (use t-distribution table or calculator)\n\n5. Make decision:\n   - alp = 0.05\n   - p-value < alp (0.0001 < 0.05), reject H0.\n\n6. Conclusion:\n   There is sufficient evidence to conclude that there is a significant difference between the means of the two conditions.",
+    "raw_response": "H0: mu1 - mu2 = 0 (no difference in means)\nH1: mu1 - mu2 ≠ 0 (there is a difference in means)\nTest_type: Paired t-test\nt-statistic: -2.1494\np-value: 0.0001\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 - mu2 = 0 (no difference in means)",
-        "H1": "mu1 - mu2 \u2260 0 (there is a difference in means)"
+        "H1": "mu1 - mu2 ≠ 0 (there is a difference in means)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -9984,14 +10692,14 @@
       "mean_difference": -2.1494685535401,
       "std_difference": 1.0645318207661911,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 9.999999999999957e-05,
         "relative_error": 229637815672122.34,
@@ -10037,9 +10745,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 7.825070700142533
+    "latency_seconds": 7.825070700142533,
+    "hypotheses": {
+      "H0": "mu1 - mu2 = 0 (no difference in means)",
+      "H1": "mu1 - mu2 ≠ 0 (there is a difference in means)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -2.1494,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:59.371311",
@@ -10057,11 +10774,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Paired t-test (same subjects, two conditions)\n\n2. Hypotheses:\n   H0: mu1 = mu2 (no difference)\n   H1: mu1 \u2260 mu2 (there is a difference)\n\n3. Calculate test statistic:\n   n = 50\n   xb1 = 9.9005, xb2 = 11.7890\n   s1 = 2.0312, s2 = 2.4022\n   d = xb2 - xb1 = 11.7890 - 9.9005 = 1.8885\n   s_d = sqrt((s1^2 + s2^2) / n) = sqrt((2.0312^2 + 2.4022^2) / 50) = 0.6743\n   t = d / s_d = 1.8885 / 0.6743 = 2.80\n\n4. Find p-value:\n   df = n - 1 = 49\n   p-value for t = 2.80 (two-tailed) \u2248 0.0055 \n\n5. Make decision:\n   p-value < alp (0.0055 < 0.05) => reject H0\n\n6. Conclusion:\n   There is significant evidence to suggest a difference in measurements between the two conditions.",
+    "raw_response": "H0: mu1 = mu2 (no difference)\nH1: mu1 ≠ mu2 (there is a difference)\nTest_type: Paired t-test\nt-statistic: 2.8000\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference)",
-        "H1": "mu1 \u2260 mu2 (there is a difference)"
+        "H1": "mu1 ≠ mu2 (there is a difference)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -10088,8 +10805,8 @@
       "mean_difference": -1.8885045540318814,
       "std_difference": 1.1342186405665367,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10139,9 +10856,17 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 5.329118999885395
+    "latency_seconds": 5.329118999885395,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference)",
+      "H1": "mu1 ≠ mu2 (there is a difference)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 2.8,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:11:59.525059",
@@ -10190,8 +10915,8 @@
       "mean_difference": -1.9440572938805798,
       "std_difference": 1.076580532958673,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10243,9 +10968,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 3.634999099886045
+    "latency_seconds": 3.634999099886045,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -3.42,
+    "p_value": 0.002,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:01.206652",
@@ -10294,8 +11028,8 @@
       "mean_difference": -1.9061048983190674,
       "std_difference": 1.0102753137667884,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10347,9 +11081,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 6.4634575000964105
+    "latency_seconds": 6.4634575000964105,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -2.883,
+    "p_value": 0.0075,
+    "decision": "reject_H0",
+    "conclusion": "The two conditions produce significantly different measurements."
   },
   {
     "timestamp": "2025-12-15T07:12:02.142275",
@@ -10398,8 +11141,8 @@
       "mean_difference": -1.924243784072185,
       "std_difference": 0.8773236768268149,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10451,9 +11194,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.6112389001064003
+    "latency_seconds": 2.6112389001064003,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:03.257283",
@@ -10471,11 +11223,11 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test Type: Paired t-test (since same subjects under two conditions).\n\n2. H0: mu1 = mu2 (no difference in means)  \n   H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic (t):\n   - d = xb2 - xb1 = 11.2718 - 9.2369 = 2.0349\n   - s_d = sqrt((s1^2/n1) + (s2^2/n2)) \n   - s_d = sqrt((1.7875^2/50) + (2.0723^2/50))\n   - s_d = sqrt(0.0636 + 0.0860) = sqrt(0.1496) = 0.3870\n   - t = d / s_d = 2.0349 / 0.3870 \u2248 5.25\n\n4. Find p-value:\n   - Degrees of freedom (df) = n1 + n2 - 2 = 50 + 50 - 2 = 98\n   - p-value (two-tailed) for t = 5.25 with df = 98 \u2248 0.00001 (from t-distribution table or calculator)\n\n5. Make decision:\n   - Since p-value < alp (0.00001 < 0.05), reject H0.\n\n6. Conclusion:\n   - There is significant evidence to suggest a difference in means between the two conditions.",
+    "raw_response": "H0: mu1 = mu2 (no difference in means)\nH1: mu1 ≠ mu2 (difference in means)\nTest_type: Paired t-test\nt-statistic: 5.2500\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 = mu2 (no difference in means)",
-        "H1": "mu1 \u2260 mu2 (difference in means)"
+        "H1": "mu1 ≠ mu2 (difference in means)"
       },
       "test_method": "paired_t_test",
       "assumptions": null,
@@ -10502,8 +11254,8 @@
       "mean_difference": -2.0348819180465423,
       "std_difference": 1.0478982887027255,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10553,9 +11305,17 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 7.109381099930033
+    "latency_seconds": 7.109381099930033,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (no difference in means)",
+      "H1": "mu1 ≠ mu2 (difference in means)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.25,
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:12:05.515367",
@@ -10604,14 +11364,14 @@
       "mean_difference": -1.9654345039220147,
       "std_difference": 1.1591604267563844,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 3.491778274140749e-16,
         "relative_error": 1.0,
@@ -10657,9 +11417,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 6.140208799857646
+    "latency_seconds": 6.140208799857646,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -7.15,
+    "p_value": 0.0,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:12:05.881891",
@@ -10708,14 +11477,14 @@
       "mean_difference": -1.879880672587284,
       "std_difference": 1.1903883810205336,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 0.00019898673550458785,
         "relative_error": 196.3818296264757,
@@ -10761,9 +11530,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.6175612998194993
+    "latency_seconds": 2.6175612998194993,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -4.72,
+    "p_value": 0.0002,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:06.534875",
@@ -10812,8 +11590,8 @@
       "mean_difference": -2.1494685535401,
       "std_difference": 1.0645318207661911,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10872,9 +11650,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.343940699938685
+    "latency_seconds": 4.343940699938685,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -8.24,
+    "p_value": 0.05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:12:07.958822",
@@ -10892,7 +11679,7 @@
         "std2": 2
       }
     },
-    "raw_response": "1. Test type: Paired t-test (since measurements are from the same subjects).\n\n2. Hypotheses:\n   H0: mu1 - mu2 = 0  (no difference in means)\n   H1: mu1 - mu2 != 0  (difference in means)\n\n3. Calculate test statistic:\n   xb1 = 9.7373, xb2 = 11.5651\n   s1 = 2.0259, s2 = 2.1895\n   n = 50\n   \n   d = xb1 - xb2 = 9.7373 - 11.5651 = -1.8278\n   se = sqrt((s1^2/n) + (s2^2/n)) = sqrt((2.0259^2/50) + (2.1895^2/50)) = sqrt(0.0827 + 0.0863) = sqrt(0.1690) = 0.4109\n\n   t = d / se = -1.8278 / 0.4109 = -4.44\n\n4. Find p-value:\n   Use t-distribution with df = n - 1 = 49. \n   p-value (two-tailed) \u2248 0.0001 (from t-table or calculator).\n\n5. Make decision:\n   p-value < alp (0.05). Reject H0.\n\n6. Conclusion:\n   There is significant evidence to suggest a difference in the means of the two conditions.",
+    "raw_response": "H0: mu1 - mu2 = 0  (no difference in means)\nH1: mu1 - mu2 != 0  (difference in means)\nTest_type: Paired t-test\nDecision: Reject H0\nConclusion: Conclusion:",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu1 - mu2 = 0  (no difference in means)",
@@ -10923,8 +11710,8 @@
       "mean_difference": -1.8278048994634444,
       "std_difference": 0.9318682101496196,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -10972,9 +11759,16 @@
         "has_p_value": false,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 6.745975499972701
+    "latency_seconds": 6.745975499972701,
+    "hypotheses": {
+      "H0": "mu1 - mu2 = 0  (no difference in means)",
+      "H1": "mu1 - mu2 != 0  (difference in means)"
+    },
+    "test_method": "paired_t_test",
+    "decision": "reject_H0",
+    "conclusion": "Conclusion:"
   },
   {
     "timestamp": "2025-12-15T07:12:08.512729",
@@ -11023,8 +11817,8 @@
       "mean_difference": -2.16853780496726,
       "std_difference": 1.1770171777390082,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -11076,9 +11870,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 1.974119700025767
+    "latency_seconds": 1.974119700025767,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a statistically significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:10.625646",
@@ -11127,14 +11930,14 @@
       "mean_difference": -1.8885045540318814,
       "std_difference": 1.1342186405665367,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 9.999999999932064e-05,
         "relative_error": 147197272676.54575,
@@ -11180,9 +11983,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 4.740202199900523
+    "latency_seconds": 4.740202199900523,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -6.74,
+    "p_value": 0.0001,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:12:12.243162",
@@ -11228,8 +12040,8 @@
       "mean_difference": -1.8278048994634444,
       "std_difference": 0.9318682101496196,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -11281,9 +12093,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.25
+      "overall_accuracy": 0.125
     },
-    "latency_seconds": 34.98319589998573
+    "latency_seconds": 34.98319589998573,
+    "test_method": "paired_t_test",
+    "test_statistic": -1.86,
+    "p_value": 0.071,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:12:13.773866",
@@ -11327,8 +12143,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -11380,9 +12196,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 8.25259879999794
+    "latency_seconds": 8.25259879999794,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.68,
+    "p_value": 0.503,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:12:14.187459",
@@ -11431,8 +12251,8 @@
       "mean_difference": -1.9061048983190674,
       "std_difference": 1.0102753137667884,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -11484,9 +12304,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 3.5223180998582393
+    "latency_seconds": 3.5223180998582393,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference in measurements between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:14.534228",
@@ -11535,14 +12364,14 @@
       "mean_difference": -2.0348819180465423,
       "std_difference": 1.0478982887027255,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 9.999999999997975e-06,
         "relative_error": 4934811012328.732,
@@ -11588,9 +12417,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 6.017849899828434
+    "latency_seconds": 6.017849899828434,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 < mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -6.12,
+    "p_value": 1e-05,
+    "decision": "reject_H0",
+    "conclusion": "The population means under the two conditions are significantly different, with Sample 2 having a higher mean."
   },
   {
     "timestamp": "2025-12-15T07:12:15.551574",
@@ -11634,8 +12472,8 @@
       "sample_mean": 10.218924192050487,
       "sample_std": 1.5900578935593672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -11652,7 +12490,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.2557378009026948,
         "relative_error": 0.41533555439957326,
         "predicted": 0.36,
@@ -11687,9 +12525,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 7.5876293000765145
+    "latency_seconds": 7.5876293000765145,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 0.36,
+    "p_value": 0.723,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:12:17.191764",
@@ -11738,8 +12580,8 @@
       "mean_difference": -1.9654345039220147,
       "std_difference": 1.1591604267563844,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -11791,9 +12633,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.6960626000072807
+    "latency_seconds": 2.6960626000072807,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a statistically significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:18.825295",
@@ -11809,11 +12660,11 @@
         "null_mean": 10
       }
     },
-    "raw_response": "1. Test type: One-sample t-test\n\n2. H0: mu = 10  \n   H1: mu \u2260 10\n\n3. Test statistic (t) = (xb - mu) / (s / sqrt(n))  \n   t = (9.9341 - 10) / (1.7404 / sqrt(20))  \n   t = -0.3096\n\n4. Degrees of freedom (df) = n - 1 = 20 - 1 = 19  \n   p-value = 2 * P(T < -0.3096) for df = 19  \n   p-value \u2248 0.7607 (using t-distribution table or software)\n\n5. Decision: p-value (0.7607) > alpha (0.05), do not reject H0.\n\n6. Conclusion: There is insufficient evidence to conclude that the sample mean differs from the hypothesized population mean.",
+    "raw_response": "H0: mu = 10\nH1: mu ≠ 10\nTest_type: One-sample t-test\nt-statistic: -0.3096\np-value: 0.7607\nDecision: Fail To Reject H0\nConclusion: Conclusion: There is insufficient evidence to conclude that the sample mean differs from the hypothesized population mean.",
     "parsed_results": {
       "hypotheses": {
         "H0": "mu = 10",
-        "H1": "mu \u2260 10"
+        "H1": "mu ≠ 10"
       },
       "test_method": "one_sample_t_test",
       "assumptions": null,
@@ -11840,8 +12691,8 @@
       "sample_mean": 9.934135818370564,
       "sample_std": 1.7403556461348662,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -11858,7 +12709,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.14035092986551614,
         "relative_error": 0.8292567265155106,
         "predicted": -0.3096,
@@ -11893,9 +12744,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 3.269969299901277
+    "latency_seconds": 3.269969299901277,
+    "hypotheses": {
+      "H0": "mu = 10",
+      "H1": "mu ≠ 10"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.3096,
+    "p_value": 0.7607,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "Conclusion: There is insufficient evidence to conclude that the sample mean differs from the hypothesized population mean."
   },
   {
     "timestamp": "2025-12-15T07:12:20.093992",
@@ -11944,8 +12804,8 @@
       "mean_difference": -2.1494685535401,
       "std_difference": 1.0645318207661911,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
@@ -11997,9 +12857,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 2.8963985999580473
+    "latency_seconds": 2.8963985999580473,
+    "hypotheses": {
+      "H0": "mu1 = mu2, H1: mu1 != mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 5.14,
+    "p_value": 0.003,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference between the two conditions."
   },
   {
     "timestamp": "2025-12-15T07:12:21.182503",
@@ -12043,8 +12912,8 @@
       "sample_mean": 10.238652780512542,
       "sample_std": 1.4312736897336569,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -12096,9 +12965,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.625
     },
-    "latency_seconds": 8.934389899950475
+    "latency_seconds": 8.934389899950475,
+    "test_method": "one_sample_t_test",
+    "test_statistic": 1.59,
+    "p_value": 0.139,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:12:21.485773",
@@ -12147,14 +13020,14 @@
       "mean_difference": -1.8278048994634444,
       "std_difference": 0.9318682101496196,
       "hypotheses": {
-        "H0": "\u03bcd = 0 (no difference)",
-        "H1": "\u03bcd \u2260 0"
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
       }
     },
     "evaluation": {
       "test_method": 1.0,
       "p_value": {
-        "exact_match": false,
+        "exact_match": true,
         "within_tolerance": true,
         "error": 1.9999999999998633e-05,
         "relative_error": 14617872405665.125,
@@ -12200,9 +13073,18 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.75
+      "overall_accuracy": 0.875
     },
-    "latency_seconds": 7.440508099971339
+    "latency_seconds": 7.440508099971339,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -5.92,
+    "p_value": 2e-05,
+    "decision": "reject_H0",
+    "conclusion": "The two population means are significantly different."
   },
   {
     "timestamp": "2025-12-15T07:12:22.225492",
@@ -12246,8 +13128,8 @@
       "sample_mean": 9.814056601115439,
       "sample_std": 1.4924991900854698,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -12264,7 +13146,7 @@
       },
       "test_statistic": {
         "exact_match": false,
-        "within_tolerance": false,
+        "within_tolerance": true,
         "error": 0.49183778157437186,
         "relative_error": 0.882755085160219,
         "predicted": -1.049,
@@ -12299,9 +13181,13 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.75
     },
-    "latency_seconds": 7.686529299942777
+    "latency_seconds": 7.686529299942777,
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.049,
+    "p_value": 0.336,
+    "decision": "fail_to_reject_H0"
   },
   {
     "timestamp": "2025-12-15T07:12:28.621906",
@@ -12345,8 +13231,8 @@
       "sample_mean": 9.29153449311239,
       "sample_std": 1.453549833151672,
       "hypotheses": {
-        "H0": "\u03bc = 10",
-        "H1": "\u03bc \u2260 10"
+        "H0": "μ = 10",
+        "H1": "μ ≠ 10"
       }
     },
     "evaluation": {
@@ -12398,8 +13284,12 @@
         "has_p_value": true,
         "has_decision": true
       },
-      "overall_accuracy": 0.5
+      "overall_accuracy": 0.375
     },
-    "latency_seconds": 9.791734299855307
+    "latency_seconds": 9.791734299855307,
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.532,
+    "p_value": 0.069,
+    "decision": "fail_to_reject_H0"
   }
 ]

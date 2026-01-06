@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T11:18:43.990865",
+    "model": "claude-3-opus-20240229",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1fca07f7490 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T11:18:43.997269",
+    "model": "claude-3-opus-20240229",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1fca07d7e30 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]

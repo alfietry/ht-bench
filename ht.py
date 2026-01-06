@@ -40,10 +40,25 @@ logger = logging.getLogger(__name__)
 class HypothesisTestingBenchmark:
     """Main benchmark orchestrator"""
     
-    def __init__(self, output_dir: Path = config.RESULTS_DIR):
+    def __init__(self, output_dir: Path = config.RESULTS_DIR,
+                 data_source: str = "synthetic",
+                 real_domain: str = "random"):
+        """
+        Initialize the benchmark.
+        
+        Args:
+            output_dir: Directory to save results
+            data_source: "synthetic", "real", or "mixed"
+            real_domain: For real data - "stocks", "healthcare", or "random"
+        """
         self.output_dir = output_dir
         self.output_dir.mkdir(exist_ok=True)
-        self.data_generator = DataGenerator()
+        self.data_source = data_source
+        self.real_domain = real_domain
+        self.data_generator = DataGenerator(
+            data_source=data_source,
+            real_domain=real_domain
+        )
         self.results = []
     
     async def evaluate_single(self,
@@ -54,8 +69,8 @@ class HypothesisTestingBenchmark:
         """Evaluate a single scenario"""
         latency_seconds = None
         try:
-            # Generate prompt
-            test_context = create_test_context(scenario["test_type"])
+            # Generate prompt - pass full scenario for context awareness
+            test_context = create_test_context(scenario["test_type"], scenario)
             prompt = get_prompt(prompt_type, scenario, test_context)
             
             # Get LLM response
@@ -97,9 +112,12 @@ class HypothesisTestingBenchmark:
                 "model": model_name,
                 "prompt_type": prompt_type,
                 "prompt": prompt,
+                "data_source": scenario.get("data_source", "synthetic"),
+                "domain": scenario.get("context", {}).get("domain", None),
                 "input_data": {
                     "test_type": scenario["test_type"],
-                    "metadata": scenario.get("metadata", {})
+                    "metadata": scenario.get("metadata", {}),
+                    "context": scenario.get("context", {})
                 },
                 "raw_response": raw_response_text if isinstance(raw_response, str) else json.dumps(raw_response),
                 "parsed_results": parsed.model_dump() if hasattr(parsed, 'model_dump') else parsed,
@@ -284,11 +302,14 @@ class HypothesisTestingBenchmark:
         print("\n" + "="*80)
 
 
-async def run_quick_test():
+async def run_quick_test(data_source: str = "synthetic", real_domain: str = "random"):
     """Run a quick test with a subset of models and scenarios"""
-    logger.info("Starting quick test...")
+    logger.info(f"Starting quick test (data_source={data_source}, domain={real_domain})...")
     
-    benchmark = HypothesisTestingBenchmark()
+    benchmark = HypothesisTestingBenchmark(
+        data_source=data_source,
+        real_domain=real_domain
+    )
     
     # Test with a small subset
     models = {
@@ -310,11 +331,14 @@ async def run_quick_test():
     benchmark.print_summary()
 
 
-async def run_full_benchmark():
+async def run_full_benchmark(data_source: str = "synthetic", real_domain: str = "random"):
     """Run comprehensive benchmark across all models and scenarios"""
-    logger.info("Starting full benchmark...")
+    logger.info(f"Starting full benchmark (data_source={data_source}, domain={real_domain})...")
     
-    benchmark = HypothesisTestingBenchmark()
+    benchmark = HypothesisTestingBenchmark(
+        data_source=data_source,
+        real_domain=real_domain
+    )
     
     # Target model set for full benchmark (skip Google, exclude Ollama)
     full_models = config.FULL_MODE_MODEL_MAP
@@ -365,12 +389,17 @@ async def run_custom_benchmark(
     prompt_types: List[str],
     test_types: List[str],
     sample_sizes: Optional[List[int]] = None,
-    scenarios_per_type: int = 3
+    scenarios_per_type: int = 3,
+    data_source: str = "synthetic",
+    real_domain: str = "random"
 ):
     """Run custom benchmark with specified parameters"""
-    logger.info("Starting custom benchmark...")
+    logger.info(f"Starting custom benchmark (data_source={data_source}, domain={real_domain})...")
     
-    benchmark = HypothesisTestingBenchmark()
+    benchmark = HypothesisTestingBenchmark(
+        data_source=data_source,
+        real_domain=real_domain
+    )
     
     await benchmark.evaluate_batch(
         models=models_per_provider,
@@ -405,12 +434,26 @@ def main():
     parser.add_argument("--evaluations", type=int,
                        help="Alias for --scenarios")
     
+    # New data source arguments
+    parser.add_argument("--data-source", choices=["synthetic", "real", "mixed"],
+                       default="synthetic",
+                       help="Data source: synthetic (default), real (stocks/healthcare), or mixed")
+    parser.add_argument("--real-domain", choices=["stocks", "healthcare", "random"],
+                       default="random",
+                       help="Domain for real data: stocks, healthcare, or random (both)")
+    
     args = parser.parse_args()
     
     if args.mode == "quick":
-        asyncio.run(run_quick_test())
+        asyncio.run(run_quick_test(
+            data_source=args.data_source,
+            real_domain=args.real_domain
+        ))
     elif args.mode == "full":
-        asyncio.run(run_full_benchmark())
+        asyncio.run(run_full_benchmark(
+            data_source=args.data_source,
+            real_domain=args.real_domain
+        ))
     else:  # custom
         if args.models:
             # Parse models
@@ -434,7 +477,9 @@ def main():
                 prompt_types=prompt_types,
                 test_types=test_types,
                 sample_sizes=sample_sizes,
-                scenarios_per_type=scenarios_per_type
+                scenarios_per_type=scenarios_per_type,
+                data_source=args.data_source,
+                real_domain=args.real_domain
             ))
         else:
             logger.error("Custom mode requires --models argument")

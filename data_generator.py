@@ -1,16 +1,75 @@
 """
-Data generator for various statistical distributions and hypothesis testing scenarios
+Data generator for various statistical distributions and hypothesis testing scenarios.
+
+Supports both synthetic data generation and real-world datasets (stocks, healthcare).
 """
 import numpy as np
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Optional, Literal
 import config
+
+# Try to import real data loader - gracefully handle if datasets not present
+try:
+    from data.data_loader import RealDataLoader, StockDataLoader, HealthcareDataLoader
+    REAL_DATA_AVAILABLE = True
+except (ImportError, FileNotFoundError):
+    REAL_DATA_AVAILABLE = False
+    RealDataLoader = None
+
+
+DataSource = Literal["synthetic", "real", "mixed"]
+RealDomain = Literal["stocks", "healthcare", "random"]
 
 
 class DataGenerator:
-    """Generate synthetic data for hypothesis testing"""
+    """Generate synthetic or real-world data for hypothesis testing.
     
-    def __init__(self, seed: int = config.RANDOM_SEED):
+    Supports three modes:
+    - synthetic: Generated from statistical distributions (default, original behavior)
+    - real: Uses real-world datasets (stocks, healthcare)
+    - mixed: Randomly alternates between synthetic and real data
+    """
+    
+    def __init__(self, seed: int = config.RANDOM_SEED, 
+                 data_source: DataSource = "synthetic",
+                 real_domain: RealDomain = "random"):
+        """
+        Initialize the data generator.
+        
+        Args:
+            seed: Random seed for reproducibility
+            data_source: "synthetic", "real", or "mixed"
+            real_domain: For real data - "stocks", "healthcare", or "random"
+        """
         self.rng = np.random.default_rng(seed)
+        self.seed = seed
+        self.data_source = data_source
+        self.real_domain = real_domain
+        self._real_loader = None
+        
+        # Validate configuration
+        if data_source in ("real", "mixed") and not REAL_DATA_AVAILABLE:
+            import warnings
+            warnings.warn(
+                "Real data loader not available. Falling back to synthetic data. "
+                "Ensure data/data_loader.py exists and datasets are in data/raw/."
+            )
+            self.data_source = "synthetic"
+    
+    @property
+    def real_loader(self) -> Optional['RealDataLoader']:
+        """Lazy-load the real data loader."""
+        if self._real_loader is None and REAL_DATA_AVAILABLE:
+            self._real_loader = RealDataLoader()
+        return self._real_loader
+    
+    def _should_use_real_data(self) -> bool:
+        """Determine if this scenario should use real data."""
+        if self.data_source == "synthetic":
+            return False
+        elif self.data_source == "real":
+            return True
+        else:  # mixed
+            return self.rng.random() > 0.5
     
     def generate_normal(self, mean: float, std: float, size: int) -> np.ndarray:
         """Generate normal distribution data"""
@@ -36,7 +95,35 @@ class DataGenerator:
                                    true_mean: float = 10,
                                    std: float = 2,
                                    null_mean: float = 10) -> Dict[str, Any]:
-        """Generate data for one-sample t-test"""
+        """Generate data for one-sample t-test (synthetic or real)."""
+        
+        # Try real data first if configured
+        if self._should_use_real_data() and self.real_loader:
+            try:
+                real_scenario = self.real_loader.generate_one_sample_scenario(
+                    domain=self.real_domain,
+                    n_samples=sample_size,
+                    seed=self.seed
+                )
+                return {
+                    "test_type": "one_sample_t_test",
+                    "sample1": np.array(real_scenario["data"]),
+                    "population_mean": real_scenario["population_mean"],
+                    "true_effect": None,  # Unknown for real data
+                    "data_source": "real",
+                    "context": real_scenario.get("context", {}),
+                    "metadata": {
+                        "sample_size": len(real_scenario["data"]),
+                        "domain": real_scenario.get("context", {}).get("domain", "unknown"),
+                        "dataset": real_scenario.get("context", {}).get("dataset", "unknown"),
+                    }
+                }
+            except Exception as e:
+                # Fallback to synthetic on error
+                import warnings
+                warnings.warn(f"Real data loading failed, using synthetic: {e}")
+        
+        # Synthetic data generation (original behavior)
         sample = self.generate_normal(true_mean, std, sample_size)
         
         return {
@@ -44,6 +131,7 @@ class DataGenerator:
             "sample1": sample,
             "population_mean": null_mean,
             "true_effect": true_mean - null_mean,
+            "data_source": "synthetic",
             "metadata": {
                 "sample_size": sample_size,
                 "true_mean": true_mean,
@@ -56,7 +144,59 @@ class DataGenerator:
                                    mean1: float = 10, mean2: float = 12,
                                    std1: float = 2, std2: float = 2,
                                    paired: bool = False) -> Dict[str, Any]:
-        """Generate data for two-sample t-test"""
+        """Generate data for two-sample t-test (synthetic or real)."""
+        
+        # Try real data first if configured
+        if self._should_use_real_data() and self.real_loader:
+            try:
+                if paired:
+                    real_scenario = self.real_loader.generate_paired_scenario(
+                        domain=self.real_domain,
+                        n_pairs=sample_size1,
+                        seed=self.seed
+                    )
+                    return {
+                        "test_type": "paired_t_test",
+                        "sample1": np.array(real_scenario["before_data"]),
+                        "sample2": np.array(real_scenario["after_data"]),
+                        "true_effect": None,  # Unknown for real data
+                        "paired": True,
+                        "data_source": "real",
+                        "context": real_scenario.get("context", {}),
+                        "metadata": {
+                            "sample_size1": len(real_scenario["before_data"]),
+                            "sample_size2": len(real_scenario["after_data"]),
+                            "domain": real_scenario.get("context", {}).get("domain", "unknown"),
+                            "dataset": real_scenario.get("context", {}).get("dataset", "unknown"),
+                        }
+                    }
+                else:
+                    real_scenario = self.real_loader.generate_two_sample_scenario(
+                        domain=self.real_domain,
+                        n_samples=min(sample_size1, sample_size2),
+                        seed=self.seed
+                    )
+                    return {
+                        "test_type": "two_sample_t_test",
+                        "sample1": np.array(real_scenario["group1_data"]),
+                        "sample2": np.array(real_scenario["group2_data"]),
+                        "true_effect": None,  # Unknown for real data
+                        "paired": False,
+                        "data_source": "real",
+                        "context": real_scenario.get("context", {}),
+                        "metadata": {
+                            "sample_size1": len(real_scenario["group1_data"]),
+                            "sample_size2": len(real_scenario["group2_data"]),
+                            "domain": real_scenario.get("context", {}).get("domain", "unknown"),
+                            "dataset": real_scenario.get("context", {}).get("dataset", "unknown"),
+                        }
+                    }
+            except Exception as e:
+                # Fallback to synthetic on error
+                import warnings
+                warnings.warn(f"Real data loading failed, using synthetic: {e}")
+        
+        # Synthetic data generation (original behavior)
         sample1 = self.generate_normal(mean1, std1, sample_size1)
         
         if paired:
@@ -71,6 +211,7 @@ class DataGenerator:
             "sample2": sample2,
             "true_effect": mean2 - mean1,
             "paired": paired,
+            "data_source": "synthetic",
             "metadata": {
                 "sample_size1": sample_size1,
                 "sample_size2": sample_size2,
@@ -273,8 +414,27 @@ class DataGenerator:
         return scenarios
 
 
-def create_test_context(test_type: str) -> str:
-    """Create contextual description for test type"""
+def create_test_context(test_type: str, scenario: Dict[str, Any] = None) -> str:
+    """Create contextual description for test type.
+    
+    Args:
+        test_type: The statistical test type
+        scenario: Optional scenario dict with context info for real data
+        
+    Returns:
+        Human-readable context description
+    """
+    # If scenario has real-world context, use it
+    if scenario and scenario.get("data_source") == "real" and "context" in scenario:
+        ctx = scenario["context"]
+        description = ctx.get("test_description", ctx.get("description", ""))
+        if description:
+            domain = ctx.get("domain", "").title()
+            dataset = ctx.get("dataset", "")
+            prefix = f"[{domain} - {dataset}] " if domain and dataset else ""
+            return f"{prefix}{description}"
+    
+    # Default synthetic data contexts (original behavior)
     contexts = {
         "one_sample_t_test": "A researcher wants to test if a sample mean differs from a known population value.",
         "two_sample_t_test": "A researcher wants to compare the means of two independent groups.",

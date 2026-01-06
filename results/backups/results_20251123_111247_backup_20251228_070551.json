@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T11:12:47.581236",
+    "model": "claude-3-sonnet-20240229",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1aff26148a0 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T11:12:47.741306",
+    "model": "claude-3-sonnet-20240229",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1aff24d6d50 state=finished raised NotFoundError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]

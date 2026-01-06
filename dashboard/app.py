@@ -27,6 +27,26 @@ st.set_page_config(
 # Switch to a light, leaderboard-style aesthetic
 pio.templates.default = "plotly_white"
 
+# Global font configuration - set all text to black
+pio.templates["plotly_white"].layout.font.family = "Segoe UI, system-ui, -apple-system, sans-serif"
+pio.templates["plotly_white"].layout.font.size = 13
+pio.templates["plotly_white"].layout.font.color = "#000000"
+pio.templates["plotly_white"].layout.title.font.color = "#000000"
+
+# Axis title styling - larger, bold, dark
+pio.templates["plotly_white"].layout.xaxis.title.font.size = 16
+pio.templates["plotly_white"].layout.xaxis.title.font.color = "#1f2937"
+pio.templates["plotly_white"].layout.xaxis.title.font.family = "Segoe UI, sans-serif"
+pio.templates["plotly_white"].layout.yaxis.title.font.size = 16
+pio.templates["plotly_white"].layout.yaxis.title.font.color = "#1f2937"
+pio.templates["plotly_white"].layout.yaxis.title.font.family = "Segoe UI, sans-serif"
+
+# Axis tick label styling - larger, bold, dark
+pio.templates["plotly_white"].layout.xaxis.tickfont.size = 13
+pio.templates["plotly_white"].layout.xaxis.tickfont.color = "#111827"
+pio.templates["plotly_white"].layout.yaxis.tickfont.size = 13
+pio.templates["plotly_white"].layout.yaxis.tickfont.color = "#111827"
+
 st.markdown("""
 <style>
     :root {
@@ -158,19 +178,35 @@ st.markdown("""
 def load_results(results_dir: Path = config.RESULTS_DIR):
     """Load all result JSON files"""
     results = []
+    
+    # Ensure results_dir is a Path object
+    if isinstance(results_dir, str):
+        results_dir = Path(results_dir)
+    
+    # If relative path, make it absolute from current file's parent
+    if not results_dir.is_absolute():
+        results_dir = Path(__file__).parent.parent / results_dir
+    
     if not results_dir.exists():
+        st.error(f"Results directory does not exist: {results_dir}")
         return []
-        
-    for file in results_dir.glob("*.json"):
+    
+    json_files = list(results_dir.glob("*.json"))
+    
+    if not json_files:
+        return []
+    
+    for file in json_files:
         try:
-            with open(file, 'r') as f:
+            with open(file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 if isinstance(data, list):
                     results.extend(data)
                 else:
                     results.append(data)
         except Exception as e:
-            st.warning(f"Error loading {file}: {e}")
+            st.warning(f"Error loading {file.name}: {e}")
+    
     return results
 
 # Models to exclude from dashboard (outdated versions)
@@ -263,6 +299,8 @@ def prepare_dataframe(results: list) -> pd.DataFrame:
             'model': shorten_model_name(model_name),
             'prompt_type': result.get('prompt_type', 'unknown'),
             'test_type': result.get('input_data', {}).get('test_type', 'unknown'),
+            'data_source': result.get('data_source', 'synthetic'),
+            'domain': result.get('domain') or result.get('input_data', {}).get('context', {}).get('domain'),
             'overall_accuracy': eval_data.get('overall_accuracy', 0),
             'test_method_accuracy': eval_data.get('test_method', 0),
             'decision_accuracy': 1.0 if eval_data.get('decision', {}).get('correct', False) else 0.0,
@@ -360,7 +398,8 @@ def create_radar_chart(df: pd.DataFrame, models: list):
         polar=dict(radialaxis=dict(visible=True, range=[0, 1])),
         showlegend=True,
         title="Model Capabilities Fingerprint",
-        height=500
+        height=500,
+        font=dict(family="Segoe UI, sans-serif", size=15, color="#000000")
     )
     
     return fig
@@ -410,7 +449,12 @@ def create_p_value_scatter(df: pd.DataFrame):
         x0=0, y0=0, x1=1, y1=1
     )
     
-    fig.update_layout(height=600, xaxis_tickformat='.4f', yaxis_tickformat='.4f')
+    fig.update_layout(
+        height=600, 
+        xaxis_tickformat='.4f', 
+        yaxis_tickformat='.4f',
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
     return fig
 
 
@@ -439,7 +483,12 @@ def create_test_statistic_scatter(df: pd.DataFrame):
             x0=min_val, y0=min_val, x1=max_val, y1=max_val
         )
     
-    fig.update_layout(height=600, xaxis_tickformat='.4f', yaxis_tickformat='.4f')
+    fig.update_layout(
+        height=600, 
+        xaxis_tickformat='.4f', 
+        yaxis_tickformat='.4f',
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
     return fig
 
 
@@ -486,7 +535,10 @@ def create_correlation_heatmap(df: pd.DataFrame):
         title="Correlation Heatmap: Predicted vs Ground Truth"
     )
     
-    fig.update_layout(height=300)
+    fig.update_layout(
+        height=300,
+        font=dict(family="Segoe UI, sans-serif", size=15, color="#000000")
+    )
     fig.update_traces(hovertemplate='Model: %{x}<br>Metric: %{y}<br>Correlation: %{z:.4f}<extra></extra>')
     return fig
 
@@ -509,7 +561,10 @@ def create_accuracy_by_prompt_and_test(df: pd.DataFrame):
         title="Accuracy by Prompt Strategy × Test Type"
     )
     
-    fig.update_layout(height=350)
+    fig.update_layout(
+        height=350,
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
     fig.update_traces(hovertemplate='Test Type: %{x}<br>Prompt: %{y}<br>Accuracy: %{z:.4f}<extra></extra>')
     return fig
 
@@ -542,7 +597,10 @@ def create_decision_confusion_matrix(df: pd.DataFrame):
             title="Decision Confusion Matrix (All Models)"
         )
         
-        fig.update_layout(height=400)
+        fig.update_layout(
+            height=400,
+            font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+        )
         return fig
     except Exception:
         return None
@@ -565,7 +623,12 @@ def create_error_distribution_violin(df: pd.DataFrame):
         title="P-Value Error Distribution by Model"
     )
     
-    fig.update_layout(height=450, showlegend=False, yaxis_tickformat='.4f')
+    fig.update_layout(
+        height=450, 
+        showlegend=False, 
+        yaxis_tickformat='.4f',
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
     fig.update_traces(hovertemplate='Model: %{x}<br>P-Value Error: %{y:.4f}<extra></extra>')
     return fig
 
@@ -591,8 +654,77 @@ def create_heatmap(df: pd.DataFrame):
         title="Model Performance Heatmap by Test Type"
     )
     
-    fig.update_layout(height=400)
+    fig.update_layout(
+        height=400,
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
     fig.update_traces(hovertemplate='Test Type: %{x}<br>Model: %{y}<br>Accuracy: %{z:.4f}<extra></extra>')
+    return fig
+
+def create_pipeline_funnel_chart(df: pd.DataFrame) -> go.Figure:
+    """
+    Funnel chart showing hierarchical accuracy:
+    All scenarios → Correct Test → Correct Statistic → Correct P-Value → Correct Decision
+    """
+    stages = ["Total Scenarios", "Correct Test", "Correct Statistic", 
+              "Correct P-Value", "Correct Decision"]
+    
+    values = [
+        len(df),
+        df["test_correct"].sum(),
+        df["test_statistic_correct"].sum(),
+        df["p_value_correct"].sum(),
+        df["decision_correct"].sum()
+    ]
+    
+    fig = go.Figure(go.Funnel(
+        y=stages,
+        x=values,
+        textposition="inside",
+        textinfo="value+percent initial",
+        marker=dict(color=["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"])
+    ))
+    
+    fig.update_layout(
+        title="Hierarchical Accuracy Funnel (Strict Mode)",
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
+    
+    return fig
+
+def create_hallucination_heatmap(df: pd.DataFrame) -> go.Figure:
+    """Heatmap of hallucination types by model"""
+    
+    hallucination_types = ["structural", "numerical", "logical", "reasoning"]
+    models = df["model"].unique()
+    
+    # Compute average hallucination rate for each type per model
+    heatmap_data = []
+    for model in models:
+        model_df = df[df["model"] == model]
+        rates = []
+        for h_type in hallucination_types:
+            rate = model_df[f"hallucinations.{h_type}"].apply(len).mean()
+            rates.append(rate)
+        heatmap_data.append(rates)
+    
+    fig = go.Figure(data=go.Heatmap(
+        z=heatmap_data,
+        x=hallucination_types,
+        y=models,
+        colorscale="Reds",
+        text=np.round(heatmap_data, 2),
+        texttemplate="%{text}",
+        textfont={"size": 12, "color": "#000000"}
+    ))
+    
+    fig.update_layout(
+        title="Hallucination Type Frequency by Model",
+        xaxis_title="Hallucination Category",
+        yaxis_title="Model",
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
+    
     return fig
 
 def main():
@@ -636,23 +768,61 @@ def main():
     all_tests = df['test_type'].unique()
     selected_tests = st.sidebar.multiselect("Test Types", all_tests, default=all_tests)
     
-    # Apply filters
+    # Data source filter (new)
+    all_data_sources = df['data_source'].dropna().unique()
+    if len(all_data_sources) > 1:
+        selected_data_sources = st.sidebar.multiselect(
+            "Data Source", 
+            all_data_sources, 
+            default=all_data_sources,
+            help="Filter by synthetic or real-world data"
+        )
+    else:
+        selected_data_sources = all_data_sources.tolist() if len(all_data_sources) > 0 else ['synthetic']
+    
+    # Domain filter (new - only show if real data exists)
+    all_domains = df['domain'].dropna().unique()
+    if len(all_domains) > 0:
+        selected_domains = st.sidebar.multiselect(
+            "Domain (Real Data)",
+            all_domains,
+            default=all_domains,
+            help="Filter by domain: stocks, healthcare"
+        )
+        # Handle None domain values (synthetic data)
+        include_synthetic = df['domain'].isna().any()
+    else:
+        selected_domains = []
+        include_synthetic = True
+    
+    # Apply filters (updated to include data source and domain)
     filtered_df = df[
         (df['model'].isin(selected_models)) &
         (df['prompt_type'].isin(selected_prompts)) &
-        (df['test_type'].isin(selected_tests))
+        (df['test_type'].isin(selected_tests)) &
+        (df['data_source'].isin(selected_data_sources) | df['data_source'].isna())
     ].copy()
+    
+    # Apply domain filter if real data domains are selected
+    if selected_domains:
+        filtered_df = filtered_df[
+            (filtered_df['domain'].isin(selected_domains)) | 
+            (filtered_df['domain'].isna() if include_synthetic else False)
+        ]
     
     if filtered_df.empty:
         st.error("No data matches the selected filters.")
         return
 
     display_df = filtered_df[[
-        'timestamp', 'model', 'prompt_type', 'test_type',
+        'timestamp', 'model', 'prompt_type', 'test_type', 'data_source', 'domain',
         'overall_accuracy', 'decision_accuracy', 'p_value_accuracy',
         'reasoning_quality', 'has_hallucinations', 'latency_seconds'
     ]].sort_values('overall_accuracy', ascending=False)
     display_df['latency_seconds'] = pd.to_numeric(display_df['latency_seconds'], errors='coerce').round(2)
+    # Fill NA values for better display
+    display_df['data_source'] = display_df['data_source'].fillna('synthetic')
+    display_df['domain'] = display_df['domain'].fillna('—')
 
     # Layout closer to leaderboard style:
     tab_overview, tab_detailed, tab_stats, tab_qual = st.tabs([
@@ -694,7 +864,7 @@ def main():
                     st.markdown(f"#### {title}")
                     if models_subset:
                         radar_fig = create_radar_chart(filtered_df, models_subset)
-                        st.plotly_chart(radar_fig, width='stretch')
+                        st.plotly_chart(radar_fig, use_container_width=True)
                     else:
                         st.info("No models selected in this family.")
 
@@ -751,7 +921,7 @@ def main():
         st.markdown("### Correlation Heatmap: Model Prediction Quality")
         st.info("Pearson correlation (r) between predicted and ground truth values. Higher values (green) indicate better calibration.")
         corr_heatmap = create_correlation_heatmap(filtered_df)
-        st.plotly_chart(corr_heatmap, width='stretch')
+        st.plotly_chart(corr_heatmap, use_container_width=True)
         
         st.markdown("---")
         
@@ -762,7 +932,7 @@ def main():
             p_val_df = filtered_df.dropna(subset=['predicted_p_value', 'true_p_value'])
             if not p_val_df.empty:
                 scatter = create_p_value_scatter(p_val_df)
-                st.plotly_chart(scatter, width='stretch')
+                st.plotly_chart(scatter, use_container_width=True)
             else:
                 st.warning("No p-value data available.")
         
@@ -771,7 +941,7 @@ def main():
             stat_df = filtered_df.dropna(subset=['predicted_test_statistic', 'true_test_statistic'])
             if not stat_df.empty:
                 stat_scatter = create_test_statistic_scatter(stat_df)
-                st.plotly_chart(stat_scatter, width='stretch')
+                st.plotly_chart(stat_scatter, use_container_width=True)
             else:
                 st.warning("No test statistic data available.")
         
@@ -783,7 +953,7 @@ def main():
             st.markdown("### P-Value Error Distribution")
             violin_fig = create_error_distribution_violin(filtered_df)
             if violin_fig:
-                st.plotly_chart(violin_fig, width='stretch')
+                st.plotly_chart(violin_fig, use_container_width=True)
             else:
                 st.warning("Insufficient error data.")
         
@@ -791,7 +961,7 @@ def main():
             st.markdown("### Decision Confusion Matrix")
             cm_fig = create_decision_confusion_matrix(filtered_df)
             if cm_fig:
-                st.plotly_chart(cm_fig, width='stretch')
+                st.plotly_chart(cm_fig, use_container_width=True)
             else:
                 st.warning("Insufficient decision data.")
         
@@ -807,7 +977,7 @@ def main():
                               color='model')
             fig_p_err.update_layout(showlegend=False, yaxis_tickformat='.4f')
             fig_p_err.update_traces(hovertemplate='Model: %{x}<br>MAE: %{y:.4f}<extra></extra>')
-            st.plotly_chart(fig_p_err, width='stretch')
+            st.plotly_chart(fig_p_err, use_container_width=True)
         
         with col6:
             stat_error_df = filtered_df.groupby('model')[['test_statistic_error']].mean().reset_index()
@@ -816,13 +986,13 @@ def main():
                               color='model')
             fig_s_err.update_layout(showlegend=False, yaxis_tickformat='.4f')
             fig_s_err.update_traces(hovertemplate='Model: %{x}<br>MAE: %{y:.4f}<extra></extra>')
-            st.plotly_chart(fig_s_err, width='stretch')
+            st.plotly_chart(fig_s_err, use_container_width=True)
         
         st.markdown("---")
         
         st.markdown("### Accuracy Breakdown: Prompt Strategy × Test Type")
         prompt_test_heatmap = create_accuracy_by_prompt_and_test(filtered_df)
-        st.plotly_chart(prompt_test_heatmap, width='stretch')
+        st.plotly_chart(prompt_test_heatmap, use_container_width=True)
 
     with tab_qual:
         st.markdown("### Individual Response Inspector")
@@ -850,9 +1020,24 @@ def main():
                 st.text_area("Output", row['response_text'], height=400, disabled=True)
                 
             st.markdown("#### Ground Truth vs Prediction")
+            # Determine domain display value
+            domain_val = row.get('domain')
+            if pd.isna(domain_val) or domain_val is None or domain_val == '—':
+                domain_display = "synthetic"
+            elif domain_val == "finance" or domain_val == "stocks":
+                domain_display = "finance"
+            elif domain_val == "healthcare" or domain_val == "health":
+                domain_display = "health"
+            else:
+                domain_display = str(domain_val)
+            
             st.json({
+                "Domain": domain_display,
+                "Test Type": row['test_type'],
                 "True Decision": row['true_decision'],
                 "Predicted Decision": row['predicted_decision'],
+                "True Test Statistic": row['true_test_statistic'],
+                "Predicted Test Statistic": row['predicted_test_statistic'],
                 "True P-Value": row['true_p_value'],
                 "Predicted P-Value": row['predicted_p_value'],
                 "Accuracy Score": row['overall_accuracy'],

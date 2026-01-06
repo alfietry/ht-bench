@@ -1,0 +1,4263 @@
+[
+  {
+    "timestamp": "2025-11-22T15:06:32.886517",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.675149097597867), np.float64(12.814963722627434), np.float64(10.181169813803491), np.float64(11.287877586553716), np.float64(5.899655797937955), np.float64(9.902563196139765), np.float64(8.313539459414258), np.float64(7.562373879152744), np.float64(8.243695266142499), np.float64(9.331753118598376)]...\nSample 1 size: 100\nSample 1 mean: 9.8753\nSample 1 std: 2.0489\n\nHypothesized population mean: 10\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: One-sample t-test\n3. Test statistic value: t = (xb - mu) / (s / sqrt(n)) = (9.8753 - 10) / (2.0489 / sqrt(100)) = -0.607\n4. P-value: 0.545\n5. Decision: Fail to reject H0\n6. Conclusion: There is not enough evidence to suggest that the sample mean differs from the population mean of 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10, H1: mu != 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.607,
+      "p_value": 0.545,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to suggest that the sample mean differs from the population mean of 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.60846099631998,
+      "p_value": 0.544275295126757,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.468773637251987,
+        10.28188531194778
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.875329474599884,
+      "sample_std": 2.0489485136127628,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0007247048732430539,
+        "relative_error": 0.0013315042584732353,
+        "predicted": 0.545,
+        "ground_truth": 0.544275295126757,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0014609963199799791,
+        "relative_error": 0.0024011338915989684,
+        "predicted": -0.607,
+        "ground_truth": -0.60846099631998
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:33.070493",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.779383410640005), np.float64(10.205106367452533), np.float64(9.705115020163666), np.float64(13.176552214298525), np.float64(8.755585109410564), np.float64(14.120596341048156), np.float64(9.549137101543801), np.float64(7.445967110059543), np.float64(10.13983916198965), np.float64(7.847509599362464)]...\nSample 1 size: 50\nSample 1 mean: 10.2319\nSample 1 std: 2.1866\n\nSample 2: [np.float64(11.055920003234586), np.float64(12.656874968393517), np.float64(12.182644357430462), np.float64(14.014123434158595), np.float64(10.043483067531625), np.float64(17.491137329662287), np.float64(11.065106969971126), np.float64(11.688887422462528), np.float64(12.137919308813304), np.float64(10.255545776243732)]...\nSample 2 size: 50\nSample 2 mean: 12.3275\nSample 2 std: 2.2835\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [10.779, 10.205, 9.705, 13.177, 8.756, 14.121, 9.549, 7.446, 10.140, 7.848]...\nSample 1 size: 50\nSample 1 mean: 10.2319\nSample 1 std: 2.1866\n\nSample 2: [11.056, 12.657, 12.183, 14.014, 10.043, 17.491, 11.065, 11.689, 12.138, 10.256]...\nSample 2 size: 50\nSample 2 mean: 12.3275\nSample 2 std: 2.2835\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -4.451\np-value: 0.00003\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -4.451,
+      "p_value": 3e-05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -16.25446760338663,
+      "p_value": 2.24860352987004e-21,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.354733180968489,
+        -1.8365550829601311
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.09564413196431,
+      "std_difference": 0.911653468340616,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 2.9999999999999997e-05,
+        "relative_error": 1.3341613851212746e+16,
+        "predicted": 3e-05,
+        "ground_truth": 2.24860352987004e-21,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 11.803467603386629,
+        "relative_error": 0.72616759228259,
+        "predicted": -4.451,
+        "ground_truth": -16.25446760338663
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:35.766136",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.675149097597867), np.float64(12.814963722627434), np.float64(10.181169813803491), np.float64(11.287877586553716), np.float64(5.899655797937955), np.float64(9.902563196139765), np.float64(8.313539459414258), np.float64(7.562373879152744), np.float64(8.243695266142499), np.float64(9.331753118598376)]...\nSample 1 size: 100\nSample 1 mean: 9.8753\nSample 1 std: 2.0489\n\nHypothesized population mean: 10\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - One-sample t-test (since population standard deviation is unknown and sample size is 100).\n\n2. State H0 and H1:\n   - H0: mu = 10 (The sample mean is equal to the population mean)\n   - H1: mu \u2260 10 (The sample mean is different from the population mean)\n\n3. Calculate test statistic:\n   - Formula: t = (xb - mu) / (s / sqrt(n))\n   - Given: xb = 9.8753, mu = 10, s = 2.0489, n = 100\n   - t = (9.8753 - 10) / (2.0489 / sqrt(100))\n   - t = -0.607\n\n4. Find p-value:\n   - Use t-distribution with df = n - 1 = 99\n   - Two-tailed test: p-value = 2 * P(T > |t|)\n   - p-value \u2248 0.545 (using t-distribution table or calculator)\n\n5. Make decision (alp = 0.05):\n   - p-value = 0.545 > 0.05\n   - Fail to reject H0\n\n6. State conclusion:\n   - There is not enough evidence to conclude that the sample mean differs from the population mean of 10 at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10 (The sample mean is equal to the population mean)",
+        "H1": "- H0: mu = 10 (The sample mean is equal to the population mean)"
+      },
+      "test_method": "__one_sample_t_test_(since_population_standard_deviation_is_unknown_and_sample_size_is_100).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.545,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is not enough evidence to conclude that the sample mean differs from the population mean of 10 at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.60846099631998,
+      "p_value": 0.544275295126757,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.468773637251987,
+        10.28188531194778
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.875329474599884,
+      "sample_std": 2.0489485136127628,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0007247048732430539,
+        "relative_error": 0.0013315042584732353,
+        "predicted": 0.545,
+        "ground_truth": 0.544275295126757,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": false,
+        "predicted": "reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 0,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 2.6666666666666665,
+        "max": 5,
+        "percentage": 53.333333333333336
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.545,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:36.782164",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284)]...\nSample 1 size: 50\nSample 1 mean: 10.1824\nSample 1 std: 1.5366\n\nHypothesized population mean: 10\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "Data:\nSample 1 mean (xb): 10.1824\nSample 1 std (s): 1.5366\nSample size (n): 50\nHypothesized population mean (mu): 10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: 0.837\np-value: 0.407\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.837,
+      "p_value": 0.407,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference between the sample mean and the hypothesized population mean.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.839487828091678,
+      "p_value": 0.40527287278483803,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.745738116089615,
+        10.61910600588243
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.182422060986022,
+      "sample_std": 1.53655445671519,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0017271272151619388,
+        "relative_error": 0.004261640319752864,
+        "predicted": 0.407,
+        "ground_truth": 0.40527287278483803,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0024878280916780238,
+        "relative_error": 0.00296350704373326,
+        "predicted": 0.837,
+        "ground_truth": 0.839487828091678
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:37.814597",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.225931783320528), np.float64(9.509878697618595), np.float64(7.938372559457692), np.float64(9.886090917572941), np.float64(12.0983472428827), np.float64(8.04808236777019), np.float64(8.178850232157103), np.float64(11.117097918548447), np.float64(9.556927768538399), np.float64(11.294969381418948)]...\nSample 1 size: 100\nSample 1 mean: 10.0766\nSample 1 std: 1.9779\n\nSample 2: [np.float64(10.309909344061698), np.float64(9.83260234528388), np.float64(12.689209809500715), np.float64(12.758560068730326), np.float64(14.574662223210131), np.float64(14.199959300684167), np.float64(11.735542686937656), np.float64(9.511588242278261), np.float64(11.361786805978204), np.float64(12.43446238962105)]...\nSample 2 size: 100\nSample 2 mean: 11.6715\nSample 2 std: 2.0149\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Independent two-sample t-test\n3. Test statistic value: -6.451\n4. P-value: < 0.0001\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "independent_two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -6.451,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two groups.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.648689543702781,
+      "p_value": 5.563840177433093e-08,
+      "degrees_of_freedom": 198.0,
+      "critical_value": 1.9720174778338955,
+      "confidence_interval": [
+        -2.151708091473582,
+        -1.0381090640891393
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.5949085777813607,
+      "sample1_mean": 10.076598431744594,
+      "sample2_mean": 11.671507009525955,
+      "sample1_std": 1.977937574632876,
+      "sample2_std": 2.014925817190868,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.802310456297219,
+        "relative_error": 0.1420347941039959,
+        "predicted": -6.451,
+        "ground_truth": -5.648689543702781
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:38.636970",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x197947c8050 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:38.646962",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979472e690 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:39.804189",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979472f890 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:39.957894",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x197948d9440 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:40.249192",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(9.881434707948136), np.float64(8.541426127252677), np.float64(9.171053868328283), np.float64(11.267820755467485), np.float64(10.005986582399911), np.float64(10.680419953736676), np.float64(11.34015848440438), np.float64(9.25031707420478), np.float64(11.512496327259612), np.float64(10.757685206916788)]...\nSample 1 size: 50\nSample 1 mean: 9.8720\nSample 1 std: 1.6361\n\nSample 2: [np.float64(10.639679179069743), np.float64(10.337357542813828), np.float64(11.280701622902292), np.float64(15.712950900526401), np.float64(10.628670926879543), np.float64(14.152434520226809), np.float64(13.49000089839166), np.float64(11.661488992220743), np.float64(13.630844240647816), np.float64(13.202412025112022)]...\nSample 2 size: 50\nSample 2 mean: 12.0416\nSample 2 std: 1.9599\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [9.8814, 8.5414, 9.1711, 11.2678, 10.0060, 10.6804, 11.3402, 9.2503, 11.5125, 10.7577]...\nSample 1 size: 50\nSample 1 mean: 9.8720\nSample 1 std: 1.6361\n\nSample 2: [10.6397, 10.3374, 11.2807, 15.7130, 10.6287, 14.1524, 13.4900, 11.6615, 13.6308, 13.2024]...\nSample 2 size: 50\nSample 2 mean: 12.0416\nSample 2 std: 1.9599\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -5.68\np-value: 0.000001\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.68,
+      "p_value": 1e-06,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -15.441039649284486,
+      "p_value": 1.8595408440764317e-20,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.4519298577403204,
+        -1.887211931482149
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.1695708946112346,
+      "std_difference": 0.9935330306050066,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 9.999999999999813e-07,
+        "relative_error": 53776716074050.31,
+        "predicted": 1e-06,
+        "ground_truth": 1.8595408440764317e-20,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 9.761039649284486,
+        "relative_error": 0.6321491214962845,
+        "predicted": -5.68,
+        "ground_truth": -15.441039649284486
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:43.823265",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(13.454700428328369), np.float64(6.932277190167724), np.float64(11.727656027396376), np.float64(9.342949553754213), np.float64(9.877351308342305), np.float64(7.8942029785921015), np.float64(9.331087655288247), np.float64(12.600089189397917), np.float64(11.165310483975414), np.float64(13.464623210819887)]...\nSample 1 size: 50\nSample 1 mean: 10.2698\nSample 1 std: 2.1426\n\nSample 2: [np.float64(12.736713225401317), np.float64(13.693167971686808), np.float64(10.858112676956411), np.float64(13.62752737993242), np.float64(14.136943111978077), np.float64(12.465756040274337), np.float64(12.468801785397392), np.float64(12.540686478563451), np.float64(10.273309470521237), np.float64(11.704942639519293)]...\nSample 2 size: 50\nSample 2 mean: 12.1401\nSample 2 std: 1.9216\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Independent two-sample t-test (since comparing means of two independent groups).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (The population means are equal)\n   - H1: mu1 \u2260 mu2 (The population means are not equal)\n\n3. Calculate test statistic:\n   - Formula: t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   - xb1 = 10.2698, xb2 = 12.1401\n   - s1 = 2.1426, s2 = 1.9216\n   - n1 = 50, n2 = 50\n   - t = (10.2698 - 12.1401) / sqrt((2.1426^2/50) + (1.9216^2/50))\n   - t \u2248 -4.374\n\n4. Find p-value:\n   - Degrees of freedom (df) \u2248 98 (using df = n1 + n2 - 2)\n   - Using a t-distribution table or calculator, p-value for t \u2248 -4.374 with df = 98 is very small (p < 0.001).\n\n5. Make decision (alp = 0.05):\n   - Since p-value < 0.05, reject H0.\n\n6. State conclusion:\n   - There is significant evidence to conclude that the population means of the two groups are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The population means are equal)",
+        "H1": "- H0: mu1 = mu2 (The population means are equal)"
+      },
+      "test_method": "__independent_two_sample_t_test_(since_comparing_means_of_two_independent_groups).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is significant evidence to conclude that the population means of the two groups are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -4.595114856043084,
+      "p_value": 1.2892978599157498e-05,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -2.678020941215438,
+        -1.0625854471845937
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.870303194200016,
+      "sample1_mean": 10.269829386830075,
+      "sample2_mean": 12.140132581030091,
+      "sample1_std": 2.1426373662169027,
+      "sample2_std": 1.9215527864263418,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04998710702140084,
+        "relative_error": 3877.0798102982417,
+        "predicted": 0.05,
+        "ground_truth": 1.2892978599157498e-05,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:44.722897",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x197947c78d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:45.566129",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.578238797379969), np.float64(11.26257645167708), np.float64(7.0856883602886676), np.float64(9.360657567285397), np.float64(9.05925469141441), np.float64(8.722244303513316), np.float64(9.449715497546633), np.float64(12.98988262246879), np.float64(8.268337768613513), np.float64(11.936556709182963)]...\nSample 1 size: 50\nSample 1 mean: 9.6165\nSample 1 std: 1.5332\n\nHypothesized population mean: 10\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "Data:\nSample 1 mean (xb): 9.6165\nSample 1 std (s): 1.5332\nSample size: 50\nHypothesized population mean (mu): 10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: -1.772\np-value: 0.082\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: There is not enough evidence to conclude that the sample mean differs significantly from the population mean.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.772,
+      "p_value": 0.082,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that the sample mean differs significantly from the population mean.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.7687071032939465,
+      "p_value": 0.08316718583622974,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.180772672792354,
+        10.052226313364734
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.616499493078544,
+      "sample_std": 1.5331866340538596,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0011671858362297394,
+        "relative_error": 0.014034211023180775,
+        "predicted": 0.082,
+        "ground_truth": 0.08316718583622974,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.003292896706053483,
+        "relative_error": 0.0018617535373273316,
+        "predicted": -1.772,
+        "ground_truth": -1.7687071032939465
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:45.841738",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.779383410640005), np.float64(10.205106367452533), np.float64(9.705115020163666), np.float64(13.176552214298525), np.float64(8.755585109410564), np.float64(14.120596341048156), np.float64(9.549137101543801), np.float64(7.445967110059543), np.float64(10.13983916198965), np.float64(7.847509599362464)]...\nSample 1 size: 50\nSample 1 mean: 10.2319\nSample 1 std: 2.1866\n\nSample 2: [np.float64(11.055920003234586), np.float64(12.656874968393517), np.float64(12.182644357430462), np.float64(14.014123434158595), np.float64(10.043483067531625), np.float64(17.491137329662287), np.float64(11.065106969971126), np.float64(11.688887422462528), np.float64(12.137919308813304), np.float64(10.255545776243732)]...\nSample 2 size: 50\nSample 2 mean: 12.3275\nSample 2 std: 2.2835\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Paired t-test\n3. Test statistic value: -5.678\n4. P-value: < 0.0001\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -5.678,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -16.25446760338663,
+      "p_value": 2.24860352987004e-21,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.354733180968489,
+        -1.8365550829601311
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.09564413196431,
+      "std_difference": 0.911653468340616,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 10.576467603386629,
+        "relative_error": 0.6506806535566267,
+        "predicted": -5.678,
+        "ground_truth": -16.25446760338663
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:46.720407",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979491ef50 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:46.859068",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x197947c78d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:47.153186",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x19794864bd0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:48.237459",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(12.260198632809027), np.float64(11.228198354225247), np.float64(11.196694094149766), np.float64(11.039321146693005), np.float64(7.805324650905913), np.float64(11.401446313719171), np.float64(7.2883720577468925), np.float64(8.41080108974989), np.float64(12.607130135616174), np.float64(11.680440325388394)]...\nSample 1 size: 100\nSample 1 mean: 9.9386\nSample 1 std: 2.0498\n\nSample 2: [np.float64(12.937657499517348), np.float64(12.7420042235262), np.float64(13.616920803624351), np.float64(12.93692444008191), np.float64(9.154761030500321), np.float64(12.727233851994662), np.float64(8.576034993334183), np.float64(9.531291461090948), np.float64(16.888763012892234), np.float64(13.97795139657395)]...\nSample 2 size: 100\nSample 2 mean: 11.8710\nSample 2 std: 2.2524\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [12.26, 11.23, 11.20, 11.04, 7.81, 11.40, 7.29, 8.41, 12.61, 11.68]...\nSample 1 size: 100\nSample 1 mean: 9.9386\nSample 1 std: 2.0498\n\nSample 2: [12.94, 12.74, 13.62, 12.94, 9.15, 12.73, 8.58, 9.53, 16.89, 13.98]...\nSample 2 size: 100\nSample 2 mean: 11.8710\nSample 2 std: 2.2524\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -6.12\np-value: <0.0001\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -6.12,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -18.779102425846315,
+      "p_value": 2.121165036325275e-34,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        -2.136631280997678,
+        -1.728263049518943
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.9324471652583106,
+      "std_difference": 1.0290412829308702,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.05,
+        "relative_error": 2.357195180183643e+32,
+        "predicted": 0.05,
+        "ground_truth": 2.121165036325275e-34,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 12.659102425846314,
+        "relative_error": 0.67410582991566,
+        "predicted": -6.12,
+        "ground_truth": -18.779102425846315
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:50.260029",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(9.640777172337083), np.float64(10.393552193313914), np.float64(11.641056950834837), np.float64(9.212517655550856), np.float64(11.042334511464226), np.float64(9.468322416169242), np.float64(9.76491566534374), np.float64(11.659038084048145), np.float64(6.013879257891688), np.float64(7.4070553438504785)]...\nSample 1 size: 50\nSample 1 mean: 9.7465\nSample 1 std: 1.9189\n\nSample 2: [np.float64(11.73772493959331), np.float64(12.697551788092591), np.float64(15.902025120252599), np.float64(16.153961058107505), np.float64(12.138762270265557), np.float64(12.320381186634151), np.float64(14.15248031493277), np.float64(10.308677934465306), np.float64(12.666140745236511), np.float64(11.948274304092287)]...\nSample 2 size: 50\nSample 2 mean: 12.0740\nSample 2 std: 2.0610\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Two-sample t-test for independent samples.\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (The population means are equal)\n   - H1: mu1 \u2260 mu2 (The population means are not equal)\n\n3. Calculate test statistic:\n   - Formula: t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   - xb1 = 9.7465, xb2 = 12.0740\n   - s1 = 1.9189, s2 = 2.0610\n   - n1 = 50, n2 = 50\n   - t = (9.7465 - 12.0740) / sqrt((1.9189^2/50) + (2.0610^2/50))\n   - t \u2248 -5.679\n\n4. Find p-value:\n   - Degrees of freedom (df) \u2248 98 (using approximation for equal variances)\n   - Using a t-distribution table or calculator, p-value for t \u2248 -5.679 with df \u2248 98 is very small (p < 0.0001).\n\n5. Make decision (alp = 0.05):\n   - Since p-value < 0.05, reject H0.\n\n6. State conclusion:\n   - There is significant evidence to conclude that the population means of the two groups are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The population means are equal)",
+        "H1": "- H0: mu1 = mu2 (The population means are equal)"
+      },
+      "test_method": "__two_sample_t_test_for_independent_samples.",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is significant evidence to conclude that the population means of the two groups are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.844521289818555,
+      "p_value": 6.664381222653436e-08,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -3.117846690617025,
+        -1.5372427358675829
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.327544713242304,
+      "sample1_mean": 9.746458578789147,
+      "sample2_mean": 12.07400329203145,
+      "sample1_std": 1.9189467688758526,
+      "sample2_std": 2.0609589673445834,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04999993335618778,
+        "relative_error": 750256.2006241325,
+        "predicted": 0.05,
+        "ground_truth": 6.664381222653436e-08,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:51.604092",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(9.24367489192122), np.float64(12.59845659557213), np.float64(9.287472057877148), np.float64(11.475031136934174), np.float64(8.132764639980246), np.float64(9.58912488426474), np.float64(8.099955890178837), np.float64(9.321933848198874), np.float64(11.68061627491479), np.float64(6.545359153615303)]...\nSample 1 size: 100\nSample 1 mean: 9.9787\nSample 1 std: 1.9590\n\nHypothesized population mean: 10\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "Data:\nSample 1 mean (xb): 9.9787\nSample 1 std (s): 1.9590\nSample size (n): 100\nHypothesized population mean (mu): 10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: -0.108\np-value: 0.914\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.108,
+      "p_value": 0.914,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference between the sample mean and the hypothesized population mean.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.10854200576797488,
+      "p_value": 0.9137854519568591,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.590022799474436,
+        10.36744984924179
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.978736324358113,
+      "sample_std": 1.9590273361394341,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00021454804314091636,
+        "relative_error": 0.00023479039054677948,
+        "predicted": 0.914,
+        "ground_truth": 0.9137854519568591,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0005420057679748763,
+        "relative_error": 0.004993511628424267,
+        "predicted": -0.108,
+        "ground_truth": -0.10854200576797488
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:52.490825",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494d9d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:53.418267",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(9.881434707948136), np.float64(8.541426127252677), np.float64(9.171053868328283), np.float64(11.267820755467485), np.float64(10.005986582399911), np.float64(10.680419953736676), np.float64(11.34015848440438), np.float64(9.25031707420478), np.float64(11.512496327259612), np.float64(10.757685206916788)]...\nSample 1 size: 50\nSample 1 mean: 9.8720\nSample 1 std: 1.6361\n\nSample 2: [np.float64(10.639679179069743), np.float64(10.337357542813828), np.float64(11.280701622902292), np.float64(15.712950900526401), np.float64(10.628670926879543), np.float64(14.152434520226809), np.float64(13.49000089839166), np.float64(11.661488992220743), np.float64(13.630844240647816), np.float64(13.202412025112022)]...\nSample 2 size: 50\nSample 2 mean: 12.0416\nSample 2 std: 1.9599\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Paired t-test\n3. Test statistic value: -6.123\n4. P-value: < 0.0001\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -6.123,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -15.441039649284486,
+      "p_value": 1.8595408440764317e-20,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.4519298577403204,
+        -1.887211931482149
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.1695708946112346,
+      "std_difference": 0.9935330306050066,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 9.318039649284486,
+        "relative_error": 0.6034593434721393,
+        "predicted": -6.123,
+        "ground_truth": -15.441039649284486
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:53.753319",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494fad0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:54.028117",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494f850 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:55.164154",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979491f050 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:55.941933",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.1069632536438), np.float64(5.831195690023051), np.float64(11.228540876714128), np.float64(11.507710139867365), np.float64(9.497794823926174), np.float64(5.038582980030917), np.float64(8.00716274799522), np.float64(12.465803868205393), np.float64(4.444011438542855), np.float64(9.304953175612962)]...\nSample 1 size: 100\nSample 1 mean: 9.9520\nSample 1 std: 2.2106\n\nSample 2: [np.float64(13.289493995396457), np.float64(7.507210914526621), np.float64(13.024471361665693), np.float64(13.01605452490188), np.float64(10.91714342118059), np.float64(7.7332535916593255), np.float64(10.263069598099444), np.float64(15.117552009608433), np.float64(6.435216749057283), np.float64(11.818152986690142)]...\nSample 2 size: 100\nSample 2 mean: 12.0019\nSample 2 std: 2.4283\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [10.1069632536438, 5.831195690023051, 11.228540876714128, 11.507710139867365, 9.497794823926174, 5.038582980030917, 8.00716274799522, 12.465803868205393, 4.444011438542855, 9.304953175612962]...\nSample 1 size: 100\nSample 1 mean: 9.9520\nSample 1 std: 2.2106\n\nSample 2: [13.289493995396457, 7.507210914526621, 13.024471361665693, 13.01605452490188, 10.91714342118059, 7.7332535916593255, 10.263069598099444, 15.117552009608433, 6.435216749057283, 11.818152986690142]...\nSample 2 size: 100\nSample 2 mean: 12.0019\nSample 2 std: 2.4283\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -6.01\np-value: <0.0001\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -6.01,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -19.711806167419983,
+      "p_value": 4.7641153172202076e-36,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        -2.2562084726499805,
+        -1.8435238923442174
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.049866182497099,
+      "std_difference": 1.0399179887864125,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.05,
+        "relative_error": 1.049512798719874e+34,
+        "predicted": 0.05,
+        "ground_truth": 4.7641153172202076e-36,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 13.701806167419983,
+        "relative_error": 0.6951065798357213,
+        "predicted": -6.01,
+        "ground_truth": -19.711806167419983
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:57.406720",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.727724459627819), np.float64(11.790369963943371), np.float64(8.561039533430419), np.float64(6.994993087918206), np.float64(4.070942324316698), np.float64(8.91300898413473), np.float64(14.840830024494805), np.float64(10.869768542927295), np.float64(8.880855427901022), np.float64(10.930160419000613)]...\nSample 1 size: 100\nSample 1 mean: 9.8173\nSample 1 std: 2.0861\n\nSample 2: [np.float64(13.030820805801621), np.float64(10.844922225288698), np.float64(14.548894433882477), np.float64(10.74482492712616), np.float64(10.726769433795528), np.float64(13.082263221609063), np.float64(13.525852964673874), np.float64(12.896198727872408), np.float64(8.628805365230384), np.float64(13.076068879856502)]...\nSample 2 size: 100\nSample 2 mean: 11.7765\nSample 2 std: 2.0903\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Independent two-sample t-test (comparing means of two independent groups).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (the population means are equal)\n   - H1: mu1 != mu2 (the population means are not equal)\n\n3. Calculate test statistic:\n   - Formula: t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   - xb1 = 9.8173, xb2 = 11.7765\n   - s1 = 2.0861, s2 = 2.0903\n   - n1 = 100, n2 = 100\n   - t = (9.8173 - 11.7765) / sqrt((2.0861^2/100) + (2.0903^2/100))\n   - t = -6.977\n\n4. Find p-value:\n   - Degrees of freedom (df) can be approximated using the smaller of n1-1 and n2-1, which is 99.\n   - Using a t-distribution table or calculator, find p-value for t = -6.977 with df = 99.\n   - p-value is approximately 0.0000 (very small).\n\n5. Make decision (alp = 0.05):\n   - Since p-value < alp (0.0000 < 0.05), reject H0.\n\n6. State conclusion:\n   - There is sufficient evidence to conclude that the population means of the two groups are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (the population means are equal)",
+        "H1": "- H0: mu1 = mu2 (the population means are equal)"
+      },
+      "test_method": "__independent_two_sample_t_test_(comparing_means_of_two_independent_groups).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is sufficient evidence to conclude that the population means of the two groups are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -6.634331862754437,
+      "p_value": 3.0442977701560763e-10,
+      "degrees_of_freedom": 198.0,
+      "critical_value": 1.9720174778338955,
+      "confidence_interval": [
+        -2.5415458362896723,
+        -1.3768306680958193
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.959188252192746,
+      "sample1_mean": 9.817277053101968,
+      "sample2_mean": 11.776465305294714,
+      "sample1_std": 2.0860669090176267,
+      "sample2_std": 2.090252972148058,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04999999969557022,
+        "relative_error": 164241488.41723457,
+        "predicted": 0.05,
+        "ground_truth": 3.0442977701560763e-10,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:58.518318",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.675149097597867), np.float64(12.814963722627434), np.float64(10.181169813803491), np.float64(11.287877586553716), np.float64(5.899655797937955), np.float64(9.902563196139765), np.float64(8.313539459414258), np.float64(7.562373879152744), np.float64(8.243695266142499), np.float64(9.331753118598376)]...\nSample 1 size: 100\nSample 1 mean: 9.8753\nSample 1 std: 2.0489\n\nHypothesized population mean: 10\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "Data:\nSample 1 mean (xb): 9.8753\nSample 1 std (s): 2.0489\nSample size: 100\nHypothesized population mean (mu): 10\n\nAnalysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: -0.608\np-value: 0.544\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: There is no significant difference between the sample mean and the hypothesized population mean.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.608,
+      "p_value": 0.544,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference between the sample mean and the hypothesized population mean.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.60846099631998,
+      "p_value": 0.544275295126757,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.468773637251987,
+        10.28188531194778
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.875329474599884,
+      "sample_std": 2.0489485136127628,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.000275295126756947,
+        "relative_error": 0.0005058012539276345,
+        "predicted": 0.544,
+        "ground_truth": 0.544275295126757,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00046099631997997825,
+        "relative_error": 0.0007576431731337264,
+        "predicted": -0.608,
+        "ground_truth": -0.60846099631998
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:06:59.409825",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x19794715350 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:00.085619",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(12.260198632809027), np.float64(11.228198354225247), np.float64(11.196694094149766), np.float64(11.039321146693005), np.float64(7.805324650905913), np.float64(11.401446313719171), np.float64(7.2883720577468925), np.float64(8.41080108974989), np.float64(12.607130135616174), np.float64(11.680440325388394)]...\nSample 1 size: 100\nSample 1 mean: 9.9386\nSample 1 std: 2.0498\n\nSample 2: [np.float64(12.937657499517348), np.float64(12.7420042235262), np.float64(13.616920803624351), np.float64(12.93692444008191), np.float64(9.154761030500321), np.float64(12.727233851994662), np.float64(8.576034993334183), np.float64(9.531291461090948), np.float64(16.888763012892234), np.float64(13.97795139657395)]...\nSample 2 size: 100\nSample 2 mean: 11.8710\nSample 2 std: 2.2524\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Paired t-test\n3. Test statistic value: -8.234\n4. P-value: < 0.0001\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -8.234,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -18.779102425846315,
+      "p_value": 2.121165036325275e-34,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        -2.136631280997678,
+        -1.728263049518943
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.9324471652583106,
+      "std_difference": 1.0290412829308702,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 10.545102425846315,
+        "relative_error": 0.5615338894649583,
+        "predicted": -8.234,
+        "ground_truth": -18.779102425846315
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:00.922515",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494c650 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:02.451677",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979491ff50 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:02.989024",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979491dfd0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:04.711097",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.225931783320528), np.float64(9.509878697618595), np.float64(7.938372559457692), np.float64(9.886090917572941), np.float64(12.0983472428827), np.float64(8.04808236777019), np.float64(8.178850232157103), np.float64(11.117097918548447), np.float64(9.556927768538399), np.float64(11.294969381418948)]...\nSample 1 size: 100\nSample 1 mean: 10.0766\nSample 1 std: 1.9779\n\nSample 2: [np.float64(10.309909344061698), np.float64(9.83260234528388), np.float64(12.689209809500715), np.float64(12.758560068730326), np.float64(14.574662223210131), np.float64(14.199959300684167), np.float64(11.735542686937656), np.float64(9.511588242278261), np.float64(11.361786805978204), np.float64(12.43446238962105)]...\nSample 2 size: 100\nSample 2 mean: 11.6715\nSample 2 std: 2.0149\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Independent two-sample t-test (comparing means of two independent groups).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (the population means are equal)\n   - H1: mu1 != mu2 (the population means are not equal)\n\n3. Calculate test statistic:\n   - Formula: t = (xb1 - xb2) / sqrt((s1^2/n1) + (s2^2/n2))\n   - xb1 = 10.0766, xb2 = 11.6715\n   - s1 = 1.9779, s2 = 2.0149\n   - n1 = 100, n2 = 100\n   - t = (10.0766 - 11.6715) / sqrt((1.9779^2/100) + (2.0149^2/100))\n   - t \u2248 -5.946\n\n4. Find p-value:\n   - Use t-distribution with df = n1 + n2 - 2 = 198\n   - p-value \u2248 0.000 (using t-distribution table or calculator)\n\n5. Make decision (alp = 0.05):\n   - p-value < alp (0.000 < 0.05)\n   - Reject H0\n\n6. State conclusion:\n   - There is sufficient evidence to conclude that the population means of the two groups are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (the population means are equal)",
+        "H1": "- H0: mu1 = mu2 (the population means are equal)"
+      },
+      "test_method": "__independent_two_sample_t_test_(comparing_means_of_two_independent_groups).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is sufficient evidence to conclude that the population means of the two groups are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.648689543702781,
+      "p_value": 5.563840177433093e-08,
+      "degrees_of_freedom": 198.0,
+      "critical_value": 1.9720174778338955,
+      "confidence_interval": [
+        -2.151708091473582,
+        -1.0381090640891393
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.5949085777813607,
+      "sample1_mean": 10.076598431744594,
+      "sample2_mean": 11.671507009525955,
+      "sample1_std": 1.977937574632876,
+      "sample2_std": 2.014925817190868,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04999994436159823,
+        "relative_error": 898658.8896711618,
+        "predicted": 0.05,
+        "ground_truth": 5.563840177433093e-08,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:06.319616",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979496fd50 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:07.071061",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979498cdd0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:08.202123",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(13.454700428328369), np.float64(6.932277190167724), np.float64(11.727656027396376), np.float64(9.342949553754213), np.float64(9.877351308342305), np.float64(7.8942029785921015), np.float64(9.331087655288247), np.float64(12.600089189397917), np.float64(11.165310483975414), np.float64(13.464623210819887)]...\nSample 1 size: 50\nSample 1 mean: 10.2698\nSample 1 std: 2.1426\n\nSample 2: [np.float64(12.736713225401317), np.float64(13.693167971686808), np.float64(10.858112676956411), np.float64(13.62752737993242), np.float64(14.136943111978077), np.float64(12.465756040274337), np.float64(12.468801785397392), np.float64(12.540686478563451), np.float64(10.273309470521237), np.float64(11.704942639519293)]...\nSample 2 size: 50\nSample 2 mean: 12.1401\nSample 2 std: 1.9216\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [13.4547, 6.9323, 11.7277, 9.3429, 9.8774, 7.8942, 9.3311, 12.6001, 11.1653, 13.4646]...\nSample 1 size: 50\nSample 1 mean: 10.2698\nSample 1 std: 2.1426\n\nSample 2: [12.7367, 13.6932, 10.8581, 13.6275, 14.1369, 12.4658, 12.4688, 12.5407, 10.2733, 11.7049]...\nSample 2 size: 50\nSample 2 mean: 12.1401\nSample 2 std: 1.9216\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -4.548\np-value: 0.00002\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -4.548,
+      "p_value": 2e-05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -4.595114856043084,
+      "p_value": 1.2892978599157498e-05,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -2.678020941215438,
+        -1.0625854471845937
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.870303194200016,
+      "sample1_mean": 10.269829386830075,
+      "sample2_mean": 12.140132581030091,
+      "sample1_std": 2.1426373662169027,
+      "sample2_std": 1.9215527864263418,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 7.1070214008425035e-06,
+        "relative_error": 0.5512319241192968,
+        "predicted": 2e-05,
+        "ground_truth": 1.2892978599157498e-05,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.047114856043084075,
+        "relative_error": 0.010253248834710373,
+        "predicted": -4.548,
+        "ground_truth": -4.595114856043084
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:08.254911",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.1069632536438), np.float64(5.831195690023051), np.float64(11.228540876714128), np.float64(11.507710139867365), np.float64(9.497794823926174), np.float64(5.038582980030917), np.float64(8.00716274799522), np.float64(12.465803868205393), np.float64(4.444011438542855), np.float64(9.304953175612962)]...\nSample 1 size: 100\nSample 1 mean: 9.9520\nSample 1 std: 2.2106\n\nSample 2: [np.float64(13.289493995396457), np.float64(7.507210914526621), np.float64(13.024471361665693), np.float64(13.01605452490188), np.float64(10.91714342118059), np.float64(7.7332535916593255), np.float64(10.263069598099444), np.float64(15.117552009608433), np.float64(6.435216749057283), np.float64(11.818152986690142)]...\nSample 2 size: 100\nSample 2 mean: 12.0019\nSample 2 std: 2.4283\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2 (The population means of the two conditions are equal)\n   H1: mu1 != mu2 (The population means of the two conditions are not equal)\n\n2. Test name: Paired t-test\n\n3. Test statistic value: t = -8.784\n\n4. P-value: < 0.0001\n\n5. Decision: Reject H0\n\n6. Brief conclusion: There is a significant difference between the means of the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The population means of the two conditions are equal)",
+        "H1": "mu1 != mu2 (The population means of the two conditions are not equal)"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -8.784,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -19.711806167419983,
+      "p_value": 4.7641153172202076e-36,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        -2.2562084726499805,
+        -1.8435238923442174
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.049866182497099,
+      "std_difference": 1.0399179887864125,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 10.927806167419982,
+        "relative_error": 0.5543787349878496,
+        "predicted": -8.784,
+        "ground_truth": -19.711806167419983
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:09.374449",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494d1d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:09.914837",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979496fb50 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:11.497804",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(9.24367489192122), np.float64(12.59845659557213), np.float64(9.287472057877148), np.float64(11.475031136934174), np.float64(8.132764639980246), np.float64(9.58912488426474), np.float64(8.099955890178837), np.float64(9.321933848198874), np.float64(11.68061627491479), np.float64(6.545359153615303)]...\nSample 1 size: 100\nSample 1 mean: 9.9787\nSample 1 std: 1.9590\n\nHypothesized population mean: 10\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: One-sample t-test\n3. Test statistic value: t = (xb - mu) / (s / sqrt(n)) = (9.9787 - 10) / (1.9590 / sqrt(100)) = -0.1082\n4. P-value: 0.914\n5. Decision: Fail to reject H0\n6. Conclusion: There is no significant difference between the sample mean and the hypothesized population mean at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10, H1: mu != 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.1082,
+      "p_value": 0.914,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference between the sample mean and the hypothesized population mean at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.10854200576797488,
+      "p_value": 0.9137854519568591,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.590022799474436,
+        10.36744984924179
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.978736324358113,
+      "sample_std": 1.9590273361394341,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00021454804314091636,
+        "relative_error": 0.00023479039054677948,
+        "predicted": 0.914,
+        "ground_truth": 0.9137854519568591,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0003420057679748706,
+        "relative_error": 0.003150907020328703,
+        "predicted": -0.1082,
+        "ground_truth": -0.10854200576797488
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:11.664831",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979496c1d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:13.152045",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.779383410640005), np.float64(10.205106367452533), np.float64(9.705115020163666), np.float64(13.176552214298525), np.float64(8.755585109410564), np.float64(14.120596341048156), np.float64(9.549137101543801), np.float64(7.445967110059543), np.float64(10.13983916198965), np.float64(7.847509599362464)]...\nSample 1 size: 50\nSample 1 mean: 10.2319\nSample 1 std: 2.1866\n\nSample 2: [np.float64(11.055920003234586), np.float64(12.656874968393517), np.float64(12.182644357430462), np.float64(14.014123434158595), np.float64(10.043483067531625), np.float64(17.491137329662287), np.float64(11.065106969971126), np.float64(11.688887422462528), np.float64(12.137919308813304), np.float64(10.255545776243732)]...\nSample 2 size: 50\nSample 2 mean: 12.3275\nSample 2 std: 2.2835\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Paired t-test (comparing means from the same subjects under two conditions).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (no difference in means)\n   - H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic:\n   - Difference in sample means: xb1 - xb2 = 10.2319 - 12.3275 = -2.0956\n   - Standard deviation of differences (s_diff): sqrt((s1^2/n1) + (s2^2/n2)) = sqrt((2.1866^2/50) + (2.2835^2/50)) = 0.4513\n   - t = (xb1 - xb2) / s_diff = -2.0956 / 0.4513 = -4.642\n\n4. Find p-value:\n   - Degrees of freedom (df) = n1 - 1 = 50 - 1 = 49\n   - Using a t-distribution table or calculator, p-value for t = -4.642 with df = 49 is approximately 0.00003\n\n5. Make decision (alp = 0.05):\n   - p-value (0.00003) < alp (0.05), reject H0\n\n6. State conclusion:\n   - There is a statistically significant difference in means between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (no difference in means)",
+        "H1": "- H0: mu1 = mu2 (no difference in means)"
+      },
+      "test_method": "__paired_t_test_(comparing_means_from_the_same_subjects_under_two_conditions).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": 50.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is a statistically significant difference in means between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -16.25446760338663,
+      "p_value": 2.24860352987004e-21,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.354733180968489,
+        -1.8365550829601311
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.09564413196431,
+      "std_difference": 0.911653468340616,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.05,
+        "relative_error": 2.2236023085354578e+19,
+        "predicted": 0.05,
+        "ground_truth": 2.24860352987004e-21,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:15.128623",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494e850 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:15.172649",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979494d050 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:17.374476",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(9.640777172337083), np.float64(10.393552193313914), np.float64(11.641056950834837), np.float64(9.212517655550856), np.float64(11.042334511464226), np.float64(9.468322416169242), np.float64(9.76491566534374), np.float64(11.659038084048145), np.float64(6.013879257891688), np.float64(7.4070553438504785)]...\nSample 1 size: 50\nSample 1 mean: 9.7465\nSample 1 std: 1.9189\n\nSample 2: [np.float64(11.73772493959331), np.float64(12.697551788092591), np.float64(15.902025120252599), np.float64(16.153961058107505), np.float64(12.138762270265557), np.float64(12.320381186634151), np.float64(14.15248031493277), np.float64(10.308677934465306), np.float64(12.666140745236511), np.float64(11.948274304092287)]...\nSample 2 size: 50\nSample 2 mean: 12.0740\nSample 2 std: 2.0610\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [9.6408, 10.3936, 11.6411, 9.2125, 11.0423, 9.4683, 9.7649, 11.6590, 6.0139, 7.4071]...\nSample 1 size: 50\nSample 1 mean: 9.7465\nSample 1 std: 1.9189\n\nSample 2: [11.7377, 12.6976, 15.9020, 16.1540, 12.1388, 12.3204, 14.1525, 10.3087, 12.6661, 11.9483]...\nSample 2 size: 50\nSample 2 mean: 12.0740\nSample 2 std: 2.0610\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -5.679\np-value: 0.000001\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.679,
+      "p_value": 1e-06,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.844521289818555,
+      "p_value": 6.664381222653436e-08,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -3.117846690617025,
+        -1.5372427358675829
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.327544713242304,
+      "sample1_mean": 9.746458578789147,
+      "sample2_mean": 12.07400329203145,
+      "sample1_std": 1.9189467688758526,
+      "sample2_std": 2.0609589673445834,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 9.333561877734656e-07,
+        "relative_error": 14.00514401248265,
+        "predicted": 1e-06,
+        "ground_truth": 6.664381222653436e-08,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.16552128981855496,
+        "relative_error": 0.028320760864863515,
+        "predicted": -5.679,
+        "ground_truth": -5.844521289818555
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:18.424918",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x19794866850 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:18.622317",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x197948661d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:19.153011",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284)]...\nSample 1 size: 50\nSample 1 mean: 10.1824\nSample 1 std: 1.5366\n\nHypothesized population mean: 10\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - One-sample t-test (since population standard deviation is unknown and sample size is less than 30).\n\n2. State H0 and H1:\n   - H0: mu = 10 (The sample mean is equal to the population mean)\n   - H1: mu \u2260 10 (The sample mean is different from the population mean)\n\n3. Calculate test statistic:\n   - Formula: t = (xb - mu) / (s / sqrt(n))\n   - Given: xb = 10.1824, mu = 10, s = 1.5366, n = 50\n   - t = (10.1824 - 10) / (1.5366 / sqrt(50))\n   - t \u2248 0.837\n\n4. Find p-value:\n   - Use t-distribution with df = n - 1 = 49\n   - p-value for t \u2248 0.837 (two-tailed test)\n\n5. Make decision (alp = 0.05):\n   - Compare p-value with alp\n   - If p-value < alp, reject H0; otherwise, do not reject H0\n\n6. State conclusion:\n   - Since p-value > 0.05, do not reject H0\n   - Conclusion: There is not enough evidence to suggest that the sample mean differs from the population mean of 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10 (The sample mean is equal to the population mean)",
+        "H1": "- H0: mu = 10 (The sample mean is equal to the population mean)"
+      },
+      "test_method": "__one_sample_t_test_(since_population_standard_deviation_is_unknown_and_sample_size_is_less_than_30).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- Since p-value > 0.05, do not reject H0\n   - Conclusion: There is not enough evidence to suggest that the sample mean differs from the population mean of 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.839487828091678,
+      "p_value": 0.40527287278483803,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.745738116089615,
+        10.61910600588243
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.182422060986022,
+      "sample_std": 1.53655445671519,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.35527287278483805,
+        "relative_error": 0.8766263341130525,
+        "predicted": 0.05,
+        "ground_truth": 0.40527287278483803,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:20.082723",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x197948ef5d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:20.509500",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(13.454700428328369), np.float64(6.932277190167724), np.float64(11.727656027396376), np.float64(9.342949553754213), np.float64(9.877351308342305), np.float64(7.8942029785921015), np.float64(9.331087655288247), np.float64(12.600089189397917), np.float64(11.165310483975414), np.float64(13.464623210819887)]...\nSample 1 size: 50\nSample 1 mean: 10.2698\nSample 1 std: 2.1426\n\nSample 2: [np.float64(12.736713225401317), np.float64(13.693167971686808), np.float64(10.858112676956411), np.float64(13.62752737993242), np.float64(14.136943111978077), np.float64(12.465756040274337), np.float64(12.468801785397392), np.float64(12.540686478563451), np.float64(10.273309470521237), np.float64(11.704942639519293)]...\nSample 2 size: 50\nSample 2 mean: 12.1401\nSample 2 std: 1.9216\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Independent two-sample t-test\n3. Test statistic value: -4.451\n4. P-value: 0.00003\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "independent_two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -4.451,
+      "p_value": 3e-05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two groups.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -4.595114856043084,
+      "p_value": 1.2892978599157498e-05,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -2.678020941215438,
+        -1.0625854471845937
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.870303194200016,
+      "sample1_mean": 10.269829386830075,
+      "sample2_mean": 12.140132581030091,
+      "sample1_std": 2.1426373662169027,
+      "sample2_std": 1.9215527864263418,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 1.71070214008425e-05,
+        "relative_error": 1.326847886178945,
+        "predicted": 3e-05,
+        "ground_truth": 1.2892978599157498e-05,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.1441148560430845,
+        "relative_error": 0.03136262325490244,
+        "predicted": -4.451,
+        "ground_truth": -4.595114856043084
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:22.505458",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(9.881434707948136), np.float64(8.541426127252677), np.float64(9.171053868328283), np.float64(11.267820755467485), np.float64(10.005986582399911), np.float64(10.680419953736676), np.float64(11.34015848440438), np.float64(9.25031707420478), np.float64(11.512496327259612), np.float64(10.757685206916788)]...\nSample 1 size: 50\nSample 1 mean: 9.8720\nSample 1 std: 1.6361\n\nSample 2: [np.float64(10.639679179069743), np.float64(10.337357542813828), np.float64(11.280701622902292), np.float64(15.712950900526401), np.float64(10.628670926879543), np.float64(14.152434520226809), np.float64(13.49000089839166), np.float64(11.661488992220743), np.float64(13.630844240647816), np.float64(13.202412025112022)]...\nSample 2 size: 50\nSample 2 mean: 12.0416\nSample 2 std: 1.9599\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Paired t-test (comparing means from the same subjects under two conditions).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (no difference in means)\n   - H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic:\n   - Difference in sample means: xb_diff = xb2 - xb1 = 12.0416 - 9.8720 = 2.1696\n   - Standard deviation of differences: s_diff = sqrt((s1^2/n1) + (s2^2/n2)) = sqrt((1.6361^2/50) + (1.9599^2/50)) = 0.4013\n   - Test statistic (t): t = xb_diff / s_diff = 2.1696 / 0.4013 = 5.405\n\n4. Find p-value:\n   - Degrees of freedom (df) = n1 - 1 = 50 - 1 = 49\n   - Using a t-distribution table or calculator, find p-value for t = 5.405 with df = 49.\n   - p-value \u2248 0.00001 (two-tailed)\n\n5. Make decision (alp = 0.05):\n   - p-value < alp (0.00001 < 0.05)\n\n6. State conclusion:\n   - Reject H0. There is a significant difference in means between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (no difference in means)",
+        "H1": "- H0: mu1 = mu2 (no difference in means)"
+      },
+      "test_method": "__paired_t_test_(comparing_means_from_the_same_subjects_under_two_conditions).",
+      "assumptions": null,
+      "test_statistic": 2.1696,
+      "p_value": 0.05,
+      "degrees_of_freedom": 50.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- Reject H0. There is a significant difference in means between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -15.441039649284486,
+      "p_value": 1.8595408440764317e-20,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.4519298577403204,
+        -1.887211931482149
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.1695708946112346,
+      "std_difference": 0.9935330306050066,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.05,
+        "relative_error": 2.688835803702566e+18,
+        "predicted": 0.05,
+        "ground_truth": 1.8595408440764317e-20,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 17.610639649284487,
+        "relative_error": 1.1405086735918417,
+        "predicted": 2.1696,
+        "ground_truth": -15.441039649284486
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:24.341851",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x19794866250 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:25.389404",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979491e450 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:25.554343",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.727724459627819), np.float64(11.790369963943371), np.float64(8.561039533430419), np.float64(6.994993087918206), np.float64(4.070942324316698), np.float64(8.91300898413473), np.float64(14.840830024494805), np.float64(10.869768542927295), np.float64(8.880855427901022), np.float64(10.930160419000613)]...\nSample 1 size: 100\nSample 1 mean: 9.8173\nSample 1 std: 2.0861\n\nSample 2: [np.float64(13.030820805801621), np.float64(10.844922225288698), np.float64(14.548894433882477), np.float64(10.74482492712616), np.float64(10.726769433795528), np.float64(13.082263221609063), np.float64(13.525852964673874), np.float64(12.896198727872408), np.float64(8.628805365230384), np.float64(13.076068879856502)]...\nSample 2 size: 100\nSample 2 mean: 11.7765\nSample 2 std: 2.0903\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [12.7277, 11.7904, 8.5610, 6.9950, 4.0709, 8.9130, 14.8408, 10.8698, 8.8809, 10.9302]...\nSample 1 size: 100\nSample 1 mean: 9.8173\nSample 1 std: 2.0861\n\nSample 2: [13.0308, 10.8449, 14.5489, 10.7448, 10.7268, 13.0823, 13.5259, 12.8962, 8.6288, 13.0761]...\nSample 2 size: 100\nSample 2 mean: 11.7765\nSample 2 std: 2.0903\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -6.682\np-value: <0.0001\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -6.682,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -6.634331862754437,
+      "p_value": 3.0442977701560763e-10,
+      "degrees_of_freedom": 198.0,
+      "critical_value": 1.9720174778338955,
+      "confidence_interval": [
+        -2.5415458362896723,
+        -1.3768306680958193
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.959188252192746,
+      "sample1_mean": 9.817277053101968,
+      "sample2_mean": 11.776465305294714,
+      "sample1_std": 2.0860669090176267,
+      "sample2_std": 2.090252972148058,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04999999969557022,
+        "relative_error": 164241488.41723457,
+        "predicted": 0.05,
+        "ground_truth": 3.0442977701560763e-10,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04766813724556318,
+        "relative_error": 0.007185069760102769,
+        "predicted": -6.682,
+        "ground_truth": -6.634331862754437
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:26.972607",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979491ce50 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:27.082140",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.578238797379969), np.float64(11.26257645167708), np.float64(7.0856883602886676), np.float64(9.360657567285397), np.float64(9.05925469141441), np.float64(8.722244303513316), np.float64(9.449715497546633), np.float64(12.98988262246879), np.float64(8.268337768613513), np.float64(11.936556709182963)]...\nSample 1 size: 50\nSample 1 mean: 9.6165\nSample 1 std: 1.5332\n\nHypothesized population mean: 10\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - One-sample t-test (since population standard deviation is unknown).\n\n2. State H0 and H1:\n   - H0: mu = 10\n   - H1: mu \u2260 10\n\n3. Calculate test statistic:\n   - Formula: t = (xb - mu) / (s / sqrt(n))\n   - xb = 9.6165, mu = 10, s = 1.5332, n = 50\n   - t = (9.6165 - 10) / (1.5332 / sqrt(50))\n   - t \u2248 -1.772\n\n4. Find p-value:\n   - Degrees of freedom (df) = n - 1 = 49\n   - Using t-distribution table or calculator, find p-value for t \u2248 -1.772 with df = 49\n   - p-value \u2248 0.082 (two-tailed)\n\n5. Make decision (alp = 0.05):\n   - p-value (0.082) > alp (0.05)\n   - Fail to reject H0\n\n6. State conclusion:\n   - There is not enough evidence to conclude that the sample mean differs from the hypothesized population mean of 10 at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "- H0: mu = 10"
+      },
+      "test_method": "__one_sample_t_test_(since_population_standard_deviation_is_unknown).",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": 49.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is not enough evidence to conclude that the sample mean differs from the hypothesized population mean of 10 at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.7687071032939465,
+      "p_value": 0.08316718583622974,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.180772672792354,
+        10.052226313364734
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.616499493078544,
+      "sample_std": 1.5331866340538596,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.03316718583622974,
+        "relative_error": 0.39880134818486634,
+        "predicted": 0.05,
+        "ground_truth": 0.08316718583622974,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": false,
+        "predicted": "reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 0,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 2.6666666666666665,
+        "max": 5,
+        "percentage": 53.333333333333336
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:27.461267",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979496fad0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:28.829834",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284)]...\nSample 1 size: 50\nSample 1 mean: 10.1824\nSample 1 std: 1.5366\n\nHypothesized population mean: 10\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: One-sample t-test\n3. Test statistic value: t = (xb - mu) / (s / sqrt(n)) = (10.1824 - 10) / (1.5366 / sqrt(50)) = 0.837\n4. P-value: 0.406\n5. Decision: Fail to reject H0\n6. Conclusion: There is not enough evidence to suggest that the sample mean differs from the population mean of 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10, H1: mu != 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.837,
+      "p_value": 0.406,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to suggest that the sample mean differs from the population mean of 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.839487828091678,
+      "p_value": 0.40527287278483803,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.745738116089615,
+        10.61910600588243
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.182422060986022,
+      "sample_std": 1.53655445671519,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0007271272151619934,
+        "relative_error": 0.0017941670020140477,
+        "predicted": 0.406,
+        "ground_truth": 0.40527287278483803,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0024878280916780238,
+        "relative_error": 0.00296350704373326,
+        "predicted": 0.837,
+        "ground_truth": 0.839487828091678
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:29.293455",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(9.640777172337083), np.float64(10.393552193313914), np.float64(11.641056950834837), np.float64(9.212517655550856), np.float64(11.042334511464226), np.float64(9.468322416169242), np.float64(9.76491566534374), np.float64(11.659038084048145), np.float64(6.013879257891688), np.float64(7.4070553438504785)]...\nSample 1 size: 50\nSample 1 mean: 9.7465\nSample 1 std: 1.9189\n\nSample 2: [np.float64(11.73772493959331), np.float64(12.697551788092591), np.float64(15.902025120252599), np.float64(16.153961058107505), np.float64(12.138762270265557), np.float64(12.320381186634151), np.float64(14.15248031493277), np.float64(10.308677934465306), np.float64(12.666140745236511), np.float64(11.948274304092287)]...\nSample 2 size: 50\nSample 2 mean: 12.0740\nSample 2 std: 2.0610\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Independent two-sample t-test\n3. Test statistic value: -5.679\n4. P-value: < 0.001\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "independent_two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.679,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two groups.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.844521289818555,
+      "p_value": 6.664381222653436e-08,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -3.117846690617025,
+        -1.5372427358675829
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.327544713242304,
+      "sample1_mean": 9.746458578789147,
+      "sample2_mean": 12.07400329203145,
+      "sample1_std": 1.9189467688758526,
+      "sample2_std": 2.0609589673445834,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.16552128981855496,
+        "relative_error": 0.028320760864863515,
+        "predicted": -5.679,
+        "ground_truth": -5.844521289818555
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:29.967125",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.578238797379969), np.float64(11.26257645167708), np.float64(7.0856883602886676), np.float64(9.360657567285397), np.float64(9.05925469141441), np.float64(8.722244303513316), np.float64(9.449715497546633), np.float64(12.98988262246879), np.float64(8.268337768613513), np.float64(11.936556709182963)]...\nSample 1 size: 50\nSample 1 mean: 9.6165\nSample 1 std: 1.5332\n\nHypothesized population mean: 10\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. Test name: One-sample t-test\n3. Test statistic value: t = (xb - mu) / (s / sqrt(n)) = (9.6165 - 10) / (1.5332 / sqrt(50)) = -1.772\n4. P-value: 0.082\n5. Decision: Fail to reject H0\n6. Conclusion: There is not enough evidence to conclude that the sample mean differs from the population mean of 10 at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10, H1: mu != 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.772,
+      "p_value": 0.082,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that the sample mean differs from the population mean of 10 at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.7687071032939465,
+      "p_value": 0.08316718583622974,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.180772672792354,
+        10.052226313364734
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.616499493078544,
+      "sample_std": 1.5331866340538596,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0011671858362297394,
+        "relative_error": 0.014034211023180775,
+        "predicted": 0.082,
+        "ground_truth": 0.08316718583622974,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.003292896706053483,
+        "relative_error": 0.0018617535373273316,
+        "predicted": -1.772,
+        "ground_truth": -1.7687071032939465
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:30.173461",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(12.260198632809027), np.float64(11.228198354225247), np.float64(11.196694094149766), np.float64(11.039321146693005), np.float64(7.805324650905913), np.float64(11.401446313719171), np.float64(7.2883720577468925), np.float64(8.41080108974989), np.float64(12.607130135616174), np.float64(11.680440325388394)]...\nSample 1 size: 100\nSample 1 mean: 9.9386\nSample 1 std: 2.0498\n\nSample 2: [np.float64(12.937657499517348), np.float64(12.7420042235262), np.float64(13.616920803624351), np.float64(12.93692444008191), np.float64(9.154761030500321), np.float64(12.727233851994662), np.float64(8.576034993334183), np.float64(9.531291461090948), np.float64(16.888763012892234), np.float64(13.97795139657395)]...\nSample 2 size: 100\nSample 2 mean: 11.8710\nSample 2 std: 2.2524\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Paired t-test (comparing means from the same subjects under two conditions).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (no difference in means)\n   - H1: mu1 \u2260 mu2 (difference in means)\n\n3. Calculate test statistic:\n   - Difference in sample means: xb_diff = xb2 - xb1 = 11.8710 - 9.9386 = 1.9324\n   - Standard deviation of differences: s_diff = sqrt((s1^2/n1) + (s2^2/n2)) = sqrt((2.0498^2/100) + (2.2524^2/100)) = 0.3031\n   - Test statistic (t): t = xb_diff / s_diff = 1.9324 / 0.3031 = 6.377\n\n4. Find p-value:\n   - Degrees of freedom (df) = n1 - 1 = 100 - 1 = 99\n   - Using t-distribution table or calculator, p-value for t = 6.377 with df = 99 is approximately p < 0.0001\n\n5. Make decision (alp = 0.05):\n   - Since p < 0.0001 < 0.05, reject H0.\n\n6. State conclusion:\n   - There is a statistically significant difference in means between the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (no difference in means)",
+        "H1": "- H0: mu1 = mu2 (no difference in means)"
+      },
+      "test_method": "__paired_t_test_(comparing_means_from_the_same_subjects_under_two_conditions).",
+      "assumptions": null,
+      "test_statistic": 1.9324,
+      "p_value": 0.05,
+      "degrees_of_freedom": 100.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is a statistically significant difference in means between the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -18.779102425846315,
+      "p_value": 2.121165036325275e-34,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        -2.136631280997678,
+        -1.728263049518943
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.9324471652583106,
+      "std_difference": 1.0290412829308702,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.05,
+        "relative_error": 2.357195180183643e+32,
+        "predicted": 0.05,
+        "ground_truth": 2.121165036325275e-34,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 20.711502425846316,
+        "relative_error": 1.1029016167109442,
+        "predicted": 1.9324,
+        "ground_truth": -18.779102425846315
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:31.485547",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.225931783320528), np.float64(9.509878697618595), np.float64(7.938372559457692), np.float64(9.886090917572941), np.float64(12.0983472428827), np.float64(8.04808236777019), np.float64(8.178850232157103), np.float64(11.117097918548447), np.float64(9.556927768538399), np.float64(11.294969381418948)]...\nSample 1 size: 100\nSample 1 mean: 10.0766\nSample 1 std: 1.9779\n\nSample 2: [np.float64(10.309909344061698), np.float64(9.83260234528388), np.float64(12.689209809500715), np.float64(12.758560068730326), np.float64(14.574662223210131), np.float64(14.199959300684167), np.float64(11.735542686937656), np.float64(9.511588242278261), np.float64(11.361786805978204), np.float64(12.43446238962105)]...\nSample 2 size: 100\nSample 2 mean: 11.6715\nSample 2 std: 2.0149\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Data:\nSample 1: [10.0766, s=1.9779, n=100]\nSample 2: [11.6715, s=2.0149, n=100]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -5.946\np-value: <0.0001\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.946,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.648689543702781,
+      "p_value": 5.563840177433093e-08,
+      "degrees_of_freedom": 198.0,
+      "critical_value": 1.9720174778338955,
+      "confidence_interval": [
+        -2.151708091473582,
+        -1.0381090640891393
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.5949085777813607,
+      "sample1_mean": 10.076598431744594,
+      "sample2_mean": 11.671507009525955,
+      "sample1_std": 1.977937574632876,
+      "sample2_std": 2.014925817190868,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.04999994436159823,
+        "relative_error": 898658.8896711618,
+        "predicted": 0.05,
+        "ground_truth": 5.563840177433093e-08,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.2973104562972191,
+        "relative_error": 0.05263352747517589,
+        "predicted": -5.946,
+        "ground_truth": -5.648689543702781
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:32.325780",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x197948651d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:32.467187",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979427c050 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:34.421817",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(9.24367489192122), np.float64(12.59845659557213), np.float64(9.287472057877148), np.float64(11.475031136934174), np.float64(8.132764639980246), np.float64(9.58912488426474), np.float64(8.099955890178837), np.float64(9.321933848198874), np.float64(11.68061627491479), np.float64(6.545359153615303)]...\nSample 1 size: 100\nSample 1 mean: 9.9787\nSample 1 std: 1.9590\n\nHypothesized population mean: 10\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. **Identify test type:**\n   - One-sample t-test (since population standard deviation is unknown).\n\n2. **State H0 and H1:**\n   - H0: mu = 10\n   - H1: mu \u2260 10\n\n3. **Calculate test statistic:**\n   - Formula: t = (xb - mu) / (s / sqrt(n))\n   - Given: xb = 9.9787, mu = 10, s = 1.9590, n = 100\n   - t = (9.9787 - 10) / (1.9590 / sqrt(100))\n   - t = -0.1083\n\n4. **Find p-value:**\n   - Degrees of freedom (df) = n - 1 = 99\n   - Using a t-distribution table or calculator, find p-value for t = -0.1083 with df = 99.\n   - p-value \u2248 0.914 (two-tailed)\n\n5. **Make decision (alp = 0.05):**\n   - Since p-value (0.914) > alp (0.05), fail to reject H0.\n\n6. **State conclusion:**\n   - There is not enough evidence to conclude that the sample mean differs from the hypothesized population mean of 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "**"
+      },
+      "test_method": "**",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": 99.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "**\n   - There is not enough evidence to conclude that the sample mean differs from the hypothesized population mean of 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.10854200576797488,
+      "p_value": 0.9137854519568591,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.590022799474436,
+        10.36744984924179
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.978736324358113,
+      "sample_std": 1.9590273361394341,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.8637854519568591,
+        "relative_error": 0.9452825607007359,
+        "predicted": 0.05,
+        "ground_truth": 0.9137854519568591,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": false,
+        "predicted": "reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 0,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 1.6666666666666665,
+        "max": 5,
+        "percentage": 33.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:36.427483",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x197948ed950 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:37.580843",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(10.1069632536438), np.float64(5.831195690023051), np.float64(11.228540876714128), np.float64(11.507710139867365), np.float64(9.497794823926174), np.float64(5.038582980030917), np.float64(8.00716274799522), np.float64(12.465803868205393), np.float64(4.444011438542855), np.float64(9.304953175612962)]...\nSample 1 size: 100\nSample 1 mean: 9.9520\nSample 1 std: 2.2106\n\nSample 2: [np.float64(13.289493995396457), np.float64(7.507210914526621), np.float64(13.024471361665693), np.float64(13.01605452490188), np.float64(10.91714342118059), np.float64(7.7332535916593255), np.float64(10.263069598099444), np.float64(15.117552009608433), np.float64(6.435216749057283), np.float64(11.818152986690142)]...\nSample 2 size: 100\nSample 2 mean: 12.0019\nSample 2 std: 2.4283\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. Identify test type:\n   - Paired t-test (comparing measurements from the same subjects under two conditions).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (no difference in population means)\n   - H1: mu1 \u2260 mu2 (difference in population means)\n\n3. Calculate test statistic:\n   - Difference in sample means: xb_diff = 12.0019 - 9.9520 = 2.0499\n   - Standard deviation of differences: s_diff = sqrt((s1^2 + s2^2) / n) = sqrt((2.2106^2 + 2.4283^2) / 100) = 0.3241\n   - Test statistic (t): t = xb_diff / (s_diff / sqrt(n)) = 2.0499 / (0.3241 / sqrt(100)) = 6.324\n\n4. Find p-value:\n   - Degrees of freedom (df) = n - 1 = 100 - 1 = 99\n   - Using a t-distribution table or calculator, p-value for t = 6.324 with df = 99 is approximately p < 0.0001\n\n5. Make decision (alp = 0.05):\n   - Since p < 0.0001 < 0.05, reject H0.\n\n6. State conclusion:\n   - There is a statistically significant difference in the means of the two conditions.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (no difference in population means)",
+        "H1": "- H0: mu1 = mu2 (no difference in population means)"
+      },
+      "test_method": "__paired_t_test_(comparing_measurements_from_the_same_subjects_under_two_conditions).",
+      "assumptions": null,
+      "test_statistic": 2.0499,
+      "p_value": 0.05,
+      "degrees_of_freedom": 100.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is a statistically significant difference in the means of the two conditions.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -19.711806167419983,
+      "p_value": 4.7641153172202076e-36,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        -2.2562084726499805,
+        -1.8435238923442174
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.049866182497099,
+      "std_difference": 1.0399179887864125,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.05,
+        "relative_error": 1.049512798719874e+34,
+        "predicted": 0.05,
+        "ground_truth": 4.7641153172202076e-36,
+        "valid_range": true,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 21.761706167419984,
+        "relative_error": 1.1039935144750008,
+        "predicted": 2.0499,
+        "ground_truth": -19.711806167419983
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:37.941466",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(12.727724459627819), np.float64(11.790369963943371), np.float64(8.561039533430419), np.float64(6.994993087918206), np.float64(4.070942324316698), np.float64(8.91300898413473), np.float64(14.840830024494805), np.float64(10.869768542927295), np.float64(8.880855427901022), np.float64(10.930160419000613)]...\nSample 1 size: 100\nSample 1 mean: 9.8173\nSample 1 std: 2.0861\n\nSample 2: [np.float64(13.030820805801621), np.float64(10.844922225288698), np.float64(14.548894433882477), np.float64(10.74482492712616), np.float64(10.726769433795528), np.float64(13.082263221609063), np.float64(13.525852964673874), np.float64(12.896198727872408), np.float64(8.628805365230384), np.float64(13.076068879856502)]...\nSample 2 size: 100\nSample 2 mean: 11.7765\nSample 2 std: 2.0903\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 100,
+        "sample_size2": 100,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "1. H0: mu1 = mu2; H1: mu1 != mu2\n2. Test name: Independent two-sample t-test\n3. Test statistic value: -6.944\n4. P-value: < 0.0001\n5. Decision: Reject H0\n6. Brief conclusion: There is a significant difference between the means of the two groups.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2; H1: mu1 != mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "independent_two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -6.944,
+      "p_value": null,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference between the means of the two groups.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -6.634331862754437,
+      "p_value": 3.0442977701560763e-10,
+      "degrees_of_freedom": 198.0,
+      "critical_value": 1.9720174778338955,
+      "confidence_interval": [
+        -2.5415458362896723,
+        -1.3768306680958193
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.959188252192746,
+      "sample1_mean": 9.817277053101968,
+      "sample2_mean": 11.776465305294714,
+      "sample1_std": 2.0860669090176267,
+      "sample2_std": 2.090252972148058,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null,
+        "valid_range": false,
+        "correct_significance": false
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.30966813724556275,
+        "relative_error": 0.046676612453479975,
+        "predicted": -6.944,
+        "ground_truth": -6.634331862754437
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 3.6666666666666665,
+        "max": 5,
+        "percentage": 73.33333333333333
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": false,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:38.389723",
+    "model": "deepseek-chat",
+    "prompt_type": "few_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1979498d350 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:39.388883",
+    "model": "deepseek-chat",
+    "prompt_type": "chain_of_thought",
+    "input_data": {
+      "test_type": "paired_t_test"
+    },
+    "error": "RetryError[<Future at 0x19794714fd0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-22T15:07:39.474672",
+    "model": "deepseek-chat",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "two_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x197947168d0 state=finished raised AuthenticationError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]
