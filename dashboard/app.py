@@ -12,10 +12,11 @@ from pathlib import Path
 import sys
 import scipy.stats as stats
 from sklearn.metrics import confusion_matrix
+from typing import Dict
 
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
-import config
+from src import config
 
 st.set_page_config(
     page_title="LLM Hypothesis Testing Benchmark",
@@ -294,6 +295,19 @@ def prepare_dataframe(results: list) -> pd.DataFrame:
         stat_true = ground_truth.get('test_statistic')
         stat_error = abs(stat_pred - stat_true) if (stat_pred is not None and stat_true is not None) else None
         
+        # Extract hallucination data
+        halluc_data = result.get('hallucinations', {})
+        has_hallucinations = halluc_data.get('has_hallucination', False)
+        halluc_severity = halluc_data.get('severity', 'none')
+        halluc_counts = halluc_data.get('counts', {})
+        
+        # Extract decision data for F1 calculation (handle None values)
+        gt_decision_raw = ground_truth.get('decision', '')
+        gt_decision = gt_decision_raw.lower() if gt_decision_raw else ''
+        
+        llm_decision_raw = eval_data.get('decision', {}).get('predicted', '') if isinstance(eval_data.get('decision'), dict) else ''
+        llm_decision = llm_decision_raw.lower() if llm_decision_raw else ''
+        
         row = {
             'timestamp': result.get('timestamp', ''),
             'model': shorten_model_name(model_name),
@@ -306,10 +320,17 @@ def prepare_dataframe(results: list) -> pd.DataFrame:
             'decision_accuracy': 1.0 if eval_data.get('decision', {}).get('correct', False) else 0.0,
             'p_value_accuracy': 1.0 if eval_data.get('p_value', {}).get('within_tolerance', False) else 0.0,
             'reasoning_quality': eval_data.get('reasoning_quality', {}).get('percentage', 0) / 100,
-            'has_hallucinations': eval_data.get('hallucinations', {}).get('has_hallucinations', False),
+            'has_hallucinations': has_hallucinations,
+            'hallucination_severity': halluc_severity,
+            'structural_hallucinations': halluc_counts.get('structural', 0),
+            'numerical_hallucinations': halluc_counts.get('numerical', 0),
+            'logical_hallucinations': halluc_counts.get('logical', 0),
+            'reasoning_hallucinations': halluc_counts.get('reasoning', 0),
             'completeness': sum(eval_data.get('completeness', {}).values()) / 5.0 if eval_data.get('completeness') else 0,
             'predicted_decision': parsed.get('decision'),
             'true_decision': ground_truth.get('decision'),
+            'ground_truth_decision': gt_decision,
+            'llm_decision': llm_decision,
             'predicted_p_value': p_val_pred,
             'true_p_value': p_val_true,
             'p_value_error': p_val_error,
@@ -390,7 +411,7 @@ def create_radar_chart(df: pd.DataFrame, models: list):
         fig.add_trace(go.Scatterpolar(
             r=values,
             theta=theta,
-            fill='toself',
+            # fill='toself',
             name=model
         ))
     
@@ -696,21 +717,25 @@ def create_hallucination_heatmap(df: pd.DataFrame) -> go.Figure:
     """Heatmap of hallucination types by model"""
     
     hallucination_types = ["structural", "numerical", "logical", "reasoning"]
-    models = df["model"].unique()
+    models = sorted(df["model"].unique())
     
-    # Compute average hallucination rate for each type per model
+    # Compute average hallucination count for each type per model
     heatmap_data = []
     for model in models:
         model_df = df[df["model"] == model]
         rates = []
         for h_type in hallucination_types:
-            rate = model_df[f"hallucinations.{h_type}"].apply(len).mean()
+            col_name = f"{h_type}_hallucinations"
+            if col_name in model_df.columns:
+                rate = model_df[col_name].mean()
+            else:
+                rate = 0
             rates.append(rate)
         heatmap_data.append(rates)
     
     fig = go.Figure(data=go.Heatmap(
         z=heatmap_data,
-        x=hallucination_types,
+        x=[h.title() for h in hallucination_types],
         y=models,
         colorscale="Reds",
         text=np.round(heatmap_data, 2),
@@ -719,13 +744,365 @@ def create_hallucination_heatmap(df: pd.DataFrame) -> go.Figure:
     ))
     
     fig.update_layout(
-        title="Hallucination Type Frequency by Model",
+        title="Average Hallucination Count by Type and Model",
         xaxis_title="Hallucination Category",
         yaxis_title="Model",
+        height=400,
         font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
     )
     
     return fig
+
+
+def create_f1_leaderboard(df: pd.DataFrame) -> pd.DataFrame:
+    """Create F1 score leaderboard by model"""
+    models = df['model'].unique()
+    leaderboard = []
+    
+    for model in models:
+        model_df = df[df['model'] == model]
+        metrics = calculate_f1_from_df(model_df)
+        
+        leaderboard.append({
+            'Model': model,
+            'F1 Score': metrics['f1_score'],
+            'Precision': metrics['precision'],
+            'Recall': metrics['recall'],
+            'Samples': len(model_df),
+            'TP': metrics['tp'],
+            'FP': metrics['fp'],
+            'FN': metrics['fn'],
+            'TN': metrics['tn']
+        })
+    
+    return pd.DataFrame(leaderboard).sort_values('F1 Score', ascending=False)
+
+
+def create_f1_comparison_chart(df: pd.DataFrame) -> go.Figure:
+    """Create bar chart comparing F1 scores across models"""
+    f1_leaderboard = create_f1_leaderboard(df)
+    
+    fig = go.Figure()
+    
+    # F1 Score bars
+    fig.add_trace(go.Bar(
+        x=f1_leaderboard['Model'],
+        y=f1_leaderboard['F1 Score'],
+        name='F1 Score',
+        marker_color='#3b82f6',
+        text=f1_leaderboard['F1 Score'].round(3),
+        textposition='outside',
+        hovertemplate='<b>%{x}</b><br>F1: %{y:.3f}<extra></extra>'
+    ))
+    
+    # Precision bars
+    fig.add_trace(go.Bar(
+        x=f1_leaderboard['Model'],
+        y=f1_leaderboard['Precision'],
+        name='Precision',
+        marker_color='#10b981',
+        text=f1_leaderboard['Precision'].round(3),
+        textposition='outside',
+        hovertemplate='<b>%{x}</b><br>Precision: %{y:.3f}<extra></extra>'
+    ))
+    
+    # Recall bars
+    fig.add_trace(go.Bar(
+        x=f1_leaderboard['Model'],
+        y=f1_leaderboard['Recall'],
+        name='Recall',
+        marker_color='#f59e0b',
+        text=f1_leaderboard['Recall'].round(3),
+        textposition='outside',
+        hovertemplate='<b>%{x}</b><br>Recall: %{y:.3f}<extra></extra>'
+    ))
+    
+    fig.update_layout(
+        title="F1 Score, Precision, and Recall by Model",
+        xaxis_title="Model",
+        yaxis_title="Score",
+        yaxis_range=[0, 1.1],
+        barmode='group',
+        height=500,
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000"),
+        hovermode='x unified'
+    )
+    
+    return fig
+
+
+def create_confusion_matrix_heatmap(df: pd.DataFrame, model_name: str = None) -> go.Figure:
+    """Create confusion matrix heatmap for a specific model or overall"""
+    if model_name:
+        df = df[df['model'] == model_name]
+    
+    metrics = calculate_f1_from_df(df)
+    
+    # Create confusion matrix
+    cm = np.array([
+        [metrics['tp'], metrics['fp']],
+        [metrics['fn'], metrics['tn']]
+    ])
+    
+    # Normalize for percentages
+    cm_pct = cm / cm.sum() * 100
+    
+    fig = go.Figure(data=go.Heatmap(
+        z=cm,
+        x=['Predicted: Reject H₀', 'Predicted: Fail to Reject H₀'],
+        y=['Actual: Reject H₀', 'Actual: Fail to Reject H₀'],
+        text=[[f'{cm[i][j]}<br>({cm_pct[i][j]:.1f}%)' for j in range(2)] for i in range(2)],
+        texttemplate='%{text}',
+        textfont={"size": 14, "color": "#deec19"},
+        colorscale='Blues',
+        showscale=True
+    ))
+    
+    title = f"Confusion Matrix: {model_name}" if model_name else "Overall Confusion Matrix"
+    fig.update_layout(
+        title=title,
+        xaxis_title="Predicted Decision",
+        yaxis_title="Ground Truth Decision",
+        height=450,
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
+    
+    return fig
+
+
+def create_f1_by_prompt_type(df: pd.DataFrame) -> go.Figure:
+    """Create F1 score comparison across prompt types"""
+    prompt_types = df['prompt_type'].unique()
+    f1_data = []
+    
+    for prompt_type in prompt_types:
+        prompt_df = df[df['prompt_type'] == prompt_type]
+        metrics = calculate_f1_from_df(prompt_df)
+        f1_data.append({
+            'Prompt Type': prompt_type,
+            'F1 Score': metrics['f1_score'],
+            'Precision': metrics['precision'],
+            'Recall': metrics['recall']
+        })
+    
+    f1_df = pd.DataFrame(f1_data).sort_values('F1 Score', ascending=False)
+    
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(
+        x=f1_df['Prompt Type'],
+        y=f1_df['F1 Score'],
+        mode='markers+lines',
+        name='F1 Score',
+        marker=dict(size=12, color='#3b82f6'),
+        line=dict(width=3, color='#3b82f6'),
+        hovertemplate='<b>%{x}</b><br>F1: %{y:.3f}<extra></extra>'
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=f1_df['Prompt Type'],
+        y=f1_df['Precision'],
+        mode='markers+lines',
+        name='Precision',
+        marker=dict(size=10, color='#10b981'),
+        line=dict(width=2, color='#10b981', dash='dash'),
+        hovertemplate='<b>%{x}</b><br>Precision: %{y:.3f}<extra></extra>'
+    ))
+    
+    fig.add_trace(go.Scatter(
+        x=f1_df['Prompt Type'],
+        y=f1_df['Recall'],
+        mode='markers+lines',
+        name='Recall',
+        marker=dict(size=10, color='#f59e0b'),
+        line=dict(width=2, color='#f59e0b', dash='dot'),
+        hovertemplate='<b>%{x}</b><br>Recall: %{y:.3f}<extra></extra>'
+    ))
+    
+    fig.update_layout(
+        title="F1 Score by Prompt Strategy",
+        xaxis_title="Prompt Type",
+        yaxis_title="Score",
+        yaxis_range=[0, 1.1],
+        height=450,
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000"),
+        hovermode='x unified'
+    )
+    
+    return fig
+
+
+def create_f1_by_test_type(df: pd.DataFrame) -> go.Figure:
+    """Create F1 score heatmap by model and test type"""
+    models = sorted(df['model'].unique())
+    test_types = sorted(df['test_type'].unique())
+    
+    f1_matrix = []
+    for model in models:
+        model_f1s = []
+        for test_type in test_types:
+            subset = df[(df['model'] == model) & (df['test_type'] == test_type)]
+            if len(subset) > 0:
+                metrics = calculate_f1_from_df(subset)
+                model_f1s.append(metrics['f1_score'])
+            else:
+                model_f1s.append(0)
+        f1_matrix.append(model_f1s)
+    
+    fig = go.Figure(data=go.Heatmap(
+        z=f1_matrix,
+        x=test_types,
+        y=models,
+        colorscale='Viridis',
+        text=np.round(f1_matrix, 3),
+        texttemplate='%{text}',
+        textfont={"size": 11, "color": "#ffffff"},
+        colorbar=dict(title="F1 Score")
+    ))
+    
+    fig.update_layout(
+        title="F1 Score Heatmap: Model × Test Type",
+        xaxis_title="Test Type",
+        yaxis_title="Model",
+        height=500,
+        font=dict(family="Segoe UI, sans-serif", size=13, color="#000000")
+    )
+    
+    return fig
+
+
+def display_overall_f1_metrics(df: pd.DataFrame):
+    """Display overall F1 metrics with visualizations"""
+    st.subheader("📊 Overall Reasoning Quality (F1 Metrics)")
+    
+    overall_metrics = calculate_f1_from_df(df)
+    
+    # Top row - main metrics
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("F1 Score", f"{overall_metrics['f1_score']:.3f}")
+    with col2:
+        st.metric("Precision", f"{overall_metrics['precision']:.3f}")
+    with col3:
+        st.metric("Recall", f"{overall_metrics['recall']:.3f}")
+    with col4:
+        st.metric("Total Samples", f"{len(df):,}")
+    
+    # Confusion matrix breakdown (text only, no chart)
+    # st.markdown("#### Overall Confusion Matrix Breakdown")
+    # col1, col2, col3, col4 = st.columns(4)
+    
+    # with col1:
+    #     st.markdown(f"**True Positives:** {overall_metrics['tp']:,}")
+    #     st.caption("Correctly rejected H₀")
+    
+    # with col2:
+    #     st.markdown(f"**False Positives:** {overall_metrics['fp']:,}")
+    #     st.caption("Incorrectly rejected H₀ (Type I error)")
+    
+    # with col3:
+    #     st.markdown(f"**False Negatives:** {overall_metrics['fn']:,}")
+    #     st.caption("Missed rejecting H₀ (Type II error)")
+    
+    # with col4:
+    #     st.markdown(f"**True Negatives:** {overall_metrics['tn']:,}")
+    #     st.caption("Correctly failed to reject H₀")
+
+# def display_overall_f1_metrics(df: pd.DataFrame):
+#     """Display overall F1 metrics with visualizations"""
+#     st.subheader("📊 Overall Reasoning Quality (F1 Metrics)")
+    
+#     overall_metrics = calculate_f1_from_df(df)
+    
+#     # Top row - main metrics
+#     col1, col2, col3, col4 = st.columns(4)
+    
+#     with col1:
+#         st.metric("F1 Score", f"{overall_metrics['f1_score']:.3f}")
+#     with col2:
+#         st.metric("Precision", f"{overall_metrics['precision']:.3f}")
+#     with col3:
+#         st.metric("Recall", f"{overall_metrics['recall']:.3f}")
+#     with col4:
+#         st.metric("Total Samples", f"{len(df):,}")
+    
+#     # Confusion matrix
+#     col1, col2 = st.columns([3, 2])
+    
+#     with col1:
+#         st.plotly_chart(create_confusion_matrix_heatmap(df), use_container_width=True)
+    
+#     with col2:
+#         st.markdown("#### Confusion Matrix Values")
+#         st.markdown(f"**True Positives:** {overall_metrics['tp']:,}")
+#         st.caption("Correctly rejected H₀")
+        
+#         st.markdown(f"**False Positives:** {overall_metrics['fp']:,}")
+#         st.caption("Incorrectly rejected H₀ (Type I error)")
+        
+#         st.markdown(f"**False Negatives:** {overall_metrics['fn']:,}")
+#         st.caption("Missed rejecting H₀ (Type II error)")
+        
+#         st.markdown(f"**True Negatives:** {overall_metrics['tn']:,}")
+#         st.caption("Correctly failed to reject H₀")
+
+
+def display_overall_metrics(df: pd.DataFrame):
+    """Display overall metrics including F1 score."""
+    st.subheader("📊 Overall Performance Metrics")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.metric("Accuracy", f"{df['correct'].mean():.2%}")
+    with col2:
+        st.metric("P-value Accuracy", f"{df['p_value_correct'].mean():.2%}")
+    with col3:
+        st.metric("Test Selection", f"{df['test_selection_correct'].mean():.2%}")
+    with col4:
+        # Compute F1 from all results
+        metrics = calculate_f1_from_df(df)
+        st.metric("F1 Score", f"{metrics['f1_score']:.3f}")
+    
+    # Detailed breakdown
+    with st.expander("🔍 Precision & Recall Details"):
+        metrics = calculate_f1_from_df(df)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Precision", f"{metrics['precision']:.3f}")
+        with col2:
+            st.metric("Recall", f"{metrics['recall']:.3f}")
+
+def calculate_f1_from_df(df: pd.DataFrame) -> Dict:
+    """Calculate F1, precision, recall from dataframe."""
+    # Normalize decisions
+    df_copy = df.copy()
+    df_copy['gt_rejects'] = df_copy['ground_truth_decision'].apply(
+        lambda x: 'reject' in str(x).lower() and 'fail' not in str(x).lower()
+    )
+    df_copy['llm_rejects'] = df_copy['llm_decision'].apply(
+        lambda x: 'reject' in str(x).lower() and 'fail' not in str(x).lower()
+    )
+    
+    tp = len(df_copy[df_copy['gt_rejects'] & df_copy['llm_rejects']])
+    fp = len(df_copy[~df_copy['gt_rejects'] & df_copy['llm_rejects']])
+    fn = len(df_copy[df_copy['gt_rejects'] & ~df_copy['llm_rejects']])
+    tn = len(df_copy[~df_copy['gt_rejects'] & ~df_copy['llm_rejects']])
+    
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    f1_score = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+    
+    return {
+        "precision": precision, 
+        "recall": recall, 
+        "f1_score": f1_score,
+        "tp": tp,
+        "fp": fp,
+        "fn": fn,
+        "tn": tn
+    }
 
 def main():
     st.markdown(" ")
@@ -913,6 +1290,30 @@ def main():
             st.plotly_chart(fig_latency, width='stretch')
         else:
             st.info("Latency data is not available for the selected filters.")
+        
+        st.markdown("### Hallucination Analysis")
+        col_h1, col_h2 = st.columns(2)
+        
+        with col_h1:
+            st.markdown("#### Hallucination Rates by Model")
+            halluc_rates = filtered_df.groupby('model')['has_hallucinations'].mean().reset_index()
+            halluc_rates.columns = ['model', 'hallucination_rate']
+            fig_halluc_rate = px.bar(
+                halluc_rates,
+                x='model',
+                y='hallucination_rate',
+                color='model',
+                title="Proportion of Responses with Hallucinations",
+                labels={'hallucination_rate': 'Hallucination Rate'}
+            )
+            fig_halluc_rate.update_layout(showlegend=False, yaxis_tickformat='.1%')
+            fig_halluc_rate.update_traces(hovertemplate='Model: %{x}<br>Rate: %{y:.1%}<extra></extra>')
+            st.plotly_chart(fig_halluc_rate, use_container_width=True)
+        
+        with col_h2:
+            st.markdown("#### Hallucination Type Heatmap")
+            halluc_heatmap = create_hallucination_heatmap(filtered_df)
+            st.plotly_chart(halluc_heatmap, use_container_width=True)
 
         st.markdown("### Detailed Results")
         st.dataframe(display_df, width='stretch', height=400)
@@ -967,6 +1368,42 @@ def main():
         
         st.markdown("---")
         
+        # Model-specific confusion matrices
+        st.markdown("### Model-Specific Confusion Matrices")
+        st.markdown("Select a model to view its detailed confusion matrix:")
+        
+        selected_model = st.selectbox(
+            "Model",
+            options=sorted(filtered_df['model'].unique()),
+            key="stats_model_selector"
+        )
+        
+        if selected_model:
+            col1, col2 = st.columns([3, 2])
+            
+            with col1:
+                st.plotly_chart(
+                    create_confusion_matrix_heatmap(filtered_df, selected_model),
+                    use_container_width=True
+                )
+            
+            with col2:
+                model_metrics = calculate_f1_from_df(filtered_df[filtered_df['model'] == selected_model])
+                st.markdown(f"#### {selected_model} Metrics")
+                st.metric("F1 Score", f"{model_metrics['f1_score']:.3f}")
+                st.metric("Precision", f"{model_metrics['precision']:.3f}")
+                st.metric("Recall", f"{model_metrics['recall']:.3f}")
+                
+                st.markdown("#### Error Analysis")
+                total = model_metrics['tp'] + model_metrics['fp'] + model_metrics['fn'] + model_metrics['tn']
+                st.write(f"**Type I Error Rate:** {model_metrics['fp'] / (model_metrics['fp'] + model_metrics['tn']) * 100:.1f}%" if (model_metrics['fp'] + model_metrics['tn']) > 0 else "N/A")
+                st.caption("False Positive Rate (α)")
+                
+                st.write(f"**Type II Error Rate:** {model_metrics['fn'] / (model_metrics['fn'] + model_metrics['tp']) * 100:.1f}%" if (model_metrics['fn'] + model_metrics['tp']) > 0 else "N/A")
+                st.caption("False Negative Rate (β)")
+        
+        st.markdown("---")
+        
         st.markdown("### Mean Absolute Errors by Model")
         col5, col6 = st.columns(2)
         
@@ -1014,10 +1451,12 @@ def main():
             c1, c2 = st.columns(2)
             with c1:
                 st.markdown("#### Prompt")
-                st.text_area("Input", row['prompt_text'], height=400, disabled=True)
+                prompt_html = f'<div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; max-height: 400px; overflow-y: auto;"><pre style="color: #1f2937; white-space: pre-wrap; word-wrap: break-word; margin: 0; font-family: monospace;">{row["prompt_text"]}</pre></div>'
+                st.markdown(prompt_html, unsafe_allow_html=True)
             with c2:
                 st.markdown(f"#### {row['model']} Response")
-                st.text_area("Output", row['response_text'], height=400, disabled=True)
+                response_html = f'<div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; max-height: 400px; overflow-y: auto;"><pre style="color: #1f2937; white-space: pre-wrap; word-wrap: break-word; margin: 0; font-family: monospace;">{row["response_text"]}</pre></div>'
+                st.markdown(response_html, unsafe_allow_html=True)
                 
             st.markdown("#### Ground Truth vs Prediction")
             # Determine domain display value

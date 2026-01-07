@@ -1,0 +1,1309 @@
+{
+  "total_evaluations": 810,
+  "by_model": {
+    "gpt-4o": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.7708333333333334,
+        "std": 0.2101999709271573,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.95,
+        "exact_match_rate": 0.9
+      },
+      "decision_accuracy": {
+        "mean": 0.8888888888888888,
+        "correct_rate": 0.8888888888888888
+      },
+      "p_value_accuracy": {
+        "mean": 0.9111111111111111,
+        "within_tolerance_rate": 0.9111111111111111
+      },
+      "reasoning_quality": {
+        "mean": 74.7037037037037,
+        "std": 9.569685217992687
+      },
+      "hallucination_rate": 0.34444444444444444,
+      "latency": {
+        "mean": 4.113468642222101,
+        "median": 3.1360210999991978,
+        "min": 1.6213717000064207,
+        "max": 20.36219319999873
+      }
+    },
+    "gemini-2.5-pro": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.39861111111111114,
+        "std": 0.4444466145780352,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.4388888888888889,
+        "exact_match_rate": 0.43333333333333335
+      },
+      "decision_accuracy": {
+        "mean": 0.3888888888888889,
+        "correct_rate": 0.3888888888888889
+      },
+      "p_value_accuracy": {
+        "mean": 0.4666666666666667,
+        "within_tolerance_rate": 0.4666666666666667
+      },
+      "reasoning_quality": {
+        "mean": 34.333333333333336,
+        "std": 36.866291606155926
+      },
+      "hallucination_rate": 0.05555555555555555,
+      "latency": {
+        "mean": 15.096000176666914,
+        "median": 15.024605750000774,
+        "min": 6.954386500001419,
+        "max": 40.587059299999964
+      }
+    },
+    "gemini-2.5-flash": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.20416666666666666,
+        "std": 0.36867348547039414,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.2611111111111111,
+        "exact_match_rate": 0.24444444444444444
+      },
+      "decision_accuracy": {
+        "mean": 0.16666666666666666,
+        "correct_rate": 0.16666666666666666
+      },
+      "p_value_accuracy": {
+        "mean": 0.2111111111111111,
+        "within_tolerance_rate": 0.2111111111111111
+      },
+      "reasoning_quality": {
+        "mean": 19.074074074074076,
+        "std": 31.324773368881655
+      },
+      "hallucination_rate": 0.1111111111111111,
+      "latency": {
+        "mean": 8.668705775555484,
+        "median": 8.940237850001722,
+        "min": 3.1320679999989807,
+        "max": 14.635120999999344
+      }
+    },
+    "claude-sonnet-4-5-20250929": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.775,
+        "std": 0.2174664725116648,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9888888888888889,
+        "exact_match_rate": 0.9888888888888889
+      },
+      "decision_accuracy": {
+        "mean": 0.8777777777777778,
+        "correct_rate": 0.8777777777777778
+      },
+      "p_value_accuracy": {
+        "mean": 0.8222222222222222,
+        "within_tolerance_rate": 0.8222222222222222
+      },
+      "reasoning_quality": {
+        "mean": 73.92592592592594,
+        "std": 9.820333878030548
+      },
+      "hallucination_rate": 0.32222222222222224,
+      "latency": {
+        "mean": 6.561667423333064,
+        "median": 5.7352131999978155,
+        "min": 3.8585497999956715,
+        "max": 27.637368399999104
+      }
+    },
+    "deepseek-chat": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.7402777777777778,
+        "std": 0.22609899639945222,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.8944444444444445,
+        "exact_match_rate": 0.7888888888888889
+      },
+      "decision_accuracy": {
+        "mean": 0.9666666666666667,
+        "correct_rate": 0.9666666666666667
+      },
+      "p_value_accuracy": {
+        "mean": 0.7,
+        "within_tolerance_rate": 0.7
+      },
+      "reasoning_quality": {
+        "mean": 73.51851851851852,
+        "std": 8.305302651089862
+      },
+      "hallucination_rate": 0.12222222222222222,
+      "latency": {
+        "mean": 6.757290415555528,
+        "median": 5.604592999996385,
+        "min": 3.683609899999283,
+        "max": 15.73162439999578
+      }
+    },
+    "grok-4-1-fast-reasoning": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.7527777777777778,
+        "std": 0.20410524397301494,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9555555555555556,
+        "exact_match_rate": 0.9111111111111111
+      },
+      "decision_accuracy": {
+        "mean": 0.8555555555555555,
+        "correct_rate": 0.8555555555555555
+      },
+      "p_value_accuracy": {
+        "mean": 0.8666666666666667,
+        "within_tolerance_rate": 0.8666666666666667
+      },
+      "reasoning_quality": {
+        "mean": 72.59259259259258,
+        "std": 9.759803906370726
+      },
+      "hallucination_rate": 0.23333333333333334,
+      "latency": {
+        "mean": 74.1796458266669,
+        "median": 67.03956729999845,
+        "min": 8.501740100000461,
+        "max": 213.4402362999972
+      }
+    },
+    "grok-3-mini": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.7916666666666666,
+        "std": 0.20155644370746376,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 1.0,
+        "exact_match_rate": 1.0
+      },
+      "decision_accuracy": {
+        "mean": 0.9666666666666667,
+        "correct_rate": 0.9666666666666667
+      },
+      "p_value_accuracy": {
+        "mean": 0.7777777777777778,
+        "within_tolerance_rate": 0.7777777777777778
+      },
+      "reasoning_quality": {
+        "mean": 76.37037037037037,
+        "std": 6.968083223774173
+      },
+      "hallucination_rate": 0.2,
+      "latency": {
+        "mean": 16.468075227778375,
+        "median": 15.242078299999775,
+        "min": 5.699527100005071,
+        "max": 37.38047820000065
+      }
+    },
+    "claude-haiku-4-5-20251001": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.7361111111111112,
+        "std": 0.2254967082511378,
+        "min": 0.25,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.9111111111111111,
+        "exact_match_rate": 0.8777777777777778
+      },
+      "decision_accuracy": {
+        "mean": 0.8777777777777778,
+        "correct_rate": 0.8777777777777778
+      },
+      "p_value_accuracy": {
+        "mean": 0.8222222222222222,
+        "within_tolerance_rate": 0.8222222222222222
+      },
+      "reasoning_quality": {
+        "mean": 72.5185185185185,
+        "std": 11.464503576241627
+      },
+      "hallucination_rate": 0.25555555555555554,
+      "latency": {
+        "mean": 3.599427261111042,
+        "median": 2.8238247000008414,
+        "min": 1.697416199996951,
+        "max": 18.98203579999972
+      }
+    },
+    "gpt-5-mini": {
+      "n_samples": 90,
+      "overall_accuracy": {
+        "mean": 0.425,
+        "std": 0.4256530929707378,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.5666666666666667,
+        "exact_match_rate": 0.5666666666666667
+      },
+      "decision_accuracy": {
+        "mean": 0.4777777777777778,
+        "correct_rate": 0.4777777777777778
+      },
+      "p_value_accuracy": {
+        "mean": 0.36666666666666664,
+        "within_tolerance_rate": 0.36666666666666664
+      },
+      "reasoning_quality": {
+        "mean": 41.55555555555556,
+        "std": 37.5818448420031
+      },
+      "hallucination_rate": 0.15555555555555556,
+      "latency": {
+        "mean": 25.086982933333598,
+        "median": 25.724424949999957,
+        "min": 9.989274999999907,
+        "max": 64.32472810000036
+      }
+    }
+  },
+  "by_prompt_type": {
+    "few_shot": {
+      "n_samples": 270,
+      "overall_accuracy": {
+        "mean": 0.7648148148148148,
+        "std": 0.3486255591910352,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.8037037037037037,
+        "exact_match_rate": 0.7592592592592593
+      },
+      "decision_accuracy": {
+        "mean": 0.8481481481481481,
+        "correct_rate": 0.8481481481481481
+      },
+      "p_value_accuracy": {
+        "mean": 0.8481481481481481,
+        "within_tolerance_rate": 0.8481481481481481
+      },
+      "reasoning_quality": {
+        "mean": 66.96296296296296,
+        "std": 28.474135738168858
+      },
+      "hallucination_rate": 0.11851851851851852,
+      "latency": {
+        "mean": 15.338066242963045,
+        "median": 8.572590650001075,
+        "min": 1.664282199999434,
+        "max": 138.43391379999957
+      }
+    },
+    "chain_of_thought": {
+      "n_samples": 270,
+      "overall_accuracy": {
+        "mean": 0.47129629629629627,
+        "std": 0.2667711343725755,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.7814814814814814,
+        "exact_match_rate": 0.7592592592592593
+      },
+      "decision_accuracy": {
+        "mean": 0.5777777777777777,
+        "correct_rate": 0.5777777777777777
+      },
+      "p_value_accuracy": {
+        "mean": 0.4777777777777778,
+        "within_tolerance_rate": 0.4777777777777778
+      },
+      "reasoning_quality": {
+        "mean": 53.9753086419753,
+        "std": 25.789576789766738
+      },
+      "hallucination_rate": 0.3962962962962963,
+      "latency": {
+        "mean": 16.12780654185191,
+        "median": 9.51044185000137,
+        "min": 2.396873100005905,
+        "max": 160.72026769999502
+      }
+    },
+    "zero_shot": {
+      "n_samples": 270,
+      "overall_accuracy": {
+        "mean": 0.6287037037037037,
+        "std": 0.3935065357652733,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.737037037037037,
+        "exact_match_rate": 0.7185185185185186
+      },
+      "decision_accuracy": {
+        "mean": 0.7296296296296296,
+        "correct_rate": 0.7296296296296296
+      },
+      "p_value_accuracy": {
+        "mean": 0.6555555555555556,
+        "within_tolerance_rate": 0.6555555555555556
+      },
+      "reasoning_quality": {
+        "mean": 58.59259259259259,
+        "std": 33.89761069712639
+      },
+      "hallucination_rate": 0.08518518518518518,
+      "latency": {
+        "mean": 22.044548442592713,
+        "median": 9.29152619999877,
+        "min": 1.6213717000064207,
+        "max": 213.4402362999972
+      }
+    }
+  },
+  "by_test_type": {
+    "unknown": {
+      "n_samples": 810,
+      "overall_accuracy": {
+        "mean": 0.6216049382716049,
+        "std": 0.36088140314528167,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "test_method_accuracy": {
+        "mean": 0.774074074074074,
+        "exact_match_rate": 0.745679012345679
+      },
+      "decision_accuracy": {
+        "mean": 0.7185185185185186,
+        "correct_rate": 0.7185185185185186
+      },
+      "p_value_accuracy": {
+        "mean": 0.6604938271604939,
+        "within_tolerance_rate": 0.6604938271604939
+      },
+      "reasoning_quality": {
+        "mean": 59.843621399176946,
+        "std": 30.064452320517265
+      },
+      "hallucination_rate": 0.2,
+      "latency": {
+        "mean": 17.836807075802557,
+        "median": 9.21000135000213,
+        "min": 1.6213717000064207,
+        "max": 213.4402362999972
+      }
+    }
+  },
+  "comparison_matrix": {
+    "gemini-2.5-pro": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.5875,
+          "std": 0.4842842656952629,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.5833333333333334,
+          "exact_match_rate": 0.5666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 0.6,
+          "correct_rate": 0.6
+        },
+        "p_value_accuracy": {
+          "mean": 0.6,
+          "within_tolerance_rate": 0.6
+        },
+        "reasoning_quality": {
+          "mean": 47.666666666666664,
+          "std": 38.96009354312293
+        },
+        "hallucination_rate": 0.03333333333333333,
+        "latency": {
+          "mean": 14.25962337000031,
+          "median": 14.162783699999636,
+          "min": 6.954386500001419,
+          "max": 40.587059299999964
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.43333333333333335,
+          "std": 0.3647678104706548,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.5333333333333333,
+          "exact_match_rate": 0.5333333333333333
+        },
+        "decision_accuracy": {
+          "mean": 0.4,
+          "correct_rate": 0.4
+        },
+        "p_value_accuracy": {
+          "mean": 0.6333333333333333,
+          "within_tolerance_rate": 0.6333333333333333
+        },
+        "reasoning_quality": {
+          "mean": 40.666666666666664,
+          "std": 32.40256048410258
+        },
+        "hallucination_rate": 0.13333333333333333,
+        "latency": {
+          "mean": 13.553134769999936,
+          "median": 14.215481499999441,
+          "min": 8.479714100001729,
+          "max": 20.4940471000009
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.175,
+          "std": 0.3716517186829626,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.2,
+          "exact_match_rate": 0.2
+        },
+        "decision_accuracy": {
+          "mean": 0.16666666666666666,
+          "correct_rate": 0.16666666666666666
+        },
+        "p_value_accuracy": {
+          "mean": 0.16666666666666666,
+          "within_tolerance_rate": 0.16666666666666666
+        },
+        "reasoning_quality": {
+          "mean": 14.666666666666666,
+          "std": 30.0813711271426
+        },
+        "hallucination_rate": 0.0,
+        "latency": {
+          "mean": 17.475242390000496,
+          "median": 16.062961700001324,
+          "min": 12.3631177999996,
+          "max": 37.465762200001336
+        }
+      }
+    },
+    "gpt-4o": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8458333333333333,
+          "std": 0.1698140322692903,
+          "min": 0.625,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.85,
+          "exact_match_rate": 0.7
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 77.0,
+          "std": 4.58257569495584
+        },
+        "hallucination_rate": 0.03333333333333333,
+        "latency": {
+          "mean": 3.880057379999562,
+          "median": 2.812396549999903,
+          "min": 1.664282199999434,
+          "max": 20.36219319999873
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.6,
+          "std": 0.21015867021530815,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.6666666666666666,
+          "correct_rate": 0.6666666666666666
+        },
+        "p_value_accuracy": {
+          "mean": 0.7333333333333333,
+          "within_tolerance_rate": 0.7333333333333333
+        },
+        "reasoning_quality": {
+          "mean": 67.11111111111111,
+          "std": 12.757955639473176
+        },
+        "hallucination_rate": 0.8666666666666667,
+        "latency": {
+          "mean": 5.322429849999995,
+          "median": 4.830312350002714,
+          "min": 3.139028199999302,
+          "max": 12.463540500000818
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8666666666666667,
+          "std": 0.12472191289246473,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "hallucination_rate": 0.13333333333333333,
+        "latency": {
+          "mean": 3.1379186966667474,
+          "median": 2.2983449999992445,
+          "min": 1.6213717000064207,
+          "max": 12.07794819999981
+        }
+      }
+    },
+    "grok-4-1-fast-reasoning": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8791666666666667,
+          "std": 0.15303639726839133,
+          "min": 0.625,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9166666666666666,
+          "exact_match_rate": 0.8333333333333334
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 78.33333333333333,
+          "std": 3.7267799624996494
+        },
+        "hallucination_rate": 0.03333333333333333,
+        "latency": {
+          "mean": 69.98731481000031,
+          "median": 66.55504884999937,
+          "min": 25.58707300000242,
+          "max": 138.43391379999957
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.6291666666666667,
+          "std": 0.12699792211773475,
+          "min": 0.375,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.95,
+          "exact_match_rate": 0.9
+        },
+        "decision_accuracy": {
+          "mean": 0.6333333333333333,
+          "correct_rate": 0.6333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.9333333333333333,
+          "within_tolerance_rate": 0.9333333333333333
+        },
+        "reasoning_quality": {
+          "mean": 64.55555555555556,
+          "std": 9.328702554912159
+        },
+        "hallucination_rate": 0.6666666666666666,
+        "latency": {
+          "mean": 53.52400166999978,
+          "median": 28.758578300001318,
+          "min": 8.501740100000461,
+          "max": 160.72026769999502
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.75,
+          "std": 0.2327373340628157,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.9333333333333333,
+          "correct_rate": 0.9333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.6666666666666666,
+          "within_tolerance_rate": 0.6666666666666666
+        },
+        "reasoning_quality": {
+          "mean": 74.88888888888889,
+          "std": 9.05674838769548
+        },
+        "hallucination_rate": 0.0,
+        "latency": {
+          "mean": 99.02762100000061,
+          "median": 80.20529564999742,
+          "min": 42.055028000002494,
+          "max": 213.4402362999972
+        }
+      }
+    },
+    "gpt-5-mini": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.65,
+          "std": 0.4636809247747852,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.6666666666666666,
+          "exact_match_rate": 0.6666666666666666
+        },
+        "decision_accuracy": {
+          "mean": 0.6666666666666666,
+          "correct_rate": 0.6666666666666666
+        },
+        "p_value_accuracy": {
+          "mean": 0.6666666666666666,
+          "within_tolerance_rate": 0.6666666666666666
+        },
+        "reasoning_quality": {
+          "mean": 53.333333333333336,
+          "std": 37.712361663282536
+        },
+        "hallucination_rate": 0.06666666666666667,
+        "latency": {
+          "mean": 17.01003812333341,
+          "median": 15.675104949999877,
+          "min": 9.989274999999907,
+          "max": 46.32208710000123
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.26666666666666666,
+          "std": 0.29533408577782255,
+          "min": 0.0,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.5333333333333333,
+          "exact_match_rate": 0.5333333333333333
+        },
+        "decision_accuracy": {
+          "mean": 0.3333333333333333,
+          "correct_rate": 0.3333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.2,
+          "within_tolerance_rate": 0.2
+        },
+        "reasoning_quality": {
+          "mean": 35.11111111111111,
+          "std": 33.596002113714235
+        },
+        "hallucination_rate": 0.36666666666666664,
+        "latency": {
+          "mean": 25.7012846700008,
+          "median": 27.549246399998083,
+          "min": 11.267367600004945,
+          "max": 42.691532200005895
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.35833333333333334,
+          "std": 0.4014729823481968,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.5,
+          "exact_match_rate": 0.5
+        },
+        "decision_accuracy": {
+          "mean": 0.43333333333333335,
+          "correct_rate": 0.43333333333333335
+        },
+        "p_value_accuracy": {
+          "mean": 0.23333333333333334,
+          "within_tolerance_rate": 0.23333333333333334
+        },
+        "reasoning_quality": {
+          "mean": 36.222222222222214,
+          "std": 38.439306014983934
+        },
+        "hallucination_rate": 0.03333333333333333,
+        "latency": {
+          "mean": 32.549626006666585,
+          "median": 30.090049499998713,
+          "min": 21.235884100002295,
+          "max": 64.32472810000036
+        }
+      }
+    },
+    "gemini-2.5-flash": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.36666666666666664,
+          "std": 0.48189440982669857,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.36666666666666664,
+          "exact_match_rate": 0.36666666666666664
+        },
+        "decision_accuracy": {
+          "mean": 0.36666666666666664,
+          "correct_rate": 0.36666666666666664
+        },
+        "p_value_accuracy": {
+          "mean": 0.36666666666666664,
+          "within_tolerance_rate": 0.36666666666666664
+        },
+        "reasoning_quality": {
+          "mean": 29.333333333333332,
+          "std": 38.55155278613589
+        },
+        "hallucination_rate": 0.03333333333333333,
+        "latency": {
+          "mean": 7.612880563333117,
+          "median": 8.736672399994859,
+          "min": 3.1320679999989807,
+          "max": 10.094175899997936
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.14583333333333334,
+          "std": 0.21184539698143603,
+          "min": 0.0,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.31666666666666665,
+          "exact_match_rate": 0.26666666666666666
+        },
+        "decision_accuracy": {
+          "mean": 0.03333333333333333,
+          "correct_rate": 0.03333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.16666666666666666,
+          "within_tolerance_rate": 0.16666666666666666
+        },
+        "reasoning_quality": {
+          "mean": 19.222222222222225,
+          "std": 25.80099529135827
+        },
+        "hallucination_rate": 0.3,
+        "latency": {
+          "mean": 9.225159233333276,
+          "median": 9.085086749997572,
+          "min": 6.374943100003293,
+          "max": 14.635120999999344
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.1,
+          "std": 0.3,
+          "min": 0.0,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.1,
+          "exact_match_rate": 0.1
+        },
+        "decision_accuracy": {
+          "mean": 0.1,
+          "correct_rate": 0.1
+        },
+        "p_value_accuracy": {
+          "mean": 0.1,
+          "within_tolerance_rate": 0.1
+        },
+        "reasoning_quality": {
+          "mean": 8.666666666666666,
+          "std": 24.046251729161902
+        },
+        "hallucination_rate": 0.0,
+        "latency": {
+          "mean": 9.168077530000058,
+          "median": 9.172930449996784,
+          "min": 7.248604400003387,
+          "max": 10.257109900005162
+        }
+      }
+    },
+    "grok-3-mini": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.9166666666666666,
+          "std": 0.11785113019775795,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "hallucination_rate": 0.16666666666666666,
+        "latency": {
+          "mean": 13.28669367666771,
+          "median": 13.75063985000088,
+          "min": 6.799975600002654,
+          "max": 21.07735700000194
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.675,
+          "std": 0.16007810593582122,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.9666666666666667,
+          "correct_rate": 0.9666666666666667
+        },
+        "p_value_accuracy": {
+          "mean": 0.5666666666666667,
+          "within_tolerance_rate": 0.5666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 72.88888888888889,
+          "std": 6.651835354264783
+        },
+        "hallucination_rate": 0.43333333333333335,
+        "latency": {
+          "mean": 15.00702604000083,
+          "median": 11.350920300003054,
+          "min": 5.699527100005071,
+          "max": 37.38047820000065
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.7833333333333333,
+          "std": 0.23033791601808754,
+          "min": 0.25,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 0.9333333333333333,
+          "correct_rate": 0.9333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.7666666666666667,
+          "within_tolerance_rate": 0.7666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 76.22222222222221,
+          "std": 8.723460633951342
+        },
+        "hallucination_rate": 0.0,
+        "latency": {
+          "mean": 21.110505966666583,
+          "median": 20.630594149999524,
+          "min": 12.660956499999884,
+          "max": 36.13982880000185
+        }
+      }
+    },
+    "claude-sonnet-4-5-20250929": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.9,
+          "std": 0.12247448713915891,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "hallucination_rate": 0.23333333333333334,
+        "latency": {
+          "mean": 4.658085956666279,
+          "median": 4.599633949997951,
+          "min": 3.8585497999956715,
+          "max": 7.1841588000024785
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.5166666666666667,
+          "std": 0.11055415967851333,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.9666666666666667,
+          "exact_match_rate": 0.9666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 0.6333333333333333,
+          "correct_rate": 0.6333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.4666666666666667,
+          "within_tolerance_rate": 0.4666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 61.77777777777779,
+          "std": 8.243216440440627
+        },
+        "hallucination_rate": 0.43333333333333335,
+        "latency": {
+          "mean": 9.22734403999954,
+          "median": 8.800995599998714,
+          "min": 5.508831200000714,
+          "max": 27.637368399999104
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.9083333333333333,
+          "std": 0.12047360245667466,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "hallucination_rate": 0.3,
+        "latency": {
+          "mean": 5.799572273333372,
+          "median": 5.75543259999904,
+          "min": 4.603995100005704,
+          "max": 7.467069999998785
+        }
+      }
+    },
+    "deepseek-chat": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8541666666666666,
+          "std": 0.17103646459811492,
+          "min": 0.625,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.85,
+          "exact_match_rate": 0.7
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 77.0,
+          "std": 4.58257569495584
+        },
+        "hallucination_rate": 0.3,
+        "latency": {
+          "mean": 5.063332760000291,
+          "median": 5.282253400000627,
+          "min": 3.683609899999283,
+          "max": 6.036167400001432
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.48333333333333334,
+          "std": 0.11055415967851333,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.9333333333333333,
+          "exact_match_rate": 0.8666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 0.9,
+          "correct_rate": 0.9
+        },
+        "p_value_accuracy": {
+          "mean": 0.1,
+          "within_tolerance_rate": 0.1
+        },
+        "reasoning_quality": {
+          "mean": 65.55555555555556,
+          "std": 8.620962107231477
+        },
+        "hallucination_rate": 0.06666666666666667,
+        "latency": {
+          "mean": 9.922725823333288,
+          "median": 9.475927799998317,
+          "min": 6.06203419999656,
+          "max": 15.73162439999578
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8833333333333333,
+          "std": 0.11149240133549711,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9,
+          "exact_match_rate": 0.8
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 78.0,
+          "std": 4.0
+        },
+        "hallucination_rate": 0.0,
+        "latency": {
+          "mean": 5.285812663333005,
+          "median": 5.274534299998777,
+          "min": 4.703092199997627,
+          "max": 5.75989010000194
+        }
+      }
+    },
+    "claude-haiku-4-5-20251001": {
+      "few_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8833333333333333,
+          "std": 0.12472191289246473,
+          "min": 0.75,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 1.0,
+          "exact_match_rate": 1.0
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 1.0,
+          "within_tolerance_rate": 1.0
+        },
+        "reasoning_quality": {
+          "mean": 80.0,
+          "std": 0.0
+        },
+        "hallucination_rate": 0.16666666666666666,
+        "latency": {
+          "mean": 2.2845695466664133,
+          "median": 2.0099822500014852,
+          "min": 1.697416199996951,
+          "max": 6.0449681999962195
+        }
+      },
+      "chain_of_thought": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.49166666666666664,
+          "std": 0.1736055554666638,
+          "min": 0.25,
+          "max": 0.75
+        },
+        "test_method_accuracy": {
+          "mean": 0.8,
+          "exact_match_rate": 0.7666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 0.6333333333333333,
+          "correct_rate": 0.6333333333333333
+        },
+        "p_value_accuracy": {
+          "mean": 0.5,
+          "within_tolerance_rate": 0.5
+        },
+        "reasoning_quality": {
+          "mean": 58.8888888888889,
+          "std": 10.159226178366632
+        },
+        "hallucination_rate": 0.3,
+        "latency": {
+          "mean": 3.667152779999742,
+          "median": 3.7361073000029137,
+          "min": 2.396873100005905,
+          "max": 5.880857799995283
+        }
+      },
+      "zero_shot": {
+        "n_samples": 30,
+        "overall_accuracy": {
+          "mean": 0.8333333333333334,
+          "std": 0.1263812574008592,
+          "min": 0.5,
+          "max": 1.0
+        },
+        "test_method_accuracy": {
+          "mean": 0.9333333333333333,
+          "exact_match_rate": 0.8666666666666667
+        },
+        "decision_accuracy": {
+          "mean": 1.0,
+          "correct_rate": 1.0
+        },
+        "p_value_accuracy": {
+          "mean": 0.9666666666666667,
+          "within_tolerance_rate": 0.9666666666666667
+        },
+        "reasoning_quality": {
+          "mean": 78.66666666666667,
+          "std": 3.399346342395191
+        },
+        "hallucination_rate": 0.3,
+        "latency": {
+          "mean": 4.84655945666697,
+          "median": 3.042680200000177,
+          "min": 1.965777599998546,
+          "max": 18.98203579999972
+        }
+      }
+    }
+  }
+}

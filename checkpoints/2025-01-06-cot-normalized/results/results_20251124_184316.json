@@ -1,0 +1,216 @@
+[
+  {
+    "timestamp": "2025-11-24T18:43:16.366029",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284)]...\nSample 1 size: 50\nSample 1 mean: 10.1824\nSample 1 std: 1.5366\n\nHypothesized population mean: 10\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. H0: mu = 10, H1: mu != 10\n2. One-sample t-test\n3. Test statistic value: 0.839\n4. P-value: 0.405\n5. Fail to reject H0\n6. There is not sufficient evidence to conclude that the population mean is different from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10, H1: mu != 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.839,
+      "p_value": 0.405,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": null,
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.839487828091678,
+      "p_value": 0.40527287278483803,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.745738116089615,
+        10.61910600588243
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.182422060986022,
+      "sample_std": 1.53655445671519,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0002728727848380075,
+        "relative_error": 0.0006733063157249051,
+        "predicted": 0.405,
+        "ground_truth": 0.40527287278483803,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.000487828091678022,
+        "relative_error": 0.0005811020426430147,
+        "predicted": 0.839,
+        "ground_truth": 0.839487828091678
+      },
+      "decision": {
+        "correct": false,
+        "predicted": "reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 0,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.0,
+        "max": 5,
+        "percentage": 60.0
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.405,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    }
+  },
+  {
+    "timestamp": "2025-11-24T18:43:16.837951",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.578238797379969), np.float64(11.26257645167708), np.float64(7.0856883602886676), np.float64(9.360657567285397), np.float64(9.05925469141441), np.float64(8.722244303513316), np.float64(9.449715497546633), np.float64(12.98988262246879), np.float64(8.268337768613513), np.float64(11.936556709182963)]...\nSample 1 size: 100\nSample 1 mean: 9.7570\nSample 1 std: 1.7830\n\nHypothesized population mean: 10\n\nProvide:\n1. H0 and H1 (use plain text like mean1, mean2, not Greek symbols)\n2. Test name\n3. Test statistic value\n4. P-value\n5. Decision (reject/fail to reject H0)\n6. Brief conclusion (one sentence)\n\nIMPORTANT: Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n\nNotation requirements:\n- mu for population mean\n- xb for sample mean\n- sig for population standard deviation\n- s for sample standard deviation\n- alp for significance level\n- Follow this pattern for all Greek letters (use ASCII abbreviations)",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 100,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "1. H0 and H1\nH0: mu = 10\nH1: mu != 10\n\n2. Test name\nOne-sample t-test\n\n3. Test statistic value\n-1.363\n\n4. P-value\n0.176\n\n5. Decision (assuming alp = 0.05)\nFail to reject H0\n\n6. Brief conclusion\nThere is not sufficient evidence to conclude that the population mean is different from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": null,
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.362724332437145,
+      "p_value": 0.17606122403333913,
+      "degrees_of_freedom": 99,
+      "critical_value": 1.9842169515086827,
+      "confidence_interval": [
+        9.403226925074101,
+        10.110814630392863
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.757020777733482,
+      "sample_std": 1.7830401680137713,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.12606122403333914,
+        "relative_error": 0.7160078814939288,
+        "predicted": 0.05,
+        "ground_truth": 0.17606122403333913,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": false,
+        "predicted": "reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 0,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 2.6666666666666665,
+        "max": 5,
+        "percentage": 53.333333333333336
+      },
+      "hallucinations": {
+        "has_hallucinations": true,
+        "count": 1,
+        "details": [
+          {
+            "type": "inconsistent_decision",
+            "p_value": 0.05,
+            "decision": "reject_H0",
+            "message": "Decision inconsistent with p-value"
+          }
+        ]
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.25
+    }
+  }
+]

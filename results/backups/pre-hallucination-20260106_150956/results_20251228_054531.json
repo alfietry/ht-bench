@@ -1,0 +1,3514 @@
+[
+  {
+    "timestamp": "2025-12-28T05:45:20.179950",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nSample 2: [np.float64(0.7776764538520253), np.float64(-0.2860729208646419), np.float64(-0.7238325006991053), np.float64(1.2090649330211347), np.float64(1.8380497835037592), np.float64(1.6884706784341306), np.float64(-0.9672757850741249), np.float64(-0.17226806401698896), np.float64(0.7884456468651788), np.float64(1.7548681904433716)]...\nSample 2 size: 50\nSample 2 mean: 0.3182\nSample 2 std: 1.3115\n\nProvide your answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT: \n- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "H0: mu1 = mu2  \nH1: mu1 != mu2  \nTest_type: Paired t-test  \nt-statistic: -2.2765  \np-value: 0.0259  \nDecision: Reject H0  \nConclusion: There is a significant change in SPY returns after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -2.2765,
+      "p_value": 0.0259,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant change in SPY returns after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -2.3687830655512694,
+      "p_value": 0.021833357635533356,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -1.120904453088687,
+        -0.09196087360325633
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -0.6064326633459717,
+      "std_difference": 1.8102655951112214,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.004066642364466643,
+        "relative_error": 0.18625822158696578,
+        "predicted": 0.0259,
+        "ground_truth": 0.021833357635533356,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.09228306555126942,
+        "relative_error": 0.0389580062831938,
+        "predicted": -2.2765,
+        "ground_truth": -2.3687830655512694
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 1.4440177000033145,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -2.2765,
+    "p_value": 0.0259,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant change in SPY returns after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.0259,decision=reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:20.461322",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 20\nSample 1 mean: -0.2341\nSample 1 std: 1.5360\n\nSample 2: [np.float64(3.011297537843108), np.float64(-0.3715526009730713), np.float64(0.2150564093758477), np.float64(-2.7694963724269135), np.float64(-1.0087654490503652), np.float64(0.30184517941973216), np.float64(-2.2219871548446055), np.float64(0.8313960366913439), np.float64(-1.1212773798376099), np.float64(-0.5033874995865536)]...\nSample 2 size: 20\nSample 2 mean: -0.4520\nSample 2 std: 1.9361\n\nProvide your answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT: \n- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "H0: mu1 = mu2  \nH1: mu1 != mu2  \nTest_type: Two-sample t-test  \nt-statistic: 0.3842  \np-value: 0.7034  \nDecision: Fail to reject H0  \nConclusion: There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.3842,
+      "p_value": 0.7034,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference in mean returns between the Industrial and Tech sectors.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": 0.3942520468461309,
+      "p_value": 0.695598892017999,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -0.9008531323820093,
+        1.3365981973443561
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": 0.21787253248117347,
+      "sample1_mean": -0.23407769830692624,
+      "sample2_mean": -0.4519502307880997,
+      "sample1_std": 1.5360454743024425,
+      "sample2_std": 1.9360774184353824,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.007801107982001065,
+        "relative_error": 0.01121495170782878,
+        "predicted": 0.7034,
+        "ground_truth": 0.695598892017999,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.010052046846130924,
+        "relative_error": 0.025496498817301125,
+        "predicted": 0.3842,
+        "ground_truth": 0.3942520468461309
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 1.7379846000003454,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 0.3842,
+    "p_value": 0.7034,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.7034,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:21.221735",
+    "model": "gpt-4o",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nSample 2: [np.float64(0.7776764538520253), np.float64(-0.2860729208646419), np.float64(-0.7238325006991053), np.float64(1.2090649330211347), np.float64(1.8380497835037592), np.float64(1.6884706784341306), np.float64(-0.9672757850741249), np.float64(-0.17226806401698896), np.float64(0.7884456468651788), np.float64(1.7548681904433716)]...\nSample 2 size: 50\nSample 2 mean: 0.3182\nSample 2 std: 1.3115\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample1_mean = -0.2882\nsample1_std = 1.4005\nsample1_size = 50\n\nsample2_mean = 0.3182\nsample2_std = 1.3115\nsample2_size = 50\n\n# Calculate the standard error of the difference in means\nse_diff = np.sqrt((sample1_std**2 / sample1_size) + (sample2_std**2 / sample2_size))\n\n# Calculate the t-statistic\nt_statistic = (sample1_mean - sample2_mean) / se_diff\n\n# Degrees of freedom for the two-sample t-test\ndf = sample1_size + sample2_size - 2\n\n# Calculate the p-value\np_value = stats.t.sf(np.abs(t_statistic), df) * 2  # two-tailed test\n\n```\n\nRESULTS:\nH0: mu1 = mu2 (The mean returns before and after the pandemic are equal)\nH1: mu1 != mu2 (The mean returns before and after the pandemic are not equal)\nTest_type: Two-sample t-test\nt-statistic: -2.2761\np-value: 0.0255\nDecision: Reject H0\nConclusion: There is a significant difference in SPY returns before and after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+        "H1": "mu1 != mu2 (The mean returns before and after the pandemic are not equal)"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -2.2761,
+      "p_value": 0.0255,
+      "degrees_of_freedom": 2.0,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is a significant difference in SPY returns before and after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -2.3687830655512694,
+      "p_value": 0.021833357635533356,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -1.120904453088687,
+        -0.09196087360325633
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -0.6064326633459717,
+      "std_difference": 1.8102655951112214,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.003666642364466642,
+        "relative_error": 0.16793763129218633,
+        "predicted": 0.0255,
+        "ground_truth": 0.021833357635533356,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.09268306555126937,
+        "relative_error": 0.03912686936137815,
+        "predicted": -2.2761,
+        "ground_truth": -2.3687830655512694
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.9375
+    },
+    "latency_seconds": 2.492272100000264,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+      "H1": "mu1 != mu2 (The mean returns before and after the pandemic are not equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.2761,
+    "p_value": 0.0255,
+    "decision": "reject_H0",
+    "conclusion": "There is a significant difference in SPY returns before and after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.0255,decision=reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:21.845345",
+    "model": "gpt-4o",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nSample 2: [np.float64(2.4900236531421642), np.float64(-0.04711395096997062), np.float64(0.3928428067917186), np.float64(-1.8455717795603526), np.float64(-0.5250235870279412), np.float64(0.457934384324632), np.float64(-1.4349398663736215), np.float64(0.8550975272783408), np.float64(-0.6094075351183745), np.float64(-0.1459901249300823)]...\nSample 2 size: 20\nSample 2 mean: -0.1074\nSample 2 std: 1.4521\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample1 = np.array([0.795071229516849, -0.15739645175677697, 1.0215328071510388, 2.3345447846120377, -0.30123006208500397, -0.3012054354237708, 2.418819223261087, 1.2011520937293632, -0.6542115789024281, 0.8638400653789471, -0.2069, 1.4400, 0.795071229516849, -0.15739645175677697, 1.0215328071510388, 2.3345447846120377, -0.30123006208500397, -0.3012054354237708, 2.418819223261087, 1.2011520937293632])\nsample2 = np.array([2.4900236531421642, -0.04711395096997062, 0.3928428067917186, -1.8455717795603526, -0.5250235870279412, 0.457934384324632, -1.4349398663736215, 0.8550975272783408, -0.6094075351183745, -0.1459901249300823, -0.1074, 1.4521, 2.4900236531421642, -0.04711395096997062, 0.3928428067917186, -1.8455717795603526, -0.5250235870279412, 0.457934384324632, -1.4349398663736215, 0.8550975272783408])\n\n# Perform paired t-test\nt_statistic, p_value = stats.ttest_rel(sample1, sample2)\n\n```\n\nRESULTS:\nH0: mu1 = mu2 (The mean returns before and after the pandemic are equal)\nH1: mu1 != mu2 (The mean returns before and after the pandemic are not equal)\nTest_type: Paired t-test\nt-statistic: -0.287\np-value: 0.777\nDecision: Fail to reject H0\nConclusion: There is no significant difference in the mean returns of SPY before and after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+        "H1": "mu1 != mu2 (The mean returns before and after the pandemic are not equal)"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -0.287,
+      "p_value": 0.777,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference in the mean returns of SPY before and after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -0.2023348750982601,
+      "p_value": 0.8418057379115417,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -1.1291680989045452,
+        0.9300967612415423
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.09953566883150143,
+      "std_difference": 2.2000015724927113,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.06480573791154165,
+        "relative_error": 0.07698419598839981,
+        "predicted": 0.777,
+        "ground_truth": 0.8418057379115417,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.08466512490173989,
+        "relative_error": 0.41844059191784844,
+        "predicted": -0.287,
+        "ground_truth": -0.2023348750982601
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.75
+    },
+    "latency_seconds": 3.609127499999886,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+      "H1": "mu1 != mu2 (The mean returns before and after the pandemic are not equal)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -0.287,
+    "p_value": 0.777,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference in the mean returns of SPY before and after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.777,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:21.991007",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0\nConclusion: The two population means are significantly different.\n\n\n---\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nHypothesized population mean: 0.0\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "Data:\nSample 1: [0.7951, -0.1574, 1.0215, 2.3345, -0.3012, -0.3012, 2.4188, 1.2012, -0.6542, 0.8638, ...]\nSample 1 size: 20\nSample 1 mean (xb): -0.2069\nSample 1 std (s): 1.4400\n\nAnalysis:\nH0: mu = 0\nH1: mu != 0\nTest_type: One-sample t-test\nt-statistic: -0.641\np-value: 0.529\nDecision: Fail to reject H0\nConclusion: AAPL's mean daily return is not significantly different from zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "mu != 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.641,
+      "p_value": 0.529,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "AAPL's mean daily return is not significantly different from zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.642688532323737,
+      "p_value": 0.528106356410881,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -0.8809085398717864,
+        0.46701285554629957
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.20694784216274345,
+      "sample_std": 1.4400426321585398,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0008936435891190309,
+        "relative_error": 0.0016921659401951073,
+        "predicted": 0.529,
+        "ground_truth": 0.528106356410881,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.001688532323737002,
+        "relative_error": 0.0026272949318573643,
+        "predicted": -0.641,
+        "ground_truth": -0.642688532323737
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 1.80394200000228,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "mu != 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.641,
+    "p_value": 0.529,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "AAPL's mean daily return is not significantly different from zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.529,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:22.112892",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 50\nSample 1 mean: -0.3208\nSample 1 std: 1.4939\n\nSample 2: [np.float64(0.72816793878959), np.float64(-0.6901645608326331), np.float64(-1.2738440006119174), np.float64(1.3033525776817358), np.float64(2.141999044991902), np.float64(1.9425602382323972), np.float64(-1.598435046445277), np.float64(-0.5384247517024292), np.float64(0.7425268628071279), np.float64(2.0310902542447185)]...\nSample 2 size: 50\nSample 2 mean: 0.1156\nSample 2 std: 1.7486\n\nProvide your answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT: \n- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "H0: mu1 = mu2  \nH1: mu1 != mu2  \nTest_type: Two-sample t-test  \nt-statistic: -1.4173  \np-value: 0.1598  \nDecision: Fail to reject H0  \nConclusion: There is not enough evidence to suggest that the mean returns of Industrial sector stocks are different from Tech sector stocks.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.4173,
+      "p_value": 0.1598,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to suggest that the mean returns of Industrial sector stocks are different from Tech sector stocks.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -1.341485251653995,
+      "p_value": 0.18286338043430186,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -1.0817708562149901,
+        0.20913087752353227
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.43631998934572896,
+      "sample1_mean": -0.32075824840982414,
+      "sample2_mean": 0.11556174093590484,
+      "sample1_std": 1.4938700510129785,
+      "sample2_std": 1.748649974955719,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.023063380434301867,
+        "relative_error": 0.12612355945474796,
+        "predicted": 0.1598,
+        "ground_truth": 0.18286338043430186,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.07581474834600499,
+        "relative_error": 0.05651552877866423,
+        "predicted": -1.4173,
+        "ground_truth": -1.341485251653995
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 0.8880368999998609,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.4173,
+    "p_value": 0.1598,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to suggest that the mean returns of Industrial sector stocks are different from Tech sector stocks.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.1598,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:23.117675",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 20\nSample 1 mean: -0.2341\nSample 1 std: 1.5360\n\nSample 2: [np.float64(3.011297537843108), np.float64(-0.3715526009730713), np.float64(0.2150564093758477), np.float64(-2.7694963724269135), np.float64(-1.0087654490503652), np.float64(0.30184517941973216), np.float64(-2.2219871548446055), np.float64(0.8313960366913439), np.float64(-1.1212773798376099), np.float64(-0.5033874995865536)]...\nSample 2 size: 20\nSample 2 mean: -0.4520\nSample 2 std: 1.9361\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nAfter your reasoning, provide final answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "1. Identify test type: Two-sample t-test (independent samples)\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)\n   - H1: mu1 != mu2 (The mean returns of Industrial and Tech sectors are different)\n\n3. Calculate test statistic:\n   - Sample 1 (Industrial): xb1 = -0.2341, s1 = 1.5360, n1 = 20\n   - Sample 2 (Tech): xb2 = -0.4520, s2 = 1.9361, n2 = 20\n   - Pooled standard deviation (sp):\n     sp = sqrt(((n1-1)*s1^2 + (n2-1)*s2^2) / (n1+n2-2))\n     sp = sqrt(((20-1)*1.5360^2 + (20-1)*1.9361^2) / (20+20-2))\n     sp = sqrt((44.8704 + 70.9641) / 38)\n     sp = sqrt(115.8345 / 38)\n     sp = 1.7433\n   - t-statistic:\n     t = (xb1 - xb2) / (sp * sqrt(1/n1 + 1/n2))\n     t = (-0.2341 - (-0.4520)) / (1.7433 * sqrt(1/20 + 1/20))\n     t = 0.2179 / (1.7433 * sqrt(0.1))\n     t = 0.2179 / (1.7433 * 0.3162)\n     t = 0.2179 / 0.5513\n     t = 0.3952\n\n4. Find p-value:\n   - Degrees of freedom (df) = n1 + n2 - 2 = 20 + 20 - 2 = 38\n   - Using a t-distribution table or calculator, find the p-value for t = 0.3952 with df = 38\n   - p-value = 0.6958 (two-tailed)\n\n5. Make decision (alp = 0.05):\n   - Since p-value = 0.6958 > 0.05, fail to reject H0\n\n6. State conclusion:\n   - There is no significant difference in mean returns between the Industrial and Tech sectors.\n\nFinal answer:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 0.3952\np-value: 0.6958\nDecision: Fail to reject H0\nConclusion: There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)",
+        "H1": "- H0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.3952,
+      "p_value": 0.6958,
+      "degrees_of_freedom": 38.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is no significant difference in mean returns between the Industrial and Tech sectors.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": 0.3942520468461309,
+      "p_value": 0.695598892017999,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -0.9008531323820093,
+        1.3365981973443561
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": 0.21787253248117347,
+      "sample1_mean": -0.23407769830692624,
+      "sample2_mean": -0.4519502307880997,
+      "sample1_std": 1.5360454743024425,
+      "sample2_std": 1.9360774184353824,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0002011079820010142,
+        "relative_error": 0.0002891148682218005,
+        "predicted": 0.6958,
+        "ground_truth": 0.695598892017999,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0009479531538690855,
+        "relative_error": 0.0024044343243170368,
+        "predicted": 0.3952,
+        "ground_truth": 0.3942520468461309
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 4.395403700000315,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)",
+      "H1": "- H0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 0.3952,
+    "p_value": 0.6958,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "- There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.6958,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:23.303783",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0\nConclusion: The two population means are significantly different.\n\n\n---\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 20\nSample 1 mean: -0.2341\nSample 1 std: 1.5360\n\nSample 2: [np.float64(3.011297537843108), np.float64(-0.3715526009730713), np.float64(0.2150564093758477), np.float64(-2.7694963724269135), np.float64(-1.0087654490503652), np.float64(0.30184517941973216), np.float64(-2.2219871548446055), np.float64(0.8313960366913439), np.float64(-1.1212773798376099), np.float64(-0.5033874995865536)]...\nSample 2 size: 20\nSample 2 mean: -0.4520\nSample 2 std: 1.9361\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "Data:\nSample 1: [-0.2341, 1.5360, n=20]\nSample 2: [-0.4520, 1.9361, n=20]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 0.384\np-value: 0.703\nDecision: Fail to reject H0\nConclusion: There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.384,
+      "p_value": 0.703,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference in mean returns between the Industrial and Tech sectors.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": 0.3942520468461309,
+      "p_value": 0.695598892017999,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -0.9008531323820093,
+        1.3365981973443561
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": 0.21787253248117347,
+      "sample1_mean": -0.23407769830692624,
+      "sample2_mean": -0.4519502307880997,
+      "sample1_std": 1.5360454743024425,
+      "sample2_std": 1.9360774184353824,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.007401107982000998,
+        "relative_error": 0.010639907663638848,
+        "predicted": 0.703,
+        "ground_truth": 0.695598892017999,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.010252046846130902,
+        "relative_error": 0.026003788510785036,
+        "predicted": 0.384,
+        "ground_truth": 0.3942520468461309
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 1.1878541999976733,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 0.384,
+    "p_value": 0.703,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.703,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:24.708034",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0\nConclusion: The two population means are significantly different.\n\n\n---\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nHypothesized population mean: 0.0\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "Data:\nSample 1: [0.7951, -0.1574, 1.0215, 2.3345, -0.3012, -0.3012, 2.4188, 1.2012, -0.6542, 0.8638, ...]\nSample 1 size: 50\nSample 1 mean (xb): -0.2882\nSample 1 std (s): 1.4005\n\nAnalysis:\nH0: mu = 0\nH1: mu != 0\nTest_type: One-sample t-test\nt-statistic: -1.457\np-value: 0.151\nDecision: Fail to reject H0\nConclusion: There is no significant difference between AAPL's mean daily return and zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "mu != 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.457,
+      "p_value": 0.151,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference between AAPL's mean daily return and zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.4551616588663814,
+      "p_value": 0.1520014361791188,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -0.6862294557127733,
+        0.10980773994435306
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.28821085788421014,
+      "sample_std": 1.4005031728246673,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0010014361791187976,
+        "relative_error": 0.006588333665076053,
+        "predicted": 0.151,
+        "ground_truth": 0.1520014361791188,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0018383411336186928,
+        "relative_error": 0.001263324334047408,
+        "predicted": -1.457,
+        "ground_truth": -1.4551616588663814
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.8606093999987934,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "mu != 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.457,
+    "p_value": 0.151,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference between AAPL's mean daily return and zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.151,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:24.994437",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 50\nSample 1 mean: -0.3208\nSample 1 std: 1.4939\n\nSample 2: [np.float64(0.72816793878959), np.float64(-0.6901645608326331), np.float64(-1.2738440006119174), np.float64(1.3033525776817358), np.float64(2.141999044991902), np.float64(1.9425602382323972), np.float64(-1.598435046445277), np.float64(-0.5384247517024292), np.float64(0.7425268628071279), np.float64(2.0310902542447185)]...\nSample 2 size: 50\nSample 2 mean: 0.1156\nSample 2 std: 1.7486\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nAfter your reasoning, provide final answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "1. Identify test type: Two-sample t-test (independent samples)\n\n2. State H0 and H1:\n   H0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)\n   H1: mu1 != mu2 (The mean returns of Industrial and Tech sectors are different)\n\n3. Calculate test statistic:\n   - Sample 1 mean (xb1) = -0.3208\n   - Sample 2 mean (xb2) = 0.1156\n   - Sample 1 std (s1) = 1.4939\n   - Sample 2 std (s2) = 1.7486\n   - Sample sizes: n1 = 50, n2 = 50\n\n   Pooled standard deviation (sp):\n   sp = sqrt(((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2))\n   sp = sqrt(((50 - 1) * 1.4939^2 + (50 - 1) * 1.7486^2) / (50 + 50 - 2))\n   sp = sqrt((49 * 2.2311 + 49 * 3.0585) / 98)\n   sp = sqrt((109.3199 + 149.8665) / 98)\n   sp = sqrt(259.1864 / 98)\n   sp = sqrt(2.6458)\n   sp = 1.6266\n\n   t-statistic:\n   t = (xb1 - xb2) / (sp * sqrt(1/n1 + 1/n2))\n   t = (-0.3208 - 0.1156) / (1.6266 * sqrt(1/50 + 1/50))\n   t = (-0.4364) / (1.6266 * sqrt(0.04))\n   t = (-0.4364) / (1.6266 * 0.2)\n   t = (-0.4364) / 0.3253\n   t = -1.3415\n\n4. Find p-value:\n   Using a t-distribution table or calculator with df = n1 + n2 - 2 = 98, two-tailed test:\n   p-value = 0.1832\n\n5. Make decision (alp = 0.05):\n   Since p-value (0.1832) > alp (0.05), fail to reject H0.\n\n6. State conclusion:\n   There is not enough evidence to conclude that the mean returns of Industrial and Tech sectors are different.\n\nFinal answer:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: -1.3415\np-value: 0.1832\nDecision: Fail to reject H0\nConclusion: There is not enough evidence to conclude that the mean returns of Industrial and Tech sectors are different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)",
+        "H1": "H0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.3415,
+      "p_value": 0.1832,
+      "degrees_of_freedom": 98.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that the mean returns of Industrial and Tech sectors are different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -1.341485251653995,
+      "p_value": 0.18286338043430186,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -1.0817708562149901,
+        0.20913087752353227
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.43631998934572896,
+      "sample1_mean": -0.32075824840982414,
+      "sample2_mean": 0.11556174093590484,
+      "sample1_std": 1.4938700510129785,
+      "sample2_std": 1.748649974955719,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.00033661956569813745,
+        "relative_error": 0.0018408254561337733,
+        "predicted": 0.1832,
+        "ground_truth": 0.18286338043430186,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 1.474834600490027e-05,
+        "relative_error": 1.0994042600704092e-05,
+        "predicted": -1.3415,
+        "ground_truth": -1.341485251653995
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 4.530359000000317,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)",
+      "H1": "H0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.3415,
+    "p_value": 0.1832,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that the mean returns of Industrial and Tech sectors are different.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.1832,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:25.302460",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0\nConclusion: The two population means are significantly different.\n\n\n---\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 50\nSample 1 mean: -0.3208\nSample 1 std: 1.4939\n\nSample 2: [np.float64(0.72816793878959), np.float64(-0.6901645608326331), np.float64(-1.2738440006119174), np.float64(1.3033525776817358), np.float64(2.141999044991902), np.float64(1.9425602382323972), np.float64(-1.598435046445277), np.float64(-0.5384247517024292), np.float64(0.7425268628071279), np.float64(2.0310902542447185)]...\nSample 2 size: 50\nSample 2 mean: 0.1156\nSample 2 std: 1.7486\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "Data:\nSample 1: [0.8347, -0.1812, 1.0763, 2.4768, -0.3346, -0.3346, 2.5667, 1.2679, -0.7112, 0.9081]...\nSample 1 size: 50\nSample 1 mean: -0.3208\nSample 1 std: 1.4939\n\nSample 2: [0.7282, -0.6902, -1.2738, 1.3034, 2.1420, 1.9426, -1.5984, -0.5384, 0.7425, 2.0311]...\nSample 2 size: 50\nSample 2 mean: 0.1156\nSample 2 std: 1.7486\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: -1.366\np-value: 0.175\nDecision: Fail to reject H0\nConclusion: There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.366,
+      "p_value": 0.175,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant difference in mean returns between the Industrial and Tech sectors.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -1.341485251653995,
+      "p_value": 0.18286338043430186,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -1.0817708562149901,
+        0.20913087752353227
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.43631998934572896,
+      "sample1_mean": -0.32075824840982414,
+      "sample2_mean": 0.11556174093590484,
+      "sample1_std": 1.4938700510129785,
+      "sample2_std": 1.748649974955719,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.007863380434301875,
+        "relative_error": 0.043001394897252194,
+        "predicted": 0.175,
+        "ground_truth": 0.18286338043430186,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.02451474834600509,
+        "relative_error": 0.01827433310636806,
+        "predicted": -1.366,
+        "ground_truth": -1.341485251653995
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 1.9948902999967686,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.366,
+    "p_value": 0.175,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant difference in mean returns between the Industrial and Tech sectors.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.175,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:26.593168",
+    "model": "gpt-4o",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nHypothesized population mean: 0.0\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample_mean = -0.2069\nsample_std = 1.4400\nsample_size = 20\nhypothesized_mean = 0.0\n\n# Calculate the t-statistic\nt_statistic = (sample_mean - hypothesized_mean) / (sample_std / np.sqrt(sample_size))\n\n# Calculate the p-value for a two-tailed test\np_value = 2 * stats.t.sf(np.abs(t_statistic), df=sample_size - 1)\n```\n\nRESULTS:\nH0: mu = 0\nH1: mu != 0\nTest_type: One-sample t-test\nt-statistic: -0.6434\np-value: 0.5275\nDecision: Fail to reject H0\nConclusion: There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "mu != 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.6434,
+      "p_value": 0.5275,
+      "degrees_of_freedom": 1.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.642688532323737,
+      "p_value": 0.528106356410881,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -0.8809085398717864,
+        0.46701285554629957
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.20694784216274345,
+      "sample_std": 1.4400426321585398,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.000606356410881026,
+        "relative_error": 0.0011481710142668012,
+        "predicted": 0.5275,
+        "ground_truth": 0.528106356410881,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0007114676762629557,
+        "relative_error": 0.0011070178484289075,
+        "predicted": -0.6434,
+        "ground_truth": -0.642688532323737
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 1.882377900001302,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "mu != 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.6434,
+    "p_value": 0.5275,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.5275,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:26.811797",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nSample 2: [np.float64(0.7776764538520253), np.float64(-0.2860729208646419), np.float64(-0.7238325006991053), np.float64(1.2090649330211347), np.float64(1.8380497835037592), np.float64(1.6884706784341306), np.float64(-0.9672757850741249), np.float64(-0.17226806401698896), np.float64(0.7884456468651788), np.float64(1.7548681904433716)]...\nSample 2 size: 50\nSample 2 mean: 0.3182\nSample 2 std: 1.3115\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nAfter your reasoning, provide final answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "1. Identify test type: Paired t-test (since we are comparing two related samples before and after the event).\n\n2. State H0 and H1:\n   - H0: mu1 = mu2 (The mean returns before and after the pandemic are equal)\n   - H1: mu1 != mu2 (The mean returns before and after the pandemic are not equal)\n\n3. Calculate test statistic:\n   - Difference in sample means: xb2 - xb1 = 0.3182 - (-0.2882) = 0.6064\n   - Standard error of the difference: SE = sqrt((s1^2/n1) + (s2^2/n2)) = sqrt((1.4005^2/50) + (1.3115^2/50)) = 0.2618\n   - t-statistic = (xb2 - xb1) / SE = 0.6064 / 0.2618 = 2.316\n\n4. Find p-value:\n   - Using a t-distribution table or calculator with df = n1 + n2 - 2 = 98, the p-value for t = 2.316 is approximately 0.0225.\n\n5. Make decision (alp = 0.05):\n   - Since p-value (0.0225) < alp (0.05), we reject H0.\n\n6. State conclusion:\n   - There is a significant change in SPY returns after the COVID-19 pandemic onset.\n\nFinal answer:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Paired t-test\nt-statistic: 2.316\np-value: 0.0225\nDecision: Reject H0\nConclusion: There is a significant change in SPY returns after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+        "H1": "- H0: mu1 = mu2 (The mean returns before and after the pandemic are equal)"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": 2.316,
+      "p_value": 0.0225,
+      "degrees_of_freedom": 0.0225,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is a significant change in SPY returns after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -2.3687830655512694,
+      "p_value": 0.021833357635533356,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -1.120904453088687,
+        -0.09196087360325633
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -0.6064326633459717,
+      "std_difference": 1.8102655951112214,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0006666423644666429,
+        "relative_error": 0.030533204081340914,
+        "predicted": 0.0225,
+        "ground_truth": 0.021833357635533356,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 4.684783065551269,
+        "relative_error": 1.9777172226875126,
+        "predicted": 2.316,
+        "ground_truth": -2.3687830655512694
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.875
+    },
+    "latency_seconds": 3.692239200001495,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+      "H1": "- H0: mu1 = mu2 (The mean returns before and after the pandemic are equal)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": 2.316,
+    "p_value": 0.0225,
+    "decision": "reject_H0",
+    "conclusion": "- There is a significant change in SPY returns after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.0225,decision=reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:26.921752",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nSample 2: [np.float64(2.4900236531421642), np.float64(-0.04711395096997062), np.float64(0.3928428067917186), np.float64(-1.8455717795603526), np.float64(-0.5250235870279412), np.float64(0.457934384324632), np.float64(-1.4349398663736215), np.float64(0.8550975272783408), np.float64(-0.6094075351183745), np.float64(-0.1459901249300823)]...\nSample 2 size: 20\nSample 2 mean: -0.1074\nSample 2 std: 1.4521\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nAfter your reasoning, provide final answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "1. Identify test type: Paired t-test (since we are comparing two related samples before and after the event).\n\n2. State H0 and H1:\n   H0: mu1 = mu2 (The mean returns before and after the pandemic are equal)\n   H1: mu1 != mu2 (The mean returns before and after the pandemic are not equal)\n\n3. Calculate test statistic:\n   - Difference in means: xb1 - xb2 = -0.2069 - (-0.1074) = -0.0995\n   - Standard deviation of differences: sqrt((s1^2 + s2^2) / n) = sqrt((1.4400^2 + 1.4521^2) / 20) = 0.4561\n   - t-statistic = (xb1 - xb2) / (standard deviation of differences) = -0.0995 / 0.4561 = -0.2182\n\n4. Find p-value:\n   - Degrees of freedom = n - 1 = 20 - 1 = 19\n   - Using a t-distribution table or calculator, p-value for t = -0.2182 with 19 df is approximately 0.8290\n\n5. Make decision (alp = 0.05):\n   - Since p-value (0.8290) > alp (0.05), we fail to reject H0.\n\n6. State conclusion:\n   - There is no significant change in SPY returns after the COVID-19 pandemic onset.\n\nFinal answer:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Paired t-test\nt-statistic: -0.2182\np-value: 0.8290\nDecision: Fail to reject H0\nConclusion: There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+        "H1": "H0: mu1 = mu2 (The mean returns before and after the pandemic are equal)"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -0.2182,
+      "p_value": 0.829,
+      "degrees_of_freedom": 19.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "- There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -0.2023348750982601,
+      "p_value": 0.8418057379115417,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -1.1291680989045452,
+        0.9300967612415423
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.09953566883150143,
+      "std_difference": 2.2000015724927113,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.012805737911541715,
+        "relative_error": 0.01521222454875612,
+        "predicted": 0.829,
+        "ground_truth": 0.8418057379115417,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.015865124901739913,
+        "relative_error": 0.07841023399468489,
+        "predicted": -0.2182,
+        "ground_truth": -0.2023348750982601
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 4.928493800001888,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns before and after the pandemic are equal)",
+      "H1": "H0: mu1 = mu2 (The mean returns before and after the pandemic are equal)"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -0.2182,
+    "p_value": 0.829,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "- There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.829,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:27.636787",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0\nConclusion: The two population means are significantly different.\n\n\n---\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nSample 2: [np.float64(2.4900236531421642), np.float64(-0.04711395096997062), np.float64(0.3928428067917186), np.float64(-1.8455717795603526), np.float64(-0.5250235870279412), np.float64(0.457934384324632), np.float64(-1.4349398663736215), np.float64(0.8550975272783408), np.float64(-0.6094075351183745), np.float64(-0.1459901249300823)]...\nSample 2 size: 20\nSample 2 mean: -0.1074\nSample 2 std: 1.4521\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "Data:\nSample 1: [0.7951, -0.1574, 1.0215, 2.3345, -0.3012, -0.3012, 2.4188, 1.2012, -0.6542, 0.8638, ...]\nSample 2: [2.4900, -0.0471, 0.3928, -1.8456, -0.5250, 0.4579, -1.4349, 0.8551, -0.6094, -0.1460, ...]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Paired t-test\nt-statistic: -0.215\np-value: 0.831\nDecision: Fail to reject H0\nConclusion: There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -0.215,
+      "p_value": 0.831,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -0.2023348750982601,
+      "p_value": 0.8418057379115417,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -1.1291680989045452,
+        0.9300967612415423
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.09953566883150143,
+      "std_difference": 2.2000015724927113,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.010805737911541713,
+        "relative_error": 0.012836379493385204,
+        "predicted": 0.831,
+        "ground_truth": 0.8418057379115417,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.012665124901739905,
+        "relative_error": 0.06259486850988653,
+        "predicted": -0.215,
+        "ground_truth": -0.2023348750982601
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.640589099999488,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -0.215,
+    "p_value": 0.831,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.831,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:27.674603",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nHypothesized population mean: 0.0\n\nProvide your answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT: \n- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "H0: mu = 0.0  \nH1: mu != 0.0  \nTest_type: One-sample t-test  \nt-statistic: -1.4561  \np-value: 0.1522  \nDecision: Fail to reject H0  \nConclusion: There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0.0",
+        "H1": "mu != 0.0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.4561,
+      "p_value": 0.1522,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.4551616588663814,
+      "p_value": 0.1520014361791188,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -0.6862294557127733,
+        0.10980773994435306
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.28821085788421014,
+      "sample_std": 1.4005031728246673,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.00019856382088120905,
+        "relative_error": 0.0013063285839432534,
+        "predicted": 0.1522,
+        "ground_truth": 0.1520014361791188,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0009383411336185699,
+        "relative_error": 0.0006448363505877199,
+        "predicted": -1.4561,
+        "ground_truth": -1.4551616588663814
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 0.7491362000000663,
+    "hypotheses": {
+      "H0": "mu = 0.0",
+      "H1": "mu != 0.0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.4561,
+    "p_value": 0.1522,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.1522,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:27.766200",
+    "model": "gpt-4o",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nHypothesized population mean: 0.0\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nsample_mean = -0.2882\nsample_std = 1.4005\nsample_size = 50\nhypothesized_mean = 0.0\n\n# Calculate the t-statistic\nt_statistic = (sample_mean - hypothesized_mean) / (sample_std / np.sqrt(sample_size))\n\n# Calculate the p-value\np_value = 2 * stats.t.sf(np.abs(t_statistic), df=sample_size - 1)\n```\n\nRESULTS:\nH0: mu = 0\nH1: mu != 0\nTest_type: One-sample t-test\nt-statistic: -1.4571\np-value: 0.1518\nDecision: Fail to reject H0\nConclusion: There is not enough evidence to conclude that AAPL's mean daily return differs from zero at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "mu != 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.4571,
+      "p_value": 0.1518,
+      "degrees_of_freedom": 1.0,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.4551616588663814,
+      "p_value": 0.1520014361791188,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -0.6862294557127733,
+        0.10980773994435306
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.28821085788421014,
+      "sample_std": 1.4005031728246673,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0002014361791188024,
+        "relative_error": 0.0013252254990632432,
+        "predicted": 0.1518,
+        "ground_truth": 0.1520014361791188,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0019383411336186818,
+        "relative_error": 0.0013320452210984675,
+        "predicted": -1.4571,
+        "ground_truth": -1.4551616588663814
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.4602743000032206,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "mu != 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.4571,
+    "p_value": 0.1518,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero at the 0.05 significance level.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.1518,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:28.188451",
+    "model": "gpt-4o",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0\nConclusion: The two population means are significantly different.\n\n\n---\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nSample 2: [np.float64(0.7776764538520253), np.float64(-0.2860729208646419), np.float64(-0.7238325006991053), np.float64(1.2090649330211347), np.float64(1.8380497835037592), np.float64(1.6884706784341306), np.float64(-0.9672757850741249), np.float64(-0.17226806401698896), np.float64(0.7884456468651788), np.float64(1.7548681904433716)]...\nSample 2 size: 50\nSample 2 mean: 0.3182\nSample 2 std: 1.3115\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "Data:\nSample 1: [-0.2882, std: 1.4005, size: 50]\nSample 2: [0.3182, std: 1.3115, size: 50]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest_type: Two-sample t-test\nt-statistic: -2.234\np-value: 0.0281\nDecision: Reject H0\nConclusion: The returns before and after the COVID-19 pandemic onset are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -2.234,
+      "p_value": 0.0281,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The returns before and after the COVID-19 pandemic onset are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -2.3687830655512694,
+      "p_value": 0.021833357635533356,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -1.120904453088687,
+        -0.09196087360325633
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -0.6064326633459717,
+      "std_difference": 1.8102655951112214,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.006266642364466644,
+        "relative_error": 0.2870214682082525,
+        "predicted": 0.0281,
+        "ground_truth": 0.021833357635533356,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.1347830655512694,
+        "relative_error": 0.056899708340283295,
+        "predicted": -2.234,
+        "ground_truth": -2.3687830655512694
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.9375
+    },
+    "latency_seconds": 1.5931431999997585,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -2.234,
+    "p_value": 0.0281,
+    "decision": "reject_H0",
+    "conclusion": "The returns before and after the COVID-19 pandemic onset are significantly different.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.0281,decision=reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:28.587498",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\n[Finance - US Stock Market 2020-2024] Testing if returns changed significantly after COVID-19 pandemic onset\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Paired comparison of SPY returns comparing returns before and after the pandemic crash\nResearch Question: Testing if returns changed significantly after COVID-19 pandemic onset\n\nEvent: COVID-19 pandemic onset (March 2020)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nSample 2: [np.float64(2.4900236531421642), np.float64(-0.04711395096997062), np.float64(0.3928428067917186), np.float64(-1.8455717795603526), np.float64(-0.5250235870279412), np.float64(0.457934384324632), np.float64(-1.4349398663736215), np.float64(0.8550975272783408), np.float64(-0.6094075351183745), np.float64(-0.1459901249300823)]...\nSample 2 size: 20\nSample 2 mean: -0.1074\nSample 2 std: 1.4521\n\nProvide your answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT: \n- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Paired comparison of SPY returns comparing returns before and after the pandemic crash",
+        "event": "COVID-19 pandemic onset",
+        "event_date": "March 2020",
+        "test_description": "Testing if returns changed significantly after COVID-19 pandemic onset",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "H0: mu1 = mu2  \nH1: mu1 != mu2  \nTest_type: Paired t-test  \nt-statistic: -0.2041  \np-value: 0.8401  \nDecision: Fail to reject H0  \nConclusion: There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "paired_t_test",
+      "assumptions": null,
+      "test_statistic": -0.2041,
+      "p_value": 0.8401,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -0.2023348750982601,
+      "p_value": 0.8418057379115417,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -1.1291680989045452,
+        0.9300967612415423
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.09953566883150143,
+      "std_difference": 2.2000015724927113,
+      "hypotheses": {
+        "H0": "μd = 0 (no difference)",
+        "H1": "μd ≠ 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.001705737911541716,
+        "relative_error": 0.0020262844914475477,
+        "predicted": 0.8401,
+        "ground_truth": 0.8418057379115417,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0017651249017399118,
+        "relative_error": 0.008723779827292315,
+        "predicted": -0.2041,
+        "ground_truth": -0.2023348750982601
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 0.819646299998567,
+    "hypotheses": {
+      "H0": "mu1 = mu2",
+      "H1": "mu1 != mu2"
+    },
+    "test_method": "paired_t_test",
+    "test_statistic": -0.2041,
+    "p_value": 0.8401,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no significant change in SPY returns after the COVID-19 pandemic onset.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.8401,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:28.987099",
+    "model": "gpt-4o",
+    "prompt_type": "zero_shot",
+    "prompt": "Analyze this data and perform the appropriate hypothesis test. Be concise and direct.\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nHypothesized population mean: 0.0\n\nProvide your answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT: \n- Use only plain ASCII text. No markdown formatting (no **, __, ##). Be brief.\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "H0: mu = 0  \nH1: mu != 0  \nTest_type: One-sample t-test  \nt-statistic: -0.6413  \np-value: 0.5288  \nDecision: Fail to reject H0  \nConclusion: There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "mu != 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.6413,
+      "p_value": 0.5288,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.642688532323737,
+      "p_value": 0.528106356410881,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -0.8809085398717864,
+        0.46701285554629957
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.20694784216274345,
+      "sample_std": 1.4400426321585398,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.0006936435891190529,
+        "relative_error": 0.001313454346266909,
+        "predicted": 0.5288,
+        "ground_truth": 0.528106356410881,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.001388532323737035,
+        "relative_error": 0.0021605058343216236,
+        "predicted": -0.6413,
+        "ground_truth": -0.642688532323737
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 0.7973717000022589,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "mu != 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.6413,
+    "p_value": 0.5288,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.5288,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:29.116330",
+    "model": "gpt-4o",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 20\nSample 1 mean: -0.2341\nSample 1 std: 1.5360\n\nSample 2: [np.float64(3.011297537843108), np.float64(-0.3715526009730713), np.float64(0.2150564093758477), np.float64(-2.7694963724269135), np.float64(-1.0087654490503652), np.float64(0.30184517941973216), np.float64(-2.2219871548446055), np.float64(0.8313960366913439), np.float64(-1.1212773798376099), np.float64(-0.5033874995865536)]...\nSample 2 size: 20\nSample 2 mean: -0.4520\nSample 2 std: 1.9361\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nmean1 = -0.2341\nstd1 = 1.5360\nn1 = 20\n\nmean2 = -0.4520\nstd2 = 1.9361\nn2 = 20\n\n# Perform two-sample t-test\nt_statistic, p_value = stats.ttest_ind_from_stats(mean1, std1, n1, mean2, std2, n2, equal_var=False)\n```\n\nRESULTS:\nH0: mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)\nH1: mu1 != mu2 (The mean returns of Industrial and Tech sectors are different)\nTest_type: Two-sample t-test\nt-statistic: 0.3841\np-value: 0.7035\nDecision: Fail to reject H0\nConclusion: There is no statistically significant difference in mean returns between the Industrial and Tech sectors at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)",
+        "H1": "mu1 != mu2 (The mean returns of Industrial and Tech sectors are different)"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.3841,
+      "p_value": 0.7035,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is no statistically significant difference in mean returns between the Industrial and Tech sectors at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": 0.3942520468461309,
+      "p_value": 0.695598892017999,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -0.9008531323820093,
+        1.3365981973443561
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": 0.21787253248117347,
+      "sample1_mean": -0.23407769830692624,
+      "sample2_mean": -0.4519502307880997,
+      "sample1_std": 1.5360454743024425,
+      "sample2_std": 1.9360774184353824,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.007901107982001054,
+        "relative_error": 0.011358712718876224,
+        "predicted": 0.7035,
+        "ground_truth": 0.695598892017999,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.010152046846130913,
+        "relative_error": 0.02575014366404308,
+        "predicted": 0.3841,
+        "ground_truth": 0.3942520468461309
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.3020230000001902,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns of Industrial and Tech sectors are equal)",
+      "H1": "mu1 != mu2 (The mean returns of Industrial and Tech sectors are different)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": 0.3841,
+    "p_value": 0.7035,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is no statistically significant difference in mean returns between the Industrial and Tech sectors at the 0.05 significance level.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.7035,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:30.071106",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 20\nSample 1 mean: -0.2069\nSample 1 std: 1.4400\n\nHypothesized population mean: 0.0\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nAfter your reasoning, provide final answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "1. Identify test type: One-sample t-test\n\n2. State H0 and H1:\n   H0: mu = 0\n   H1: mu != 0\n\n3. Calculate test statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   t = (-0.2069 - 0) / (1.4400 / sqrt(20))\n   t = -0.643\n\n4. Find p-value:\n   Using a t-distribution table or calculator with df = n - 1 = 19, the p-value for t = -0.643 is approximately 0.527.\n\n5. Make decision (alp = 0.05):\n   Since p-value (0.527) > alp (0.05), we fail to reject H0.\n\n6. State conclusion:\n   There is not enough evidence to conclude that AAPL's mean daily return differs from zero.\n\nFinal answer:\nH0: mu = 0\nH1: mu != 0\nTest_type: One-sample t-test\nt-statistic: -0.643\np-value: 0.527\nDecision: Fail to reject H0\nConclusion: There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "H0: mu = 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.643,
+      "p_value": 0.527,
+      "degrees_of_freedom": 0.527,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.642688532323737,
+      "p_value": 0.528106356410881,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -0.8809085398717864,
+        0.46701285554629957
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.20694784216274345,
+      "sample_std": 1.4400426321585398,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.001106356410880971,
+        "relative_error": 0.002094949999087297,
+        "predicted": 0.527,
+        "ground_truth": 0.528106356410881,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": true,
+        "within_tolerance": true,
+        "error": 0.00031146767626299976,
+        "relative_error": 0.0004846323850479198,
+        "predicted": -0.643,
+        "ground_truth": -0.642688532323737
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.43191840000145,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "H0: mu = 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -0.643,
+    "p_value": 0.527,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.527,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:30.275044",
+    "model": "gpt-4o",
+    "prompt_type": "program_of_thought",
+    "prompt": "Solve this hypothesis test by writing and executing Python code mentally. Show your code, then provide the final results.\n\n[Finance - US Stock Market 2020-2024] Testing if Industrial sector stocks have different mean returns than Tech sector\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Comparing daily returns between Industrial and Tech sectors\nResearch Question: Testing if Industrial sector stocks have different mean returns than Tech sector\n\nGroup 1: Industrial Sector\nGroup 2: Tech Sector\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.8347426448179723), np.float64(-0.18122288187389546), np.float64(1.076301660961108), np.float64(2.476847770252841), np.float64(-0.3346453995573376), np.float64(-0.3346191311186889), np.float64(2.5667405048118264), np.float64(1.267895566644654), np.float64(-0.7111590174959234), np.float64(0.9080960697375435)]...\nSample 1 size: 50\nSample 1 mean: -0.3208\nSample 1 std: 1.4939\n\nSample 2: [np.float64(0.72816793878959), np.float64(-0.6901645608326331), np.float64(-1.2738440006119174), np.float64(1.3033525776817358), np.float64(2.141999044991902), np.float64(1.9425602382323972), np.float64(-1.598435046445277), np.float64(-0.5384247517024292), np.float64(0.7425268628071279), np.float64(2.0310902542447185)]...\nSample 2 size: 50\nSample 2 mean: 0.1156\nSample 2 std: 1.7486\n\nInstructions:\n1. Write Python code using numpy/scipy to perform the appropriate hypothesis test\n2. Execute the code mentally and compute the actual numerical results\n3. After your code, output the RESULTS section with the computed values\n\nYour response format:\n```python\nimport numpy as np\nfrom scipy import stats\n\n# Your computation code here\n# ...\n```\n\nRESULTS:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nIMPORTANT:\n- State hypotheses using notation: mu for population mean, mu1/mu2 for group means\n- Provide actual computed numerical values, not variable names or formulas\n- The RESULTS section must contain the final numerical answers\n- P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Comparing daily returns between Industrial and Tech sectors",
+        "group1_name": "Industrial Sector",
+        "group2_name": "Tech Sector",
+        "test_description": "Testing if Industrial sector stocks have different mean returns than Tech sector",
+        "units": "percentage (%)"
+      }
+    },
+    "raw_response": "```python\nimport numpy as np\nfrom scipy import stats\n\n# Given data\nmean1 = -0.3208\nstd1 = 1.4939\nn1 = 50\n\nmean2 = 0.1156\nstd2 = 1.7486\nn2 = 50\n\n# Perform two-sample t-test\nt_statistic, p_value = stats.ttest_ind_from_stats(mean1, std1, n1, mean2, std2, n2, equal_var=False)\n```\n\nRESULTS:\nH0: mu1 = mu2 (The mean returns of Industrial sector stocks are equal to the mean returns of Tech sector stocks)\nH1: mu1 != mu2 (The mean returns of Industrial sector stocks are different from the mean returns of Tech sector stocks)\nTest_type: Two-sample t-test\nt-statistic: -1.3661\np-value: 0.1755\nDecision: Fail to reject H0\nConclusion: There is not enough evidence to conclude that the mean returns of Industrial sector stocks are different from the mean returns of Tech sector stocks at the 0.05 significance level.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2 (The mean returns of Industrial sector stocks are equal to the mean returns of Tech sector stocks)",
+        "H1": "mu1 != mu2 (The mean returns of Industrial sector stocks are different from the mean returns of Tech sector stocks)"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.3661,
+      "p_value": 0.1755,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that the mean returns of Industrial sector stocks are different from the mean returns of Tech sector stocks at the 0.05 significance level.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -1.341485251653995,
+      "p_value": 0.18286338043430186,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -1.0817708562149901,
+        0.20913087752353227
+      ],
+      "decision": "fail_to_reject_H0",
+      "mean_difference": -0.43631998934572896,
+      "sample1_mean": -0.32075824840982414,
+      "sample2_mean": 0.11556174093590484,
+      "sample1_std": 1.4938700510129785,
+      "sample2_std": 1.748649974955719,
+      "hypotheses": {
+        "H0": "μ1 = μ2",
+        "H1": "μ1 ≠ μ2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.007363380434301875,
+        "relative_error": 0.0402671131683872,
+        "predicted": 0.1755,
+        "ground_truth": 0.18286338043430186,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.024614748346005078,
+        "relative_error": 0.018348877347444652,
+        "predicted": -1.3661,
+        "ground_truth": -1.341485251653995
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.597935999998299,
+    "hypotheses": {
+      "H0": "mu1 = mu2 (The mean returns of Industrial sector stocks are equal to the mean returns of Tech sector stocks)",
+      "H1": "mu1 != mu2 (The mean returns of Industrial sector stocks are different from the mean returns of Tech sector stocks)"
+    },
+    "test_method": "two_sample_t_test",
+    "test_statistic": -1.3661,
+    "p_value": 0.1755,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that the mean returns of Industrial sector stocks are different from the mean returns of Tech sector stocks at the 0.05 significance level.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.1755,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  },
+  {
+    "timestamp": "2025-12-28T05:45:31.077475",
+    "model": "gpt-4o",
+    "prompt_type": "chain_of_thought",
+    "prompt": "Solve this hypothesis test step by step. Be concise.\n\n[Finance - US Stock Market 2020-2024] Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\n\nData:\n=== Real-World Context ===\nDomain: Finance\nDataset: US Stock Market 2020-2024\n\nScenario: Daily percentage returns for AAPL stock\nResearch Question: Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)\nUnits: percentage (%)\n\n=== Statistical Data ===\nSample 1: [np.float64(0.795071229516849), np.float64(-0.15739645175677697), np.float64(1.0215328071510388), np.float64(2.3345447846120377), np.float64(-0.30123006208500397), np.float64(-0.3012054354237708), np.float64(2.418819223261087), np.float64(1.2011520937293632), np.float64(-0.6542115789024281), np.float64(0.8638400653789471)]...\nSample 1 size: 50\nSample 1 mean: -0.2882\nSample 1 std: 1.4005\n\nHypothesized population mean: 0.0\n\nSteps:\n1. Identify test type\n2. State H0 and H1 (use notation: mu for population mean, xb for sample mean)\n3. Calculate test statistic\n4. Find p-value\n5. Make decision (alp = 0.05)\n6. State conclusion\n\nAfter your reasoning, provide final answer in this exact format:\nH0: <null hypothesis, e.g., mu1 = mu2>\nH1: <alternative hypothesis, e.g., mu1 != mu2>\nTest_type: <test name, e.g., Two-sample t-test>\nt-statistic: <exact numerical value, e.g., 5.14>\np-value: <exact numerical value, e.g., 0.0008>\nDecision: <Reject H0 or Fail to reject H0>\nConclusion: <one sentence interpretation>\n\nBe brief and direct. Show key values only. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values and t-statistics MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "data_source": "real",
+    "domain": "finance",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024"
+      },
+      "context": {
+        "domain": "finance",
+        "dataset": "US Stock Market 2020-2024",
+        "description": "Daily percentage returns for AAPL stock",
+        "test_description": "Testing if AAPL's mean daily return differs from zero (testing if returns are significantly different from zero)",
+        "units": "percentage (%)",
+        "ticker": "AAPL"
+      }
+    },
+    "raw_response": "1. Identify test type: One-sample t-test\n\n2. State H0 and H1:\n   H0: mu = 0\n   H1: mu != 0\n\n3. Calculate test statistic:\n   t = (xb - mu) / (s / sqrt(n))\n   t = (-0.2882 - 0) / (1.4005 / sqrt(50))\n   t = -1.457\n\n4. Find p-value:\n   Using a t-distribution table or calculator with df = n - 1 = 49, the p-value for t = -1.457 is approximately 0.151.\n\n5. Make decision (alp = 0.05):\n   Since p-value (0.151) > alp (0.05), we fail to reject H0.\n\n6. State conclusion:\n   There is not enough evidence to conclude that AAPL's mean daily return differs from zero.\n\nFinal answer:\nH0: mu = 0\nH1: mu != 0\nTest_type: One-sample t-test\nt-statistic: -1.457\np-value: 0.151\nDecision: Fail to reject H0\nConclusion: There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 0",
+        "H1": "H0: mu = 0"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -1.457,
+      "p_value": 0.151,
+      "degrees_of_freedom": 0.151,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -1.4551616588663814,
+      "p_value": 0.1520014361791188,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -0.6862294557127733,
+        0.10980773994435306
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": -0.28821085788421014,
+      "sample_std": 1.4005031728246673,
+      "hypotheses": {
+        "H0": "μ = 0.0",
+        "H1": "μ ≠ 0.0"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0010014361791187976,
+        "relative_error": 0.006588333665076053,
+        "predicted": 0.151,
+        "ground_truth": 0.1520014361791188,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0018383411336186928,
+        "relative_error": 0.001263324334047408,
+        "predicted": -1.457,
+        "ground_truth": -1.4551616588663814
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 2.4883744999970077,
+    "hypotheses": {
+      "H0": "mu = 0",
+      "H1": "H0: mu = 0"
+    },
+    "test_method": "one_sample_t_test",
+    "test_statistic": -1.457,
+    "p_value": 0.151,
+    "decision": "fail_to_reject_H0",
+    "conclusion": "There is not enough evidence to conclude that AAPL's mean daily return differs from zero.",
+    "hallucinations": {
+      "has_hallucination": true,
+      "hallucination_types": [
+        "structural",
+        "numerical"
+      ],
+      "severity": "severe",
+      "details": {
+        "structural": [
+          "missing_required_field:test_type"
+        ],
+        "numerical": [
+          "contradictory_p_value_and_decision:p=0.151,decision=fail_to_reject_H0"
+        ],
+        "logical": [],
+        "reasoning": []
+      },
+      "counts": {
+        "structural": 1,
+        "numerical": 1,
+        "logical": 0,
+        "reasoning": 0
+      }
+    }
+  }
+]

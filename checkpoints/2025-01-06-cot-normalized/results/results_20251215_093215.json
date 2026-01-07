@@ -1,0 +1,628 @@
+[
+  {
+    "timestamp": "2025-12-15T09:31:59.363905",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284)]...\nSample 1 size: 20\nSample 1 mean: 9.9341\nSample 1 std: 1.7404\n\nHypothesized population mean: 10\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "Analysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: -0.1693\np-value: 0.8672\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: The population mean is not significantly different from 10.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -0.1693,
+      "p_value": 0.8672,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The population mean is not significantly different from 10.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.16924907013448384,
+      "p_value": 0.8673896546591415,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        9.119624303685217,
+        10.74864733305591
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.934135818370564,
+      "sample_std": 1.7403556461348662,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0001896546591415582,
+        "relative_error": 0.00021864989756660965,
+        "predicted": 0.8672,
+        "ground_truth": 0.8673896546591415,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 5.092986551616385e-05,
+        "relative_error": 0.0003009166636820836,
+        "predicted": -0.1693,
+        "ground_truth": -0.16924907013448384
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 10.622140599880368
+  },
+  {
+    "timestamp": "2025-12-15T09:32:02.208478",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to test if a sample mean differs from a known population value.\n\nData:\nSample 1: [np.float64(9.63027527290948), np.float64(8.638140911192117), np.float64(12.445082677348061), np.float64(9.690941035862396), np.float64(9.143344355673786), np.float64(9.295732899023541), np.float64(11.064618371106697), np.float64(10.730888128728157), np.float64(10.825465223191976), np.float64(10.861642006015765)]...\nSample 1 size: 50\nSample 1 mean: 10.1867\nSample 1 std: 1.4952\n\nHypothesized population mean: 10\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "Analysis:\nH0: mu = 10\nH1: mu != 10\nTest: One-sample t-test\nt-statistic: 0.8829\np-value: 0.3816\nDecision: Fail to reject H0 (alp = 0.05)\nConclusion: The sample mean is not significantly different from the hypothesized population mean.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu = 10",
+        "H1": "mu != 10"
+      },
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 0.8829,
+      "p_value": 0.3816,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The sample mean is not significantly different from the hypothesized population mean.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.8828730118201856,
+      "p_value": 0.38161588299909055,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.761755171319498,
+        10.611617534836368
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.186686353077933,
+      "sample_std": 1.4952001527857144,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 1.5882999090555128e-05,
+        "relative_error": 4.162038268882267e-05,
+        "predicted": 0.3816,
+        "ground_truth": 0.38161588299909055,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 2.6988179814391167e-05,
+        "relative_error": 3.0568586255401175e-05,
+        "predicted": 0.8829,
+        "ground_truth": 0.8828730118201856
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 13.485937000019476
+  },
+  {
+    "timestamp": "2025-12-15T09:32:03.643561",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(7.448627353324156), np.float64(7.733425571993038), np.float64(8.161095427996777), np.float64(10.994321488107529), np.float64(10.284851472141131), np.float64(11.380970708135536), np.float64(9.145494707326932), np.float64(10.317079382153429), np.float64(11.251180787934674), np.float64(9.381306920559524)]...\nSample 1 size: 20\nSample 1 mean: 9.6861\nSample 1 std: 1.2934\n\nSample 2: [np.float64(13.330770217945572), np.float64(11.803029030981152), np.float64(11.153403375911692), np.float64(11.840563578187203), np.float64(8.62533113208394), np.float64(9.105775055153826), np.float64(9.354600775291196), np.float64(10.005506344797036), np.float64(12.799548453446873), np.float64(10.189041889279878)]...\nSample 2 size: 20\nSample 2 mean: 11.2091\nSample 2 std: 1.7350\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Analysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -3.15\np-value: 0.0033\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -3.15,
+      "p_value": 0.0033,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -3.14746843873534,
+      "p_value": 0.0031987470517679064,
+      "degrees_of_freedom": 38.0,
+      "critical_value": 2.024394163911969,
+      "confidence_interval": [
+        -2.502605639313657,
+        -0.5434429004557088
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.523024269884683,
+      "sample1_mean": 9.68607369144211,
+      "sample2_mean": 11.209097961326792,
+      "sample1_std": 1.2933693098776555,
+      "sample2_std": 1.7349813945811199,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.00010125294823209357,
+        "relative_error": 0.03165394030644979,
+        "predicted": 0.0033,
+        "ground_truth": 0.0031987470517679064,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0025315612646599206,
+        "relative_error": 0.000804316648105011,
+        "predicted": -3.15,
+        "ground_truth": -3.14746843873534
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 14.912602999946102
+  },
+  {
+    "timestamp": "2025-12-15T09:32:11.002326",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(9.263502086423939), np.float64(10.68311110188102), np.float64(13.457395288811185), np.float64(8.026285843143524), np.float64(9.50944430811578), np.float64(11.554675152123489), np.float64(10.869532148933237), np.float64(9.247687857539802), np.float64(9.732354070967919), np.float64(7.250208383260036)]...\nSample 1 size: 50\nSample 1 mean: 9.9936\nSample 1 std: 1.7673\n\nSample 2: [np.float64(12.990852300588124), np.float64(11.149249696964882), np.float64(16.321223302509374), np.float64(9.697760620020631), np.float64(11.448119962286933), np.float64(12.50177664141954), np.float64(12.53507597657736), np.float64(12.54773245223876), np.float64(12.315009312955626), np.float64(10.98251998866998)]...\nSample 2 size: 50\nSample 2 mean: 12.1285\nSample 2 std: 2.0754\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Analysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -5.54\np-value: 0.0000003\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.54,
+      "p_value": 3e-07,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -14.09116335569171,
+      "p_value": 7.328872850793746e-19,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        -2.439380094388284,
+        -1.8304492924417877
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.134914693415036,
+      "std_difference": 1.0713186831084514,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 2.999999999992671e-07,
+        "relative_error": 409339889102.83234,
+        "predicted": 3e-07,
+        "ground_truth": 7.328872850793746e-19,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 8.55116335569171,
+        "relative_error": 0.6068458039866325,
+        "predicted": -5.54,
+        "ground_truth": -14.09116335569171
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    },
+    "latency_seconds": 22.26912710000761
+  },
+  {
+    "timestamp": "2025-12-15T09:32:13.970281",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare the means of two independent groups.\n\nData:\nSample 1: [np.float64(10.868847287091715), np.float64(10.475471204664556), np.float64(8.811700088606411), np.float64(7.10788429122309), np.float64(10.144259015427739), np.float64(8.941014581872395), np.float64(10.465352422709408), np.float64(10.043704291046886), np.float64(13.20355778264183), np.float64(9.521288745053951)]...\nSample 1 size: 50\nSample 1 mean: 9.8896\nSample 1 std: 2.0435\n\nSample 2: [np.float64(10.069766475535257), np.float64(10.549547870928494), np.float64(16.256939464870328), np.float64(10.357226641551227), np.float64(13.67697840747269), np.float64(10.194145643825948), np.float64(13.863146025748488), np.float64(12.769901932211726), np.float64(11.68672420468382), np.float64(11.918474947729132)]...\nSample 2 size: 50\nSample 2 mean: 12.0327\nSample 2 std: 1.9242\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "two_sample_t_test",
+      "metadata": {
+        "sample_size1": 50,
+        "sample_size2": 50,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Analysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -5.40\np-value: 0.00000044\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -5.4,
+      "p_value": 4.4e-07,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "two_sample_t_test_equal_var",
+      "test_statistic": -5.398984724165242,
+      "p_value": 4.679952424568067e-07,
+      "degrees_of_freedom": 98.0,
+      "critical_value": 1.984467454426692,
+      "confidence_interval": [
+        -2.930851409651039,
+        -1.355388036819319
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -2.143119723235179,
+      "sample1_mean": 9.88955997838563,
+      "sample2_mean": 12.03267970162081,
+      "sample1_std": 2.0435257023907556,
+      "sample2_std": 1.9241659046923727,
+      "hypotheses": {
+        "H0": "\u03bc1 = \u03bc2",
+        "H1": "\u03bc1 \u2260 \u03bc2"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 2.7995242456806653e-08,
+        "relative_error": 0.05981950224502647,
+        "predicted": 4.4e-07,
+        "ground_truth": 4.679952424568067e-07,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.0010152758347583557,
+        "relative_error": 0.00018804939940172388,
+        "predicted": -5.4,
+        "ground_truth": -5.398984724165242
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 4.0,
+        "max": 5,
+        "percentage": 80.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 1.0
+    },
+    "latency_seconds": 14.603236600058153
+  },
+  {
+    "timestamp": "2025-12-15T09:32:15.380949",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "few_shot",
+    "prompt": "Perform hypothesis test following this example format. Be brief and direct.\n\nExample:\nData:\nSample 1: [12.3, 14.1, 13.5, 15.2, 14.8]\nSample 2: [10.1, 11.3, 10.8, 11.9, 10.5]\n\nAnalysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: 5.14\np-value: 0.0008\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.\n\n\n---\n\nA researcher wants to compare measurements from the same subjects under two conditions.\n\nData:\nSample 1: [np.float64(11.831805084712027), np.float64(7.347214564520872), np.float64(10.061262985188835), np.float64(9.031661133332843), np.float64(9.344653811276078), np.float64(12.005515650609208), np.float64(11.076230874007852), np.float64(12.674796214885488), np.float64(9.6909886415002), np.float64(8.608114776658594)]...\nSample 1 size: 20\nSample 1 mean: 10.3519\nSample 1 std: 1.9445\n\nSample 2: [np.float64(12.368363082875025), np.float64(8.756507550557385), np.float64(12.376867988779175), np.float64(12.237514754221078), np.float64(10.61556997353247), np.float64(13.351369210541412), np.float64(10.928941844269197), np.float64(14.51213029434058), np.float64(10.628574229640636), np.float64(10.07867534929252)]...\nSample 2 size: 20\nSample 2 mean: 12.0170\nSample 2 std: 2.3170\n\nProvide analysis in the same concise format. Use only plain ASCII text. No markdown formatting.\n\nIMPORTANT: P-values MUST be exact numerical values (e.g., 0.0342, 0.00001), NOT inequalities like \"> 0.05\" or \"< 0.0001\"\n\nNotation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "paired_t_test",
+      "metadata": {
+        "sample_size1": 20,
+        "sample_size2": 20,
+        "mean1": 10,
+        "mean2": 12,
+        "std1": 2,
+        "std2": 2
+      }
+    },
+    "raw_response": "Analysis:\nH0: mu1 = mu2\nH1: mu1 != mu2\nTest: Two-sample t-test\nt-statistic: -2.46\np-value: 0.0184\nDecision: Reject H0 (alp = 0.05)\nConclusion: The two population means are significantly different.",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "mu1 = mu2",
+        "H1": "mu1 != mu2"
+      },
+      "test_method": "two_sample_t_test",
+      "assumptions": null,
+      "test_statistic": -2.46,
+      "p_value": 0.0184,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "reject_H0",
+      "significance_level": 0.05,
+      "conclusion": "The two population means are significantly different.",
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "paired_t_test",
+      "test_statistic": -5.454900642269005,
+      "p_value": 2.907864793910734e-05,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        -2.303980364369362,
+        -1.0262022949532095
+      ],
+      "decision": "reject_H0",
+      "mean_difference": -1.6650913296612857,
+      "std_difference": 1.3651054880880218,
+      "hypotheses": {
+        "H0": "\u03bcd = 0 (no difference)",
+        "H1": "\u03bcd \u2260 0"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.5,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": true,
+        "error": 0.018370921352060893,
+        "relative_error": 631.766696667976,
+        "predicted": 0.0184,
+        "ground_truth": 2.907864793910734e-05,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 2.9949006422690054,
+        "relative_error": 0.549029366192682,
+        "predicted": -2.46,
+        "ground_truth": -5.454900642269005
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "reject_H0",
+        "ground_truth": "reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.5,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.5,
+        "max": 5,
+        "percentage": 70.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.625
+    },
+    "latency_seconds": 26.65288019995205
+  }
+]

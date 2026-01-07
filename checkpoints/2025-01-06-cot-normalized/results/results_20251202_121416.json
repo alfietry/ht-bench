@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2025-12-02T12:14:16.880123",
+    "model": "deepseek-v3.2-exp-thinking",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1dd615b7490 state=finished raised BadRequestError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  },
+  {
+    "timestamp": "2025-12-02T12:14:16.930595",
+    "model": "deepseek-v3.2-exp-thinking",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x1dd6156a690 state=finished raised BadRequestError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    },
+    "latency_seconds": null
+  }
+]

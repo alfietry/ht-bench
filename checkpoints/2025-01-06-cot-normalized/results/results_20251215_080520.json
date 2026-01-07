@@ -1,0 +1,201 @@
+[
+  {
+    "timestamp": "2025-12-15T08:04:57.299557",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "program_of_thought",
+    "prompt": "Write concise Python (numpy/scipy) code that performs the correct hypothesis test using scipy.stats ONLY. Keep imports to `import numpy as np` and `from scipy import stats`.\n\n    A researcher wants to test if a sample mean differs from a known population value.\n\n    Data (already valid Python):\n    import numpy as np\nfrom scipy import stats\n\nsample1 = np.array([np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284), np.float64(11.758795949725657), np.float64(11.555583870857896), np.float64(10.132061395122433), np.float64(12.254482413936065), np.float64(10.935018684504092), np.float64(8.281415074233523), np.float64(10.737501568164998), np.float64(8.082234798342002), np.float64(11.756900602614545), np.float64(9.900148178027495)])\npopulation_mean = 10\n\n    Your response must:\n    1. Detect and name the appropriate test (e.g., \"two_sample_t_test\").\n    2. Run the computation inside real Python code (no pseudocode) using numpy/scipy.\n    3. Print the test name, test statistic, p-value, and the decision at alp = 0.05.\n    4. After the code, emit a single plain-text summary line exactly in this format:\n       RESULT: test_type=<name>; statistic=<value>; p_value=<value>; decision=<reject/fail_to_reject>\n\n    Example summary line:\n    RESULT: test_type=two_sample_t_test; statistic=2.41; p_value=0.021; decision=reject\n\n    Keep everything ASCII. Do not use markdown fences. Ensure the summary line appears once after the code so downstream parsers can read it.\n\n    Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 20,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "import numpy as np\nfrom scipy import stats\n\n# Data\nsample1 = np.array([np.float64(10.609434159508863), np.float64(7.920031787519009), np.float64(11.500902391612914), np.float64(11.881129432782428), np.float64(6.097929622692327), np.float64(7.395640986275364), np.float64(10.25568080633457), np.float64(9.367514815312836), np.float64(9.966397684991422), np.float64(8.29391214485284), np.float64(11.758795949725657), np.float64(11.555583870857896), np.float64(10.132061395122433), np.float64(12.254482413936065), np.float64(10.935018684504092), np.float64(8.281415074233523), np.float64(10.737501568164998), np.float64(8.082234798342002), np.float64(11.756900602614545), np.float64(9.900148178027495)])\npopulation_mean = 10\n\n# 1. Detect and name the appropriate test\n# We are comparing a single sample mean to a known population value,\n# and the population standard deviation is unknown. This calls for a one-sample t-test.\ntest_name = \"one_sample_t_test\"\n\n# 2. Run the computation\n# H0: The mean of the sample is equal to the population mean.\n# H1: The mean of the sample is not equal to the population mean.\nt_statistic, p_value = stats.ttest_1samp(a=sample1, popmean=population_mean)\n\n# 3. Print the results and make a decision\nalp = 0.05\nif p_value < alp:\n    decision = \"reject\"\nelse:\n    decision = \"fail_to_reject\"\n\nprint(f\"Test Name: {test_name}\")\nprint(f\"Test Statistic: {t_statistic}\")\nprint(f\"P-value: {p_value}\")\nprint(f\"Decision at alpha = {alp}: {decision} the null hypothesis\")\n\n# 4. Emit the summary line\nprint(f\"\\nRESULT: test_type={test_name}; statistic={t_statistic:.3f}; p_value={p_value:.3f}; decision={decision}\")",
+    "parsed_results": {
+      "hypotheses": {
+        "H0": "The mean of the sample is equal to the population mean.",
+        "H1": "The mean of the sample is not equal to the population mean."
+      },
+      "test_method": "{test_name}\")",
+      "assumptions": null,
+      "test_statistic": null,
+      "p_value": 0.05,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": null,
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": -0.16924907013448384,
+      "p_value": 0.8673896546591415,
+      "degrees_of_freedom": 19,
+      "critical_value": 2.093024054408263,
+      "confidence_interval": [
+        9.119624303685217,
+        10.74864733305591
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 9.934135818370564,
+      "sample_std": 1.7403556461348662,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 0.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.8173896546591415,
+        "relative_error": 0.9423557800909574,
+        "predicted": 0.05,
+        "ground_truth": 0.8673896546591415,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": null,
+        "relative_error": null
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 1,
+          "test_justification": 0.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 0.6666666666666666
+        },
+        "total": 2.6666666666666665,
+        "max": 5,
+        "percentage": 53.333333333333336
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": true,
+        "has_test_method": true,
+        "has_test_statistic": false,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.25
+    },
+    "latency_seconds": 20.74081820016727
+  },
+  {
+    "timestamp": "2025-12-15T08:05:20.842906",
+    "model": "gemini-2.5-pro",
+    "prompt_type": "program_of_thought",
+    "prompt": "Write concise Python (numpy/scipy) code that performs the correct hypothesis test using scipy.stats ONLY. Keep imports to `import numpy as np` and `from scipy import stats`.\n\n    A researcher wants to test if a sample mean differs from a known population value.\n\n    Data (already valid Python):\n    import numpy as np\nfrom scipy import stats\n\nsample1 = np.array([np.float64(9.63027527290948), np.float64(8.638140911192117), np.float64(12.445082677348061), np.float64(9.690941035862396), np.float64(9.143344355673786), np.float64(9.295732899023541), np.float64(11.064618371106697), np.float64(10.730888128728157), np.float64(10.825465223191976), np.float64(10.861642006015765), np.float64(14.283295201740923), np.float64(9.18716996723077), np.float64(8.975514541856926), np.float64(8.372454543504244), np.float64(11.231958845150992), np.float64(12.257944585441784), np.float64(9.77210508469025), np.float64(8.319687046074943), np.float64(8.351037568617521), np.float64(11.301185575649402), np.float64(11.486508342406884), np.float64(11.08630853661039), np.float64(8.668980585422611), np.float64(10.46432264613344), np.float64(10.233371618281456), np.float64(10.437377193458026), np.float64(11.74285755589638), np.float64(10.447191097549364), np.float64(11.357827126143789), np.float64(10.135158138977783), np.float64(10.578238797379969), np.float64(11.26257645167708), np.float64(7.0856883602886676), np.float64(9.360657567285397), np.float64(9.05925469141441), np.float64(8.722244303513316), np.float64(9.449715497546633), np.float64(12.98988262246879), np.float64(8.268337768613513), np.float64(11.936556709182963), np.float64(6.6342604567683905), np.float64(9.33022994002845), np.float64(10.32550613021001), np.float64(11.172444662718556), np.float64(11.42245315958571), np.float64(11.58669447039985), np.float64(9.302549855503125), np.float64(9.075296414670866), np.float64(11.715951762514308), np.float64(9.61739135023677)])\npopulation_mean = 10\n\n    Your response must:\n    1. Detect and name the appropriate test (e.g., \"two_sample_t_test\").\n    2. Run the computation inside real Python code (no pseudocode) using numpy/scipy.\n    3. Print the test name, test statistic, p-value, and the decision at alp = 0.05.\n    4. After the code, emit a single plain-text summary line exactly in this format:\n       RESULT: test_type=<name>; statistic=<value>; p_value=<value>; decision=<reject/fail_to_reject>\n\n    Example summary line:\n    RESULT: test_type=two_sample_t_test; statistic=2.41; p_value=0.021; decision=reject\n\n    Keep everything ASCII. Do not use markdown fences. Ensure the summary line appears once after the code so downstream parsers can read it.\n\n    Notation: mu=population mean, xb=sample mean, sig=population std dev, s=sample std dev, alp=significance level.",
+    "input_data": {
+      "test_type": "one_sample_t_test",
+      "metadata": {
+        "sample_size": 50,
+        "true_mean": 10,
+        "std": 2,
+        "null_mean": 10
+      }
+    },
+    "raw_response": "import numpy as np\nfrom scipy import stats\n\n# Data\nsample1 = np.array([np.float64(9.63027527290948), np.float64(8.638140911192117), np.float64(12.445082677348061), np.float64(9.690941035862396), np.float64(9.143344355673786), np.float64(9.295732899023541), np.float64(11.064618371106697), np.float64(10.730888128728157), np.float64(10.825465223191976), np.float64(10.861642006015765), np.float64(14.283295201740923), np.float64(9.18716996723077), np.float64(8.975514541856926), np.float64(8.372454543504244), np.float64(11.231958845150992), np.float64(12.257944585441784), np.float64(9.77210508469025), np.float64(8.319687046074943), np.float64(8.351037568617521), np.float64(11.301185575649402), np.float64(11.486508342406884), np.float64(11.08630853661039), np.float64(8.668980585422611), np.float64(10.46432264613344), np.float64(10.233371618281456), np.float64(10.437377193458026), np.float64(11.74285755589638), np.float64(10.447191097549364), np.float64(11.357827126143789), np.float64(10.135158138977783), np.float64(10.578238797379969), np.float64(11.26257645167708), np.float64(7.0856883602886676), np.float64(9.360657567285397), np.float64(9.05925469141441), np.float64(8.722244303513316), np.float64(9.449715497546633), np.float64(12.98988262246879), np.float64(8.268337768613513), np.float64(11.936556709182963), np.float64(6.6342604567683905), np.float64(9.33022994002845), np.float64(10.32550613021001), np.float64(11.172444662718556), np.float64(11.42245315958571), np.float64(11.58669447039985), np.float64(9.302549855503125), np.float64(9.075296414670866), np.float64(11.715951762514308), np.float64(9.61739135023677)])\npopulation_mean = 10\nalp = 0.05\n\n# The appropriate test is a one-sample t-test, as we are comparing the\n# mean of a single sample to a known population value.\ntest_name = \"one_sample_t_test\"\n\n# Perform the one-sample t-test\nt_statistic, p_value = stats.ttest_1samp(a=sample1, popmean=population_mean)\n\n# Determine the decision based on the p-value\ndecision = \"reject\" if p_value < alp else \"fail_to_reject\"\n\n# Print the results\nprint(f\"Test Name: {test_name}\")\nprint(f\"Test Statistic: {t_statistic}\")\nprint(f\"P-value: {p_value}\")\nprint(f\"Decision: {decision} the null hypothesis at alpha = {alp}\")\n\nRESULT: test_type=one_sample_t_test; statistic=1.08; p_value=0.284; decision=fail_to_reject",
+    "parsed_results": {
+      "hypotheses": null,
+      "test_method": "one_sample_t_test",
+      "assumptions": null,
+      "test_statistic": 1.08,
+      "p_value": 0.284,
+      "degrees_of_freedom": null,
+      "critical_value": null,
+      "decision": "fail_to_reject_H0",
+      "significance_level": 0.05,
+      "conclusion": null,
+      "confidence_interval": null
+    },
+    "ground_truth": {
+      "test_method": "one_sample_t_test",
+      "test_statistic": 0.8828730118201856,
+      "p_value": 0.38161588299909055,
+      "degrees_of_freedom": 49,
+      "critical_value": 2.0095752371292397,
+      "confidence_interval": [
+        9.761755171319498,
+        10.611617534836368
+      ],
+      "decision": "fail_to_reject_H0",
+      "sample_mean": 10.186686353077933,
+      "sample_std": 1.4952001527857144,
+      "hypotheses": {
+        "H0": "\u03bc = 10",
+        "H1": "\u03bc \u2260 10"
+      }
+    },
+    "evaluation": {
+      "test_method": 1.0,
+      "p_value": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.09761588299909058,
+        "relative_error": 0.2557961744986469,
+        "predicted": 0.284,
+        "ground_truth": 0.38161588299909055,
+        "valid_range": true,
+        "correct_significance": true
+      },
+      "test_statistic": {
+        "exact_match": false,
+        "within_tolerance": false,
+        "error": 0.19712698817981444,
+        "relative_error": 0.223278982980129,
+        "predicted": 1.08,
+        "ground_truth": 0.8828730118201856
+      },
+      "decision": {
+        "correct": true,
+        "predicted": "fail_to_reject_H0",
+        "ground_truth": "fail_to_reject_H0"
+      },
+      "reasoning_quality": {
+        "scores": {
+          "hypothesis_clarity": 0,
+          "test_justification": 1.0,
+          "assumption_checking": 0,
+          "correct_interpretation": 1,
+          "statistical_rigor": 1.0
+        },
+        "total": 3.0,
+        "max": 5,
+        "percentage": 60.0
+      },
+      "hallucinations": {
+        "has_hallucinations": false,
+        "count": 0,
+        "details": []
+      },
+      "completeness": {
+        "has_hypotheses": false,
+        "has_test_method": true,
+        "has_test_statistic": true,
+        "has_p_value": true,
+        "has_decision": true
+      },
+      "overall_accuracy": 0.5
+    },
+    "latency_seconds": 44.29357450013049
+  }
+]

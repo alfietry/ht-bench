@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T13:21:54.220927",
+    "model": "gemini-2.5-flash",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x228bf235350 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T13:21:54.234729",
+    "model": "gemini-2.5-flash",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x228bf285370 state=finished raised RuntimeError>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]

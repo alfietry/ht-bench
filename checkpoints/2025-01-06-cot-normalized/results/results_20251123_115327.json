@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T11:53:27.915565",
+    "model": "gemini-2.5-flash",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x29537202780 state=finished raised ResourceExhausted>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T11:53:27.973180",
+    "model": "gemini-2.5-flash",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x2953722c950 state=finished raised ResourceExhausted>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]

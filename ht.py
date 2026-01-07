@@ -11,13 +11,14 @@ from typing import List, Dict, Any, Optional
 from tqdm.asyncio import tqdm
 import numpy as np
 
-import config
-from llm_clients import get_client, LLMClient
-from prompts import get_prompt, RESPONSE_SCHEMA
-from data_generator import DataGenerator, create_test_context
-from statistical_engine import StatisticalEngine
-from response_parser import ResponseParser
-from evaluator import EvaluationMetrics
+from src import config
+from src.llm_clients import get_client, LLMClient
+from src.prompts import get_prompt, RESPONSE_SCHEMA
+from src.data_generator import DataGenerator, create_test_context
+from src.statistical_engine import StatisticalEngine
+from src.response_parser import ResponseParser
+from src.evaluator import EvaluationMetrics, calculate_metrics
+from src.hallucination_detector import HallucinationDetector
 
 # Set up logging
 config.LOGS_DIR.mkdir(exist_ok=True)
@@ -101,6 +102,13 @@ class HypothesisTestingBenchmark:
             # Compute ground truth
             ground_truth = StatisticalEngine.compute_ground_truth(scenario)
             
+            # Detect hallucinations
+            hallucination_results = HallucinationDetector.detect_all(
+                parsed=parsed,
+                raw_output=raw_response_text if isinstance(raw_response, str) else json.dumps(raw_response),
+                ground_truth=ground_truth
+            )
+            
             # Evaluate
             evaluation = EvaluationMetrics.comprehensive_evaluation(
                 parsed, ground_truth, raw_response_text if isinstance(raw_response, str) else ""
@@ -123,6 +131,7 @@ class HypothesisTestingBenchmark:
                 "parsed_results": parsed.model_dump() if hasattr(parsed, 'model_dump') else parsed,
                 "ground_truth": ground_truth,
                 "evaluation": evaluation,
+                "hallucinations": hallucination_results,
                 "latency_seconds": latency_seconds,
             }
             
@@ -144,6 +153,30 @@ class HypothesisTestingBenchmark:
                 "evaluation": {"overall_accuracy": 0.0},
                 "latency_seconds": latency_seconds,
             }
+    
+    async def evaluate_single_scenario(
+        scenario: Dict, model_name: str, prompt_type: str, client: LLMClient
+    ) -> Dict:
+        """Evaluate single scenario and return result with conclusion data."""
+        # ...existing code...
+        
+        result = {
+            "model": model_name,
+            "prompt_type": prompt_type,
+            "test_type": scenario["test_type"],
+            "scenario_id": scenario.get("scenario_id", "unknown"),
+            "correct": is_correct,
+            "p_value_correct": p_value_correct,
+            "test_selection_correct": test_selection_correct,
+            "ground_truth_p_value": ground_truth["p_value"],
+            "llm_p_value": parsed["p_value"],
+            "ground_truth_conclusion": ground_truth["conclusion"],  # Add this
+            "llm_conclusion": parsed["conclusion"],  # Add this
+            "response_time": response_time,
+            "error": error_msg
+        }
+        
+        return result
     
     async def evaluate_batch(self,
                             models: Dict[str, List[str]],
@@ -254,8 +287,12 @@ class HypothesisTestingBenchmark:
         
         from evaluator import BenchmarkAggregator
         
+        # Calculate overall F1 metrics
+        overall_metrics = calculate_metrics(self.results)
+        
         summary = {
             "total_evaluations": len(self.results),
+            "metrics": overall_metrics,
             "by_model": BenchmarkAggregator.aggregate_by_model(self.results),
             "by_prompt_type": BenchmarkAggregator.aggregate_by_prompt_type(self.results),
             "by_test_type": BenchmarkAggregator.aggregate_by_test_type(self.results),
@@ -282,6 +319,27 @@ class HypothesisTestingBenchmark:
             return
         
         print(f"\nTotal Evaluations: {summary['total_evaluations']}")
+        
+        # Overall F1 Score Metrics
+        if 'metrics' in summary:
+            metrics = summary['metrics']
+            print("\n--- Overall Reasoning Metrics ---")
+            print(f"  Accuracy: {metrics['accuracy']:.2%}")
+            print(f"  P-value Accuracy: {metrics['p_value_accuracy']:.2%}")
+            print(f"  Test Selection Accuracy: {metrics['test_selection_accuracy']:.2%}")
+            print(f"\n  Conclusion Quality (F1 Metrics):")
+            print(f"    Precision: {metrics['precision']:.3f}")
+            print(f"    Recall: {metrics['recall']:.3f}")
+            print(f"    F1 Score: {metrics['f1_score']:.3f}")
+            
+            # Show confusion matrix
+            cm = metrics.get('confusion_matrix', {})
+            if cm:
+                print(f"\n  Confusion Matrix:")
+                print(f"    True Positives:  {cm.get('true_positives', 0)} (correctly rejected H0)")
+                print(f"    False Positives: {cm.get('false_positives', 0)} (incorrectly rejected H0)")
+                print(f"    False Negatives: {cm.get('false_negatives', 0)} (missed rejecting H0)")
+                print(f"    True Negatives:  {cm.get('true_negatives', 0)} (correctly failed to reject H0)")
         
         print("\n--- Performance by Model ---")
         for model, stats in summary['by_model'].items():

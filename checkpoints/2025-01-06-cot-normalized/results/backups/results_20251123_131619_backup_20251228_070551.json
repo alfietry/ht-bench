@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2025-11-23T13:16:19.717898",
+    "model": "gemini-1.5-pro",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x219d6f1c8a0 state=finished raised NotFound>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  },
+  {
+    "timestamp": "2025-11-23T13:16:19.725811",
+    "model": "gemini-1.5-pro",
+    "prompt_type": "zero_shot",
+    "input_data": {
+      "test_type": "one_sample_t_test"
+    },
+    "error": "RetryError[<Future at 0x219d6f4ccb0 state=finished raised NotFound>]",
+    "error_type": "RetryError",
+    "evaluation": {
+      "overall_accuracy": 0.0
+    }
+  }
+]
